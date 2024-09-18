@@ -1,24 +1,59 @@
 \documentclass{article}
-\usepackage{graphicx}
 \usepackage[utf8]{vietnam}
-\usepackage[english]{babel}
-\usepackage{float}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{hyperref}
-
-\title{\textbf{PROJECT 1.1 - 1.2: Requirement Elicitation for HCMUT Smart Printing Service (HCMUT\_SSPS)}}
-\author{\textbf{GROUP 13 CC01} \\ 
-\date{\today}
+\usepackage{graphicx}
+\usepackage{xcolor}
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    \Huge
+    \textbf{Software Requirements Specification}
+    
+    \vspace{0.5cm}
+    \LARGE
+    for
+    
+    \vspace{0.5cm}
+    \textcolor{red}{\textbf{<Project>}}
+    
+    \vfill
+    
+    \textbf{Version 1.0 approved}
+    
+    \vspace{1.5cm}
+    
+    \Large
+    Prepared by:
+    
+    \vspace{0.5cm}
+    \begin{flushleft}
+    \textcolor{red}{1. Nguyen Van A -- 2231254} \\
+    \textcolor{red}{2. Tran Van C -- 2210356} \\
+    \textcolor{red}{3. Le Thi D -- 2203265} \\
+    \textcolor{red}{4. ...} \\
+    \textcolor{red}{5. ...} \\
+    \textcolor{red}{6. ...} \\
+    \end{flushleft}
+    
+    \vfill
+    
+    \Large
+    Department of Software Engineering \\
+    Faculty of Computer Science and Engineering \\
+    Ho Chi Minh City University of Technology -- VNU-HCM
+    
+    \vspace{0.8cm}
+    
+    \textcolor{red}{21/09/2004}
+    
+\end{titlepage}
 
-\section{Task 1.1: Requirement Elicitation}
+\section{Task 1.1: Requirement elicitation(1.1, 1.2)}
 
-\subsection{Domain context of the Smart Printing Service}
+\subsection{Domain Context}
 
 \subsubsection{Problem statement}
 Currently, the demand for printing among university students in Vietnam, particularly students at Ho Chi Minh City University of Technology (HCMUT), is increasing significantly. Printed learning materials are becoming more useful to students in their studies. However, with traditional printing services offered by printing shops, several problems remain, such as:
@@ -43,48 +78,37 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
     \item The printing history and the page purchase history are stored in the system, allowing students to access and review their activities.
 \end{itemize}
 
-\subsection{Stakeholders}
+\subsection{Stakeholders and Needs}
 
 \subsubsection{Students}
 \begin{itemize}
     \item \textbf{Description}: Students are the main users of the system's printing service. They create print requests, upload documents, select printers, and make payments.
     \item \textbf{Needs}: 
     Students need convenient and affordable access to print documents. They also required secure and convenient online payments, along with the ability to view print and page purchase history when needed.
-    \item \textbf{Benefits}: 
-    Students save time and effort using the service and can easily manage their printing requests and expenses related to printing.
 \end{itemize}
 
 \subsubsection{Student Printing Service Officer (SPSO)}
 \begin{itemize}
     \item \textbf{Description}: SPSO is responsible for managing and supervising student printing activities in the system, as well as the resources used within this system. They ensure that everything runs smoothly and efficiently.
     \item \textbf{Needs}: SPSOs require useful management tools implemented in the system.
-    \item \textbf{Benefits}: They can easily manage the resources within the system.
 \end{itemize}
 
 \subsubsection{Service Providers}
 \begin{itemize}
     \item \textbf{Description}: Service providers (software providers) are responsible for developing and supplying software and related technologies for digital printing and print management.
     \item \textbf{Needs}: To build and develop the smart printing service system for the university.
-    \item \textbf{Benefits}:
-    \begin{itemize}
-        \item Generate economic benefits for the service provider.
-        \item Enhance the provider's brand recognition in the market, attracting more users.
-        \item Help individuals gain work experience and improve their professionalism.
-    \end{itemize}
 \end{itemize}
 
 \subsubsection{HCMUT (Ho Chi Minh City University of Technology)}
 \begin{itemize}
     \item \textbf{Description}: HCMUT is the investor, implementing the system to serve students.
     \item \textbf{Needs}: To provide a printing service for students, making document printing easier and offering a better management system for student printing.
-    \item \textbf{Benefits}: Enhancing the reputation of the university among individuals and external organizations and raise the income of the university.
 \end{itemize}
 
 \subsubsection{Online Payment Systems}
 \begin{itemize}
     \item \textbf{Description}: The electronic payment system supports students in purchasing additional print pages easily.
     \item \textbf{Needs}: To integrate the payment system into the smart printing service.
-    \item \textbf{Benefits}: Increase revenue and expand the customer base for the online payment service.
 \end{itemize}
 %\subsection{User Stories}
 
@@ -127,16 +151,43 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 %     \item Periodic data reporting
 % \end{itemize}
 % %
-\subsection{Scope of the system}
+% \subsubsection{Scope of the system}
+% \begin{itemize}
+%     \item The system will focus primarily on providing a smart printing service for students at HCMUT.
+%     \item SPSOs will handle the management and maintenance of printers within the system.
+%     \item The university management will be responsible for overseeing the system, ensuring its smooth operation, and integrating authentication and payment systems.
+% \end{itemize}
+\subsection{Benefits of the System}
+\subsubsection{Students}
 \begin{itemize}
-    \item The system will focus primarily on providing a smart printing service for students at HCMUT.
-    \item SPSOs will handle the management and maintenance of printers within the system.
-    \item The university management will be responsible for overseeing the system, ensuring its smooth operation, and integrating authentication and payment systems.
+    \item \textbf{Benefits}: 
+    Students save time and effort using the service and can easily manage their printing requests and expenses related to printing.
 \end{itemize}
 
+\subsubsection{Student Printing Service Officer (SPSO)}
+\begin{itemize}
+    \item \textbf{Benefits}: They can easily manage the resources within the system.
+\end{itemize}
 
-\section{Task 1.2: Functional and non-functional requirements}
+\subsubsection{Service Providers}
+\begin{itemize}
+    \item \textbf{Benefits}:
+    \begin{itemize}
+        \item Generate economic benefits for the service provider.
+        \item Enhance the provider's brand recognition in the market, attracting more users.
+        \item Help individuals gain work experience and improve their professionalism.
+    \end{itemize}
+\end{itemize}
 
+\subsubsection{HCMUT (Ho Chi Minh City University of Technology)}
+\begin{itemize}
+    \item \textbf{Benefits}: Enhancing the reputation of the university among individuals and external organizations and raise the income of the university.
+\end{itemize}
+
+\subsubsection{Online Payment Systems}
+\begin{itemize}
+    \item \textbf{Benefits}: Increase revenue and expand the customer base for the online payment service.
+\end{itemize}
 \subsection{Functional requirements:}
     \textbf{Students:} 
     \begin{itemize} 
@@ -157,5 +208,5 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 
 \textbf{Online Payment Systems}
 \begin{itemize} \item The system allows students to buy additional pages using an online payment system. \item Online payment systems must provide secure transaction methods for students. \item Payment systems must integrate with student account balances. \item Payment systems must support refunds or corrections for failed transactions. \item The system must generate reports on payment transactions for both users and the university. \end{itemize}
-\section{Non-functional requirements:}
+\subsection{Non-functional requirements:}
 \end{document}
