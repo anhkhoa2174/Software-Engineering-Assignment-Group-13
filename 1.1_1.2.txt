@@ -30,12 +30,11 @@
     
     \vspace{0.5cm}
     \begin{flushleft}
-    \textcolor{red}{1. Nguyen Van A -- 2231254} \\
-    \textcolor{red}{2. Tran Van C -- 2210356} \\
-    \textcolor{red}{3. Le Thi D -- 2203265} \\
-    \textcolor{red}{4. ...} \\
-    \textcolor{red}{5. ...} \\
-    \textcolor{red}{6. ...} \\
+    \textcolor{red}{1. Trần Anh Khoa -- 2252362} \\
+    \textcolor{red}{2. Trần Đình Long -- 2252450} \\
+    \textcolor{red}{3. Trần Duy Đức Huy -- 2252263} \\
+    \textcolor{red}{4. Trần Gia Linh -- 2252434} \\
+    \textcolor{red}{5. Trần Lê Tiến Đạt -- 2252149} \\
     \end{flushleft}
     
     \vfill
@@ -195,10 +194,11 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
     \item Students can select a printer, paper size, and configure printing properties. 
     \item Students can view their own printing history and balance for each semester. 
     \item Students can buy additional pages using an online payment system. 
-    \item The system must support guest users by displaying basic service information.
+    \item The system shall allow students to monitor the status of their print jobs, including the start and end times, and whether the print was successful.
     \end{itemize}
     \textbf{SPSO (Student Printing Service Officer)}
-\begin{itemize} \item SPSO can view printing logs for specific students and printers for a specified date range. \item SPSO can manage the list of permitted file types for uploading. \item SPSO can add, enable, or disable printers in the system. \item The system should log printing actions, including student ID, printer ID, and file name. \item The system must generate monthly and yearly reports on printing activities. \end{itemize}
+\begin{itemize} \item SPSO can view printing logs for specific students and printers for a specified date range. \item SPSO can manage the list of permitted file types for uploading. \item SPSO can add, enable, or disable printers in the system. \item The system shall allow the SPSO to manage system-wide configurations, such as setting the conversion rate between A3 and A4 pages, as well as any other custom printing policies. \item The system shall allow the SPSO to manage user access levels and permissions, ensuring that only authorized personnel have access to certain administrative functions. \end{itemize}
+
 
     \textbf{Service Providers}
 \begin{itemize} \item The system should log printing actions, including student ID, printer ID, and file name. \item The system must generate monthly and yearly reports on printing activities. \item Service Providers must ensure system integration with online payment systems. \item Service Providers are responsible for maintaining user data security. \item Service Providers must support technical issues related to printer integration and system errors. \end{itemize}
@@ -209,4 +209,14 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 \textbf{Online Payment Systems}
 \begin{itemize} \item The system allows students to buy additional pages using an online payment system. \item Online payment systems must provide secure transaction methods for students. \item Payment systems must integrate with student account balances. \item Payment systems must support refunds or corrections for failed transactions. \item The system must generate reports on payment transactions for both users and the university. \end{itemize}
 \subsection{Non-functional requirements:}
+\begin{itemize}
+    \item The system must authenticate users via HCMUT\_SSO.
+    \item The system must generate monthly and yearly reports on system usage.
+    \item The system must allow students to purchase additional printing pages securely via BKPay.
+    \item The system must be available as both a web-based app and a mobile app.
+    \item The system must handle up to 1000 concurrent users.
+    \item The system should ensure privacy and data security for all users.
+    \item The system should maintain uptime and provide reliable access to printing services.
+\end{itemize}
+
 \end{document}
