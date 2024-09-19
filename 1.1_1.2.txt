@@ -1,7 +1,15 @@
 \documentclass{article}
-\usepackage[utf8]{vietnam}
+\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} 
+\fancyhead[L]{Software Requirements Specification for SPSO}
+\fancyhead[R]{Page \thepage\ }
+\renewcommand{\headrulewidth}{0.4pt}  
+
 
 \begin{document}
 
@@ -17,7 +25,7 @@
     for
     
     \vspace{0.5cm}
-    \textcolor{red}{\textbf{<Project>}}
+    \textcolor{red}{\textbf{Project}}
     
     \vfill
     
@@ -30,11 +38,11 @@
     
     \vspace{0.5cm}
     \begin{flushleft}
-    \textcolor{red}{1. Trần Anh Khoa -- 2252362} \\
-    \textcolor{red}{2. Trần Đình Long -- 2252450} \\
-    \textcolor{red}{3. Trần Duy Đức Huy -- 2252263} \\
-    \textcolor{red}{4. Trần Gia Linh -- 2252434} \\
-    \textcolor{red}{5. Trần Lê Tiến Đạt -- 2252149} \\
+    \textcolor{red}{1. Tran Anh Khoa -- 2252362} \\
+    \textcolor{red}{2. Tran Dinh Long -- 2252450} \\
+    \textcolor{red}{3. Tran Duy Duc Huy -- 2252263} \\
+    \textcolor{red}{4. Tran Gia linh -- 2252434} \\
+    \textcolor{red}{5. Tran Le Tien Dat -- 2252149} \\
     \end{flushleft}
     
     \vfill
@@ -50,7 +58,27 @@
     
 \end{titlepage}
 
-\section{Task 1.1: Requirement elicitation(1.1, 1.2)}
+\newpage
+\tableofcontents
+\newpage
+
+\section*{Revision History}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Name} & \textbf{Date} & \textbf{Reason for Changes} & \textbf{Version} \\
+\hline
+ & & & \\
+\hline
+& & &\\
+\hline
+& & & \\
+\hline
+& & & \\
+\hline
+\end{tabular}
+
+\newpage
+\section{Task 1.1: Requirement elicitation (1.1, 1.2)}
 
 \subsection{Domain Context}
 
@@ -74,7 +102,7 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 \begin{itemize}
     \item Printing stations are set up in various locations across the campus, making it convenient for students to travel. In addition, students can choose the most suitable printing station based on their schedules.
     \item The system is developed on a web platform, providing a remote printing service, minimizing waiting times at the printing stations.
-    \item The system gives students full control over uploading files and adjusting print configurations, ensuring they get their prints exactly as they want, with abosulute privacy.
+    \item The system gives students full control over uploading files and adjusting print configurations, ensuring they get their prints exactly as they want, with absolute privacy.
     \item The system uses the number of A4 pages as a currency unit for the printing service. Students can deposit money and use it to make print requests. Each A4 page has a fixed price, and the system can calculate and display the total cost of a print request.
     \item The printing history and the page purchase history are stored in the system, allowing students to access and review their activities.
 \end{itemize}
@@ -171,5 +199,6 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
     \item The system should ensure privacy and data security for all users.
     \item The system should maintain uptime and provide reliable access to printing services.
 \end{itemize}
+
 
 \end{document}
