@@ -113,7 +113,7 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 \begin{itemize}
     \item \textbf{Description}: Students are the main users of the system's printing service. They create print requests, upload documents, select printers, and make payments.
     \item \textbf{Needs}: 
-    Students need convenient and affordable    access to print documents. They also required secure and convenient online payments, along with the ability to view print and page purchase history when needed.
+    Students need convenient and affordable access to print documents. They also required secure and convenient online payments, along with the ability to view print and page purchase history when needed.
 \end{itemize}
 
 \subsubsection{Student Printing Service Officer (SPSO)}
