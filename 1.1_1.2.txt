@@ -180,7 +180,7 @@ This system is designed to streamline the document printing process, enhance acc
     \begin{itemize} 
     \item HCMUT oversees the system's integration with the campus's authentication (SSO) and payment systems (BKPay).
     \item HCMUT can review monthly and yearly reports on printing activities. 
-    \item HCMUT should ensure the system complies with data privacy policies. 
+    \item HCMUT can view the feedbacks and request IT department to fix errors for users.
     \item HCMUT provides students with a certain number of print pages each semester. 
     \item HCMUT manages the allocation of resources such as printers and paper supply for the service. 
     \end{itemize}
