@@ -82,31 +82,15 @@
 
 \subsection{Domain Context}
 
-\subsubsection{Problem statement}
-Currently, the demand for printing among university students in Vietnam, particularly students at Ho Chi Minh City University of Technology (HCMUT), is increasing significantly. Printed learning materials are becoming more useful to students in their studies. However, with traditional printing services offered by printing shops, several problems remain, such as:
-\begin{itemize}
-    \item Students may need to travel a long distance to reach printing shops.
-    \item The number of students is much greater than the number of printing shops, which means students might have to wait in long lines if there are many printing requests.
-    \item Many printing shops offer only basic printing options (e.g., black-and-white or standard color printing), limiting students' ability to customize the format, layout, or binding of their materials based on their specific needs.
-    \item Traditional printing services usually operate within certain hours, which may not align with students' schedules, especially those who need materials printed outside of business hours.
-    \item Customizing print formats can be difficult due to communication between students and shop owners.
-    \item Prices for printing services can vary widely depending on the shop, leading to confusion or dissatisfaction among students who may not always know what to expect in terms of cost.
-    \item Some shops may not consistently deliver high-quality prints or use lower-grade paper, which affects the overall quality of printed materials. This can be problematic when students need professional-quality documents for presentations or reports.
-    \item Print requests can only be made at the shop, meaning students have to wait for their requests to be completed.
-    \item Sending files through various platforms can lead to errors, making file management challenging.
-    \item There is no guarantee that the information in printed materials will not be disclosed when sending them to the printing shop.
-\end{itemize}
+HCMUT is a multi-disciplinary and multi-major university with emphasis on technology. It has several campuses and more than 20,000 students,  including undergraduates and graduates. The university is intended to implement a smart printing system to provide printing service to its students.
 
-\subsubsection{Solution}
-The HCMUT\_SSPS printing service system is developed to address these issues. Specifically:
-\begin{itemize}
-    \item Printing stations are set up in various locations across the campus, making it convenient for students to travel. In addition, students can choose the most suitable printing station based on their schedules.
-    \item The system is developed on a web platform, providing a remote printing service, minimizing waiting times at the printing stations.
-    \item The system gives students full control over uploading files and adjusting print configurations, ensuring they get their prints exactly as they want, with absolute privacy.
-    \item The system uses the number of A4 pages as a currency unit for the printing service. Students can deposit money and use it to make print requests. Each A4 page has a fixed price, and the system can calculate and display the total cost of a print request.
-    \item The printing history and the page purchase history are stored in the system, allowing students to access and review their activities.
-\end{itemize}
+The system leverages a network of printers distributed in different campus locations, allowing students to print documents by uploading files, choosing preferred printers, and specifying printing properties. The key functionalities include secure student authentication through HCMUT’s SSO, logging of all printing actions, management of printer resources by the Student Printing Service Officer (SPSO), and the ability for students to monitor and manage their printing activities.
 
+Every student receives a default number of A4-sized pages per semester, which they can use for printing, with the option to buy additional pages if needed. The system enforces printing limits based on the student's remaining page balance, and it supports online payments via university systems such as BK-Pay. Students can upload documents to the system and customize their printing options, including selection of paper size, page ranges and more.
+
+For administration, the SPSO can configure and manage the entire printing network, including enabling/disabling printers, setting default page allocations, and defining permitted file types. Additionally, detailed printing logs and usage reports are available, ensuring transparency for both students and SPSO. The service operates through both a web app and a mobile app, offering convenience and accessibility to all users across campus.
+
+This system is designed to streamline the document printing process, enhance accessibility, and efficiently manage printing resources for the university community.
 \subsection{Stakeholders and Needs}
 
 \subsubsection{Students}
@@ -148,71 +132,78 @@ The HCMUT\_SSPS printing service system is developed to address these issues. Sp
 
 \subsubsection{Student Printing Service Officer (SPSO)}
 \begin{itemize}
-    \item \textbf{Benefits}: The SPSO benefits from streamlined resource management, allowing for easy oversight and control of printers, configurations, and printing policies, ensuring efficient operation of the service across all campuses.
+    \item \textbf{Benefits}: They can easily manage the resources within the system.
 \end{itemize}
 
 \subsubsection{IT department}
 \begin{itemize}
-    \item \textbf{Benefits}:The service generates economic advantages for the IT department, while also boosting its visibility and reputation within the university. By managing and supporting the smart printing system, IT staff gain valuable experience and enhance their technical expertise, contributing to their overall professional growth.
+    \item \textbf{Benefits}:
+    \begin{itemize}
+        \item Generate economic benefits for the service provider.
+        \item Enhance the provider's brand recognition in the market, attracting more users.
+        \item Help individuals gain work experience and improve their professionalism.
+    \end{itemize}
 \end{itemize}
 
 \subsubsection{HCMUT (Ho Chi Minh City University of Technology)}
 \begin{itemize}
-    \item \textbf{Benefits}: Implementing a modern, efficient printing service strengthens HCMUT’s reputation as a tech-savvy institution, attracting students and external partnerships. Additionally, the system generates revenue through paid services like extra printing pages, contributing to the university's financial sustainability.
+    \item \textbf{Benefits}: Enhancing the reputation of the university among individuals and external organizations and raise the income of the university.
 \end{itemize}
 
 \subsubsection{Online Payment Systems}
 \begin{itemize}
-    \item \textbf{Benefits}: By integrating with the printing service, Online Payment Systems gain a consistent flow of transactions from students purchasing additional printing pages, boosting its usage and visibility. Moreover, they can benefit from being associated with a trusted university service, reinforcing its reputation as a reliable and secure payment solution for students.
+    \item \textbf{Benefits}: Increase revenue and expand the customer base for the online payment service.
 \end{itemize}
 \subsection{Functional requirements:}
     \textbf{Students:} 
     \begin{itemize} 
-    \item Students can upload document files onto the system for printing. 
-    \item Students can choose a printer.
-    \item Students can specify printing properties.
-    \item Students can view their own printing log for a time period.
-    \item Students can view a summary of number of print pages for each page size
-    \item Students can buy additional pages through an online payment system. 
-    \item Students can not print number of pages exceeding their page balance
+    \item Students can upload document files to the system for printing. 
+    \item Students can select a printer, paper size, and configure printing properties. 
+    \item Students can view their own printing history and balance for each semester. 
+    \item Students can buy additional pages using an online payment system. 
+    \item The system shall allow students to monitor the status of their print jobs, including the start and end times, and whether the print was successful.
+    \item Students can not print number of pages exceeding their page balance.
     \end{itemize}
     \textbf{SPSO (Student Printing Service Officer)}
-\begin{itemize} 
+    \begin{itemize} 
     \item The system allows SPSO to view the printing history of all students or a student for a time period and for all or some printers.
     \item SPSO can permit and configure file types. 
     \item SPSO can add, enable, or disable printers in the system. 
     \item The system shall allow the SPSO to manage configurations, such as changing the default number of pages, change reset date, change permitted file types. 
     \item The system allows the SPSO to view the reports of the using of the printing system generated yearly and monthly by the system.
-\end{itemize}
+    \end{itemize}
 
 
     \textbf{IT department}
-\begin{itemize} 
-    \item The system should log printing actions, including student ID, printer ID, and file name. \item The system must generate monthly and yearly reports on printing activities. 
+    \begin{itemize} 
+    \item The system should log printing actions, including student ID, printer ID, and file name. 
+    \item The system must generate monthly and yearly reports on printing activities. 
     \item IT department must ensure system integration with online payment systems. 
-    \item IT department is responsible for maintaining user data security. 
-    \item IT department must support technical issues related to printer integration and system errors.
-\end{itemize}
+    \item IT department must support technical issues related to printer integration and system errors. 
+    \end{itemize}
 
 \textbf{HCMUT (Ho Chi Minh University of Technology)}
-\begin{itemize} 
-    \item HCMUT oversees the system's integration with the campus's authentication (SSO) and payment systems (BKPay). 
+    \begin{itemize} 
+    \item HCMUT oversees the system's integration with the campus's authentication (SSO) and payment systems (BKPay).
     \item HCMUT can review monthly and yearly reports on printing activities. 
     \item HCMUT should ensure the system complies with data privacy policies. 
     \item HCMUT provides students with a certain number of print pages each semester. 
-    \item HCMUT manages the allocation of resources such as printers and paper supply for the service. \end{itemize}
+    \item HCMUT manages the allocation of resources such as printers and paper supply for the service. 
+    \end{itemize}
 
 \textbf{Online Payment Systems}
-\begin{itemize} 
-    \item The system allows students to buy additional pages using an online payment system. \item Online payment systems must provide secure transaction methods for students. 
-    \item Payment systems must integrate with student account balances. 
-    \item Payment systems must support refunds or corrections for failed transactions. 
-    \item The system must generate reports on payment transactions for both users and the university. \end{itemize}
+    \begin{itemize} 
+    \item The system allows students to buy additional pages using an online payment system. 
+    \item Online payment systems must provide secure transaction methods for students. 
+    \item Payment systems must integrate with student account balances. \item Payment systems must support refunds or corrections for failed transactions. 
+    \item The system must generate reports on payment transactions for both users and the university. 
+    \end{itemize}
 \subsection{Non-functional requirements:}
 \begin{itemize}
+    \item The system must maintain user data security. 
     \item The system must be available as both a web-based app and a mobile app.
     \item The system must handle up to 1000 concurrent users.
-    \item The system should provide authentication service to all users before using the printing service.
+    \item The system should ensure privacy and data security for all users.
     \item The system should maintain uptime and provide reliable access to printing services.
 \end{itemize}
 
