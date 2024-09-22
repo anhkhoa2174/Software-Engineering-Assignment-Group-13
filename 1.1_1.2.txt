@@ -132,37 +132,32 @@ This system is designed to streamline the document printing process, enhance acc
 
 \subsubsection{Student Printing Service Officer (SPSO)}
 \begin{itemize}
-    \item \textbf{Benefits}: They can easily manage the resources within the system.
+    \item \textbf{Benefits}: The SPSO benefits from streamlined resource management, allowing for easy oversight and control of printers, configurations, and printing policies, ensuring efficient operation of the service across all campuses.
 \end{itemize}
 
 \subsubsection{IT department}
 \begin{itemize}
-    \item \textbf{Benefits}:
-    \begin{itemize}
-        \item Generate economic benefits for the service provider.
-        \item Enhance the provider's brand recognition in the market, attracting more users.
-        \item Help individuals gain work experience and improve their professionalism.
-    \end{itemize}
+    \item \textbf{Benefits}: The service generates economic advantages for the IT department, while also boosting its visibility and reputation within the university. By managing and supporting the smart printing system, IT staff gain valuable experience and enhance their technical expertise, contributing to their overall professional growth.
 \end{itemize}
 
 \subsubsection{HCMUT (Ho Chi Minh City University of Technology)}
 \begin{itemize}
-    \item \textbf{Benefits}: Enhancing the reputation of the university among individuals and external organizations and raise the income of the university.
+    \item \textbf{Benefits}: Implementing a modern, efficient printing service strengthens HCMUT’s reputation as a tech-savvy institution, attracting students and external partnerships. Additionally, the system generates revenue through paid services like extra printing pages, contributing to the university's financial sustainability.
 \end{itemize}
 
 \subsubsection{Online Payment Systems}
 \begin{itemize}
-    \item \textbf{Benefits}: Increase revenue and expand the customer base for the online payment service.
+    \item \textbf{Benefits}: By integrating with the printing service, BKPay gains a consistent flow of transactions from students purchasing additional printing pages, boosting its usage and visibility.
 \end{itemize}
 \subsection{Functional requirements:}
 \textbf{Students:} 
     \begin{itemize} 
-    \item Students can upload document files to the system for printing. 
+    \item Students are able to upload multiple permitted document files to the system for printing. 
     \item Students can select a printer, paper size, and configure printing properties. 
     \item Students can view their own printing history and balance for each semester. 
     \item Students can buy additional pages using an online payment system. 
     \item The system shall allow students to monitor the status of their print jobs, including the start and end times, and whether the print was successful.
-    \item Students can not print number of pages exceeding their page balance.
+    \item The system shall prevent students from printing more pages than their available page balance.
     \end{itemize}
 \textbf{SPSO (Student Printing Service Officer)}
     \begin{itemize} 
@@ -177,7 +172,9 @@ This system is designed to streamline the document printing process, enhance acc
     \item The system should log printing actions, including student ID, printer ID, and file name. 
     \item The system must generate monthly and yearly reports on printing activities. 
     \item IT department must ensure system integration with online payment systems. 
-    \item IT department must support technical issues related to printer integration and system errors. 
+    \item IT department creates an interface where users can report technical issues related to printer integration and system errors with the detailed error description.
+    \item IT department can keep track of issue report time, priority, whether it has been resolved.
+    \item IT department can inform the users about scheduled maintenance/ downtime through notifications.
     \end{itemize}
 \textbf{HCMUT (Ho Chi Minh University of Technology)}
     \begin{itemize} 
@@ -191,16 +188,17 @@ This system is designed to streamline the document printing process, enhance acc
     \begin{itemize} 
     \item The system allows students to buy additional pages using an online payment system. 
     \item Online payment systems must provide secure transaction methods for students. 
-    \item Payment systems must integrate with student account balances. \item Payment systems must support refunds or corrections for failed transactions. 
+    \item Payment systems must integrate with student account balances. 
+    \item Payment systems must support refunds or corrections for failed transactions. 
     \item The system must generate reports on payment transactions for both users and the university. 
     \end{itemize}
 \subsection{Non-functional requirements:}
 \begin{itemize}
-    \item The system must maintain user data security. 
     \item The system must be available as both a web-based app and a mobile app.
     \item The system must handle up to 1000 concurrent users.
     \item The system should ensure privacy and data security for all users.
     \item The system should maintain uptime and provide reliable access to printing services.
+    \item The system has an integrated timer.
 \end{itemize}
 
 
