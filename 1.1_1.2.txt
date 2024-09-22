@@ -155,9 +155,11 @@ This system is designed to streamline the document printing process, enhance acc
     \item Students are able to upload multiple permitted document files to the system for printing. 
     \item Students can select a printer, paper size, and configure printing properties. 
     \item Students can view their own printing history and balance for each semester. 
-    \item Students can buy additional pages using an online payment system. 
-    \item The system shall allow students to monitor the status of their print jobs, including the start and end times, and whether the print was successful.
+    \item Students can buy additional pages using an online payment system. .
+    \item The system shall allow students to view printing log for a time period.
+    \item Students can view summary of number of printed pages for each page size.
     \item The system shall prevent students from printing more pages than their available page balance.
+    \item System rejects printing requests when chosen printer is overloaded and notify user about fail requests.
     \end{itemize}
 \textbf{SPSO (Student Printing Service Officer)}
     \begin{itemize} 
