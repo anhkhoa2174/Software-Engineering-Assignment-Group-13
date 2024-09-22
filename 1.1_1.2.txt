@@ -155,7 +155,7 @@ This system is designed to streamline the document printing process, enhance acc
     \item \textbf{Benefits}: Increase revenue and expand the customer base for the online payment service.
 \end{itemize}
 \subsection{Functional requirements:}
-    \textbf{Students:} 
+\textbf{Students:} 
     \begin{itemize} 
     \item Students can upload document files to the system for printing. 
     \item Students can select a printer, paper size, and configure printing properties. 
@@ -164,7 +164,7 @@ This system is designed to streamline the document printing process, enhance acc
     \item The system shall allow students to monitor the status of their print jobs, including the start and end times, and whether the print was successful.
     \item Students can not print number of pages exceeding their page balance.
     \end{itemize}
-    \textbf{SPSO (Student Printing Service Officer)}
+\textbf{SPSO (Student Printing Service Officer)}
     \begin{itemize} 
     \item The system allows SPSO to view the printing history of all students or a student for a time period and for all or some printers.
     \item SPSO can permit and configure file types. 
@@ -174,7 +174,7 @@ This system is designed to streamline the document printing process, enhance acc
     \end{itemize}
 
 
-    \textbf{IT department}
+\textbf{IT department}
     \begin{itemize} 
     \item The system should log printing actions, including student ID, printer ID, and file name. 
     \item The system must generate monthly and yearly reports on printing activities. 
