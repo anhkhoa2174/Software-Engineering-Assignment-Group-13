@@ -4,6 +4,9 @@
 \usepackage{xcolor}
 \usepackage{tocloft}
 \usepackage{fancyhdr}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath} 
 \pagestyle{fancy}
 \fancyhf{} 
 \fancyhead[L]{Software Requirements Specification for SPSO}
@@ -54,7 +57,7 @@
     
     \vspace{0.8cm}
     
-    \textcolor{red}{21/09/2004}
+    \textcolor{red}{22/09/2004}
     
 \end{titlepage}
 
@@ -65,20 +68,22 @@
 \section*{Revision History}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Name} & \textbf{Date} & \textbf{Reason for Changes} & \textbf{Version} \\
+\textbf{Name of Modifier} & \textbf{Date} & \textbf{Reason for Changes} & \textbf{Version} \\
 \hline
- & & & \\
+\text{Tran Anh Khoa} & 10/1/2024 & Identical SPSO's Functional Requirements & 2.0\\
 \hline
-& & &\\
+\text{} & & & \\
 \hline
-& & & \\
+\text{} & & & \\
 \hline
-& & & \\
+\text{} & & & \\
 \hline
 \end{tabular}
 
+
+
 \newpage
-\section{Task 1.1: Requirement elicitation (1.1, 1.2)}
+\section{Task 1: Requirement elicitation (1.1, 1.2)}
 
 \subsection{Domain Context}
 
@@ -166,7 +171,7 @@ This system is designed to streamline the document printing process, enhance acc
     \item The system allows SPSO to view the printing history of all students or a student for a time period and for all or some printers.
     \item SPSO can permit and configure file types. 
     \item SPSO can add, enable, or disable printers in the system. 
-    \item The system shall allow the SPSO to manage configurations, such as changing the default number of pages, change reset date, change permitted file types. 
+    \item The system shall allow the SPSO to manage configurations, such as changing the default number of pages, change reset date.
     \item The system allows the SPSO to view the reports of the using of the printing system generated yearly and monthly by the system.
     \end{itemize}
 \textbf{IT department}
@@ -203,5 +208,248 @@ This system is designed to streamline the document printing process, enhance acc
     \item The system has an integrated timer.
 \end{itemize}
 
+\section{Task 2: Use-case Diagrams (1.3)}
+\subsection{Use-case Diagram for the Whole System}
+\subsubsection{Actors}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Actor} \\ \hline
+1 & User \\ \hline
+2 & Student \\ \hline
+3 & SPSO \\ \hline
+4 & Printer \\ \hline
+5 & HCMUT\_SSO \\ \hline
+6 & Payment System \\ \hline
+\end{tabular}
+\caption{Actors of a whole system.}
+\end{table}
+
+\subsubsection{Main modules}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Module ID} & \textbf{Module Name} &  \textbf{Note} \\ \hline
+MD001 & Authenticate & \\ \hline
+MD002 & Print Documents & Important \\ \hline
+MD003 & Buy Additional Printing Pages  &  \\ \hline
+MD004 & View Personal Printing Logs & \\ \hline
+MD005 & View Personal Payment Logs & \\ \hline
+MD006 & Manage Configurations &  \\ \hline
+MD007 & View All Payment Logs & \\ \hline
+MD008 & View All Printing Logs & \\ \hline
+MD009 & Manage Printers &  \\ \hline
+MD0010 & View Reports & \\ \hline
+MD0011 & Access User Info & \\ \hline
+\end{tabular}
+\caption{Main modules of a whole system.}
+\end{table}
+
+\newpage
+
+\subsubsection{Use-case diagram of a whole system}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Wholesystem.drawio (1).png}
+    \caption{Whole system use-case diagram.}
+    \label{fig:sample}
+\end{figure}
+\newpage
+\subsection{Use-case diagram for Print Documents Module}
+\subsubsection{Use-case diagram for Print Documents Module}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{printdocuments.jpg}
+    \caption{Print Documents use-case diagram .}
+    \label{fig:Print Document use-case diagram }
+\end{figure}
+\newpage
+\subsubsection{Table for Print Documents}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Use case name} & Print Document \\ \hline
+\textbf{Created by} & Tran Le Tien Dat \\ \hline
+\textbf{Date created} & 30/09/2024 \\ \hline
+\textbf{Actors} & Primary Actor: Student; Secondary Actor: Printer \\ \hline
+\textbf{Description} & Student can print documents by choosing a printer, uploading files, setting configurations, and sending requests to the printer. \\ \hline
+\textbf{Trigger} & Student indicates that he/she wants to print a document. \\ \hline
+\textbf{Pre-conditions} & 
+\begin{itemize}
+    \item User’s identity has been authenticated.
+    \item User is defined as a student and assigned student functions.
+\end{itemize} \\ \hline
+\textbf{Post-conditions} & 
+\begin{itemize}
+    \item The printer sends a notification that the printing process is complete.
+    \item The system saves the information of this printing session.
+\end{itemize} \\ \hline
+\textbf{Normal flow} & 
+\begin{enumerate}
+    \item Student chooses a printer on demand.
+    \item Student uploads a file into the system.
+    \item Student sets properties, such as paper size, pages to be printed, one-/two-sided, number of copies, etc.
+    \item The system checks if the balance is sufficient to print.
+    \item Student sends a request to the selected printer.
+    \item Printer receives the information and prints the document.
+    \item Printer sends a notification to the student indicating that the process is complete.
+    \item The system saves the history to the log, including student ID, printer ID, file name, printing start and end times, and the number of pages for each size.
+\end{enumerate} \\ \hline
+\textbf{Alternative flows} & 
+\begin{itemize}
+    \item 2.a Student can remove or change the uploaded file.
+\end{itemize} \\ \hline
+\textbf{Exceptions} & 
+\begin{itemize}
+    \item 2.b A notification is raised when the file is in the wrong format, and the system rejects that file.
+    \item 4.a The system raises an error when the balance (the number of pages left that the student can print) is not sufficient to print the file.
+    \item 5.a The printer cannot print due to overflow or technical issues and will notify an error to the student.
+\end{itemize} \\ \hline
+\end{longtable}
+
+
+\subsubsection{Table for Upload files}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Use case name} & Upload Files \\ \hline
+\textbf{Created by} & Tran Gia Linh \\ \hline
+\textbf{Date created} & 29/09/2024 \\ \hline
+\textbf{Actors} & Student \\ \hline
+\textbf{Description} & Student uploads documents to the system. \\ \hline
+\textbf{Trigger} & When students click the "Upload Files" button after finishing choosing a printer. \\ \hline
+\textbf{Pre-conditions} & Students successfully choose a printer. \\ \hline
+\textbf{Post-conditions} & Documents are uploaded onto the system. \\ \hline
+\textbf{Normal flow} & 
+\begin{enumerate}
+    \item Student presses the upload button.
+    \item A window appears allowing the student to choose the document from their device storage.
+    \item Student presses the button to confirm files to upload.
+    \item Files are uploaded to the system. The system displays the uploading progress on the screen.
+    \item When the upload is finished, the system verifies whether the file type is appropriate.
+    \item The system displays a successful upload message when the file type is allowed.
+\end{enumerate} \\ \hline
+\textbf{Alternative flows} & 
+\begin{itemize}
+    \item \textbf{Student tries to upload a duplicate document:}
+    \begin{itemize}
+        \item The system checks if the document has already been uploaded.
+        \item If a duplicate is found, the system displays a warning: "This document already exists."
+        \item The student can either overwrite the existing document, upload a new version, or cancel the operation.
+    \end{itemize}
+
+    \item \textbf{Student takes too long to upload a file:}
+    \begin{itemize}
+        \item The system detects the timeout and cancels the upload.
+        \item The system prompts the student with a message like "Upload timed out. Please try again."
+        \item The student can then retry uploading the document.
+    \end{itemize}
+
+    \item \textbf{Student cancels upload when the file is in uploading progress:}
+    \begin{itemize}
+        \item The student clicks a "Cancel" button during the upload process.
+        \item The system stops the upload and may display a confirmation message like "Upload canceled."
+        \item The student can either retry or exit the process.
+    \end{itemize}
+\end{itemize} \\ \hline
+\textbf{Exceptions} & 
+\begin{itemize}
+    \item \textbf{Student tries to print unsupported file format:}
+    \begin{itemize}
+        \item The system detects the invalid file format.
+        \item The system prompts the student with an error message, such as "Unsupported file format."
+    \end{itemize}
+    
+    \item \textbf{Student tries to upload a file that exceeds the size limit:}
+    \begin{itemize}
+        \item The system checks the file size before completing the upload.
+        \item The system displays an error message like "File size exceeds the allowed limit."
+    \end{itemize}
+\end{itemize} \\ \hline
+\end{longtable}
+
+\subsubsection{Table for Notify}
+
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Use case name} & Notify \\ \hline
+\textbf{Created by} & Tran Dinh Long \\ \hline
+\textbf{Date created} & 30/09/2024 \\ \hline
+\textbf{Actors} & Printer \\ \hline
+\textbf{Description} & This use case allows students to receive notifications when the printing process is complete or when a payment is successful. The system also informs students about errors. \\ \hline
+\textbf{Trigger} & 
+\begin{itemize}
+    \item Students check information by accessing the Notification icon.
+    \item The system does not have any issues.
+\end{itemize} \\ \hline
+\textbf{Pre-conditions} & 
+\begin{itemize}
+    \item Students have successfully accessed the system.
+    \item All devices are connected to the Internet.
+    \item The account is logged in as a student.
+\end{itemize} \\ \hline
+\textbf{Post-conditions} & 
+\begin{itemize}
+    \item The system displays notifications to students.
+    \item If an error occurs (e.g., not enough cash to pay, out of paper, printer issues), students will be informed.
+\end{itemize} \\ \hline
+\textbf{Normal flow} & 
+\begin{enumerate}
+    \item Students successfully log in and access the system.
+    \item Students select the option to access their notifications.
+    \item The system fetches the student's account information.
+    \item Students receive notifications from the system.
+\end{enumerate} \\ \hline
+\textbf{Alternative flow} & 
+\begin{itemize}
+    \item If the student’s balance is low, the printer has errors, or there is not enough paper to print, a notification will be sent to students.
+\end{itemize} \\ \hline
+\end{longtable}
+
+
+\newpage
+\subsubsection{Table for Check Balance}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}p{10cm}|}
+\hline
+\textbf{Use case name} & Check balance \\ \hline
+\textbf{Created by} & Tran Duy Duc Huy \\ \hline
+\textbf{Date created} & 29/09/2024 \\ \hline
+\textbf{Actors} & Student \\ \hline
+\textbf{Description} & This use case allows a student to check their available balance of printing pages before initiating a printing task. The system verifies the current balance and provides feedback to the student, notifying them if they have sufficient pages or if there is an error. \\ \hline
+\textbf{Trigger} & The student selects the "Check Balance" option in the application or system before attempting to print. \\ \hline
+\textbf{Pre-conditions} & 
+\begin{itemize}
+    \item Student has logged into the system.
+    \item Login account has student permissions.
+    \item Student device has internet connection.
+\end{itemize} \\ \hline
+\textbf{Post-conditions} & 
+\begin{itemize}
+    \item The system displays the current balance of printing pages to the student.
+    \item If an error occurs (e.g., insufficient balance, system issue), the student is notified of the specific problem.
+\end{itemize} \\ \hline
+\textbf{Normal flow} & 
+\begin{enumerate}
+    \item Student logs into the system.
+    \item Student selects the option to check his/her balance.
+    \item The system will fetch the student's account information.
+    \item The system will verify the current balance of the printed pages.
+    \item The system will display the balance to the student.
+\end{enumerate} \\ \hline
+\textbf{Alternative flows} & 
+\textbf{Low balance warning:} 
+\begin{itemize}
+    \item If the student’s balance is lower than a needed number of pages to print, the system prompts the student to check their balance before proceeding to print.
+\end{itemize} \\ \hline
+\textbf{Exceptions} & 
+\begin{enumerate}
+    \item \textbf{System error:} If the system is unable to retrieve the balance due to a technical issue (e.g., server downtime), the student is shown a notification of the error.
+\end{enumerate} \\ \hline
+\end{longtable}
 
 \end{document}
