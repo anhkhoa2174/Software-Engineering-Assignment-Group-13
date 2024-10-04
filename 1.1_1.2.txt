@@ -57,7 +57,7 @@
     
     \vspace{0.8cm}
     
-    \textcolor{red}{22/09/2004}
+    \textcolor{red}{1/10/2004}
     
 \end{titlepage}
 
@@ -70,7 +70,7 @@
 \hline
 \textbf{Name of Modifier} & \textbf{Date} & \textbf{Reason for Changes} & \textbf{Version} \\
 \hline
-\text{Tran Anh Khoa} & 10/1/2024 & Identical SPSO's Functional Requirements & 2.0\\
+\text{Tran Anh Khoa} & 1/10/2024 & Identical SPSO's Functional Requirements & 2.0\\
 \hline
 \text{} & & & \\
 \hline
