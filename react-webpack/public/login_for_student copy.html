@@ -11,6 +11,23 @@
 				margin: 0; /* Đảm bảo không có margin ngoài trang */
 				padding: 0; /* Đảm bảo không có padding ngoài trang */
 			}
+			.hover-div {
+				width: 200px;
+				height: 65px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 18px;
+				font-weight: bold;
+				background-color: white;
+				transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng mượt */
+			}
+
+			/* Khi trỏ chuột vào div */
+			.hover-div:hover {
+				background-color: #b3b7bd;
+				color: #0f8ede;
+			}
 		</style>
 		<link rel="stylesheet" href="input.css" />
 	</head>
@@ -73,13 +90,13 @@
 				</div>
 			</div>
 			<div
+				class="hover-div"
 				onClick="window.location.href = 'login_for_student.html';"
 				style="
 					width: 154px;
 					height: 154px;
 					top: 135px;
 					left: 350px;
-					background: white;
 					border-radius: 20px;
 					border: 1px #0f8ede solid;
 					position: absolute;
@@ -115,7 +132,12 @@
 			</div>
 			<div style="top: 390px; left: 140px; position: absolute">
 				<div style="font-family: Montserrat; font-weight: 900">
-					<b>Mật khẩu</b>
+					<b
+						>Mật khẩu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="color: #0c2a92">Quên mật khẩu?</span></b
+					>
 				</div>
 				<input type="password" />
 			</div>
@@ -220,7 +242,7 @@
 			<b
 				style="
 					left: 158px;
-					top: 460px;
+					top: 461px;
 					appearance: none;
 					font-size: 10px;
 					position: absolute;

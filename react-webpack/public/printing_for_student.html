@@ -11,6 +11,22 @@
 				margin: 0; /* Đảm bảo không có margin ngoài trang */
 				padding: 0; /* Đảm bảo không có padding ngoài trang */
 			}
+			.hover-div {
+				width: 200px;
+				height: 65px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 18px;
+				font-weight: bold;
+				transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng mượt */
+			}
+
+			/* Khi trỏ chuột vào div */
+			.hover-div:hover {
+				background-color: #142c64;
+				color: white;
+			}
 		</style>
 	</head>
 	<body>
@@ -435,6 +451,7 @@
 				display: inline-flex;
 			">
 			<div
+				class="hover-div"
 				style="
 					text-align: center;
 					color: black;
