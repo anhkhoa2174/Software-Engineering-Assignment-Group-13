@@ -29,6 +29,21 @@
 				background-color: #b3b7bd;
 				color: #0f8ede;
 			}
+
+			#slideshow {
+				width: 529px;
+				height: 600px;
+				position: absolute;
+				left: 659px;
+				top: 0px;
+				transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+				opacity: 1; /* Bắt đầu với ảnh rõ ràng */
+				transform: scale(1);
+				transform: scale(1.2);
+			}
+			#slideshow.hidden {
+				opacity: 0; /* Làm mờ ảnh khi thay đổi */
+			}
 		</style>
 		<link rel="stylesheet" href="input.css" />
 	</head>
@@ -75,6 +90,15 @@
 						position: absolute;
 					"
 					src="image 47.png" />
+				<img
+					style="
+						width: 32px;
+						height: 32px;
+						left: 135px;
+						top: 130px;
+						position: absolute;
+					"
+					src="Group 1171275873.png" />
 				<div
 					style="
 						top: 120px;
@@ -134,8 +158,11 @@
 					<b
 						>Mật khẩu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span style="color: #0c2a92">Quên mật khẩu?</span></b
+						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+						<span style="color: #0c2a92; font-size: 9px"
+							>Quên mật khẩu?</span
+						></b
 					>
 				</div>
 				<input type="password" />
@@ -153,15 +180,7 @@
 				">
 				ĐĂNG NHẬP VỚI TƯ CÁCH
 			</div>
-			<img
-				style="
-					width: 625px;
-					height: 600px;
-					left: 625px;
-					top: 0px;
-					position: absolute;
-				"
-				src="image 28.png" />
+			<img id="slideshow" src="image 28.png" />
 			<div
 				style="
 					width: 235px;
@@ -202,7 +221,7 @@
 					style="
 						width: 100%;
 						height: 100%;
-						top: 455px;
+						top: 465px;
 						left: 5px;
 						background: #23abea;
 						box-shadow: 0px 34px 40px -8px rgba(123, 118, 241, 0.24);
