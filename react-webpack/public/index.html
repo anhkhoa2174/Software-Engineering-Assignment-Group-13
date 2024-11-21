@@ -4,9 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
 		<title>Trang chủ sinh viên</title>
+		<link />
 		<link
 			rel="shortcut icon"
-			href="HCMUT_official_logo.ico"
+			href="images/HCMUT_official_logo.ico"
 			type="image/x-icon" />
 		<style>
 			html,
@@ -25,12 +26,12 @@
 				transition: background-color 0.3s ease, color 0.3s ease;
 			}
 
-			/* Khi trỏ chuột vào div */
 			.hover-div:hover {
 				background-color: #142c64;
 				color: white;
 			}
 		</style>
+		<link rel="stylesheet" href="css/styleIndex.css" />
 	</head>
 	<body>
 		<div id="root"></div>
@@ -42,40 +43,9 @@
 			rel="stylesheet" />
 		<div>
 			style=" width: 100%; height: 100%; "
-			<div
-				style="
-					width: 36%;
-					height: 21%;
-					left: 63.25%;
-					top: 23.5%;
-					position: absolute;
-					background: white;
-					box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-					border: 0.05em #d8d8d8 solid;
-				"></div>
-			<div
-				style="
-					width: 36%;
-					height: 21%;
-					left: 63.25%;
-					top: 49%;
-					position: absolute;
-					background: white;
-					box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-					border: 0.05em #d8d8d8 solid;
-				"></div>
-			<div
-				style="
-					width: 36%;
-					height: 21%;
-					left: 63.25%;
-					top: 74.5%;
-					position: absolute;
-					background: white;
-					box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-					box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-					border: 0.05em #d8d8d8 solid;
-				"></div>
+			<div id="system_error_frame"></div>
+			<div id="HDSD_frame"></div>
+			<div id="ra_mat_he_thong_frame"></div>
 			<div
 				style="
 					width: 1536px;
@@ -130,237 +100,39 @@
 					Student Smart Printing Service
 				</div>
 			</div>
-			<div
-				style="
-					width: 125%;
-					height: 85%;
-					left: 0%;
-					top: 11.8%;
-					position: absolute;
-				">
-				<div
-					style="
-						width: 41%;
-						left: 50.5%;
-						top: 16%;
-						position: absolute;
-						text-align: center;
-						color: black;
-						font-size: 1.5vw;
-						font-family: Montserrat;
-						font-style: italic;
-						font-weight: 800;
-						word-wrap: break-word;
-					">
+			<div id="big_one_1">
+				<div id="hang_dau">BÀI VIẾT HÀNG ĐẦU</div>
+				<div id="gap_loi">
 					HỆ THỐNG GẶP LỖI <br />VÀO 21/10/2024,<br />NGUYÊN NHÂN DO ĐÂU ?
 				</div>
-				<div
-					style="
-						width: 25%;
-						left: 55.5%;
-						top: 4.7%;
-						position: absolute;
-						text-align: center;
-						color: black;
-						font-size: 2vw;
-						font-family: Montserrat;
-						font-weight: 500;
-						word-wrap: break-word;
-					">
-					BÀI VIẾT HÀNG ĐẦU
-				</div>
-				<img
-					style="
-						width: 25%;
-						height: 55%;
-						left: 1%;
-						top: 16%;
-						position: absolute;
-						filter: contrast(120%);
-					"
-					src="images/womanpringting.png" />
-				<div
-					style="
-						width: 50%;
-						left: 0%;
-						top: 75%;
-						position: absolute;
-						text-align: center;
-						font-size: 2.5vw;
-						font-family: Montserrat;
-						font-style: italic;
-						font-weight: 800;
-						word-wrap: break-word;
-						background: linear-gradient(90deg, #4e23ea, #236fea);
-						-webkit-background-clip: text;
-						-webkit-text-fill-color: transparent;
-					">
+				<img id="woman" src="images/womanpringting.png" />
+				<div id="big_text">
 					HCMUT - STUDENT SMART PRINTING <br />SERVICE DỊCH VỤ IN ẤN TIỆN LỢI
 					<br />DÀNH CHO SINH VIÊN BÁCH KHOA
 				</div>
-				<img
-					style="
-						width: 25%;
-						height: 55%;
-						left: 20%;
-						top: 16.5%;
-						position: absolute;
-					"
-					src="images/manprinting.webp" />
-				<img
-					style="
-						width: 5%;
-						height: 11%;
-						left: 55%;
-						top: 2.5%;
-						position: absolute;
-					"
-					src="images/image 35.png" />
-				<img
-					style="
-						width: 11.8%;
-						height: 20.7%;
-						left: 50.9%;
-						top: 16.3%;
-						position: absolute;
-						border-radius: 4px;
-					"
-					src="images/image 36.png" />
-				<img
-					style="
-						width: 11.8%;
-						height: 20.7%;
-						left: 50.9%;
-						top: 46%;
-						position: absolute;
-						border-radius: 4px;
-					"
-					src="images/image 37.png" />
-				<div
-					style="
-						width: 41%;
-						left: 50.5%;
-						top: 75.8%;
-						position: absolute;
-						text-align: center;
-						color: black;
-						font-size: 1.5vw;
-						font-family: Montserrat;
-						font-style: italic;
-						font-weight: 800;
-						word-wrap: break-word;
-					">
-					RA MẮT <br />HỆ THỐNG SSPS
-				</div>
-				<div
-					style="
-						width: 41%;
-						left: 50.5%;
-						top: 45.5%;
-						position: absolute;
-						text-align: center;
-						color: black;
-						font-size: 1.5vw;
-						font-family: Montserrat;
-						font-style: italic;
-						font-weight: 800;
-						word-wrap: break-word;
-					">
-					HƯỚNG DẪN <br />SỬ DỤNG SSPS
-				</div>
-				<div
-					style="
-						width: 46%;
-						left: 43%;
-						top: 94%;
-						position: absolute;
-						text-align: center;
-						color: #0037ff(20.39, 20.39, 20.39, 0.2);
-						font-size: 1em;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<img id="man" src="images/manprinting.webp" />
+				<img id="best" src="images/image 35.png" />
+				<img id="system_error" src="images/image 36.png" />
+				<img id="below_system_error" src="images/image 37.png" />
+				<div id="ra_mat_he_thong">RA MẮT <br />HỆ THỐNG SSPS</div>
+				<div id="HDSD">HƯỚNG DẪN <br />SỬ DỤNG SSPS</div>
+				<div id="Dang_Hoang_Long_2">
 					<span style="color: #0037ff">Đặng Hoàng Long</span>
 				</div>
-				<div
-					style="
-						width: 46%;
-						left: 43%;
-						top: 63.92%;
-						position: absolute;
-						text-align: center;
-						font-size: 1em;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<div id="Dang_Hoang_Long_1">
 					<span style="color: #0037ff">Đặng Hoàng Long</span>
 				</div>
-				<div
-					style="
-						width: 46%;
-						left: 42.1%;
-						top: 34.5%;
-						position: absolute;
-						text-align: center;
-						color: #0037ff;
-						font-size: 1ew;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<div id="Mai_Quoc_Tri">
 					<span style="color: #0037ff">Mai Quốc Trí</span>
 				</div>
-				<div
-					style="
-						width: 46%;
-						left: 52.5%;
-						top: 94%;
-						position: absolute;
-						text-align: center;
-						font-size: 1em;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<div id="thang_1">
 					<span style="color: #8c909e">3 tháng trước</span>
 				</div>
-				<div
-					style="
-						width: 46%;
-						left: 52.5%;
-						top: 63.92%;
-						position: absolute;
-						text-align: center;
-						color: rgba(20.39, 20.39, 20.39, 0.2);
-						font-size: 1em;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<div id="thang_2">
 					<span style="color: #8c909e">3 tháng trước</span>
 				</div>
 
-				<div
-					style="
-						width: 46%;
-						left: 52.5%;
-						top: 34.5%;
-						position: absolute;
-						text-align: center;
-						color: rgba(20.39, 20.39, 20.39, 0.2);
-						font-size: 1em;
-						font-family: Itim;
-						font-weight: 400;
-						word-wrap: break-word;
-						text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
-					">
+				<div id="tieng_truoc">
 					<span style="color: #8c909e">23 tiếng trước</span>
 				</div>
 				<img
@@ -400,6 +172,43 @@
 						word-wrap: break-word;
 					">
 					TRANG CHỦ
+				</div>
+			</div>
+			<div>
+				<div
+					style="
+						padding-left: 4px;
+						padding-right: 4px;
+						padding-top: 3px;
+						padding-bottom: 3px;
+						left: 1318px;
+						top: 20.3px;
+						position: absolute;
+					"></div>
+				<div
+					class="hover-div"
+					style="
+						width: 192px;
+						height: 45px;
+						padding: 10px;
+						left: 484px;
+						top: 0px;
+						position: absolute;
+						justify-content: center;
+						align-items: center;
+						gap: 10px;
+						display: inline-flex;
+					">
+					<div
+						style="
+							text-align: center;
+							font-size: 18px;
+							font-family: Montserrat;
+							font-weight: 400;
+							word-wrap: break-word;
+						">
+						BẢNG ĐIỀU KHIỂN
+					</div>
 				</div>
 			</div>
 			<div
@@ -476,43 +285,6 @@
 						word-wrap: break-word;
 					">
 					MUA THÊM GIẤY
-				</div>
-			</div>
-			<div>
-				<div
-					style="
-						padding-left: 4px;
-						padding-right: 4px;
-						padding-top: 3px;
-						padding-bottom: 3px;
-						left: 1318px;
-						top: 20.3px;
-						position: absolute;
-					"></div>
-				<div
-					class="hover-div"
-					style="
-						width: 192px;
-						height: 45px;
-						padding: 10px;
-						left: 484px;
-						top: 0px;
-						position: absolute;
-						justify-content: center;
-						align-items: center;
-						gap: 10px;
-						display: inline-flex;
-					">
-					<div
-						style="
-							text-align: center;
-							font-size: 18px;
-							font-family: Montserrat;
-							font-weight: 400;
-							word-wrap: break-word;
-						">
-						BẢNG ĐIỀU KHIỂN
-					</div>
 				</div>
 			</div>
 			<div
