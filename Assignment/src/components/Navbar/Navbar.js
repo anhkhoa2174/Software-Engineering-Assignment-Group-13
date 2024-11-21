@@ -31,7 +31,7 @@ const Navbar = (props) => {
                 </div>
             </LogoBox>
             <Menu>
-                <MenuItem>TRANG CHỦ</MenuItem>
+                <MenuItem to='/'>TRANG CHỦ</MenuItem>
                 <MenuItem>BẢNG ĐIỀU KHIỂN</MenuItem>
                 <MenuItem>IN TÀI LIỆU</MenuItem>
                 <MenuItem>LỊCH SỬ IN</MenuItem>
