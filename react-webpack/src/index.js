@@ -1,23 +1,10 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import GlobalStyles from './components/GlobalStyles/GlobalStyles.style';
+import React from "react"; // nạp thư viện react
+import ReactDOM from "react-dom"; // nạp thư viện react-dom
 
-const container = document.getElementById('root');
-
-if (container) {
-    const root = createRoot(container);
-
-    root.render(
-        <React.StrictMode>
-            <GlobalStyles />
-            <Router>
-                <App />
-            </Router>
-        </React.StrictMode>,
-    );
-
-    reportWebVitals;
+// Tạo component App
+function App() {
+	return <div> </div>;
 }
+
+// Render component App vào #root element
+ReactDOM.render(<App />, document.getElementById("root"));
