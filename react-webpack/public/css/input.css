@@ -3,7 +3,7 @@ input {
 	font-family: montserrat;
 	padding: 10px;
 	border-radius: 10px;
-	width: 345px;
+	width: 200%;
 	overflow: hidden;
 	border: 1.5px #23abea solid;
 	justify-content: flex-start;
