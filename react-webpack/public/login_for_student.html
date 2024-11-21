@@ -11,7 +11,6 @@
 				margin: 0; /* Đảm bảo không có margin ngoài trang */
 				padding: 0; /* Đảm bảo không có padding ngoài trang */
 			}
-
 			.hover-div {
 				width: 200px;
 				height: 65px;
@@ -20,8 +19,8 @@
 				align-items: center;
 				font-size: 18px;
 				font-weight: bold;
+				color: #b3b7bd;
 				background-color: white;
-				color: #d4c9c9;
 				transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng mượt */
 			}
 
@@ -30,6 +29,21 @@
 				background-color: #b3b7bd;
 				color: #0f8ede;
 			}
+
+			#slideshow {
+				width: 45%;
+				height: 100%;
+				position: absolute;
+				left: 51%;
+				top: 0%;
+				transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+				opacity: 1; /* Bắt đầu với ảnh rõ ràng */
+				transform: scale(1);
+				transform: scale(1.2);
+			}
+			#slideshow.hidden {
+				opacity: 0; /* Làm mờ ảnh khi thay đổi */
+			}
 		</style>
 		<link rel="stylesheet" href="input.css" />
 	</head>
@@ -37,221 +51,220 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
 			rel="stylesheet" />
-		<div
-			style="
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				background-image: url('Rectangle.png');
-			"></div>
+		<div style="width: 100%; height: 100%">
+			<div
+				style="
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					background-image: url('Rectangle.png');
+				"></div>
 
-		<div
-			style="
-				width: 1240px;
-				height: 572px;
-				left: 143px;
-				top: 69px;
-				position: absolute;
-				background: rgb(255, 255, 255);
-				border-radius: 10px;
-				overflow: hidden;
-			">
 			<div
-				class="hover-div"
-				onClick="window.location.href = 'login_for_spso.html';"
 				style="
-					width: 154px;
-					height: 154px;
-					top: 135px;
-					left: 140px;
-					border-radius: 20px;
-					border: 1px #d4c9c9 solid;
+					width: 81.2%;
+					height: 80%;
+					left: 9%;
+					top: 10%;
 					position: absolute;
+					background: rgb(255, 255, 255);
+					border-radius: 10px;
+					overflow: hidden;
 				">
-				<img
-					style="
-						width: 91px;
-						height: 91px;
-						left: 32px;
-						top: 15px;
-						position: absolute;
-					"
-					src="image 47.png" />
 				<div
+					onClick="window.location.href = 'login_for_spso.html';"
+					class="hover-div"
 					style="
-						top: 120px;
-						left: 50px;
-						font-size: 20px;
-						font-family: Montserrat;
-						font-weight: 400;
-						word-wrap: break-word;
+						width: 12.5%;
+						height: 27%;
+						top: 24%;
+						left: 11.7%;
+						border-radius: 20px;
+						border: 1px #d4c9c9 solid;
 						position: absolute;
 					">
-					SPSO
-				</div>
-			</div>
-			<div
-				class="hover-div"
-				onClick="window.location.href = 'login_for_student.html';"
-				style="
-					width: 154px;
-					height: 154px;
-					top: 135px;
-					left: 350px;
-					border-radius: 20px;
-					border: 1px #0f8ede solid;
-					position: absolute;
-				">
-				<img
-					style="
-						width: 91px;
-						height: 91px;
-						left: 32px;
-						top: 15px;
-						position: absolute;
-					"
-					src="image.png" />
-				<div
-					style="
-						top: 120px;
-						left: 33px;
-						color: #0f8ede;
-						font-size: 20px;
-						font-family: Montserrat;
-						font-weight: 400;
-						word-wrap: break-word;
-						position: absolute;
-					">
-					Sinh viên
-				</div>
-			</div>
-			<div style="top: 320px; left: 140px; position: absolute">
-				<div style="font-family: Montserrat; font-weight: 900">
-					<b>Tên đăng nhập</b>
-				</div>
-				<input type="email" />
-			</div>
-			<div style="top: 390px; left: 140px; position: absolute">
-				<div style="font-family: Montserrat; font-weight: 900">
-					<b
-						>Mật khẩu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<span style="color: #0c2a92">Quên mật khẩu?</span></b
-					>
-				</div>
-				<input type="password" />
-			</div>
-			<div
-				style="
-					top: 86px;
-					left: 115px;
-					color: black;
-					font-size: 32px;
-					font-family: Montserrat;
-					font-weight: 400;
-					word-wrap: break-word;
-					position: absolute;
-				">
-				ĐĂNG NHẬP VỚI TƯ CÁCH
-			</div>
-			<img
-				style="
-					width: 625px;
-					height: 600px;
-					left: 625px;
-					top: 0px;
-					position: absolute;
-				"
-				src="image 28.png" />
-			<div
-				style="
-					width: 235px;
-					height: 50.22px;
-					left: 205.97px;
-					top: 19px;
-					position: absolute;
-					background: #456db3;
-					border-radius: 16px;
-				">
-				<img
-					style="
-						width: 90px;
-						height: 65px;
-						left: -12px;
-						top: -5px;
-						position: absolute;
-					"
-					src="01_logobachkhoatoi 1.png" />
-				<div style="width: 100%; height: 100%; position: relative">
+					<img
+						style="
+							width: 60%;
+							height: 63%;
+							left: 21%;
+							top: 9%;
+							position: absolute;
+						"
+						src="image 47.png" />
 					<div
 						style="
-							width: 173.57px;
-							height: 45.83px;
-							left: 69.43px;
-							top: 0px;
+							top: 80%;
+							left: 34%;
+							font-size: 1.3vw;
+							font-family: Montserrat;
+							font-weight: 400;
+							word-wrap: break-word;
+							position: absolute;
+						">
+						SPSO
+					</div>
+				</div>
+				<div
+					class="hover-div"
+					style="
+						width: 12.5%;
+						height: 27%;
+						top: 24%;
+						left: 28%;
+						border-radius: 20px;
+						border: 1px #0f8ede solid;
+						position: absolute;
+					">
+					<img
+						style="
+							width: 60%;
+							height: 60%;
+							left: 20%;
+							top: 9%;
+							position: absolute;
+						"
+						src="image.png" />
+					<img
+						style="
+							width: 21%;
+							height: 20%;
+							left: 87%;
+							top: 130px;
+							position: absolute;
+						"
+						src="Group 1171275873.png" />
+					<div
+						style="
+							top: 80%;
+							left: 22%;
+							color: #0f8ede;
+							font-size: 1.3vw;
+							font-family: Montserrat;
+							font-weight: 400;
+							word-wrap: break-word;
+							position: absolute;
+						">
+						Sinh viên
+					</div>
+				</div>
+				<div style="top: 57%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Tên đăng nhập</b>
+					</div>
+					<input type="email" />
+				</div>
+				<div style="top: 69%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Mật khẩu</b>
+					</div>
+					<input type="password" />
+				</div>
+				<div style="top: 69%; left: 36%; position: absolute">
+					<span style="color: #0c2a92; font-size: 0.58vw; left: 90%"
+						>Quên mật khẩu?</span
+					>
+				</div>
+				<div
+					style="
+						top: 15%;
+						left: 9%;
+						color: black;
+						font-size: 2.1vw;
+						font-family: Montserrat;
+						font-weight: 400;
+						word-wrap: break-word;
+						position: absolute;
+					">
+					ĐĂNG NHẬP VỚI TƯ CÁCH
+				</div>
+				<img id="slideshow" src="image 28.png" />
+				<div
+					style="
+						width: 19.5%;
+						height: 9%;
+						left: 17%;
+						top: 3%;
+						position: absolute;
+						background: #456db3;
+						border-radius: 16px;
+					">
+					<img
+						style="
+							width: 37%;
+							height: 130%;
+							left: -4%;
+							top: -10%;
+							position: absolute;
+						"
+						src="01_logobachkhoatoi 1.png" />
+					<div
+						style="
+							width: 70%;
+							height: 60%;
+							left: 30%;
+							top: 0%;
 							position: absolute;
 							color: rgb(255, 255, 255);
-							font-size: 20px;
+							font-size: 1.3vw;
 							font-family: Montserrat;
 							font-weight: 700;
 							word-wrap: break-word;
 						">
 						Student Smart Printing Service
 					</div>
-				</div>
-				<div
-					style="
-						width: 100%;
-						height: 100%;
-						top: 455px;
-						left: 5px;
-						background: #23abea;
-						box-shadow: 0px 34px 40px -8px rgba(123, 118, 241, 0.24);
-						position: absolute;
-						border-radius: 56px;
-					">
 					<div
 						style="
-							width: 173.57px;
-							height: 45.83px;
-							left: 52px;
-							top: 10px;
+							width: 100%;
+							height: 100%;
+							top: 920%;
+							left: 3%;
+							background: #23abea;
+							box-shadow: 0px 34px 40px -8px rgba(123, 118, 241, 0.24);
 							position: absolute;
-							color: rgb(255, 255, 255);
-							font-size: 25px;
-							font-family: Montserrat;
-							font-weight: 700;
-							word-wrap: break-word;
+							border-radius: 56px;
 						">
-						Đăng nhập
+						<div
+							style="
+								width: 54%;
+								height: 52%;
+								left: 24%;
+								top: 23%;
+								position: absolute;
+								color: rgb(255, 255, 255);
+								font-size: 1.5vw;
+								font-family: Montserrat;
+								font-weight: 700;
+								word-wrap: break-word;
+							">
+							Đăng nhập
+						</div>
 					</div>
 				</div>
+				<input
+					style="
+						width: 1.5%;
+						height: 2.7%;
+						left: 10.9%;
+						top: 81%;
+						position: absolute;
+						background-color: #0f8ede;
+						position: absolute;
+					"
+					type="checkbox" />
+				<b
+					style="
+						left: 13%;
+						top: 81.8%;
+						appearance: none;
+						font-size: 0.65vw;
+						position: absolute;
+						position: absolute;
+						font-family: Montserrat;
+					"
+					>Lưu tài khoản</b
+				>
 			</div>
-
-			<input
-				style="
-					width: 15px;
-					height: 15px;
-					left: 135px;
-					top: 456px;
-					position: absolute;
-					background-color: #0f8ede;
-					position: absolute;
-				"
-				type="checkbox" />
-			<b
-				style="
-					left: 158px;
-					top: 461px;
-					appearance: none;
-					font-size: 10px;
-					position: absolute;
-					position: absolute;
-					font-family: Montserrat;
-				"
-				>Lưu tài khoản</b
-			>
 		</div>
 	</body>
 </html>
