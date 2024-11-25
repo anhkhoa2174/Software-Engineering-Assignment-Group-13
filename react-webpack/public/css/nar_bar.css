@@ -1,0 +1,109 @@
+/* Định dạng tổng quát cho thanh navbar */
+.navbar {
+    width: 100vw;
+    height: 65px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 3vw;
+    background: #23abea;
+    box-shadow: 0px 3.2px 3.2px rgba(102, 101, 101, 0.9);
+  }
+  
+  /* Cột logo */
+  .navbar-logo {
+    width: 15vw;
+    height: 53.6px;
+    background: #142c64;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .navbar-logo img {
+    width: auto;
+    height: auto;
+    margin-left: -18px;
+    margin-top: 5.5px;
+  }
+  
+  .navbar-logo-text {
+    width: auto;
+    height: auto;
+    color: white;
+    font-size: 22.4px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    margin-left: -5px;
+    word-wrap: break-word;
+  }
+  
+  /* Định dạng cho các mục trong navbar */
+  .navbar-item {
+    width: 7.5vw;
+    height: 65px;
+    padding: 0 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-size: 19.2px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+  
+  .navbar-item2 {
+    width: 9.5vw;
+    height: 65px;
+    padding: 0 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-size: 19.2px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+
+
+  .navbar-item.highlight {
+    width: 11vw;
+    background: #142c64;
+    color: white;
+  }
+  
+  /* Cột cuối (Thông báo và người dùng) */
+  .navbar-end {
+    width: auto;
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 12%;
+  }
+  
+  .navbar-end .img {
+    width: 40px;
+    height: 40px;
+    margin-left:10px;
+  }
+  
+  .navbar-end .username {
+    margin-left: 10px;
+    font-size: 15px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    color: black;
+  }
+  
