@@ -5,6 +5,7 @@
 	top: 11.8%;
 	position: absolute;
 }
+
 #big_text {
 	width: 50%;
 	left: 0%;
@@ -20,6 +21,7 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
+
 #hang_dau {
 	width: 25%;
 	left: 55.5%;
@@ -32,6 +34,7 @@
 	font-weight: 500;
 	word-wrap: break-word;
 }
+
 #system_error_frame {
 	width: 36%;
 	height: 21%;
@@ -42,6 +45,7 @@
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	border: 0.05em #d8d8d8 solid;
 }
+
 #gap_loi {
 	width: 41%;
 	left: 50.5%;
@@ -55,6 +59,7 @@
 	font-weight: 800;
 	word-wrap: break-word;
 }
+
 #system_error {
 	width: 11.8%;
 	height: 20.7%;
@@ -63,6 +68,7 @@
 	position: absolute;
 	border-radius: 4px;
 }
+
 #HDSD_frame {
 	width: 36%;
 	height: 21%;
@@ -73,6 +79,7 @@
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	border: 0.05em #d8d8d8 solid;
 }
+
 #HDSD {
 	width: 41%;
 	left: 50.5%;
@@ -86,6 +93,7 @@
 	font-weight: 800;
 	word-wrap: break-word;
 }
+
 #below_system_error {
 	width: 11.8%;
 	height: 20.7%;
@@ -94,6 +102,7 @@
 	position: absolute;
 	border-radius: 4px;
 }
+
 #ra_mat_he_thong_frame {
 	width: 36%;
 	height: 21%;
@@ -105,6 +114,7 @@
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	border: 0.05em #d8d8d8 solid;
 }
+
 #ra_mat_he_thong {
 	width: 41%;
 	left: 50.5%;
@@ -118,6 +128,7 @@
 	font-weight: 800;
 	word-wrap: break-word;
 }
+
 #Dang_Hoang_Long_1 {
 	width: 46%;
 	left: 43%;
@@ -130,6 +141,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #Dang_Hoang_Long_2 {
 	width: 46%;
 	left: 43%;
@@ -143,6 +155,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #Mai_Quoc_Tri {
 	width: 46%;
 	left: 42.1%;
@@ -156,6 +169,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #thang_1 {
 	width: 46%;
 	left: 52.5%;
@@ -168,6 +182,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #thang_2 {
 	width: 46%;
 	left: 52.5%;
@@ -181,6 +196,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #tieng_truoc {
 	width: 46%;
 	left: 52.5%;
@@ -194,6 +210,7 @@
 	word-wrap: break-word;
 	text-shadow: 2px 2px 4px rgba(0, 4, 4, 0.25);
 }
+
 #man {
 	width: 25%;
 	height: 55%;
@@ -201,6 +218,7 @@
 	top: 16.5%;
 	position: absolute;
 }
+
 #woman {
 	width: 25%;
 	height: 55%;
@@ -209,6 +227,7 @@
 	position: absolute;
 	filter: contrast(120%);
 }
+
 #best {
 	width: 5%;
 	height: 11%;
