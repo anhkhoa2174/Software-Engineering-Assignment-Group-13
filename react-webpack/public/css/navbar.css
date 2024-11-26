@@ -1,0 +1,217 @@
+#navbar {
+    width: 100%;
+    height: 65px;
+    color: #ffffff;
+    display: flex;
+    color: #142c64;
+    background: #23abea;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    box-shadow: 0px 3.2px 3.2px #666565e6;
+    z-index: 999
+}
+#navbar .nav-block {
+    width: 85%;
+    height: 100%;
+    position: absolute;
+    align-items: center;
+    display: inline-flex;
+}
+#navbar .nav-block ul {
+    height: 100%;
+    position: absolute;
+    left: 280px;
+    align-items: center;
+    display: inline-flex;
+}
+#navbar .nav-block ul li {
+    color: #000000;
+    height: 100%;
+    text-decoration: none;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: Montserrat;
+    display: flex;
+    padding: 0 15px 0 15px;
+    word-wrap: break-word;
+}
+#navbar .nav-block ul li:hover {
+    background-color: #142c64;
+    color: #ffffff
+}
+#navbar .nav-block ul:hover ul.dropdown {
+    display: block;
+}
+#navbar .nav-block .index-page {
+    background-color: #142c64;
+    color: #ffffff
+}
+#navbar .nav-block #menu-icon {
+    display: none;
+}
+#navbar .nav-block #close {
+    display: none;
+}
+#navbar #noti-account {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    right: 0;
+    align-items: center;
+}
+#navbar #noti {
+    height: 100%;
+    position: absolute;
+    left: 5px;
+    z-index: 10;
+    margin-right: 10px;
+}
+#navbar #circle {
+    position: absolute;
+    top: 50%;
+    transform: translate(67%, -50%);
+}
+#navbar #bell {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+#navbar .info-list {
+    height: 100%;
+    position: absolute;
+    align-items: center;
+    font-family: Montserrat;
+    display: flex;
+    left: 50px;
+    padding: 0 4px;
+}
+#navbar .info-list .name {
+    font-size: 15px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 400;
+    color: black;
+}
+#navbar .info-list ul {
+    width: auto;
+    padding: 0;
+}
+#navbar .info-list ul li {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+#navbar .info-list ul li ul.dropdown {
+    width: 125%;
+    color: #000000;
+    background: #ffffff;
+    transform: translate(-17.5%, 65%);
+    margin-top: 10px;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    border: #000000 1px solid;
+    border-radius: 10px;
+}
+#navbar .info-list ul li ul.dropdown li {
+    display: block;
+    align-items: center;
+    padding: 10px 0 10px 10px;
+    text-decoration: none;
+    text-align: left;
+    font-size: 15px;
+    border-radius: 10px;
+}
+#navbar .info-list ul li ul.dropdown li a {
+    color: #000000;
+    text-decoration: none;
+}
+#navbar .info-list ul li ul.dropdown li ul.nextpage {
+    width: 100%;
+    color: #000000;
+    background: #ffffff;
+    transform: translate(-17.5%, 65%);
+    padding: 0;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    border: #000000 1px solid;
+    border-radius: 10px;
+}
+#navbar .info-list ul li ul.dropdown li:hover {
+    background-color: #cbcbcb;
+    display: block;
+}
+#navbar .info-list ul:hover li ul.dropdown {
+    display: block;
+}
+
+@media (max-width: 1210px) {
+    #navbar .nav-block ul {
+        display: block;
+        height: auto;
+        position: absolute;
+        background-color: #23abea;
+        transform: translateY(63%);
+        left: -40px;
+        margin: 0;
+        opacity: 0;
+    }
+    #navbar .nav-block ul.appear {
+        opacity: 100;
+        transition: opacity 0.2s linear;
+    }
+    #navbar .nav-block ul li {
+        height: 50px;
+        justify-content: left;
+        font-size: 12px;
+        padding: 0 10px 0 20px;
+    }
+    #navbar .nav-block #bar1,
+    #navbar .nav-block #bar2,
+    #navbar .nav-block #bar3 {
+        width: 36px;
+        height: 4px;
+        background-color: #000000;
+        margin: 6px;
+        transition: 0.4s;
+    }
+    #navbar #noti-account {
+        right: 20px;
+    }
+    .change #menu {
+        opacity: 100;
+    }
+    .change #bar1 {
+        transform: translate(0, 10px) rotate(45deg);
+    }
+    .change #bar2 {
+        opacity: 0;
+    }
+    .change #bar3 {
+        transform: translate(0, -10px) rotate(-45deg);
+    }
+    #navbar .nav-block #menu-icon {
+        display: block;
+        margin-left: 5px;
+        cursor: pointer;
+        position: absolute;
+    }
+    #navbar .nav-block ul li:hover {
+        background-color: #142c64;
+        color: #ffffff
+    }
+    #navbar #noti-account {
+        position: absolute;
+        width: 200px;
+        height: 100%;
+        align-items: center;
+    }
+}
