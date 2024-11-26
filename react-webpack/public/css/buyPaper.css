@@ -1,0 +1,78 @@
+.pay-log {
+    margin-top: 70px;
+    font-family: Montserrat;
+    height: 80vh;
+    justify-content: space-between;
+    padding: 0 3%;
+    display: flex;
+    position: relative;
+}
+.log {
+    width: 75%;
+    float: left;
+    position: relative;
+}
+.log ul {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+}
+.log ul #not-chosen {
+    display: block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: 2px solid #ebebee;
+    border-radius: 20px;
+}
+.log ul #chosen {
+    display: block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: 1px solid #23abea;
+    border-radius: 20px;
+}
+.log #transaction {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+.log #transaction thead tr {
+    background-color: #23abea;
+    color: #fefefe;
+    font-weight: bold;
+}
+.log #transaction th,
+.log #transaction td {
+    padding: 12px 5px;
+}
+.log #transaction tbody td a {
+    color: #23abea;
+}
+.log #transaction tbody td a:hover {
+    color: #ed2629;
+}
+.log #transaction tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.log #transaction tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.pay-log .buy-paper {
+    display: block;
+    width: 20%;
+    margin-left: 2%;
+}
+.pay-log .buy-paper #paperleft {
+    display: block;
+    text-align: center;
+    width: auto;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid #23abea;
+}
