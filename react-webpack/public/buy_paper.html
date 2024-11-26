@@ -29,7 +29,7 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
 			rel="stylesheet" />
-		<div>
+		<div id="buy-paper-page">
 			<div id = "navbar">
 				<div id = "logo"
 					style="
@@ -75,7 +75,24 @@
 					</div>
 				</div>
 				<div class = "nav-block">
-					<ul>
+					<script>
+						function openMenu(x) {
+						  	x.classList.toggle("change");
+							const menu = document.getElementById("menu");
+							if (menu.classList.contains("appear")) {
+								menu.classList.remove("appear");
+							}
+							else {
+								menu.classList.add("appear");
+							}
+						}
+					</script>
+					<div id="menu-icon" onclick="openMenu(this)">
+						<div id="bar1"></div>
+						<div id="bar2"></div>
+						<div id="bar3"></div>
+					</div>
+					<ul id="menu">
 						<li onClick="window.location.href='index.html';">
 							TRANG CHỦ
 						</li>
@@ -153,7 +170,7 @@
 											<li>English</li>
 										</ul>
 									</li>
-									<li><a>Đăng xuất</a></li>
+									<li><a href="login_for_student.html">Đăng xuất</a></li>
 								</ul>
 								<svg style = "padding: 0 10px, 0 10px;"
 									width="10"
@@ -196,20 +213,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr class="waiting">
 								<td>#152670</td>
 								<td>5/11/2024</td>
 								<td>13</td>
 								<td>13.000</td>
-								<td>Đang chờ thanh toán</td>
+								<td class="status">Đang chờ thanh toán</td>
 								<td><a>Xem chi tiết</a></td>
 							</tr>
-							<tr>
+							<tr class="done">
 								<td>#153587</td>
 								<td>5/11/2024</td>
 								<td>5</td>
 								<td>5.000</td>
-								<td>Đã thanh toán</td>
+								<td class="status">Đã thanh toán</td>
 								<td><a>Xem chi tiết</a></td>
 							</tr>
 						</tbody>
@@ -217,9 +234,33 @@
 				</div>
 				<div class="buy-paper">
 					<div id="paperleft">
-						Số giấy còn lại của bạn: 100
+						Số giấy A4 còn lại của bạn: <br>
+						<text id="no-paper">100</text>
+						 trang
 					</div>
-
+					<div id="buy-form">
+						<h4>Chọn lượng giấy cần mua</h4>
+						<form method="POST">
+							<div class="fill">	
+								<label for="paper-type">Loại giấy: </label>
+								<select id="paper-type">
+									<option>A2</option>
+									<option>A3</option>
+									<option>A4</option>
+									<option>A5</option>
+								</select><br>
+							</div>
+							<div class="fill">
+								<label for="amount">Số lượng: </label>
+								<input type="number" id="amount" min="0" max="1000"><br>
+							</div>
+							<div class="submit">
+								<button type="submit" id="submitButton">
+									Thanh toán
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
