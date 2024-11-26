@@ -76,6 +76,69 @@
 	cursor: pointer;
 }
 
+/* Cột logo */
+.navbar-logo {
+	width: 15%;
+	height: 82%;
+	background: #142c64;
+	border-radius: 16px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 1.18%;
+}
+
+.navbar-logo img {
+	width: auto;
+	height: auto;
+	margin-left: -7%;
+	margin-top: 2.5%;
+}
+
+.navbar-logo-text {
+	width: auto;
+	height: auto;
+	color: white;
+	font-size: 140%;
+	font-family: Montserrat, sans-serif;
+	font-weight: 700;
+	margin-left: -2%;
+	word-wrap: break-word;
+}
+
+/* Định dạng cho các mục trong navbar */
+.navbar-item {
+	width: 7.5%;
+	height: 100%;
+	padding: 0 1.17%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1%;
+	text-align: center;
+	font-size: 120%;
+	font-family: Montserrat, sans-serif;
+	font-weight: 400;
+	word-wrap: break-word;
+	cursor: pointer;
+}
+
+.navbar-item2 {
+	width: 9.5%;
+	height: 100%;
+	padding: 0 1.17%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1%;
+	text-align: center;
+	font-size: 120%;
+	font-family: Montserrat, sans-serif;
+	font-weight: 400;
+	word-wrap: break-word;
+	cursor: pointer;
+}
+
 .navbar-item.highlight {
 	width: 11%;
 	background: #142c64;
