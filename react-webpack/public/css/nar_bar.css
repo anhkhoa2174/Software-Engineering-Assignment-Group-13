@@ -15,7 +15,7 @@
   
   /* Cột logo */
   .navbar-logo {
-    width: 15vw;
+    width: 15%;
     height: 53.6px;
     background: #142c64;
     border-radius: 16px;
@@ -45,7 +45,7 @@
   
   /* Định dạng cho các mục trong navbar */
   .navbar-item {
-    width: 7.5vw;
+    width: 7.5%;
     height: 65px;
     padding: 0 20px;
     display: inline-flex;
@@ -61,7 +61,7 @@
   }
   
   .navbar-item2 {
-    width: 9.5vw;
+    width: 9.5%;
     height: 65px;
     padding: 0 20px;
     display: inline-flex;
@@ -78,14 +78,14 @@
 
 
   .navbar-item.highlight {
-    width: 11vw;
+    width: 11%;
     background: #142c64;
     color: white;
   }
   
   /* Cột cuối (Thông báo và người dùng) */
   .navbar-end {
-    width: auto;
+    width: 15%;
     height: 65px;
     display: flex;
     flex-direction: row;
