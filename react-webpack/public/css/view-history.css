@@ -216,8 +216,12 @@
 	}
 }
 
-#buy-page-paper{
-  height: 90vh;
+#view-history-page{
+  height: 1000vh;
+  	display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 .view-history{
     font-family: Montserrat;
@@ -226,9 +230,10 @@
     display: flex;
 }
 .history {
-    width: 75%;
-    float: left;
+	width: 100%; /* Use full width */
+    height: calc(90vh - 100px); /* Max height minus margins/padding */
     position: relative;
+    overflow-y: auto; /* Enable scrolling if content overflows */
 }
 .history #transaction{
 	width: 100%;
