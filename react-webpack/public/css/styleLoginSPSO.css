@@ -135,18 +135,43 @@
 	border-radius: 56px;
 } */
 
+button {
+	display: flex; /* Sử dụng flexbox để căn giữa */
+	justify-content: center; /* Căn giữa theo chiều ngang */
+	align-items: center; /* Căn giữa theo chiều dọc */
+	padding: 10px 20px; /* Cung cấp một chút padding để tạo không gian */
+	border: none; /* Nếu không cần border */
+	color: white; /* Màu chữ */
+	cursor: pointer; /* Khi hover chuột, con trỏ sẽ thành hình bàn tay */
+}
+
 #login_text {
-	width: 54%;
+	text-align: center; /* Căn giữa nội dung trong div */
+	margin: 0; /* Đảm bảo không có khoảng cách mặc định */
+	width: 60%;
+	height: 52%;
+	text-align: center;
+	position: absolute;
+	color: rgb(255, 255, 255);
+	font-size: 23px;
+	font-family: Montserrat;
+	font-weight: 700;
+	word-wrap: break-word;
+}
+
+/* #login_text {
+	width: 60%;
 	height: 52%;
 	left: 24%;
 	top: 23%;
+	text-align: center;
 	position: absolute;
 	color: rgb(255, 255, 255);
 	font-size: 1.5vw;
 	font-family: Montserrat;
 	font-weight: 700;
 	word-wrap: break-word;
-}
+} */
 
 #save_account {
 	width: 1.5%;
@@ -190,7 +215,8 @@
 	width: 100%;
 	height: 100%;
 	top: 920%;
-	left: 3%;
+	left: 0%;
+	align-items: center;
 	background: #23abea;
 	box-shadow: 0px 34px 40px -8px rgba(123, 118, 241, 0.24);
 	position: absolute;

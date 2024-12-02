@@ -51,6 +51,17 @@
 	border: 0.05em #d8d8d8 solid;
 }
 
+#system_error_frame:hover {
+	width: 36%;
+	height: 140px;
+	left: 63.25%;
+	top: 18%;
+	position: absolute;
+	background: rgb(230, 225, 225);
+	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+	border: 0.05em #d8d8d8 solid;
+}
+
 #gap_loi {
 	width: 56%;
 	left: 42.5%;
@@ -81,6 +92,17 @@
 	top: 46%;
 	position: absolute;
 	background: white;
+	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+	border: 0.05em #d8d8d8 solid;
+}
+
+#HDSD_frame:hover {
+	width: 36%;
+	height: 140px;
+	left: 63.25%;
+	top: 46%;
+	position: absolute;
+	background: rgb(230, 225, 225);
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	border: 0.05em #d8d8d8 solid;
 }
@@ -116,6 +138,18 @@
 	top: 74%;
 	position: absolute;
 	background: white;
+	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+	border: 0.05em #d8d8d8 solid;
+}
+
+#ra_mat_he_thong_frame:hover {
+	width: 36%;
+	height: 140px;
+	left: 63.25%;
+	top: 74%;
+	position: absolute;
+	background: rgb(230, 225, 225);
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 	border: 0.05em #d8d8d8 solid;
@@ -268,6 +302,17 @@
 		border: 0.05em #d8d8d8 solid;
 	}
 
+	#system_error_frame:hover {
+		width: 33%;
+		height: 140px;
+		left: 0%;
+		top: 115%;
+		position: absolute;
+		background: rgb(230, 225, 225);
+		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+		border: 0.05em #d8d8d8 solid;
+	}
+
 	#gap_loi {
 		width: 56%;
 		left: 42.5%;
@@ -298,6 +343,17 @@
 		top: 115%;
 		position: absolute;
 		background: white;
+		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+		border: 0.05em #d8d8d8 solid;
+	}
+
+	#HDSD_frame:hover {
+		width: 33%;
+		height: 140px;
+		left: 34.25%;
+		top: 115%;
+		position: absolute;
+		background: rgb(230, 225, 225);
 		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 		border: 0.05em #d8d8d8 solid;
 	}
@@ -333,6 +389,18 @@
 		top: 115%;
 		position: absolute;
 		background: white;
+		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+		border: 0.05em #d8d8d8 solid;
+	}
+
+	#ra_mat_he_thong_frame:hover {
+		width: 33%;
+		height: 140px;
+		left: 68.7%;
+		top: 115%;
+		position: absolute;
+		background: rgb(230, 225, 225);
 		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 		box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
 		border: 0.05em #d8d8d8 solid;

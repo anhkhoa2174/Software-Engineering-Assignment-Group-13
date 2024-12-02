@@ -47,6 +47,24 @@
 			#slideshow.hidden {
 				opacity: 0;
 			}
+			#wrongpw_message {
+				background-color: #ffdddd;
+				color: red;
+				width: 12%;
+				top: 53%;
+				left: 24.7%;
+				font-size: 72%;
+				position: absolute;
+
+				display: none; /* Mặc định ẩn */
+				font-family: Montserrat;
+				/* Căn giữa chữ */
+				display: flex;
+				justify-content: center; /* Căn giữa theo chiều ngang */
+				align-items: center; /* Căn giữa theo chiều dọc */
+				text-align: center; /* Căn giữa text */
+				margin-bottom: 900%;
+			}
 		</style>
 		<link rel="stylesheet" href="css/input.css" />
 		<link rel="stylesheet" href="css/styleLoginStudent.css" />
@@ -77,36 +95,45 @@
 				<img id="checkbox" src="images/Group 1171275873.png" />
 				<div id="sinhvien_text">Sinh viên</div>
 			</div>
-			<div style="top: 57%; left: 11.3%; position: absolute">
-				<div style="font-family: Montserrat; font-weight: 900">
-					<b>Tên đăng nhập</b>
+			<form action="php/loginStudent.php" method="POST">
+				<div style="top: 57%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Tên đăng nhập</b>
+					</div>
+					<input type="email" name="email" />
 				</div>
-				<input type="email" />
-			</div>
-			<div style="top: 69%; left: 11.3%; position: absolute">
-				<div style="font-family: Montserrat; font-weight: 900">
-					<b>Mật khẩu</b>
+				<div style="top: 69%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Mật khẩu</b>
+					</div>
+					<input type="password" name="password" />
 				</div>
-				<input type="password" />
-			</div>
-			<div style="top: 69%; left: 36%; position: absolute">
-				<span style="color: #0c2a92; font-size: 0.58vw; left: 90%"
-					>Quên mật khẩu?</span
-				>
-			</div>
-			<div id="dang_nhap_voi_tu_cach">ĐĂNG NHẬP VỚI TƯ CÁCH</div>
-			<img id="slideshow" src="images/image 28.png" />
-			<div id="ssps_frame">
-				<img id="logoBK" src="images/01_logobachkhoatoi 1.png" />
-				<div id="ssps_text">Student Smart Printing Service</div>
-				<div
-					class="hover-div-login"
-					onClick="window.location.href = 'index.html';">
-					<div id="login_text">Đăng nhập</div>
+				<div style="top: 69%; left: 36%; position: absolute">
+					<span style="color: #0c2a92; font-size: 0.58vw; left: 90%"
+						>Quên mật khẩu?</span
+					>
 				</div>
-			</div>
-			<input id="save_account" type="checkbox" />
-			<b id="save_account_text">Lưu tài khoản</b>
+				<div id="dang_nhap_voi_tu_cach">ĐĂNG NHẬP VỚI TƯ CÁCH</div>
+				<img id="slideshow" src="images/image 28.png" />
+				<div id="ssps_frame">
+					<img id="logoBK" src="images/01_logobachkhoatoi 1.png" />
+					<div id="ssps_text">Student Smart Printing Service</div>
+					<button type="submit" ; class="hover-div-login">
+						<div id="login_text">Đăng nhập</div>
+					</button>
+				</div>
+				<input id="save_account" type="checkbox" />
+				<b id="save_account_text">Lưu tài khoản</b>
+			</form>
 		</div>
+		<script>
+			// Function to check query parameters and show error
+			window.onload = function () {
+				const urlParams = new URLSearchParams(window.location.search);
+				if (urlParams.get("wrongpw") === "false") {
+					document.getElementById("wrongpw_message").style.display = "block";
+				}
+			};
+		</script>
 	</body>
 </html>
