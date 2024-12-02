@@ -19,7 +19,7 @@
 			
 		</style>
 		<link rel="stylesheet" href="css/navbar.css" />
-		<link rel="stylesheet" href="css/buyPaper.css" />
+		<link rel="stylesheet" href="main.css">
 	</head>
 	<body>
 		<div id="root"></div>
@@ -192,6 +192,9 @@
 					
 				</div>
 			</div>
+			<form id="tìm kiếm">
+				<input type="text" placeholder="Tìm kiếm" />
+			</form>
      <div class="view-history">
 		<table id="history">
 			<thead>
@@ -230,15 +233,26 @@
 					<td>3/11/2024 12:05</td>
 					<td>B32022 - B3-202</td>
 					<td>9.000</td>
-					<td class="trạng thái">Hoàn thành</td>
+					<td class="trạng thái">Lỗi in</td>
 					<td><a>Xem chi tiết</a></td>
 				</tr>
+				
 			</tbody>
 		</table>
 
 	 </div>
      </div>
-
+	 <div class="pagination">
+		<button class="prev">&larr;</button>
+		<button class="page active">01</button>
+		<button class="page">02</button>
+		<button class="page">03</button>
+		<button class="page">04</button>
+		<button class="page">05</button>
+		<button class="page">06</button>
+		<button class="next">&rarr;</button>
+	  </div>
+	  
   
   </body>
-</html
+</html>
