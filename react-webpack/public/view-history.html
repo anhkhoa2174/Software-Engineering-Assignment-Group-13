@@ -19,6 +19,7 @@
 			}
 			
 		</style>
+		
 		<link rel="stylesheet" href="css/navbar.css" />
 		<link rel="stylesheet" href="main.css">
 	</head>
@@ -193,10 +194,12 @@
 					
 				</div>
 			</div>
-			<form id="tim-kiem" style="display: flex; align-items: center;">
-				<input type="text" placeholder="Tìm kiếm"  />
-				<button type="submit"><i class="fa fa-search"></i></button>
-			  </form>
+
+			<div class="search-container">
+				<input type="text" class="search-input" placeholder="Tìm kiếm...">
+				<button class="search-button">Tìm kiếm</button>
+			</div>
+			
 			  
      	<div class="view-history">
 			<div class="history"> 
@@ -214,7 +217,11 @@
 					</thead>
 					<tbody>	
 						<tr class="waiting">
-								<td>XSTK.PDF</td>
+								<!--<td>XSTK.PDF</td>-->
+								<td>
+									XSTK.PDF
+									<img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+								</td>
 								<td>94kb</td>
 								<td>4/11/2024 11:06</td>
 								<td>B61011 - B6-101</td>
@@ -223,7 +230,9 @@
 								<td><a>Xem chi tiết</a></td>
 						</tr>
 						<tr class="done">
-							<td>BAOCAO.DOCX</td>
+							<td>BAOCAO.DOCX
+								<img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+							</td>
 							<td>94kb</td>
 							<td>4/11/2024 10:01</td>
 							<td>B11023 - B1-102</td>
@@ -232,7 +241,9 @@
 							<td><a>Xem chi tiết</a></td>
 						</tr>
 						<tr class="error">
-							<td>LSD.DOCX</td>
+							<td>LSD.DOCX
+								<img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+							</td>
 							<td>94kb</td>
 							<td>3/11/2024 12:05</td>
 							<td>B32022 - B3-202</td>
