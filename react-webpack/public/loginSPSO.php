@@ -14,7 +14,7 @@ try {
     $password = $_POST['password'] ?? '';
 
     // Chuẩn bị câu truy vấn
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND pwd = :password");
+    $stmt = $pdo->prepare("SELECT * FROM spso WHERE email = :email AND pwd = :password");
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $password);
 
@@ -23,10 +23,10 @@ try {
 
     // Kiểm tra kết quả
     if ($stmt->rowCount() > 0) {
-        header("Location: index.html?wrongpw=false");
+        header("Location: homescreen_spso.html?wrongpw=false");
         exit();
     } else {
-        header("Location: login_for_student.html?wrongpw=true");
+        header("Location: login_for_spso.html?wrongpw=true");
         exit();
     }
 } catch (PDOException $e) {
