@@ -33,7 +33,6 @@
       href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
       rel="stylesheet"
     />
-    <!-- nửa trên xài chung cho tất cả các web -->
     <!-- nav bar -->
     <div id="navbar">
       <div
@@ -438,23 +437,23 @@
     </div>
     <!-- chatbox -->
     <div class="chat-bar" id="chat-bar">
-      <img src="images/01_logobachkhoatoi 1.png"  />
+      <img src="images/01_logobachkhoatoi 1.png" />
       <span>Chat tư vấn - Giải đáp mọi thắc mắc</span>
     </div>
     <div class="chat-box" id="chat-box">
       <div class="chat-header">
         <div class="chat-header-left">
-          <img src="images/01_logobachkhoatoi 1.png"  />
+          <img src="images/01_logobachkhoatoi 1.png" />
           <span>Liên hệ SPSO</span>
         </div>
         <button id="close-chat">✖</button>
       </div>
       <div class="chat-content">
         <div class="chat-message">
-          <img src="images/01_logobachkhoatoi 1.png"  />
+          <img src="images/01_logobachkhoatoi 1.png" />
           <p>
-            Nếu bạn cần hỗ trợ gì cho việc in ấn thì có thể nhắn vào khung chat để được giúp đỡ. 
-			SPSO sẽ liên lạc lại sớm nhất có thể
+            Nếu bạn cần hỗ trợ gì cho việc in ấn thì có thể nhắn vào khung chat
+            để được giúp đỡ. SPSO sẽ liên lạc lại sớm nhất có thể
           </p>
         </div>
       </div>
@@ -463,23 +462,23 @@
         <button id="send-message">Gửi</button>
       </div>
     </div>
-
+    <!-- script -->
     <script>
-		const chatBar = document.getElementById('chat-bar');
-		const chatBox = document.getElementById('chat-box');
-		const closeChat = document.getElementById('close-chat');
-		
-		// Hiển thị khung chat và ẩn thanh chat bar
-		chatBar.addEventListener('click', () => {
-		  chatBox.classList.add('show');
-		  chatBar.style.display = 'none'; // Ẩn thanh chat bar
-		});
-		
-		// Ẩn khung chat và hiển thị lại thanh chat bar
-		closeChat.addEventListener('click', () => {
-		  chatBox.classList.remove('show');
-		  chatBar.style.display = 'flex'; // Hiển thị lại thanh chat bar
-		});
+      const chatBar = document.getElementById("chat-bar");
+      const chatBox = document.getElementById("chat-box");
+      const closeChat = document.getElementById("close-chat");
+
+      // Hiển thị khung chat và ẩn thanh chat bar
+      chatBar.addEventListener("click", () => {
+        chatBox.classList.add("show");
+        chatBar.style.display = "none"; // Ẩn thanh chat bar
+      });
+
+      // Ẩn khung chat và hiển thị lại thanh chat bar
+      closeChat.addEventListener("click", () => {
+        chatBox.classList.remove("show");
+        chatBar.style.display = "flex"; // Hiển thị lại thanh chat bar
+      });
     </script>
   </body>
 </html>

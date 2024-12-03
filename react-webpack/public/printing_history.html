@@ -5,18 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>printting_history</title>
   </head>
-  <style>
-    html,
-    body {
-      overflow-x: hidden;
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-    }
-  </style>
   <link rel="stylesheet" href="css/navbar.css" />
   <link rel="stylesheet" href="css/printing_history.css" />
+  <link rel="stylesheet" href="css/noti_box.css" />
   <body>
     <div id="root"></div>
     <link
@@ -96,11 +87,8 @@
           <li onClick="window.location.href='printing_for_student.html';">
             IN TÀI LIỆU
           </li>
-          <li>LỊCH SỬ IN</li>
-          <li
-            onClick="window.location.href='buy_paper.html';"
-            class="index-page"
-          >
+          <li class="index-page">LỊCH SỬ IN</li>
+          <li onClick="window.location.href='buy_paper.html';">
             MUA THÊM GIẤY
           </li>
         </ul>
@@ -138,6 +126,35 @@
               stroke="black"
             />
           </svg>
+          <div id="notification-box" class="hidden">
+            <div class="notification-header">Thông báo</div>
+            <ul class="notification-list">
+              <li>
+                <span class="notification-title">Thông báo 1</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">10 phút trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              <li>
+                <span class="notification-title">Thông báo 2</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">30 phút trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              <li>
+                <span class="notification-title">Thông báo 3</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">1 giờ trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="info-list">
           <ul>
@@ -195,9 +212,10 @@
       </div>
     </div>
     <!-- lịch sử in -->
+
     <div class="container">
       <div class="header">
-        <h2>Recent Orders</h2>
+        <h2>Lịch sử in</h2>
         <div class="date-filter">
           <input type="date" id="start-date" />
           <span>đến</span>
@@ -349,17 +367,39 @@
       document
         .querySelector(".search-bar input")
         .addEventListener("input", function () {
-          const searchValue = this.value.toLowerCase(); 
-          const rows = document.querySelectorAll("tbody tr"); 
+          const searchValue = this.value.toLowerCase();
+          const rows = document.querySelectorAll("tbody tr");
 
           rows.forEach((row) => {
-            const fileName = row.cells[0].innerText.toLowerCase(); 
+            const fileName = row.cells[0].innerText.toLowerCase();
             if (fileName.includes(searchValue)) {
-              row.style.display = ""; 
+              row.style.display = "";
             } else {
-              row.style.display = "none"; 
+              row.style.display = "none";
             }
           });
+        });
+      // Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+      document.getElementById("noti").addEventListener("click", function (e) {
+        e.stopPropagation(); 
+        const notificationBox = document.getElementById("notification-box");
+        notificationBox.classList.toggle("active"); 
+      });
+
+      
+      document.addEventListener("click", function (e) {
+        const notificationBox = document.getElementById("notification-box");
+        const noti = document.getElementById("noti");
+        if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+          notificationBox.classList.remove("active");
+        }
+      });
+
+      
+      document
+        .getElementById("notification-box")
+        .addEventListener("click", function (e) {
+          e.stopPropagation(); 
         });
     </script>
   </body>
