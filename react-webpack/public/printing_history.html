@@ -5,16 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>printting_history</title>
 	</head>
-	<style>
-		html,
-		body {
-			overflow-x: hidden;
-			margin: 0;
-			padding: 0;
-			height: 100%;
-			width: 100%;
-		}
-	</style>
 	<link rel="stylesheet" href="css/navbar.css" />
 	<link rel="stylesheet" href="css/printing_history.css" />
 	<body>
@@ -87,17 +77,11 @@
 				</div>
 				<ul id="menu">
 					<li onClick="window.location.href='index.html';">TRANG CHỦ</li>
-					<li onClick="window.location.href='student_dashboard.html';">
-						BẢNG ĐIỀU KHIỂN
-					</li>
-					<li onClick="window.location.href='upload_file.html';">
+					<li>BẢNG ĐIỀU KHIỂN</li>
+					<li onClick="window.location.href='printing_for_student.html';">
 						IN TÀI LIỆU
 					</li>
-					<li
-						onClick="window.location.href='printing_history.html';"
-						class="index-page">
-						LỊCH SỬ IN
-					</li>
+					<li class="index-page">LỊCH SỬ IN</li>
 					<li onClick="window.location.href='buy_paper.html';">
 						MUA THÊM GIẤY
 					</li>
@@ -185,9 +169,10 @@
 			</div>
 		</div>
 		<!-- lịch sử in -->
+
 		<div class="container">
 			<div class="header">
-				<h2>Recent Orders</h2>
+				<h2>Lịch sử in</h2>
 				<div class="date-filter">
 					<input type="date" id="start-date" />
 					<span>đến</span>
