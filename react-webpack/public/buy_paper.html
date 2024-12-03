@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Trang mua thêm giấy</title>
 		<link />
 		<link
@@ -240,27 +240,31 @@
 					</div>
 					<div id="buy-form">
 						<h4>Chọn lượng giấy cần mua</h4>
-						<form method="POST">
+						<form id="form" method="POST">
 							<div class="fill">	
 								<label for="paper-type">Loại giấy: </label>
 								<select id="paper-type">
-									<option>A2</option>
-									<option>A3</option>
 									<option>A4</option>
-									<option>A5</option>
 								</select><br>
 							</div>
 							<div class="fill">
 								<label for="amount">Số lượng: </label>
-								<input type="number" id="amount" min="0" max="1000"><br>
+								<input type="number" id="amount" min="0" max="1000" required><br>
 							</div>
 							<div class="submit">
-								<button type="submit" id="submitButton">
-									Thanh toán
-								</button>
+								<input type="submit" id="submitButton" value="Thanh toán">
 							</div>
 						</form>
 					</div>
+					<script>
+						form = document.getElementById("form")
+						form.addEventListener('submit', function(event) {
+							event.preventDefault()
+							nopaper = Number(document.getElementById('no-paper').innerHTML)
+							amount = Number(document.getElementById('amount').value)
+							document.getElementById('no-paper').innerHTML = nopaper + amount
+						});
+					</script>
 				</div>
 			</div>
 		</div>
