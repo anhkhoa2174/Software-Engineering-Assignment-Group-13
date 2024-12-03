@@ -7,6 +7,7 @@
 	</head>
 	<link rel="stylesheet" href="css/navbar.css" />
 	<link rel="stylesheet" href="css/printing_history.css" />
+	<link rel="stylesheet" href="css/noti_box.css" />
 	<body>
 		<div id="root"></div>
 		<link
@@ -77,8 +78,10 @@
 				</div>
 				<ul id="menu">
 					<li onClick="window.location.href='index.html';">TRANG CHỦ</li>
-					<li>BẢNG ĐIỀU KHIỂN</li>
-					<li onClick="window.location.href='printing_for_student.html';">
+					<li onClick="window.location.href='student_dashboard.html';">
+						BẢNG ĐIỀU KHIỂN
+					</li>
+					<li onClick="window.location.href='upload_file.html';">
 						IN TÀI LIỆU
 					</li>
 					<li class="index-page">LỊCH SỬ IN</li>
@@ -116,6 +119,35 @@
 							d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
 							stroke="black" />
 					</svg>
+					<div id="notification-box" class="hidden">
+						<div class="notification-header">Thông báo</div>
+						<ul class="notification-list">
+							<li>
+								<span class="notification-title">Thông báo 1</span>
+								<p>Nội dung chi tiết của thông báo...</p>
+								<div class="notification-footer">
+									<span class="notification-time">10 phút trước</span>
+									<button class="notification-detail-btn">Xem chi tiết</button>
+								</div>
+							</li>
+							<li>
+								<span class="notification-title">Thông báo 2</span>
+								<p>Nội dung chi tiết của thông báo...</p>
+								<div class="notification-footer">
+									<span class="notification-time">30 phút trước</span>
+									<button class="notification-detail-btn">Xem chi tiết</button>
+								</div>
+							</li>
+							<li>
+								<span class="notification-title">Thông báo 3</span>
+								<p>Nội dung chi tiết của thông báo...</p>
+								<div class="notification-footer">
+									<span class="notification-time">1 giờ trước</span>
+									<button class="notification-detail-btn">Xem chi tiết</button>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="info-list">
 					<ul>
@@ -335,6 +367,26 @@
 							row.style.display = "none";
 						}
 					});
+				});
+			// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+			document.getElementById("noti").addEventListener("click", function (e) {
+				e.stopPropagation();
+				const notificationBox = document.getElementById("notification-box");
+				notificationBox.classList.toggle("active");
+			});
+
+			document.addEventListener("click", function (e) {
+				const notificationBox = document.getElementById("notification-box");
+				const noti = document.getElementById("noti");
+				if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+					notificationBox.classList.remove("active");
+				}
+			});
+
+			document
+				.getElementById("notification-box")
+				.addEventListener("click", function (e) {
+					e.stopPropagation();
 				});
 		</script>
 	</body>
