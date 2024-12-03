@@ -9,6 +9,7 @@
 			rel="shortcut icon"
 			href="images/HCMUT_official_logo.ico"
 			type="image/x-icon" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<style>
 			html,
 			body {
@@ -29,7 +30,7 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
 			rel="stylesheet" />
-		<div id="buy-paper-page">
+		<div id="view-history-page">
 			<div id = "navbar">
 				<div id = "logo"
 					style="
@@ -102,11 +103,11 @@
 						<li onClick="window.location.href='printing_for_student.html';">
 							IN TÀI LIỆU
 						</li>
-						<li>
+						<li onClick="window.location.href='buy_paper.html';"
+						class = "index-page">
 							LỊCH SỬ IN
 						</li>
-						<li onClick="window.location.href='buy_paper.html';"
-							class = "index-page">
+						<li onClick="window.location.href='buy_paper.html';">
 							MUA THÊM GIẤY
 						</li>
 					</ul>
@@ -192,55 +193,60 @@
 					
 				</div>
 			</div>
-			<form id="tìm kiếm">
-				<input type="text" placeholder="Tìm kiếm" />
-			</form>
-     <div class="view-history">
-		<table id="history">
-			<thead>
-				<tr>
-					<th>Tên tài liệu </th>
-					<th>Dung lượng</th>
-					<th>Thời gian in</th>
-					<th>Địa điểm in</th>
-					<th>Giá(VND)</th>
-					<th>Tình trạng</th>
-					<th>Hành động</th>
-				</tr>
-			</thead>
-			<tbody>	
-				<tr class="Đang in">
-						<td>XSTK.PDF</td>
-						<td>94kb</td>
-						<td>4/11/2024 11:06</td>
-						<td>B61011 - B6-101</td>
-						<td>12.000</td>
-						<td class="trạng thái">Đang in</td>
-						<td><a>Xem chi tiết</a></td>
-				</tr>
-				<tr class="Hoàn thành">
-					<td>BAOCAO.DOCX</td>
-					<td>12kb</td>
-					<td>4/11/2024 10:01</td>
-					<td>B11023 - B1-102</td>
-					<td>2.000</td>
-					<td class="trạng thái">Hoàn thành</td>
-					<td><a>Xem chi tiết</a></td>
-				</tr>
-				<tr class="Lỗi in">
-					<td>LSD.DOCX</td>
-					<td>100kb</td>
-					<td>3/11/2024 12:05</td>
-					<td>B32022 - B3-202</td>
-					<td>9.000</td>
-					<td class="trạng thái">Lỗi in</td>
-					<td><a>Xem chi tiết</a></td>
-				</tr>
-				
-			</tbody>
-		</table>
-
-	 </div>
+			<form id="tim-kiem" style="display: flex; align-items: center;">
+				<input type="text" placeholder="Tìm kiếm"  />
+				<button type="submit"><i class="fa fa-search"></i></button>
+			  </form>
+			  
+     	<div class="view-history">
+			<div class="history"> 
+				<table id="transaction">
+					<thead>
+						<tr>
+							<th>Tên tài liệu </th>
+							<th>Dung lượng</th>
+							<th>Thời gian in</th>
+							<th>Địa điểm in</th>
+							<th>Giá(VND)</th>
+							<th>Tình trạng</th>
+							<th>Hành động</th>
+						</tr>
+					</thead>
+					<tbody>	
+						<tr class="waiting">
+								<td>XSTK.PDF</td>
+								<td>94kb</td>
+								<td>4/11/2024 11:06</td>
+								<td>B61011 - B6-101</td>
+								<td>12.000</td>
+								<td class="status">Đang in</td>
+								<td><a>Xem chi tiết</a></td>
+						</tr>
+						<tr class="done">
+							<td>BAOCAO.DOCX</td>
+							<td>94kb</td>
+							<td>4/11/2024 10:01</td>
+							<td>B11023 - B1-102</td>
+							<td>2.000</td>
+							<td class="status">Hoàn thành</td>
+							<td><a>Xem chi tiết</a></td>
+						</tr>
+						<tr class="error">
+							<td>LSD.DOCX</td>
+							<td>94kb</td>
+							<td>3/11/2024 12:05</td>
+							<td>B32022 - B3-202</td>
+							<td>9.000</td>
+							<td class="status">Lỗi in</td>
+							<td><a>Xem chi tiết</a></td>
+						</tr>
+						
+					</tbody>
+					</table>
+			</div>
+			
+		</div>
+		
      </div>
 	 <div class="pagination">
 		<button class="prev">&larr;</button>
