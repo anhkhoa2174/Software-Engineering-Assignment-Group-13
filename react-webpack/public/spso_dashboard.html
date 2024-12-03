@@ -204,139 +204,169 @@
 			</div>
 		</div>
 		<!--Trang điều khiển-->
-        <!--Trang thống kê-->
-        <div class="box box-1">
-            <div class="stat-item">
-                <div class="stat-header">
-                    <span>Lượt đăng nhập</span>
-                    <span class="stat-change negative">7.0% &#9660</span>
-                </div>
-                <div class="stat-value">856</div>
-                <div class="arrow-up"></div>
-                <div class="stat-student">Sinh viên / Ngày</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-header">
-                    <span>Số lượng đã bán</span>
-                    <span class="stat-change positive"> 12.0% &#9650</span>
-                </div>
-                <div class="stat-value">40</div>
-                <div class="stat-student">Trang / Ngày</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-header">
-                    <span>Yêu cầu in</span>
-                    <span class="stat-change positive">22.0% &#9650</span>
-                </div>
-                <div class="stat-value">267</div>
-                <div class="stat-student">Lượt / Ngày</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-header">
-                    <span>Số lượng đã in</span>
-                    <span class="stat-change negative">7.0% &#9660</span>
-                </div>
-                <div class="stat-value">1213</div>
-                <div class="stat-student">Trang / Ngày</div>
-            </div>
-            <div class="footer">16:11, 30/12/2024</div>
-
-        </div>
-		<!--Trang loại file in-->
-		<div class="box box-2">
-			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<canvas id="pie chart"></canvas>
-			<script>
-				const ctx = document.getElementById('pieChart').getContext('2d');
-		
-				const data = {
-					labels: ['PDF', 'PNG', 'DOCS', 'KHÁC'],
-					datasets: [{
-						data: [367, 220, 346, 153], // Giá trị số liệu
-						backgroundColor: ['#00C49F', '#FF00FF', '#0000FF', '#FFA500'], // Màu sắc
-						hoverOffset: 4
-					}]
-				};
-		
-				const options = {
-					plugins: {
-						legend: {
-							position: 'right', // Hiển thị chú thích ở bên phải
-							labels: {
-								font: {
-									size: 14
-								}
-							}
-						}
-					}
-				};
-		
-				const pieChart = new Chart(ctx, {
-					type: 'pie',
-					data: data,
-					options: options
-				});
-				</script>
-			<div class="footer">16:11, 30/12/2024</div>
+		<div class="container"> 
+			        <!--Trang thống kê-->
+					<div class="box box-1">
+						<div class="stat-item">
+							<div class="stat-header">
+								<span>Lượt đăng nhập</span>
+								<span class="stat-change negative">7.0% &#9660</span>
+							</div>
+							<div class="stat-value">856</div>
+							<div class="arrow-up"></div>
+							<div class="stat-student">Sinh viên / Ngày</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-header">
+								<span>Số lượng đã bán</span>
+								<span class="stat-change positive"> 12.0% &#9650</span>
+							</div>
+							<div class="stat-value">40</div>
+							<div class="stat-student">Trang / Ngày</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-header">
+								<span>Yêu cầu in</span>
+								<span class="stat-change positive">22.0% &#9650</span>
+							</div>
+							<div class="stat-value">267</div>
+							<div class="stat-student">Lượt / Ngày</div>
+						</div>
+						<div class="stat-item">
+							<div class="stat-header">
+								<span>Số lượng đã in</span>
+								<span class="stat-change negative">7.0% &#9660</span>
+							</div>
+							<div class="stat-value">1213</div>
+							<div class="stat-student">Trang / Ngày</div>
+						</div>
+						<div class="footer">16:11, 30/12/2024</div>
+			
+					</div>
+					<!--Trang loại file in-->
+					<div class="box box-2">
+						<div class="chart-container">
+						LOẠI FILE IN 
+						<canvas id="pie-chart"></canvas>
+						<div class="footer">16:11, 30/12/2024</div>	
+						</div>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
+						<script>
+							
+						</script>		
+					</div>
+					<!--Trang yêu cầu in-->
+					<div class="box box-3">
+						<div>
+								YÊU CẦU IN GẦN ĐÂY
+							<i class="fas fa-sliders-h icon"></i>
+							<i class="fas fa-external-link-alt icon"></i>
+						</div>
+						<table id="transaction">
+							<thead>
+								<tr>
+									<th>MSSV</th>
+									<th>HỌ TÊN</th>
+									<th>THỜI GIAN</th>
+									<th>KÍCH THƯỚC</th>
+									<th>TÌNH TRẠNG</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="id-1">
+								<td>2252634</td>
+								<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+									ĐOÀN HẢI BĂNG</td>
+								<td>29/10/2024</td>
+								<td>181KB</td>
+								<td><div class="circle">100%</div></td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr class="id-2">
+									<td>2352434</td>
+									<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+										HÀ QUANG HÙNG</td>
+									<td>29/10/2024</td>
+									<td>200KB</td>
+									<td><div class="circle">65%</div></td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr class="id-3">
+									<td>2251222</td>
+									<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+										NGUYỄN NHÃ LAM</td>
+									<td>29/10/2024</td>
+									<td>1MB</td>
+									<td><div class="circle">50%</div></td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr class="id-3">
+									<td>2252293</td>
+									<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
+										HUỲNH MAI QUỐC KHANG</td>
+									<td>29/10/2024</td>
+									<td>10KB</td>
+									<td><div class="circle">100%</div></td>
+								</tr>
+							</tbody>
+						</table>
+						
+					</div>
+					<div class="box box-4">
+						<div class="chart-container">
+							DOANH THU 
+							<canvas id="bar-chart">
+								<script>
+									// Lấy phần tử canvas
+									const ctx = document.getElementById('bar-chart').getContext('2d');
+								  
+									// Dữ liệu cho biểu đồ cột
+									const data = {
+									  labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'],
+									  datasets: [{
+										label: 'triệu đồng',
+										data: [10500, 11000, 12000, 14000], // Thay bằng dữ liệu thực tế
+										backgroundColor: 'rgba(54, 162, 235, 0.7)', // Màu cột
+										borderColor: 'rgba(54, 162, 235, 1)', // Màu viền
+										borderWidth: 1,
+									  }]
+									};
+								  
+									// Cấu hình biểu đồ
+									const config = {
+									  type: 'bar', // Loại biểu đồ cột
+									  data: data,
+									  options: {
+										responsive: true,
+										plugins: {
+										  legend: {
+											position: 'top', // Vị trí của chú thích
+										  },
+										  title: {
+											display: true,
+											text: 'Doanh Thu Các Quý' // Tiêu đề biểu đồ
+										  }
+										},
+										scales: {
+										  y: {
+											beginAtZero: true // Bắt đầu từ 0
+										  }
+										}
+									  }
+									};
+								  
+									// Vẽ biểu đồ
+									new Chart(ctx, config);
+								  </script>
+								  
+							</canvas>
+						</div>
+					</div>
 		</div>
-        <!--Trang yêu cầu in-->
-        <div class="box box-4">
-			<div>
-					YÊU CẦU IN GẦN ĐÂY
-				<i class="fas fa-sliders-h icon"></i>
-    			<i class="fas fa-external-link-alt icon"></i>
-			</div>
-            <table id="transaction">
-                <thead>
-                    <tr>
-                        <th>MSSV</th>
-                        <th>HỌ TÊN</th>
-                        <th>THỜI GIAN</th>
-                        <th>KÍCH THƯỚC</th>
-                        <th>TÌNH TRẠNG</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="id-1">
-                    <td>2252634</td>
-                    <td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
-						ĐOÀN HẢI BĂNG</td>
-                    <td>29/10/2024</td>
-                    <td>181KB</td>
-                    <td><div class="circle">100%</div></td>
-                    </tr>
-                </tbody>
-				<tbody>
-					<tr class="id-2">
-						<td>2352434</td>
-						<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
-							HÀ QUANG HÙNG</td>
-						<td>29/10/2024</td>
-						<td>200KB</td>
-						<td><div class="circle">65%</div></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr class="id-3">
-						<td>2251222</td>
-						<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
-							NGUYỄN NHÃ LAM</td>
-						<td>29/10/2024</td>
-						<td>1MB</td>
-						<td><div class="circle">50%</div></td>
-					</tr>
-				</tbody>
-				<tbody>
-					<tr class="id-3">
-						<td>2252293</td>
-						<td><img src="icon.png"style="width: 16px; height: 16px; margin-left: 5px;">
-							HUỲNH MAI QUỐC KHANG</td>
-						<td>29/10/2024</td>
-						<td>10KB</td>
-						<td><div class="circle">100%</div></td>
-					</tr>
-				</tbody>
-            </table>
-        </div>
+
 	</body>
 </html>
+
