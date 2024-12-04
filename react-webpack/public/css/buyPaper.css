@@ -18,26 +18,28 @@
 	padding: 0;
 }
 .log ul li {
-	display: block;
-	padding: 10px 20px;
-	margin: 0 10px;
-	border-radius: 20px;
-	text-align: center;
+    display: block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;	
 }
-.log ul #not-chosen {
-	border: 2px solid #ebebee;
+.log ul .not-chosen {
+    border: 2px solid #ebebee;
 }
-.log ul #chosen {
-	border: 2px solid #23abea;
+.log ul .chosen {
+    border: 2px solid #23abea;
 }
 .log #transaction {
-	width: 100%;
-	position: absolute;
-	text-align: center;
-	border-collapse: collapse;
-	border-radius: 20px;
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-	overflow: hidden;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+
 }
 .log #transaction thead tr {
 	background-color: #23abea;
@@ -87,11 +89,11 @@
 	color: #142c64;
 }
 .pay-log #buy-form {
-	display: block;
-	padding: 10px;
-	margin-top: 15px;
-	border: 2px solid #c4c4c4;
-	border-radius: 20px;
+    display: block;
+    padding: 10px;
+    margin-top: 15px;
+    border: 2px solid #c4c4c4;
+    border-radius: 15px;
 }
 .pay-log #buy-form h4 {
 	margin: 0 5px 5px 5px;
@@ -118,16 +120,16 @@
 	position: relative;
 	justify-content: center;
 }
-.pay-log #buy-form button {
-	text-align: center;
-	padding: 10px 15px;
-	background-color: #142c64;
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 18px;
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
+.pay-log #buy-form #submitButton {
+    text-align: center;
+    padding: 10px 15px;
+    background-color: #142c64;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 @media (max-width: 1040px) {
 	#buy-paper-page {

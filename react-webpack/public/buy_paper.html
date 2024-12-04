@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Trang mua thêm giấy</title>
 		<link />
 		<link
@@ -192,27 +192,49 @@
 			</div>
 			<div class="pay-log">
 				<div class="log">
-					<h2>Lịch sử mua</h2>
-					<ul>
-						<li id="chosen">Tất cả</li>
-						<li id="not-chosen">Đã thanh toán</li>
-						<li id="not-chosen">Đang chờ thanh toán</li>
-						<li id="not-chosen">Lỗi thanh toán</li>
+          <h2>Lịch sử mua</h2>
+					<ul class="filter-buttons">
+						<li data-class="all" class = "chosen" onclick="filterTable('')">Tất cả</li>
+						<li data-class="done" class = "not-chosen" onclick="filterTable('Đã thanh toán')">Đã thanh toán</li>
+						<li data-class="waiting" class = "not-chosen" onclick="filterTable('Đang chờ thanh toán')">Đang chờ thanh toán</li>
+						<li data-class="error" class = "not-chosen" onclick="filterTable('Lỗi thanh toán')">Lỗi thanh toán</li>
 					</ul>
+					<script>
+						function filterTable(className) {
+							const rows = document.querySelectorAll('#transaction tbody tr');
+
+							rows.forEach(row => {
+								if (className === 'all') {
+									row.style.display = ''; // Show all rows
+								} else if (row.classList.contains(className)) {
+									row.style.display = ''; // Show rows matching the class
+								} else {
+									row.style.display = 'none'; // Hide rows not matching the class
+								}
+							});
+						}
+						const filterButtons = document.querySelectorAll('.filter-buttons li');
+						filterButtons.forEach(button => {
+							button.addEventListener('click', () => {
+								const className = button.getAttribute('data-class');
+								filterTable(className);
+							});
+						});
+					</script>
 					<table id="transaction">
 						<thead>
 							<tr>
-								<th>Mã giao dịch</th>
-								<th>Thời gian</th>
-								<th>Số lượng</th>
-								<th>Giá (VND)</th>
-								<th>Tình trạng</th>
-								<th>Hành động</th>
+								<th style="width: 15%;">Mã giao dịch</th>
+								<th style="width: 15%;">Thời gian</th>
+								<th style="width: 10%;">Số lượng</th>
+								<th style="width: 15%;">Giá (VND)</th>
+								<th style="width: 25%;">Tình trạng</th>
+								<th style="width: 20%;">Hành động</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="waiting">
-								<td>#152670</td>
+								<td>#15267</td>
 								<td>5/11/2024</td>
 								<td>13</td>
 								<td>13.000</td>
@@ -220,10 +242,50 @@
 								<td><a>Xem chi tiết</a></td>
 							</tr>
 							<tr class="done">
-								<td>#153587</td>
+								<td>#15358</td>
 								<td>5/11/2024</td>
 								<td>5</td>
 								<td>5.000</td>
+								<td class="status">Đã thanh toán</td>
+								<td><a>Xem chi tiết</a></td>
+							</tr>
+							<tr class="done">
+								<td>#12463</td>
+								<td>4/11/2024</td>
+								<td>5</td>
+								<td>5.000</td>
+								<td class="status">Đã thanh toán</td>
+								<td><a>Xem chi tiết</a></td>
+							</tr>
+							<tr class="done">
+								<td>#16879</td>
+								<td>4/11/2024</td>
+								<td>100</td>
+								<td>100.000</td>
+								<td class="status">Đã thanh toán</td>
+								<td><a>Xem chi tiết</a></td>
+							</tr>
+							<tr class="error">
+								<td>#16378</td>
+								<td>1/11/2024</td>
+								<td>23</td>
+								<td>23.000</td>
+								<td class="status">Lỗi thanh toán</td>
+								<td><a>Xem chi tiết</a></td>
+							</tr>
+							<tr class="done">
+								<td>#16609</td>
+								<td>30/10/2024</td>
+								<td>51</td>
+								<td>51.000</td>
+								<td class="status">Đã thanh toán</td>
+								<td><a>Xem chi tiết</a></td>
+							</tr>
+							<tr class="done">
+								<td>#14325</td>
+								<td>29/10/2024</td>
+								<td>4</td>
+								<td>4.000</td>
 								<td class="status">Đã thanh toán</td>
 								<td><a>Xem chi tiết</a></td>
 							</tr>
@@ -238,25 +300,31 @@
 					</div>
 					<div id="buy-form">
 						<h4>Chọn lượng giấy cần mua</h4>
-						<form method="POST">
-							<div class="fill">
+						<form id="form" method="POST">
+							<div class="fill">	
 								<label for="paper-type">Loại giấy: </label>
 								<select id="paper-type">
-									<option>A2</option>
-									<option>A3</option>
 									<option>A4</option>
-									<option>A5</option></select
-								><br />
+								</select><br>
 							</div>
 							<div class="fill">
 								<label for="amount">Số lượng: </label>
-								<input type="number" id="amount" min="0" max="1000" /><br />
+								<input type="number" id="amount" min="0" max="1000" required><br>
 							</div>
 							<div class="submit">
-								<button type="submit" id="submitButton">Thanh toán</button>
+								<input type="submit" id="submitButton" value="Thanh toán">
 							</div>
 						</form>
 					</div>
+					<script>
+						form = document.getElementById("form")
+						form.addEventListener('submit', function(event) {
+							event.preventDefault()
+							nopaper = Number(document.getElementById('no-paper').innerHTML)
+							amount = Number(document.getElementById('amount').value)
+							document.getElementById('no-paper').innerHTML = nopaper + amount
+						});
+					</script>
 				</div>
 			</div>
 		</div>
