@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-		<title>Trang chủ sinh viên</title>
+		<title>SPSS - Tải tài liệu</title>
+		<link />
 		<link
 			rel="shortcut icon"
 			href="images/HCMUT_official_logo.ico"
@@ -15,23 +16,9 @@
 				margin: 0;
 				padding: 0;
 			}
-			.hover-div {
-				width: 100%;
-				height: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				background: #23abea;
-				transition: background-color 0.3s ease, color 0.3s ease;
-			}
-
-			.hover-div:hover {
-				background-color: #142c64;
-				color: white;
-			}
 		</style>
 		<link rel="stylesheet" href="css/navbar.css" />
-		<link rel="stylesheet" href="css/styleIndex.css" />
+		<link rel="stylesheet" href="css/uploadDocument.css" />
 	</head>
 	<body>
 		<div id="root"></div>
@@ -41,7 +28,12 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
 			rel="stylesheet" />
-		<div id="student-home-page">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+			rel="stylesheet" />
+		<div id="upload-document-page">
 			<div id="navbar">
 				<div
 					id="logo"
@@ -105,13 +97,13 @@
 						<div id="bar3"></div>
 					</div>
 					<ul id="menu">
-						<li onClick="window.location.href='index.html';" class="index-page">
-							TRANG CHỦ
-						</li>
+						<li onClick="window.location.href='index.html';">TRANG CHỦ</li>
 						<li onClick="window.location.href='student_dashboard.html';">
 							BẢNG ĐIỀU KHIỂN
 						</li>
-						<li onClick="window.location.href='upload_file.html';">
+						<li
+							onClick="window.location.href='upload_file.html';"
+							class="index-page">
 							IN TÀI LIỆU
 						</li>
 						<li onClick="window.location.href='printing_history.html';">
@@ -203,63 +195,74 @@
 					</div>
 				</div>
 			</div>
-			<div id="student-home-page">
-				<div id="big_one_1">
-					<div id="hang_dau">BÀI VIẾT HÀNG ĐẦU</div>
-					<img id="woman" src="images/womanpringting.png" />
-					<div id="big_text">
-						HCMUT - STUDENT SMART PRINTING <br />SERVICE DỊCH VỤ IN ẤN TIỆN LỢI
-						<br />DÀNH CHO SINH VIÊN BÁCH KHOA
-					</div>
-					<img id="man" src="images/manprinting.webp" />
-					<img id="best" src="images/image 35.png" />
-					<div
-						id="system_error_frame"
-						title="Nguyên nhân dẫn đến việc hệ thống không thể kết nối"
-						onClick="window.location.href = 'system_error.html';">
-						<div id="gap_loi">
-							HỆ THỐNG GẶP LỖI <br />VÀO 21/10/2024,<br />NGUYÊN NHÂN DO ĐÂU ?
+			<br />
+			<br />
+			<br />
+			<div id="grid-container">
+				<div id="uploadBox">
+					<h1>Tải file từ máy</h1>
+					<span id="upload-box-description" class="grey-text">
+						Thêm tài liệu của bạn ở đây</span
+					>
+					<form
+						id="upload-form"
+						action=""
+						method="post"
+						enctype="multipart/form-data">
+						<div id="uploadBox-insideBox">
+							<svg
+								width="37"
+								height="24"
+								viewBox="0 0 37 24"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M29.525 9.06C28.505 3.885 23.96 0 18.5 0C14.165 0 10.4 2.46 8.525 6.06C4.01 6.54 0.5 10.365 0.5 15C0.5 19.965 4.535 24 9.5 24H29C33.14 24 36.5 20.64 36.5 16.5C36.5 12.54 33.425 9.33 29.525 9.06ZM29 21H9.5C6.185 21 3.5 18.315 3.5 15C3.5 11.925 5.795 9.36 8.84 9.045L10.445 8.88L11.195 7.455C12.62 4.71 15.41 3 18.5 3C22.43 3 25.82 5.79 26.585 9.645L27.035 11.895L29.33 12.06C31.67 12.21 33.5 14.175 33.5 16.5C33.5 18.975 31.475 21 29 21ZM12.5 13.5H16.325V18H20.675V13.5H24.5L18.5 7.5L12.5 13.5Z"
+									fill="#1849D6" />
+							</svg>
+							<p>
+								Kéo thả file của bạn tại đây hoặc
+								<label for="upload" id="upload-label">tải lên</label>
+							</p>
+							<p class="grey-text">Kích thước tối đa là 10MB</p>
+							<input
+								type="file"
+								id="upload"
+								name="upload"
+								accept=".jpeg, .png, .pdf, .gif, .docx, .exc, .xlsx, .pptx"
+								hidden />
 						</div>
-						<div id="Mai_Quoc_Tri">
-							<span style="color: #0037ff">Mai Quốc Trí</span>
+						<br />
+						<p class="grey-text">
+							Các định dạng hợp lệ: .jpeg, .png, .pdf, .gif, .docx, .exc, .xlsx,
+							.pptx
+						</p>
+						<p class="line-text">Hoặc</p>
+						<h1>Tải file từ URL</h1>
+						<div>
+							<input
+								type="url"
+								id="upload-url"
+								name="upload-url"
+								placeholder="Dán liên kết tại đây" />
+							<button type="submit" id="submit-url">Tải lên</button>
 						</div>
-						<div id="thang_1">
-							<span style="color: #8c909e">23 tiếng trước</span>
-						</div>
-						<img id="system_error" src="images/image 36.png" />
-					</div>
-					<div id="HDSD_frame" title="Cách để sử dụng hệ thống SPSS">
-						<div id="HDSD">HƯỚNG DẪN <br />SỬ DỤNG SSPS</div>
-						<div id="Dang_Hoang_Long_1">
-							<span style="color: #0037ff">Đặng Hoàng Long</span>
-						</div>
-						<div id="thang_1">
-							<span style="color: #8c909e">3 tháng trước</span>
-						</div>
-						<img id="below_system_error" src="images/image 37.png" />
-					</div>
-					<div
-						id="ra_mat_he_thong_frame"
-						title="Hệ thống SPSS chính thức được đưa vào sử dụng">
-						<div id="ra_mat_he_thong">RA MẮT <br />HỆ THỐNG SSPS</div>
-						<div id="Dang_Hoang_Long_2">
-							<span style="color: #0037ff">Đặng Hoàng Long</span>
-						</div>
-						<div id="thang_1">
-							<span style="color: #8c909e">3 tháng trước</span>
-						</div>
-						<img
-							style="
-								width: 40%;
-								height: 132px;
-								left: 1.3%;
-								top: 3%;
-								position: absolute;
-								border-radius: 4px;
-							"
-							src="images/image 39.png" />
-					</div>
+					</form>
 				</div>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+
+				<div id="lottieAnimation"></div>
+
+				<script>
+					lottie.loadAnimation({
+						container: document.getElementById("lottieAnimation"), // Element to render the animation
+						renderer: "svg", // Render as SVG
+						loop: true, // Loop animation
+						autoplay: true, // Start playing automatically
+						path: "https://assets8.lottiefiles.com/packages/lf20_komemhfl.json", // URL to the Lottie JSON file
+					});
+				</script>
+				<!-- <img src="images/upload_file.png" alt="Image describing file upload" id="upload-file-image"/> -->
 			</div>
 		</div>
 	</body>
