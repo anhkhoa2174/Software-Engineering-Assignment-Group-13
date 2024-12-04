@@ -21,13 +21,14 @@
     display: block;
     padding: 10px 20px;
     margin: 0 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     text-align: center;
+    cursor: pointer;	
 }
-.log ul #not-chosen {
+.log ul .not-chosen {
     border: 2px solid #ebebee;
 }
-.log ul #chosen {
+.log ul .chosen {
     border: 2px solid #23abea;
 }
 .log #transaction {
@@ -35,7 +36,7 @@
     position: absolute;
     text-align: center;
     border-collapse: collapse;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     overflow: hidden;
 }
@@ -91,7 +92,7 @@
     padding: 10px;
     margin-top: 15px;
     border: 2px solid #c4c4c4;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 .pay-log #buy-form h4 {
     margin: 0 5px 5px 5px;
