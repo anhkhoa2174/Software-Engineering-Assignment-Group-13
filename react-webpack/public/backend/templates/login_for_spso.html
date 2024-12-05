@@ -75,15 +75,15 @@
 				onClick="window.location.href = 'login_for_spso';"
 				class="hover-div"
 				id="SPSO">
-				<img id="checkbox" src="images/Group 1171275873.png" />
-				<img id="imageSPSO" src="images/image 47.png" />
+				<img id="checkbox" src="{{ url_for('static', filename='images/Group 1171275873.png') }}" />
+				<img id="imageSPSO" src="{{ url_for('static', filename='images/image 47.png') }}" />
 				<div id="SPSO_text">SPSO</div>
 			</div>
 			<div
 				onClick="window.location.href = 'login_for_student';"
 				class="hover-div"
 				id="sinhvien_frame">
-				<img id="sinhvien_icon" src="images/image.png" />
+				<img id="sinhvien_icon" src="{{ url_for('static', filename='images/image.png') }}" />
 				<div id="sinhvien_text">Sinh viên</div>
 			</div>
 
@@ -106,9 +106,9 @@
 					>
 				</div>
 				<div id="dang_nhap_voi_tu_cach">ĐĂNG NHẬP VỚI TƯ CÁCH</div>
-				<img id="slideshow" src="images/image 28.png" />
+				<img id="slideshow" src="{{ url_for('static', filename='images/image 28.png') }}" />
 				<div id="ssps_frame">
-					<img id="logoBK" src="images/01_logobachkhoatoi 1.png" />
+					<img id="logoBK" src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
 					<div id="ssps_text">Student Smart Printing Service</div>
 					<button type="submit" ; class="hover-div-login">
 						<div id="login_text">Đăng nhập</div>
