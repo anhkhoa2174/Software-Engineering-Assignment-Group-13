@@ -1,0 +1,14 @@
+input {
+	color: black;
+	font-family: montserrat;
+	padding: 10px;
+	border-radius: 10px;
+	width: 200%;
+	overflow: hidden;
+	border: 1.5px #23abea solid;
+	justify-content: flex-start;
+	border-color: #23abea;
+	align-items: center;
+	gap: 10px;
+	display: inline-flex;
+}
