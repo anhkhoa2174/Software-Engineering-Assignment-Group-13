@@ -1,0 +1,150 @@
+.body{
+    font-family: "Montserrat", Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 0;
+}
+.main-container{
+    background-color: white;
+	display: flex;
+	justify-content: space-between; 
+	flex-wrap: wrap; 
+}
+.left-column{
+    background-color: white;
+    width: 150%;
+}
+/* Tránh tràn */
+* {
+    box-sizing: border-box;
+}
+/* Khung lớn chứa tất cả các stat-item */
+.container {
+    margin-top: 65px; /* Tương ứng với chiều cao navbar */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+    width: 30.5%;
+    max-width: auto;
+    padding: 24px 8px 9px 8px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Responsive chỉnh sửa khoảng cách */
+@media (max-width: 1210px) {
+    .container {
+        margin-top: 50px;
+    }
+}
+.stat-item-1{
+    width: auto;
+}
+/*Header của stat*/
+.stat-header{
+    display: flex;
+    font-size: 16px;
+    font-weight: bold;
+    align-items: center;
+}
+.stat-header span{
+    margin-right: 10px;
+}
+/*Khung phần trăm*/
+.stat-item-1 .stat-header .percentage{
+    display: inline-block;
+	background-color: #f8d7da; /* Màu nền hồng nhạt */
+	color: #ff0000; /* Màu chữ đỏ */
+	font-size: 14px; /* Kích thước chữ */
+	font-weight: bold;
+	border-radius: 50%; /* Góc bo tròn */
+	padding: 2% 4%; /* Khoảng cách bên trong */
+    justify-content: center;
+    text-align: center;
+}
+.stat-item-2{
+    width: auto;
+}
+.stat-item-2 .stat-header .percentage{
+    text-align: center;
+    justify-content: center;
+	background-color: #2DE40F ; 
+	color: #0B8400; 
+	font-size: 14px; /* Kích thước chữ */
+	font-weight: bold;
+	border-radius: 50%; /* Góc bo tròn */
+	padding: 2% 4%; /* Khoảng cách bên trong */
+    display: inline-block;
+}
+.stat-item-3 {
+    width: auto;
+}
+.stat-item-3 .stat-header .percentage{
+    text-align: center;
+    justify-content: center;
+	background-color: #2DE40F ; 
+	color: #0B8400; 
+	font-size: 14px; /* Kích thước chữ */
+	font-weight: bold;
+	border-radius: 50%; /* Góc bo tròn */
+	padding: 2% 4%; /* Khoảng cách bên trong */
+    display: inline-block;
+}
+.stat-item-4 {
+    width: auto;
+}
+.stat-item-4 .stat-header .percentage{
+    display: inline-block;
+	background-color: #f8d7da; /* Màu nền hồng nhạt */
+	color: #ff0000; /* Màu chữ đỏ */
+	font-size: 14px; /* Kích thước chữ */
+	font-weight: bold;
+	border-radius: 50%; /* Góc bo tròn */
+	padding: 2% 4%; /* Khoảng cách bên trong */
+    justify-content: center;
+    text-align: center;
+}
+
+
+.stat-value{
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+}
+.stat-student{
+    font-size:  14px;
+    font-weight: bold;
+    color: black;
+}
+/*Footer*/
+.footer{
+    grid-column: span 2;
+    text-align: center;
+    margin-top: 20px;
+    color: #B2B2B2;
+    font-size: 12px;
+}
+/*Tạo hiệu ứng màu cho mũi tên */
+.red-icon{
+    color: #B80218;
+}
+.icon{
+    color: #28A91D;
+}
+/* Thiết lập cho bảng */
+table {
+	width: 50%;
+	border-collapse: separate;
+    border-spacing: 0 10px ;
+	margin-bottom: 2%;
+}
+thead{
+    background-color: #142C64;
+	border-bottom: 1px solid #ddd;
+}
+table th,
+table td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
