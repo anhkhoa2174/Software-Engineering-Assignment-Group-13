@@ -1,512 +1,462 @@
+html,
+body {
+  height: 100%; /* Đảm bảo chiều cao của toàn bộ trang */
+  width: 100%;
+  font-family: Montserrat, sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+}
+body {
+  font-family: Montserrat, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  display: flex;
+}
 /* Định dạng cho container chứa 3 khung */
 .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  /* Định dạng chung cho các khung */
-  .box {
-    height: 84.5%;
-    margin-top: 6%;
-    margin-left: 3%;
-    background: rgb(255, 255, 255);
-    border-radius: 6px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Kích thước riêng cho từng khung */
-  .box-1 {
-    width: 25%;
-  }
-  
-  .box-2 {
-    width: 25%;
-  }
-  
-  .box-3 {
-    width: 38%;
-  }
-  
-  /* Nội dung trong khung 1 */
-  /* div 1 */
-  .greeting {
-    width: auto;
-    height: auto;
-    display: flex;
-    margin-top: 8%;
-  }
-  
-  .greeting-bold {
-    color: #0032a7;
-    font-size: 225%;
-    font-family: "Assistant", sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  
-  .greeting-regular {
-    color: #0032a7;
-    font-size: 225%;
-    font-family: "Assistant", sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  
-  .greeting-image {
-    width: 9%;
-    height: 90%;
-    margin-left: 1.2%;
-  }
-  /* div 2 */
-  .welcome-message {
-    width: auto;
-    height: auto;
-    color: #566da2;
-    font-size: 95.2%;
-    font-family: "Assistant", sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-    margin-top: 5%;
-  }
-  /* div 3 */
-  .balance-container {
-    margin-top: 7%;
-    width: 72%;
-    height: 29.4%;
-    background: rgba(152, 203, 220, 0.3);
-    border-radius: 5px;
-  }
-  
-  .balance-title {
-    margin-top: 7%;
-    margin-left: 7%;
-    color: #3c5fb0;
-    font-size: 160%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  
-  .balance-content {
-    display: flex;
-    flex-direction: row;
-    gap: 8%;
-    margin-left: 19.5%;
-    margin-top: 6.5%;
-    color: #007be5;
-    font-size: 266.66%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  /* div 4 */
-  .used-pages-container {
-    margin-top: 11.5%;
-    width: 72%;
-    height: 29.4%;
-    background: rgba(152, 203, 220, 0.3);
-    border-radius: 5px;
-  }
-  
-  .used-pages-title {
-    margin-top: 3%;
-    margin-left: 3%;
-    color: #3c5fb0;
-    font-size: 107%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  
-  .used-pages-image {
-    margin-top: 10%;
-    margin-left: 2%;
-    width: 95%;
-    height: 70%;
-  }
-  /* div 5 */
-  .paper-type {
-    color: #3c5fb0;
-    font-size: 100%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-    margin-top: 11%;
-  }
-  
-  .filter-icon {
-    width: 16px;
-    height: 16px;
-  }
-  /* nội dung khung 2 */
-  /* div 1 */
-  .intro-container {
-    width: auto;
-    height: auto;
-    display: flex;
-    margin-top: 8%;
-  }
-  
-  .intro-text-bold {
-    color: #0032a7;
-    font-size: 225%;
-    font-family: Assistant, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  
-  .intro-text-regular {
-    color: #0032a7;
-    font-size: 225%;
-    font-family: Assistant, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  /* div 2 */
-  .info-text {
-    width: auto;
-    height: auto;
-    color: #566da2;
-    font-size: 95.2%;
-    font-family: Assistant, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-    margin-top: 5%;
-  }
-  /* div 3 */
-  .payment-container {
-    margin-top: 7%;
-    width: 72%;
-    height: 29.4%;
-    background: rgba(152, 203, 220, 0.3);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .payment-image {
-    width: auto;
-    height: auto;
-  }
-  
-  .payment-amount {
-    margin-top: 3.5%;
-    color: #007be5;
-    font-size: 157%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 600;
-    word-wrap: break-word;
-  }
-  
-  .payment-label {
-    margin-top: 3.5%;
-    text-align: center;
-    color: rgba(0, 123, 229, 0.5);
-    font-size: 131.5%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  /* div 4 */
-  .file-types-container {
-    margin-top: 11.5%;
-    width: 72%;
-    height: 29.4%;
-    background: rgba(152, 203, 220, 0.3);
-    border-radius: 5px;
-  }
-  
-  .file-row {
-    display: flex;
-    width: 100%;
-    height: 16.66%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .file-column {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px #c4c4c4 solid;
-  }
-  
-  .file-column-no-border {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .file-type,
-  .file-count {
-    color: black;
-    font-size: 90%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  
-  .file-icon {
-    width: 20px;
-    height: 20px;
-  }
-  /* div 5 */
-  .month-container {
-    margin-top: 11%;
-    color: #3c5fb0;
-    font-size: 100%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 700;
-    word-wrap: break-word;
-  }
-  
-  .arrow-left,
-  .arrow-right {
-    width: 16px;
-    height: 16px;
-  }
-  /* nội dung khung 3 */
-  /* div 1 */
-  .image-container {
-    width: 30%;
-    height: 47%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-  }
-  
-  .image-scholarcap,
-  .image-student,
-  .image-backpack {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .image-backpack {
-    height: 120%;
-  }
-  /* div 2 */
-  .status-container {
-    margin-top: 9%;
-    width: 85%;
-    height: 40%;
-    background: rgba(152, 203, 220, 0.8);
-    border-radius: 5px;
-    border: 1px solid #d8d8d8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .status-title {
-    width: auto;
-    height: 9%;
-    margin-top: 3.5%;
-    color: #3c5fb0;
-    font-size: 106.5%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 600;
-    word-wrap: break-word;
-  }
-  .row-container {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-  }
-  
-  .column {
-    width: 6vw;
-    height: auto;
-    margin-top: 10px;
-    color: rgba(0, 0, 0, 1);
-    font-size: 0.6vw;
-    font-family: Montserrat, sans-serif;
-    font-weight: 600;
-    word-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .document-name .row,
-  .page-count .row,
-  .printer .row {
-    width: auto;
-    height: 3vh;
-    margin-top: 10px;
-    color: rgba(0, 0, 0, 1);
-    font-size: 0.6vw;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  
-  .document-name .row:first-child,
-  .page-count .row:first-child,
-  .printer .row:first-child {
-    margin-top: 2.5vh;
-  }
-  
-  .status-row {
-    width: auto;
-    height: 3vh;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .status-row:first-child {
-    margin-top: 2.5vh;
-  }
-  
-  .status-indicator {
-    width: 0.6vw;
-    height: 0.6vw;
-    border-radius: 9999px;
-  }
-  
-  .status-green {
-    background: #67e618;
-    border: 1px solid #3ddd75;
-  }
-  
-  .status-yellow {
-    background: #ffcc54;
-    border: 1px solid #dcb122;
-  }
-  
-  .status-red {
-    background: #ff8181;
-    border: 1px solid #ff6767;
-  }
-  
-  .footer {
-    margin-top: 2.5%;
-    width: auto;
-    height: 3%;
-    color: #717171;
-    font-size: 70%;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Container của legend */
-  .legend {
-    margin-top: 2.5%;
-    width: 60%;
-    height: 6%;
-    background: #f9f9f9;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  
-  /* Mỗi cột trong legend */
-  .legend-item {
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  /* Văn bản trong mỗi cột */
-  .legend-text {
-    width: auto;
-    height: auto;
-    color: #1d2a1c;
-    font-size: 0.5vw;
-    font-family: Montserrat, sans-serif;
-    font-weight: 400;
-    word-wrap: break-word;
-  }
-  
-  /* Vòng tròn trạng thái */
-  .status-indicator {
-    width: 0.5vw;
-    height: 0.5vw;
-    border-radius: 9999px;
-    border: 1px solid;
-  }
-  
-  /* Trạng thái Đang in */
-  .status-green {
-    background: #67e618;
-    border-color: #3ddd75;
-  }
-  
-  /* Trạng thái Chờ in */
-  .status-yellow {
-    background: #ffcc53;
-    border-color: #dcb122;
-  }
-  
-  /* Trạng thái Lỗi in */
-  .status-red {
-    background: #ff8181;
-    border-color: #ff6767;
-  }
-
-  /* Media query cho độ phân giải 1920x1080 với scale 125% */
-@media (min-width: 1536px) and (max-width: 1920px) and (resolution: 1dppx) {
-  .container {
-      width: 100%;
-      height: auto;
-      display: flex;
-      flex-wrap: nowrap;
-  }
-
-  .box-1, .box-2, .box-3 {
-      height: 80%;
-      margin: 5%;
-  }
-
-  .box-1 {
-      width: 28%; /* Điều chỉnh để cân đối */
-  }
-
-  .box-2 {
-      width: 28%; /* Điều chỉnh để cân đối */
-  }
-
-  .box-3 {
-      width: 40%; /* Điều chỉnh để cân đối */
-  }
-
-  /* Font size điều chỉnh theo scale */
-  .greeting-bold, .greeting-regular {
-      font-size: 200%; /* Scale nhỏ hơn */
-  }
-
-  .welcome-message {
-      font-size: 85%; /* Scale nhỏ hơn */
-  }
-
-  .balance-title {
-      font-size: 150%;
-  }
-
-  .balance-content {
-      font-size: 250%;
-  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
+
+/* Định dạng chung cho các khung */
+.box {
+  height: 84.5%;
+  margin-top: 6%;
+  margin-left: 3%;
+  background: rgb(255, 255, 255);
+  border-radius: 6px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Kích thước riêng cho từng khung */
+.box-1 {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-evenly; 
+}
+
+.box-2 {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-evenly;
+}
+
+.box-3 {
+  width: 38%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-evenly;
+}
+
+/* Nội dung trong khung 1 */
+/* div 1 */
+.greeting {
+  width: auto;
+  height: auto;
+  display: flex;
+}
+
+.greeting-bold {
+  color: #0032a7;
+  font-size: 225%;
+  font-family: "Assistant", sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.greeting-image {
+  width: 9%;
+  height: 90%;
+  margin-left: 1.2%;
+}
+
+/* div 2 */
+.welcome-message {
+  width: auto;
+  height: auto;
+  color: #566da2;
+  font-size: 95.2%;
+  font-family: "Assistant", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+/* div 3 */
+.balance-container {
+  width: 72%;
+  height: 29.4%;
+  background: rgba(152, 203, 220, 0.3);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-evenly; 
+}
+
+.balance-title {
+  color: #3c5fb0;
+  font-size: 160%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.balance-content {
+  color: #007be5;
+  font-size: 266.66%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+/* div 4 */
+.used-pages-container {
+  width: 72%;
+  height: 29.4%;
+  background: rgba(152, 203, 220, 0.3);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-evenly;
+}
+
+.used-pages-title {
+  color: #3c5fb0;
+  font-size: 107%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.used-pages-image {
+  width: 95%;
+  height: 70%;
+}
+/* div 5 */
+.paper-type {
+  color: #3c5fb0;
+  font-size: 100%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.filter-icon {
+  width: 16px;
+  height: 16px;
+}
+/* nội dung khung 2 */
+/* div 1 */
+.intro-container {
+  width: auto;
+  height: auto;
+  display: flex;
+}
+
+.intro-text-bold {
+  color: #0032a7;
+  font-size: 225%;
+  font-family: Assistant, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+/* div 2 */
+.info-text {
+  width: auto;
+  height: auto;
+  color: #566da2;
+  font-size: 95.2%;
+  font-family: Assistant, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+/* div 3 */
+.payment-container {
+  width: 72%;
+  height: 29.4%;
+  background: rgba(152, 203, 220, 0.3);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly
+}
+
+.payment-image {
+  width: 40%;
+  height: 50%;
+}
+
+.payment-amount {
+  color: #007be5;
+  font-size: 157%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.payment-label {
+  color: rgba(0, 123, 229, 0.5);
+  font-size: 131.5%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+/* div 4 */
+.file-types-container {
+  width: 72%;
+  height: 29.4%;
+  background: rgba(152, 203, 220, 0.3);
+  border-radius: 5px;
+}
+
+.file-row {
+  display: flex;
+  width: 100%;
+  height: 16.66%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.file-column {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px #c4c4c4 solid;
+}
+
+.file-column-no-border {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-type,
+.file-count {
+  color: black;
+  font-size: 90%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.file-icon {
+  width: 20px;
+  height: 20px;
+}
+/* div 5 */
+.month-container {
+  color: #3c5fb0;
+  font-size: 100%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.arrow-left,
+.arrow-right {
+  width: 16px;
+  height: 16px;
+}
+/* nội dung khung 3 */
+/* div 1 */
+.image-container {
+  width: 30%;
+  height: 47%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.image-scholarcap,
+.image-student,
+.image-backpack {
+  width: 100%;
+  height: 100%;
+}
+
+.image-backpack {
+  height: 120%;
+}
+/* div 2 */
+.status-container {
+  width: 85%;
+  height: 40%;
+  background: rgba(152, 203, 220, 0.8);
+  border-radius: 5px;
+  border: 1px solid #d8d8d8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.status-title {
+  width: auto;
+  height: 9%;
+  color: #3c5fb0;
+  font-size: 106.5%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+.row-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.column {
+  width: 6vw;
+  height: auto;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.6vw;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.document-name .row,
+.page-count .row,
+.printer .row {
+  width: auto;
+  height: 3vh;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 1);
+  font-size: 0.6vw;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.document-name .row:first-child,
+.page-count .row:first-child,
+.printer .row:first-child {
+  margin-top: 2.5vh;
+}
+
+.status-row {
+  width: auto;
+  height: 3vh;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.status-row:first-child {
+  margin-top: 2.5vh;
+}
+
+.status-indicator {
+  width: 0.6vw;
+  height: 0.6vw;
+  border-radius: 9999px;
+}
+
+.status-green {
+  background: #67e618;
+  border: 1px solid #3ddd75;
+}
+
+.status-yellow {
+  background: #ffcc54;
+  border: 1px solid #dcb122;
+}
+
+.status-red {
+  background: #ff8181;
+  border: 1px solid #ff6767;
+}
+
+.footer {
+  width: auto;
+  height: 3%;
+  color: #717171;
+  font-size: 70%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Container của legend */
+.legend {
+  width: 60%;
+  height: 6%;
+  background: #f9f9f9;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Mỗi cột trong legend */
+.legend-item {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Văn bản trong mỗi cột */
+.legend-text {
+  width: auto;
+  height: auto;
+  color: #1d2a1c;
+  font-size: 0.5vw;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+/* Vòng tròn trạng thái */
+.status-indicator {
+  width: 0.5vw;
+  height: 0.5vw;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+/* Trạng thái Đang in */
+.status-green {
+  background: #67e618;
+  border-color: #3ddd75;
+}
+
+/* Trạng thái Chờ in */
+.status-yellow {
+  background: #ffcc53;
+  border-color: #dcb122;
+}
+
+/* Trạng thái Lỗi in */
+.status-red {
+  background: #ff8181;
+  border-color: #ff6767;
+}
+

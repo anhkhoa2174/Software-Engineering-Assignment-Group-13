@@ -1,466 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bảng điều khiển sinh viên</title>
-		<link
-			rel="shortcut icon"
-			href="HCMUT_official_logo.ico"
-			type="image/x-icon" />
-		<style>
-			html,
-			body {
-				overflow-x: hidden;
-				margin: 0;
-				padding: 0;
-				height: 100%;
-				width: 100%;
-			}
-		</style>
-		<link rel="stylesheet" href="css/dashboard.css" />
-		<link rel="stylesheet" href="css/navbar.css" />
-		<link rel="stylesheet" href="css/chatbox.css" />
-	</head>
-	<body>
-		<div id="root"></div>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-			rel="stylesheet" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
-			rel="stylesheet" />
-		<!-- nửa trên xài chung cho tất cả các web -->
-		<!-- nav bar -->
-		<div id="navbar">
-			<div
-				id="logo"
-				style="
-					width: 285.6px;
-					height: 57.6px;
-					left: 40px;
-					top: 5.6px;
-					position: absolute;
-				">
-				<div
-					style="
-						width: 255px;
-						height: 53.6px;
-						left: 17.6px;
-						top: 0px;
-						position: absolute;
-						background: #142c64;
-						border-radius: 16px;
-					"></div>
-				<img
-					style="
-						width: 88.8px;
-						height: 56.8px;
-						left: 0px;
-						top: 0.8px;
-						position: absolute;
-					"
-					src="images/01_logobachkhoatoi 1.png" />
-				<div
-					style="
-						width: 178px;
-						height: 49px;
-						left: 85px;
-						top: 0px;
-						position: absolute;
-						color: white;
-						font-size: 22.4px;
-						font-family: Montserrat;
-						font-weight: 700;
-						word-wrap: break-word;
-					">
-					Student Smart Printing Service
-				</div>
-			</div>
-			<div class="nav-block">
-				<script>
-					function openMenu(x) {
-						x.classList.toggle("change");
-						const menu = document.getElementById("menu");
-						if (menu.classList.contains("appear")) {
-							menu.classList.remove("appear");
-						} else {
-							menu.classList.add("appear");
-						}
-					}
-				</script>
-				<div id="menu-icon" onclick="openMenu(this)">
-					<div id="bar1"></div>
-					<div id="bar2"></div>
-					<div id="bar3"></div>
-				</div>
-				<ul id="menu">
-					<li onClick="window.location.href='index.html';">TRANG CHỦ</li>
-					<li
-						onClick="window.location.href='student_dashboard.html';"
-						class="index-page">
-						BẢNG ĐIỀU KHIỂN
-					</li>
-					<li onClick="window.location.href='upload_file.html';">
-						IN TÀI LIỆU
-					</li>
-					<li onClick="window.location.href='printing_history.html';">
-						LỊCH SỬ IN
-					</li>
-					<li onClick="window.location.href='buy_paper.html';">
-						MUA THÊM GIẤY
-					</li>
-				</ul>
-			</div>
-			<div id="noti-account">
-				<div id="noti">
-					<svg
-						id="circle"
-						width="18"
-						height="20"
-						viewBox="0 0 18 20"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Vector"
-							d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
-							stroke="black"
-							stroke-width="1.6"
-							stroke-linecap="round"
-							stroke-linejoin="round" />
-					</svg>
-					<svg
-						id="bell"
-						width="42"
-						height="41"
-						viewBox="0 0 42 41"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Ellipse 3230"
-							d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
-							stroke="black" />
-					</svg>
-				</div>
-				<div class="info-list">
-					<ul>
-						<li>
-							<svg
-								width="51"
-								height="51"
-								viewBox="0 0 51 51"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<g id="User / User_Square">
-									<path
-										id="Vector"
-										d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
-										stroke="black"
-										stroke-width="1.6"
-										stroke-linecap="round"
-										stroke-linejoin="round" />
-								</g>
-							</svg>
-							<div class="name">Katheryn</div>
-							<ul class="dropdown">
-								<li><a>Hồ sơ</a></li>
-								<li>
-									<a>Ngôn ngữ</a>
-									<ul class="nextpage">
-										<li>Tiếng Việt</li>
-										<li>English</li>
-									</ul>
-								</li>
-								<li><a href="login_for_student.html">Đăng xuất</a></li>
-							</ul>
-							<svg
-								style="padding: 0 10px, 0 10px"
-								width="10"
-								height="5"
-								viewBox="0 0 12 8"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								style="margin-left: -5px">
-								<path
-									d="M1 1L6 6L11 1"
-									stroke="black"
-									stroke-width="1.6"
-									stroke-linecap="round"
-									stroke-linejoin="round" />
-							</svg>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Chứa 3 khung bự -->
-		<div class="container">
-			<!-- Khung thứ 1 -->
-			<div class="box box-1">
-				<!-- div 1 -->
-				<div class="greeting">
-					<div class="greeting-bold">Xin chào, Katheryn</div>
-					<!-- <span class="greeting-regular">, Katheryn</span> -->
-					<img src="images/SMILE.gif" alt="GIF" class="greeting-image" />
-				</div>
-				<!-- div 2 -->
-				<div class="welcome-message">
-					Thật tuyệt khi bạn đã tiếp tục sử dụng SPSS ! Hi vọng<br />bạn sẽ có
-					những trải nghiệm tuyệt vời.
-				</div>
-				<!-- div thứ 3 -->
-				<div class="balance-container">
-					<div class="balance-title">SỐ DƯ</div>
-					<!-- Nội dung A4 và 100 trang cùng một hàng -->
-					<div class="balance-content">
-						<div>A4</div>
-						<div>
-							100<br />
-							TRANG
-						</div>
-					</div>
-				</div>
-				<!-- div thứ 4 -->
-				<div class="used-pages-container">
-					<div class="used-pages-title">SỐ TRANG A4 ĐÃ SỬ DỤNG</div>
-					<img
-						class="used-pages-image"
-						src="images/Group 1171275874 (1).png"
-						alt="Used Pages" />
-				</div>
-				<!-- div 5 -->
-				<div class="paper-type">
-					LOẠI GIẤY : A4
-					<img class="filter-icon" src="images/filters-1.png" alt="Filter" />
-				</div>
-			</div>
-			<!-- Khung 2 -->
-			<div class="box box-2">
-				<!-- div 1 -->
-				<div class="intro-container">
-					<div class="intro-text-bold">Hãy nhớ, theo dõi và</div>
-					<!-- <span class="intro-text-regular">theo dõi và</span> -->
-				</div>
-				<!-- div 2 -->
-				<div class="info-text">
-					sử dụng bảng điều khiển để giúp bạn có thể theo<br />
-					dõi những thông tin quan trọng
-				</div>
-				<!-- div 3 -->
-				<div class="payment-container">
-					<img
-						class="payment-image"
-						src="images/Group 14.png"
-						alt="Payment Image" />
-					<div class="payment-amount">đ 127,000</div>
-					<div class="payment-label">Tổng thanh toán</div>
-				</div>
-				<!-- div 4 -->
-				<div class="file-types-container">
-					<!-- loại file + số lượng -->
-					<div class="file-row">
-						<div class="file-column">
-							<div class="file-type">Loại File</div>
-						</div>
-						<div class="file-column">
-							<div class="file-type">Số lượng</div>
-						</div>
-					</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/chatbox.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <!-- nav bar -->
+    <div id="navbar">
+      <div
+        id="logo"
+        style="
+          width: 285.6px;
+          height: 57.6px;
+          left: 40px;
+          top: 5.6px;
+          position: absolute;
+        "
+      >
+        <div
+          style="
+            width: 255px;
+            height: 53.6px;
+            left: 17.6px;
+            top: 0px;
+            position: absolute;
+            background: #142c64;
+            border-radius: 16px;
+          "
+        ></div>
+        <img
+          style="
+            width: 88.8px;
+            height: 56.8px;
+            left: 0px;
+            top: 0.8px;
+            position: absolute;
+          "
+          src="images/01_logobachkhoatoi 1.png"
+        />
+        <div
+          style="
+            width: 178px;
+            height: 49px;
+            left: 85px;
+            top: 0px;
+            position: absolute;
+            color: white;
+            font-size: 22.4px;
+            font-family: Montserrat;
+            font-weight: 700;
+            word-wrap: break-word;
+          "
+        >
+          Student Smart Printing Service
+        </div>
+      </div>
+      <div class="nav-block">
+        <script>
+          function openMenu(x) {
+            x.classList.toggle("change");
+            const menu = document.getElementById("menu");
+            if (menu.classList.contains("appear")) {
+              menu.classList.remove("appear");
+            } else {
+              menu.classList.add("appear");
+            }
+          }
+        </script>
+        <div id="menu-icon" onclick="openMenu(this)">
+          <div id="bar1"></div>
+          <div id="bar2"></div>
+          <div id="bar3"></div>
+        </div>
+        <ul id="menu">
+          <li onClick="window.location.href='index.html';">TRANG CHỦ</li>
+          <li
+            onClick="window.location.href='student_dashboard.html';"
+            class="index-page"
+          >
+            BẢNG ĐIỀU KHIỂN
+          </li>
+          <li onClick="window.location.href='upload_file.html';">
+            IN TÀI LIỆU
+          </li>
+          <li onClick="window.location.href='printing_history.html';">
+            LỊCH SỬ IN
+          </li>
+          <li onClick="window.location.href='buy_paper.html';">
+            MUA THÊM GIẤY
+          </li>
+        </ul>
+      </div>
+      <div id="noti-account">
+        <div id="noti">
+          <svg
+            id="circle"
+            width="18"
+            height="20"
+            viewBox="0 0 18 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Vector"
+              d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            id="bell"
+            width="42"
+            height="41"
+            viewBox="0 0 42 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Ellipse 3230"
+              d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
+              stroke="black"
+            />
+          </svg>
+        </div>
+        <div class="info-list">
+          <ul>
+            <li>
+              <svg
+                width="51"
+                height="51"
+                viewBox="0 0 51 51"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="User / User_Square">
+                  <path
+                    id="Vector"
+                    d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+              <div class="name">Katheryn</div>
+              <ul class="dropdown">
+                <li><a>Hồ sơ</a></li>
+                <li>
+                  <a>Ngôn ngữ</a>
+                  <ul class="nextpage">
+                    <li>Tiếng Việt</li>
+                    <li>English</li>
+                  </ul>
+                </li>
+                <li><a href="login_for_student.html">Đăng xuất</a></li>
+              </ul>
+              <svg
+                style="padding: 0 10px, 0 10px"
+                width="10"
+                height="5"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: -5px"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- main -->
+    <div class="container">
+      <!-- Khung thứ 1 -->
+      <div class="box box-1">
+        <!-- div 1 -->
+        <div class="greeting">
+          <div class="greeting-bold">Xin chào, Katheryn</div>
+          <img src="images/SMILE.gif" alt="GIF" class="greeting-image" />
+        </div>
+        <!-- div 2 -->
+        <div class="welcome-message">
+          Thật tuyệt khi bạn đã tiếp tục sử dụng SPSS ! Hi vọng<br />bạn sẽ có
+          những trải nghiệm tuyệt vời.
+        </div>
+        <!-- div thứ 3 -->
+        <div class="balance-container">
+          <div class="balance-title">SỐ DƯ</div>
+          <div class="balance-content">A4</div>
+          <div class="balance-content">100 TRANG</div>
+        </div>
+        <!-- div thứ 4 -->
+        <div class="used-pages-container">
+          <div class="used-pages-title">SỐ TRANG A4 ĐÃ SỬ DỤNG</div>
+          <img
+            class="used-pages-image"
+            src="images/Group 1171275874 (1).png"
+            alt="Used Pages"
+          />
+        </div>
+        <!-- div 5 -->
+        <div class="paper-type">
+          LOẠI GIẤY : A4
+          <img class="filter-icon" src="images/filters-1.png" alt="Filter" />
+        </div>
+      </div>
+      <!-- khung 2 -->
+      <div class="box box-2">
+        <!-- div 1 -->
+        <div class="intro-container">
+          <div class="intro-text-bold">Hãy nhớ, theo dõi và</div>
+        </div>
+        <!-- div 2 -->
+        <div class="info-text">
+          sử dụng bảng điều khiển để giúp bạn có thể theo<br />
+          dõi những thông tin quan trọng
+        </div>
+        <!-- div 3 -->
+        <div class="payment-container">
+          <img class="payment-image" src="images/Group 14.png" />
+          <div class="payment-amount">đ 127,000</div>
+          <div class="payment-label">Tổng thanh toán</div>
+        </div>
+        <!-- div 4 -->
+        <div class="file-types-container">
+          <!-- loại file + số lượng -->
+          <div class="file-row">
+            <div class="file-column">
+              <div class="file-type">Loại File</div>
+            </div>
+            <div class="file-column">
+              <div class="file-type">Số lượng</div>
+            </div>
+          </div>
 
-					<!-- pdf -->
-					<div class="file-row">
-						<div class="file-column-no-border">
-							<img class="file-icon" src="images/pdf_icon.png" alt="PDF" />
-						</div>
-						<div class="file-column-no-border">
-							<div class="file-count">5</div>
-						</div>
-					</div>
+          <!-- pdf -->
+          <div class="file-row">
+            <div class="file-column-no-border">
+              <img class="file-icon" src="images/pdf_icon.png" alt="PDF" />
+            </div>
+            <div class="file-column-no-border">
+              <div class="file-count">5</div>
+            </div>
+          </div>
 
-					<!-- word -->
-					<div class="file-row">
-						<div class="file-column-no-border">
-							<img class="file-icon" src="images/word_icon.png" alt="Word" />
-						</div>
-						<div class="file-column-no-border">
-							<div class="file-count">4</div>
-						</div>
-					</div>
+          <!-- word -->
+          <div class="file-row">
+            <div class="file-column-no-border">
+              <img class="file-icon" src="images/word_icon.png" alt="Word" />
+            </div>
+            <div class="file-column-no-border">
+              <div class="file-count">4</div>
+            </div>
+          </div>
 
-					<!-- ppt -->
-					<div class="file-row">
-						<div class="file-column-no-border">
-							<img class="file-icon" src="images/ppt_icon.png" alt="PPT" />
-						</div>
-						<div class="file-column-no-border">
-							<div class="file-count">2</div>
-						</div>
-					</div>
+          <!-- ppt -->
+          <div class="file-row">
+            <div class="file-column-no-border">
+              <img class="file-icon" src="images/ppt_icon.png" alt="PPT" />
+            </div>
+            <div class="file-column-no-border">
+              <div class="file-count">2</div>
+            </div>
+          </div>
 
-					<!-- xlsx -->
-					<div class="file-row">
-						<div class="file-column-no-border">
-							<img class="file-icon" src="images/xlsx_icon.png" alt="XLSX" />
-						</div>
-						<div class="file-column-no-border">
-							<div class="file-count">2</div>
-						</div>
-					</div>
+          <!-- xlsx -->
+          <div class="file-row">
+            <div class="file-column-no-border">
+              <img class="file-icon" src="images/xlsx_icon.png" alt="XLSX" />
+            </div>
+            <div class="file-column-no-border">
+              <div class="file-count">2</div>
+            </div>
+          </div>
 
-					<!-- png -->
-					<div class="file-row">
-						<div class="file-column-no-border">
-							<img class="file-icon" src="images/png_icon.png" alt="PNG" />
-						</div>
-						<div class="file-column-no-border">
-							<div class="file-count">5</div>
-						</div>
-					</div>
-				</div>
-				<!-- div 5 -->
-				<div class="month-container">
-					Tháng 10
-					<img
-						class="arrow-left"
-						src="images/Alt Arrow Left.png"
-						alt="Previous Month" />
-					<img
-						class="arrow-right"
-						src="images/Alt Arrow Right.png"
-						alt="Next Month" />
-				</div>
-			</div>
-			<!-- Khung thứ 3 -->
-			<div class="box box-3">
-				<!-- div 1 -->
-				<div class="image-container">
-					<img
-						class="image-scholarcap"
-						src="images/Scholarcap scroll.png"
-						alt="Scholarcap scroll" />
-					<img
-						class="image-student"
-						src="images/College Student.png"
-						alt="College Student" />
-					<img
-						class="image-backpack"
-						src="images/Backpack.png"
-						alt="Backpack" />
-				</div>
-				<!-- div 2 -->
-				<div class="status-container">
-					<!-- hàng ngang 1 -->
-					<div class="status-title">TÌNH TRẠNG IN</div>
-					<!-- hàng ngang 2 -->
-					<div class="row-container">
-						<!-- Cột 1 -->
-						<div class="column document-name">
-							TÊN TÀI LIỆU
-							<div class="row">Tiểu luận Triết</div>
-							<div class="row">Tiểu luận KTCT</div>
-							<div class="row">Đồ án tổng hợp</div>
-							<div class="row">Bài giảng XSTK</div>
-						</div>
-						<!-- Cột 2 -->
-						<div class="column page-count">
-							SỐ TRANG
-							<div class="row">24</div>
-							<div class="row">35</div>
-							<div class="row">30</div>
-							<div class="row">30</div>
-						</div>
-						<!-- Cột 3 -->
-						<div class="column printer">
-							MÁY IN
-							<div class="row">MÁY IN #1</div>
-							<div class="row">MÁY IN #1</div>
-							<div class="row">MÁY IN #2</div>
-							<div class="row">MÁY IN #3</div>
-						</div>
-						<!-- Cột 4 -->
-						<div class="column status">
-							TÌNH TRẠNG
-							<div class="status-row">
-								<div class="status-indicator status-green"></div>
-							</div>
-							<div class="status-row">
-								<div class="status-indicator status-yellow"></div>
-							</div>
-							<div class="status-row">
-								<div class="status-indicator status-yellow"></div>
-							</div>
-							<div class="status-row">
-								<div class="status-indicator status-red"></div>
-							</div>
-						</div>
-					</div>
-					<!-- hàng ngang 3 -->
-					<div class="footer">Xem thêm ...</div>
-					<!-- hàng ngang 4 -->
-					<div class="legend">
-						<!-- Cột đầu tiên -->
-						<div class="legend-item">
-							<div class="legend-text">Đang in</div>
-							<div class="status-indicator status-green"></div>
-						</div>
-						<!-- Cột thứ hai -->
-						<div class="legend-item">
-							<div class="legend-text">Chờ in</div>
-							<div class="status-indicator status-yellow"></div>
-						</div>
-						<!-- Cột thứ ba -->
-						<div class="legend-item">
-							<div class="legend-text">Lỗi in</div>
-							<div class="status-indicator status-red"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- chatbox -->
-		<div class="chat-bar" id="chat-bar">
-			<img src="images/01_logobachkhoatoi 1.png" />
-			<span>Chat tư vấn - Giải đáp mọi thắc mắc</span>
-		</div>
-		<div class="chat-box" id="chat-box">
-			<div class="chat-header">
-				<div class="chat-header-left">
-					<img src="images/01_logobachkhoatoi 1.png" />
-					<span>Liên hệ SPSO</span>
-				</div>
-				<button id="close-chat">✖</button>
-			</div>
-			<div class="chat-content">
-				<div class="chat-message">
-					<img src="images/01_logobachkhoatoi 1.png" />
-					<p>
-						Nếu bạn cần hỗ trợ gì cho việc in ấn thì có thể nhắn vào khung chat
-						để được giúp đỡ. SPSO sẽ liên lạc lại sớm nhất có thể
-					</p>
-				</div>
-			</div>
-			<div class="chat-input">
-				<textarea placeholder="Nhập nội dung..."></textarea>
-				<button id="send-message">Gửi</button>
-			</div>
-		</div>
-
-		<script>
-			const chatBar = document.getElementById("chat-bar");
-			const chatBox = document.getElementById("chat-box");
-			const closeChat = document.getElementById("close-chat");
-
-			// Hiển thị khung chat và ẩn thanh chat bar
-			chatBar.addEventListener("click", () => {
-				chatBox.classList.add("show");
-				chatBar.style.display = "none"; // Ẩn thanh chat bar
-			});
-
-			// Ẩn khung chat và hiển thị lại thanh chat bar
-			closeChat.addEventListener("click", () => {
-				chatBox.classList.remove("show");
-				chatBar.style.display = "flex"; // Hiển thị lại thanh chat bar
-			});
-		</script>
-	</body>
+          <!-- png -->
+          <div class="file-row">
+            <div class="file-column-no-border">
+              <img class="file-icon" src="images/png_icon.png" alt="PNG" />
+            </div>
+            <div class="file-column-no-border">
+              <div class="file-count">5</div>
+            </div>
+          </div>
+        </div>
+        <!-- div 5 -->
+        <div class="month-container">
+          Tháng 10
+          <img
+            class="arrow-left"
+            src="images/Alt Arrow Left.png"
+            alt="Previous Month"
+          />
+          <img
+            class="arrow-right"
+            src="images/Alt Arrow Right.png"
+            alt="Next Month"
+          />
+        </div>
+      </div>
+      <!-- khung 3 -->
+      <div class="box box-3">
+        <!-- div 1 -->
+        <div class="image-container">
+          <img
+            class="image-scholarcap"
+            src="images/Scholarcap scroll.png"
+            alt="Scholarcap scroll"
+          />
+          <img
+            class="image-student"
+            src="images/College Student.png"
+            alt="College Student"
+          />
+          <img
+            class="image-backpack"
+            src="images/Backpack.png"
+            alt="Backpack"
+          />
+        </div>
+        <!-- div 2 -->
+        <div class="status-container">
+          <!-- hàng ngang 1 -->
+          <div class="status-title">TÌNH TRẠNG IN</div>
+          <!-- hàng ngang 2 -->
+          <div class="row-container">
+            <!-- Cột 1 -->
+            <div class="column document-name">
+              TÊN TÀI LIỆU
+              <div class="row">Tiểu luận Triết</div>
+              <div class="row">Tiểu luận KTCT</div>
+              <div class="row">Đồ án tổng hợp</div>
+              <div class="row">Bài giảng XSTK</div>
+            </div>
+            <!-- Cột 2 -->
+            <div class="column page-count">
+              SỐ TRANG
+              <div class="row">24</div>
+              <div class="row">35</div>
+              <div class="row">30</div>
+              <div class="row">30</div>
+            </div>
+            <!-- Cột 3 -->
+            <div class="column printer">
+              MÁY IN
+              <div class="row">MÁY IN #1</div>
+              <div class="row">MÁY IN #1</div>
+              <div class="row">MÁY IN #2</div>
+              <div class="row">MÁY IN #3</div>
+            </div>
+            <!-- Cột 4 -->
+            <div class="column status">
+              TÌNH TRẠNG
+              <div class="status-row">
+                <div class="status-indicator status-green"></div>
+              </div>
+              <div class="status-row">
+                <div class="status-indicator status-yellow"></div>
+              </div>
+              <div class="status-row">
+                <div class="status-indicator status-yellow"></div>
+              </div>
+              <div class="status-row">
+                <div class="status-indicator status-red"></div>
+              </div>
+            </div>
+          </div>
+          <!-- hàng ngang 3 -->
+          <div class="footer">Xem thêm ...</div>
+          <!-- hàng ngang 4 -->
+          <div class="legend">
+            <!-- Cột đầu tiên -->
+            <div class="legend-item">
+              <div class="legend-text">Đang in</div>
+              <div class="status-indicator status-green"></div>
+            </div>
+            <!-- Cột thứ hai -->
+            <div class="legend-item">
+              <div class="legend-text">Chờ in</div>
+              <div class="status-indicator status-yellow"></div>
+            </div>
+            <!-- Cột thứ ba -->
+            <div class="legend-item">
+              <div class="legend-text">Lỗi in</div>
+              <div class="status-indicator status-red"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,393 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>printting_history</title>
-	</head>
-	<link rel="stylesheet" href="css/navbar.css" />
-	<link rel="stylesheet" href="css/printing_history.css" />
-	<link rel="stylesheet" href="css/noti_box.css" />
-	<body>
-		<div id="root"></div>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-			rel="stylesheet" />
-		<!-- nav bar -->
-		<div id="navbar">
-			<div
-				id="logo"
-				style="
-					width: 285.6px;
-					height: 57.6px;
-					left: 40px;
-					top: 5.6px;
-					position: absolute;
-				">
-				<div
-					style="
-						width: 255px;
-						height: 53.6px;
-						left: 17.6px;
-						top: 0px;
-						position: absolute;
-						background: #142c64;
-						border-radius: 16px;
-					"></div>
-				<img
-					style="
-						width: 88.8px;
-						height: 56.8px;
-						left: 0px;
-						top: 0.8px;
-						position: absolute;
-					"
-					src="images/01_logobachkhoatoi 1.png" />
-				<div
-					style="
-						width: 178px;
-						height: 49px;
-						left: 85px;
-						top: 0px;
-						position: absolute;
-						color: white;
-						font-size: 22.4px;
-						font-family: Montserrat;
-						font-weight: 700;
-						word-wrap: break-word;
-					">
-					Student Smart Printing Service
-				</div>
-			</div>
-			<div class="nav-block">
-				<script>
-					function openMenu(x) {
-						x.classList.toggle("change");
-						const menu = document.getElementById("menu");
-						if (menu.classList.contains("appear")) {
-							menu.classList.remove("appear");
-						} else {
-							menu.classList.add("appear");
-						}
-					}
-				</script>
-				<div id="menu-icon" onclick="openMenu(this)">
-					<div id="bar1"></div>
-					<div id="bar2"></div>
-					<div id="bar3"></div>
-				</div>
-				<ul id="menu">
-					<li onClick="window.location.href='index.html';">TRANG CHỦ</li>
-					<li onClick="window.location.href='student_dashboard.html';">
-						BẢNG ĐIỀU KHIỂN
-					</li>
-					<li onClick="window.location.href='upload_file.html';">
-						IN TÀI LIỆU
-					</li>
-					<li class="index-page">LỊCH SỬ IN</li>
-					<li onClick="window.location.href='buy_paper.html';">
-						MUA THÊM GIẤY
-					</li>
-				</ul>
-			</div>
-			<div id="noti-account">
-				<div id="noti">
-					<svg
-						id="circle"
-						width="18"
-						height="20"
-						viewBox="0 0 18 20"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Vector"
-							d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
-							stroke="black"
-							stroke-width="1.6"
-							stroke-linecap="round"
-							stroke-linejoin="round" />
-					</svg>
-					<svg
-						id="bell"
-						width="42"
-						height="41"
-						viewBox="0 0 42 41"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Ellipse 3230"
-							d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
-							stroke="black" />
-					</svg>
-					<div id="notification-box" class="hidden">
-						<div class="notification-header">Thông báo</div>
-						<ul class="notification-list">
-							<li>
-								<span class="notification-title">Thông báo 1</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">10 phút trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-							<li>
-								<span class="notification-title">Thông báo 2</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">30 phút trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-							<li>
-								<span class="notification-title">Thông báo 3</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">1 giờ trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="info-list">
-					<ul>
-						<li>
-							<svg
-								width="51"
-								height="51"
-								viewBox="0 0 51 51"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<g id="User / User_Square">
-									<path
-										id="Vector"
-										d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
-										stroke="black"
-										stroke-width="1.6"
-										stroke-linecap="round"
-										stroke-linejoin="round" />
-								</g>
-							</svg>
-							<div class="name">Katheryn</div>
-							<ul class="dropdown">
-								<li><a>Hồ sơ</a></li>
-								<li>
-									<a>Ngôn ngữ</a>
-									<ul class="nextpage">
-										<li>Tiếng Việt</li>
-										<li>English</li>
-									</ul>
-								</li>
-								<li><a href="login_for_student.html">Đăng xuất</a></li>
-							</ul>
-							<svg
-								style="padding: 0 10px, 0 10px"
-								width="10"
-								height="5"
-								viewBox="0 0 12 8"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								style="margin-left: -5px">
-								<path
-									d="M1 1L6 6L11 1"
-									stroke="black"
-									stroke-width="1.6"
-									stroke-linecap="round"
-									stroke-linejoin="round" />
-							</svg>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- lịch sử in -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>printting_history</title>
+  </head>
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/printing_history.css" />
+  <link rel="stylesheet" href="css/noti_box.css" />
+  <body>
+    <div id="root"></div>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <!-- nav bar -->
+    <div id="navbar">
+      <div
+        id="logo"
+        style="
+          width: 285.6px;
+          height: 57.6px;
+          left: 40px;
+          top: 5.6px;
+          position: absolute;
+        "
+      >
+        <div
+          style="
+            width: 255px;
+            height: 53.6px;
+            left: 17.6px;
+            top: 0px;
+            position: absolute;
+            background: #142c64;
+            border-radius: 16px;
+          "
+        ></div>
+        <img
+          style="
+            width: 88.8px;
+            height: 56.8px;
+            left: 0px;
+            top: 0.8px;
+            position: absolute;
+          "
+          src="images/01_logobachkhoatoi 1.png"
+        />
+        <div
+          style="
+            width: 178px;
+            height: 49px;
+            left: 85px;
+            top: 0px;
+            position: absolute;
+            color: white;
+            font-size: 22.4px;
+            font-family: Montserrat;
+            font-weight: 700;
+            word-wrap: break-word;
+          "
+        >
+          Student Smart Printing Service
+        </div>
+      </div>
+      <div class="nav-block">
+        <script>
+          function openMenu(x) {
+            x.classList.toggle("change");
+            const menu = document.getElementById("menu");
+            if (menu.classList.contains("appear")) {
+              menu.classList.remove("appear");
+            } else {
+              menu.classList.add("appear");
+            }
+          }
+        </script>
+        <div id="menu-icon" onclick="openMenu(this)">
+          <div id="bar1"></div>
+          <div id="bar2"></div>
+          <div id="bar3"></div>
+        </div>
+        <ul id="menu">
+          <li onClick="window.location.href='index.html';">TRANG CHỦ</li>
+          <li onClick="window.location.href='student_dashboard.html';">
+            BẢNG ĐIỀU KHIỂN
+          </li>
+          <li onClick="window.location.href='upload_file.html';">
+            IN TÀI LIỆU
+          </li>
+          <li class="index-page">LỊCH SỬ IN</li>
+          <li onClick="window.location.href='buy_paper.html';">
+            MUA THÊM GIẤY
+          </li>
+        </ul>
+      </div>
+      <div id="noti-account">
+        <div id="noti">
+          <svg
+            id="circle"
+            width="18"
+            height="20"
+            viewBox="0 0 18 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Vector"
+              d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            id="bell"
+            width="42"
+            height="41"
+            viewBox="0 0 42 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Ellipse 3230"
+              d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
+              stroke="black"
+            />
+          </svg>
+          <div id="notification-box" class="hidden">
+            <div class="notification-header">Thông báo</div>
+            <ul class="notification-list">
+              <li>
+                <span class="notification-title">Thông báo 1</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">10 phút trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              <li>
+                <span class="notification-title">Thông báo 2</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">30 phút trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              <li>
+                <span class="notification-title">Thông báo 3</span>
+                <p>Nội dung chi tiết của thông báo...</p>
+                <div class="notification-footer">
+                  <span class="notification-time">1 giờ trước</span>
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="info-list">
+          <ul>
+            <li>
+              <svg
+                width="51"
+                height="51"
+                viewBox="0 0 51 51"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="User / User_Square">
+                  <path
+                    id="Vector"
+                    d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
+                    stroke="black"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+              </svg>
+              <div class="name">Katheryn</div>
+              <ul class="dropdown">
+                <li><a>Hồ sơ</a></li>
+                <li>
+                  <a>Ngôn ngữ</a>
+                  <ul class="nextpage">
+                    <li>Tiếng Việt</li>
+                    <li>English</li>
+                  </ul>
+                </li>
+                <li><a href="login_for_student.html">Đăng xuất</a></li>
+              </ul>
+              <svg
+                style="padding: 0 10px, 0 10px"
+                width="10"
+                height="5"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: -5px"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- lịch sử in -->
+    <div class="container">
+      <div class="header">
+        <h2>Lịch sử in</h2>
+        <div class="date-filter">
+          <input type="date" id="start-date" />
+          <span>đến</span>
+          <input type="date" id="end-date" />
+        </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm" />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Tên tài liệu</th>
+            <th>Dung lượng</th>
+            <th>Thời gian in</th>
+            <th>Địa điểm in</th>
+            <th>Số trang</th>
+            <th>Tình trạng</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XSTK.PDF</td>
+            <td>94KB</td>
+            <td>4/11/2024 11:06</td>
+            <td>B6101 - B6-101</td>
+            <td>20</td>
+            <td class="status in-progress">Đang in</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>BAOCAO.DOCX</td>
+            <td>12KB</td>
+            <td>4/11/2024 10:01</td>
+            <td>B11023 - B1-102</td>
+            <td>25</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>LSD.DOCX</td>
+            <td>100KB</td>
+            <td>3/11/2024 12:05</td>
+            <td>B32022 - B3-202</td>
+            <td>100</td>
+            <td class="status error">Lỗi in</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>CHAPTER2.PPTX</td>
+            <td>191KB</td>
+            <td>3/11/2024 16:15</td>
+            <td>B42035 - B4-203</td>
+            <td>52</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>MHH.PDF</td>
+            <td>2MB</td>
+            <td>3/11/2024 17:24</td>
+            <td>B92026 - B9-202</td>
+            <td>19</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>RESULT.PNG</td>
+            <td>123KB</td>
+            <td>2/11/2024 9:00</td>
+            <td>B12113 - B1-211</td>
+            <td>1</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>REVIEW.PDF</td>
+            <td>11KB</td>
+            <td>2/11/2024 10:56</td>
+            <td>B12113 - B1-211</td>
+            <td>15</td>
+            <td class="status error">Lỗi in</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>FINAL232.DOCX</td>
+            <td>50,9KB</td>
+            <td>1/11/2024 7:12</td>
+            <td>B23034 - B2-303</td>
+            <td>70</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+          <tr>
+            <td>GK_231.PDF</td>
+            <td>1.5MB</td>
+            <td>1/11/2024 15:34</td>
+            <td>B51012 - B5-101</td>
+            <td>15</td>
+            <td class="status completed">Hoàn thành</td>
+            <td><button class="details-btn">Xem chi tiết</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&lt;</button>
+        <button class="active">01</button>
+        <button>02</button>
+        <button>03</button>
+        <button>04</button>
+        <button>05</button>
+        <button>06</button>
+        <button>&gt;</button>
+        <button>Tất cả</button>
+      </div>
+    </div>
+    <!-- Bảng xem chi tiết -->
+<div id="details-modal" class="modal" style="display: none">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h3>Chi tiết tài liệu</h3>
+    <div id="details-content">
+      <!-- Nội dung chi tiết sẽ được thêm động qua JavaScript -->
+    </div>
+    <button
+      id="delete-btn"
+      class="delete-btn"
+      style="
+        margin-top: 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      "
+    >
+      Xóa
+    </button>
+  </div>
+</div>
 
-		<div class="container">
-			<div class="header">
-				<h2>Lịch sử in</h2>
-				<div class="date-filter">
-					<input type="date" id="start-date" />
-					<span>đến</span>
-					<input type="date" id="end-date" />
-				</div>
-			</div>
-			<div class="search-bar">
-				<input type="text" placeholder="Tìm kiếm" />
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>Tên tài liệu</th>
-						<th>Dung lượng</th>
-						<th>Thời gian in</th>
-						<th>Địa điểm in</th>
-						<th>Giá (VND)</th>
-						<th>Tình trạng</th>
-						<th>Hành động</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>XSTK.PDF</td>
-						<td>94KB</td>
-						<td>4/11/2024 11:06</td>
-						<td>B6101 - B6-101</td>
-						<td>12,000</td>
-						<td class="status in-progress">Đang in</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>BAOCAO.DOCX</td>
-						<td>12KB</td>
-						<td>4/11/2024 10:01</td>
-						<td>B11023 - B1-102</td>
-						<td>2,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>LSD.DOCX</td>
-						<td>100KB</td>
-						<td>3/11/2024 12:05</td>
-						<td>B32022 - B3-202</td>
-						<td>9,000</td>
-						<td class="status error">Lỗi in</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>CHAPTER2.PPTX</td>
-						<td>191KB</td>
-						<td>3/11/2024 16:15</td>
-						<td>B42035 - B4-203</td>
-						<td>15,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>MHH.PDF</td>
-						<td>2MB</td>
-						<td>3/11/2024 17:24</td>
-						<td>B92026 - B9-202</td>
-						<td>98,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>RESULT.PNG</td>
-						<td>123KB</td>
-						<td>2/11/2024 9:00</td>
-						<td>B12113 - B1-211</td>
-						<td>13,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>REVIEW.PDF</td>
-						<td>11KB</td>
-						<td>2/11/2024 10:56</td>
-						<td>B12113 - B1-211</td>
-						<td>1,500</td>
-						<td class="status error">Lỗi in</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>FINAL232.DOCX</td>
-						<td>50,9KB</td>
-						<td>1/11/2024 7:12</td>
-						<td>B23034 - B2-303</td>
-						<td>7,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-					<tr>
-						<td>GK_231.PDF</td>
-						<td>1.5MB</td>
-						<td>1/11/2024 15:34</td>
-						<td>B51012 - B5-101</td>
-						<td>76,000</td>
-						<td class="status completed">Hoàn thành</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<button>&lt;</button>
-				<button class="active">01</button>
-				<button>02</button>
-				<button>03</button>
-				<button>04</button>
-				<button>05</button>
-				<button>06</button>
-				<button>&gt;</button>
-				<button>Tất cả</button>
-			</div>
-		</div>
-		<!-- script -->
-		<script>
-			function filterByDate() {
-				const startDateInput = document.getElementById("start-date").value;
-				const endDateInput = document.getElementById("end-date").value;
-				const startDate = startDateInput ? new Date(startDateInput) : null;
-				const endDate = endDateInput ? new Date(endDateInput) : null;
-				const rows = document.querySelectorAll("tbody tr");
+<!-- Script -->
+<script>
+  document.querySelectorAll(".details-btn").forEach((button) => {
+    button.addEventListener("click", function () {
+      // Dữ liệu nhập tay cho modal
+      const details = {
+        name: "XSTK.pdf",
+        size: "94 KB",
+        status: "Thành công",
+        paperSize: "A4",
+        copies: 1,
+        pages: "1-10",
+        sides: "2 mặt",
+        orientation: "Ngang",
+        transactionId: "VN1234567890ABCD",
+        amount: "12.000 VNĐ",
+        time: "11:06 4/11/2024",
+      };
 
-				rows.forEach((row) => {
-					const timeCell = row.children[2].innerText;
-					const rowDate = new Date(
-						timeCell.split(" ")[0].split("/").reverse().join("-")
-					);
-					if (
-						(!startDate || rowDate >= startDate) &&
-						(!endDate || rowDate <= endDate)
-					) {
-						row.style.display = "";
-					} else {
-						row.style.display = "none";
-					}
-				});
-			}
-			document
-				.getElementById("start-date")
-				.addEventListener("change", filterByDate);
-			document
-				.getElementById("end-date")
-				.addEventListener("change", filterByDate);
-			// Tìm kiếm trong bảng
-			document
-				.querySelector(".search-bar input")
-				.addEventListener("input", function () {
-					const searchValue = this.value.toLowerCase();
-					const rows = document.querySelectorAll("tbody tr");
+      const modalContent = `
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
+          <div>
+            <p><strong>${details.name}</strong></p>
+            <p>${details.size}</p>
+          </div>
+          <div style="margin-left: auto; color: green; font-weight: bold;">
+            ${details.status}
+          </div>
+        </div>
+        <hr />
+        <p><strong>ĐẶC ĐIỂM</strong></p>
+        <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
+        <p><strong>Số bản:</strong> ${details.copies}</p>
+        <p><strong>Số trang:</strong> ${details.pages}</p>
+        <p><strong>Số mặt in:</strong> ${details.sides}</p>
+        <p><strong>Khổ:</strong> ${details.orientation}</p>
+        <hr />
+        <p><strong>THÔNG TIN THANH TOÁN</strong></p>
+        <p><strong>Mã giao dịch:</strong> ${details.transactionId}</p>
+        <p><strong>Số tiền đã thanh toán:</strong> ${details.amount}</p>
+        <p><strong>Thời gian:</strong> ${details.time}</p>
+      `;
 
-					rows.forEach((row) => {
-						const fileName = row.cells[0].innerText.toLowerCase();
-						if (fileName.includes(searchValue)) {
-							row.style.display = "";
-						} else {
-							row.style.display = "none";
-						}
-					});
-				});
-			// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
-			document.getElementById("noti").addEventListener("click", function (e) {
-				e.stopPropagation();
-				const notificationBox = document.getElementById("notification-box");
-				notificationBox.classList.toggle("active");
-			});
+      document.getElementById("details-content").innerHTML = modalContent;
+      document.getElementById("details-modal").style.display = "flex";
 
-			document.addEventListener("click", function (e) {
-				const notificationBox = document.getElementById("notification-box");
-				const noti = document.getElementById("noti");
-				if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
-					notificationBox.classList.remove("active");
-				}
-			});
+      // Thêm sự kiện cho nút Xóa
+      const deleteBtn = document.getElementById("delete-btn");
+      deleteBtn.onclick = function () {
+        if (confirm(`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`)) {
+          alert(`Tài liệu "${details.name}" đã bị xóa.`);
+          document.getElementById("details-modal").style.display = "none";
+        }
+      };
+    });
+  });
 
-			document
-				.getElementById("notification-box")
-				.addEventListener("click", function (e) {
-					e.stopPropagation();
-				});
-		</script>
-	</body>
+  document.querySelector(".close-btn").addEventListener("click", function () {
+    document.getElementById("details-modal").style.display = "none";
+  });
+
+  window.addEventListener("click", function (event) {
+    const modal = document.getElementById("details-modal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+</script>
+
+    <!-- script -->
+    <script>
+      function filterByDate() {
+        const startDateInput = document.getElementById("start-date").value;
+        const endDateInput = document.getElementById("end-date").value;
+        const startDate = startDateInput ? new Date(startDateInput) : null;
+        const endDate = endDateInput ? new Date(endDateInput) : null;
+        const rows = document.querySelectorAll("tbody tr");
+
+        rows.forEach((row) => {
+          const timeCell = row.children[2].innerText;
+          const rowDate = new Date(
+            timeCell.split(" ")[0].split("/").reverse().join("-")
+          );
+          if (
+            (!startDate || rowDate >= startDate) &&
+            (!endDate || rowDate <= endDate)
+          ) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+      document
+        .getElementById("start-date")
+        .addEventListener("change", filterByDate);
+      document
+        .getElementById("end-date")
+        .addEventListener("change", filterByDate);
+      // Tìm kiếm trong bảng
+      document
+        .querySelector(".search-bar input")
+        .addEventListener("input", function () {
+          const searchValue = this.value.toLowerCase();
+          const rows = document.querySelectorAll("tbody tr");
+
+          rows.forEach((row) => {
+            const fileName = row.cells[0].innerText.toLowerCase();
+            if (fileName.includes(searchValue)) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        });
+      // Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+      document.getElementById("noti").addEventListener("click", function (e) {
+        e.stopPropagation();
+        const notificationBox = document.getElementById("notification-box");
+        notificationBox.classList.toggle("active");
+      });
+
+      document.addEventListener("click", function (e) {
+        const notificationBox = document.getElementById("notification-box");
+        const noti = document.getElementById("noti");
+        if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+          notificationBox.classList.remove("active");
+        }
+      });
+
+      document
+        .getElementById("notification-box")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+    </script>
+  </body>
 </html>
