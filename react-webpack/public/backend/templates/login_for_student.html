@@ -66,8 +66,9 @@
 				margin-bottom: 900%;
 			}
 		</style>
-		<link rel="stylesheet" href={{ url_for('static', filename='css/input.css')}} /> 
-		<link rel="stylesheet" href={{ url_for('static', filename='css/styleLoginStudent.css') }} />
+		<link rel="stylesheet" href={{ url_for('static', filename='css/input.css')}}
+		/> <link rel="stylesheet" href={{ url_for('static',
+		filename='css/styleLoginStudent.css') }} />
 	</head>
 	<body>
 		<link
@@ -79,7 +80,7 @@
 				width: 100%;
 				height: 100%;
 				position: absolute;
-				background-image: url('images/Rectangle.png');
+				background-image: url('static/images/Rectangle.png');
 			"></div>
 
 		<div id="screen">
@@ -93,7 +94,9 @@
 				<div id="SPSO_text">SPSO</div>
 			</div>
 			<div class="hover-div" id="sinhvien_frame">
-				<img id="sinhvien_icon" src="{{ url_for('static', filename='images/image.png') }}" />
+				<img
+					id="sinhvien_icon"
+					src="{{ url_for('static', filename='images/image.png') }}" />
 				<img
 					id="checkbox"
 					src="{{ url_for('static', filename='images/Group 1171275873.png') }}" />
@@ -118,9 +121,13 @@
 					>
 				</div>
 				<div id="dang_nhap_voi_tu_cach">ĐĂNG NHẬP VỚI TƯ CÁCH</div>
-				<img id="slideshow" src="{{ url_for('static', filename='images/image 28.png') }}" />
+				<img
+					id="slideshow"
+					src="{{ url_for('static', filename='images/image 28.png') }}" />
 				<div id="ssps_frame">
-					<img id="logoBK" src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
+					<img
+						id="logoBK"
+						src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
 					<div id="ssps_text">Student Smart Printing Service</div>
 					<button type="submit" ; class="hover-div-login">
 						<div id="login_text">Đăng nhập</div>

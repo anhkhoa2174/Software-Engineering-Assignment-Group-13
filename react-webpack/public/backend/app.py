@@ -58,7 +58,6 @@ def login_for_student():
 def login_for_spso():
     return render_template('login_for_spso.html') 
 
-
 @app.route('/upload_file')
 def upload_file():
     return render_template('upload_file.html') 
@@ -67,6 +66,25 @@ def upload_file():
 def buy_paper():
     return render_template('buy_paper.html') 
 
+@app.route('/printing_history')
+def printing_history():
+    return render_template('printing_history.html') 
+
+@app.route('/system_error')
+def system_error():
+    return render_template('system_error.html') 
+
+@app.route('/homescreen_spso')
+def homescreen_spso():
+    return render_template('homescreen_spso.html') 
+
+@app.route('/spso_dashboard')
+def spso_dashboard():
+    return render_template('spso_dashboard.html') 
+
+@app.route('/student_dashboard')
+def student_dashboard():
+    return render_template('student_dashboard.html') 
 
   
 # Route thêm sản phẩm

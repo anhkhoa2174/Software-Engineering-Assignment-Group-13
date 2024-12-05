@@ -6,7 +6,7 @@
 		<title>SPSS DDoS Attack</title>
 		<link
 			rel="shortcut icon"
-			href="images/HCMUT_official_logo.ico"
+			href="static/images/HCMUT_official_logo.ico"
 			type="image/x-icon" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Itim&display=swap"
@@ -16,14 +16,18 @@
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 			rel="stylesheet" />
 		<!-- Optional custom styles -->
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
-  		<link rel="stylesheet" href="{{ url_for('static', filename='css/styleIndex.css') }}" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/navbar.css') }}" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/styleIndex.css') }}" />
 	</head>
 	<body>
 		<!-- Navbar with Bootstrap classes -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html">Trang chủ</a>
+				<a class="navbar-brand" href="index">Trang chủ</a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -42,15 +46,15 @@
 							>
 						</li> -->
 						<li style="color: white">
-							<a class="nav-link" href="upload_file.html">Hệ thống gặp lỗi</a>
+							<a class="nav-link" href="upload_file">Hệ thống gặp lỗi</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="printing_history.html"
+							<a class="nav-link" href="printing_history"
 								>Hướng dẫn sử dụng SPSS</a
 							>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="buy_paper.html">Ra mắt hệ thống SPSS</a>
+							<a class="nav-link" href="buy_paper">Ra mắt hệ thống SPSS</a>
 						</li>
 					</ul>
 				</div>
