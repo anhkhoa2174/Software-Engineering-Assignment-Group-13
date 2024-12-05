@@ -168,7 +168,7 @@ def login_student():
         return redirect(url_for('login_for_student', wrongpw='false'))
     
 # Login cho spso
-@app.route('/login_student', methods=['POST'])
+@app.route('/login_spso', methods=['POST'])
 def login_spso():
     conn = psycopg2.connect(database="CNPM",
                             user="postgres",
