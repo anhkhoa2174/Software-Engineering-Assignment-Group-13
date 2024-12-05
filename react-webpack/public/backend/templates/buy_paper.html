@@ -7,7 +7,7 @@
 		<link />
 		<link
 			rel="shortcut icon"
-			href="images/HCMUT_official_logo.ico"
+			href="static/images/HCMUT_official_logo.ico"
 			type="image/x-icon" />
 		<style>
 			html,
@@ -61,7 +61,7 @@
 							top: 0.8px;
 							position: absolute;
 						"
-						src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+						src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
 					<div
 						style="
 							width: 178px;
@@ -100,15 +100,11 @@
 						<li onClick="window.location.href='student_dashboard'" ;>
 							BẢNG ĐIỀU KHIỂN
 						</li>
-						<li onClick="window.location.href='upload_file';">
-							IN TÀI LIỆU
-						</li>
+						<li onClick="window.location.href='upload_file';">IN TÀI LIỆU</li>
 						<li onClick="window.location.href='printing_history';">
 							LỊCH SỬ IN
 						</li>
-						<li
-							onClick="window.location.href='buy_paper';"
-							class="index-page">
+						<li onClick="window.location.href='buy_paper';" class="index-page">
 							MUA THÊM GIẤY
 						</li>
 					</ul>
@@ -172,7 +168,7 @@
 											<li>English</li>
 										</ul>
 									</li>
-									<li><a href="login_for_student.html">Đăng xuất</a></li>
+									<li><a href="login_for_student">Đăng xuất</a></li>
 								</ul>
 								<svg
 									style="padding: 0 10px, 0 10px"

@@ -6,7 +6,7 @@
 		<title>Bảng điều khiển sinh viên</title>
 		<link
 			rel="shortcut icon"
-			href="HCMUT_official_logo.ico"
+			href="static/images/HCMUT_official_logo.ico"
 			type="image/x-icon" />
 		<style>
 			html,
@@ -18,8 +18,12 @@
 				width: 100%;
 			}
 		</style>
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}" />
-  		<link rel="stylesheet" href="{{ url_for('static', filename='css/homescreen_spso.css') }}" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/navbar.css') }}" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/homescreen_spso.css') }}" />
 	</head>
 
 	<body>
@@ -99,13 +103,9 @@
 				<ul id="menu">
 					<li onClick="window.location.href='index';">TRANG CHỦ</li>
 					<li>BẢNG ĐIỀU KHIỂN</li>
-					<li onClick="window.location.href='upload_file';">
-						IN TÀI LIỆU
-					</li>
+					<li onClick="window.location.href='upload_file';">IN TÀI LIỆU</li>
 					<li>LỊCH SỬ IN</li>
-					<li
-						onClick="window.location.href='buy_paper';"
-						class="index-page">
+					<li onClick="window.location.href='buy_paper';" class="index-page">
 						MUA THÊM GIẤY
 					</li>
 				</ul>
@@ -169,7 +169,7 @@
 										<li>English</li>
 									</ul>
 								</li>
-								<li><a href="login_for_student.html">Đăng xuất</a></li>
+								<li><a href="/">Đăng xuất</a></li>
 							</ul>
 							<svg
 								style="padding: 0 10px, 0 10px"
@@ -268,22 +268,30 @@
 						<!-- Các máy in -->
 						<div class="printer-items">
 							<div class="printer-card disabled">
-								<img src="{{ url_for('static', filename='images/printer.jpg') }}" alt="Printer" />
+								<img
+									src="{{ url_for('static', filename='images/printer.jpg') }}"
+									alt="Printer" />
 								<p class="printer-id">B63034</p>
 								<p class="status disabled">VÔ HIỆU HÓA</p>
 							</div>
 							<div class="printer-card ready">
-								<img src="{{ url_for('static', filename='images/printer.jpg') }}" alt="Printer" />
+								<img
+									src="{{ url_for('static', filename='images/printer.jpg') }}"
+									alt="Printer" />
 								<p class="printer-id">B63035</p>
 								<p class="status ready">SẴN SÀNG</p>
 							</div>
 							<div class="printer-card ready">
-								<img src="{{ url_for('static', filename='images/printer.jpg') }}" alt="Printer" />
+								<img
+									src="{{ url_for('static', filename='images/printer.jpg') }}"
+									alt="Printer" />
 								<p class="printer-id">B63035</p>
 								<p class="status ready">SẴN SÀNG</p>
 							</div>
 							<div class="printer-card ready">
-								<img src="{{ url_for('static', filename='images/printer.jpg') }}" alt="Printer" />
+								<img
+									src="{{ url_for('static', filename='images/printer.jpg') }}"
+									alt="Printer" />
 								<p class="printer-id">B63035</p>
 								<p class="status ready">SẴN SÀNG</p>
 							</div>
@@ -308,7 +316,9 @@
 							<option value="friends">Bạn bè</option>
 							<option value="only-me">Chỉ mình tôi</option>
 						</select>
-						<img src="{{ url_for('static', filename='images/icon_send.jpg') }}" class="send-button" />
+						<img
+							src="{{ url_for('static', filename='images/icon_send.jpg') }}"
+							class="send-button" />
 					</div>
 					<!-- Ô nhập -->
 					<textarea
@@ -321,19 +331,29 @@
 							<span class="add-text">Thêm vào thông báo của bạn</span>
 							<div class="add-icons">
 								<button class="footer-button">
-									<img src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}" alt="Flag" />
+									<img
+										src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
+										alt="Flag" />
 								</button>
 								<button class="footer-button">
-									<img src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}" alt="Friend" />
+									<img
+										src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
+										alt="Friend" />
 								</button>
 								<button class="footer-button">
-									<img src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}" alt="Emoji" />
+									<img
+										src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
+										alt="Emoji" />
 								</button>
 								<button class="footer-button">
-									<img src="{{ url_for('static', filename='images/icon_location.jpg') }}" alt="Location" />
+									<img
+										src="{{ url_for('static', filename='images/icon_location.jpg') }}"
+										alt="Location" />
 								</button>
 								<button class="footer-button">
-									<img src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}" alt="GIF" />
+									<img
+										src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
+										alt="GIF" />
 								</button>
 							</div>
 						</div>
@@ -356,11 +376,21 @@
 						<div class="add-to-post-container">
 							<span class="add-to-post-text">Thêm vào thông báo của bạn</span>
 							<div class="icon-container">
-								<img src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}" alt="Icon 1" />
-								<img src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}" alt="Icon 2" />
-								<img src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}" alt="Icon 3" />
-								<img src="{{ url_for('static', filename='images/icon_location.jpg') }}" alt="GIF" />
-								<img src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}" alt="GIF" />
+								<img
+									src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
+									alt="Icon 1" />
+								<img
+									src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
+									alt="Icon 2" />
+								<img
+									src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
+									alt="Icon 3" />
+								<img
+									src="{{ url_for('static', filename='images/icon_location.jpg') }}"
+									alt="GIF" />
+								<img
+									src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
+									alt="GIF" />
 							</div>
 						</div>
 					</div>
