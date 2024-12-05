@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+		<title>Login screen</title>
+		<link
+			rel="shortcut icon"
+			href="images/HCMUT_official_logo.ico"
+			type="image/x-icon" />
+		<style>
+			html,
+			body {
+				overflow-x: hidden;
+				margin: 0;
+				padding: 0;
+			}
+			.hover-div {
+				width: 200px;
+				height: 65px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 18px;
+				font-weight: bold;
+				color: #b3b7bd;
+				background-color: white;
+				transition: background-color 0.3s ease, color 0.3s ease;
+			}
+
+			.hover-div:hover {
+				background-color: #b3b7bd;
+				color: #0f8ede;
+			}
+
+			#slideshow {
+				width: 44%;
+				height: 100%;
+				position: absolute;
+				left: 53%;
+				top: 0%;
+				transition: opacity 2s ease-in-out, transform 2s ease-in-out;
+				opacity: 1;
+				transform: scale(1);
+				transform: scale(1.2);
+			}
+			#slideshow.hidden {
+				opacity: 0;
+			}
+			#wrongpw_message {
+				background-color: #ffdddd;
+				color: red;
+				width: 12%;
+				top: 53%;
+				left: 24.7%;
+				font-size: 72%;
+				position: absolute;
+
+				display: none; /* Mặc định ẩn */
+				font-family: Montserrat;
+				/* Căn giữa chữ */
+				display: flex;
+				justify-content: center; /* Căn giữa theo chiều ngang */
+				align-items: center; /* Căn giữa theo chiều dọc */
+				text-align: center; /* Căn giữa text */
+				margin-bottom: 900%;
+			}
+		</style>
+		<link rel="stylesheet" href={{ url_for('static', filename='css/input.css')
+		}} /> <link rel="stylesheet" href={{ url_for('static',
+		filename='css/styleLoginStudent.css') }} />
+	</head>
+	<body>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+			rel="stylesheet" />
+
+		<div
+			style="
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				background-image: url('images/Rectangle.png');
+			"></div>
+
+		<div id="screen">
+			<div
+				onClick="window.location.href = 'login_for_spso';"
+				class="hover-div"
+				id="SPSO">
+				<img
+					id="imageSPSO"
+					src="{{ url_for('static', filename='images/image 47.png') }}" />
+				<div id="SPSO_text">SPSO</div>
+			</div>
+			<div class="hover-div" id="sinhvien_frame">
+				<img id="sinhvien_icon" src="images/image.png" />
+				<img
+					id="checkbox"
+					src="{{ url_for('static', filename='images/Group 1171275873.png') }}" />
+				<div id="sinhvien_text">Sinh viên</div>
+			</div>
+			<form action="/login_student" method="POST">
+				<div style="top: 57%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Tên đăng nhập</b>
+					</div>
+					<input type="text" name="username" />
+				</div>
+				<div style="top: 69%; left: 11.3%; position: absolute">
+					<div style="font-family: Montserrat; font-weight: 900">
+						<b>Mật khẩu</b>
+					</div>
+					<input type="password" name="password" />
+				</div>
+				<div style="top: 69%; left: 36%; position: absolute">
+					<span style="color: #0c2a92; font-size: 0.58vw; left: 90%"
+						>Quên mật khẩu?</span
+					>
+				</div>
+				<div id="dang_nhap_voi_tu_cach">ĐĂNG NHẬP VỚI TƯ CÁCH</div>
+				<img id="slideshow" src="images/image 28.png" />
+				<div id="ssps_frame">
+					<img id="logoBK" src="images/01_logobachkhoatoi 1.png" />
+					<div id="ssps_text">Student Smart Printing Service</div>
+					<button type="submit" ; class="hover-div-login">
+						<div id="login_text">Đăng nhập</div>
+					</button>
+				</div>
+				<input id="save_account" type="checkbox" />
+				<b id="save_account_text">Lưu tài khoản</b>
+			</form>
+		</div>
+		<div id="wrongpw_message">Sai email hoặc mật khẩu!</div>
+		<script>
+			// Function to check query parameters and show error
+			window.onload = function () {
+				const urlParams = new URLSearchParams(window.location.search);
+				if (urlParams.get("wrongpw") === "false") {
+					document.getElementById("wrongpw_message").style.display = "block";
+				}
+			};
+		</script>
+	</body>
+</html>
