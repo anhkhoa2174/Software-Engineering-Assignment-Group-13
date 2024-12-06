@@ -79,7 +79,7 @@ def printing_history():
     # Lấy dữ liệu lịch sử in của người dùng
     logger.debug(f"Fetching printing history for username: {username}")
     cur.execute(
-        'SELECT username, printer_id, file_type, file_name, file_size, no_pages, status, time '
+        'SELECT username, printer_id, file_type, file_name, file_size, no_pages, status, time, paper_orientation, print_sides, num_copies '
         'FROM "Uses" WHERE username = %s',
         (username,)
     )
@@ -99,9 +99,6 @@ def printing_history():
     
     # Truyền dữ liệu vào template
     return render_template('printing_history.html', history=printing_history, record_count=record_count)
-
-
-
 
 @app.route('/system_error')
 @login_required
@@ -144,7 +141,6 @@ def login_student():
         return redirect(url_for('index'))
     else:
         return redirect(url_for('login_for_student', wrongpw='false'))
-
 
 @app.route('/login_spso', methods=['POST'])
 def login_spso():

@@ -6,6 +6,10 @@
 		<title>printting_history</title>
 	</head>
 	<link
+		rel="shortcut icon"
+		href="static/images/HCMUT_official_logo.ico"
+		type="image/x-icon" />
+	<link
 		rel="stylesheet"
 		href="{{ url_for('static', filename='css/navbar.css') }}" />
 	<link
@@ -235,12 +239,29 @@
 						<td>{{ record[7] }}</td>
 						<td>{{ record[1] }}</td>
 						<td>{{ record[5] }}</td>
-						<td class="status in-progress">Đang in</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
+						<td
+							class="status {% if record[6] == 'Hoàn thành' %}completed {% elif record[6] == 'Lỗi in' %}error {% elif record[6] == 'Đang in' %}in-progress {% else %}unknown{% endif %}">
+							{{ record[6] }}
+						</td>
+						<td>
+							<button
+								class="details-btn"
+								data-name="{{ record[3] }}"
+								data-size="{{ record[4] }}"
+								data-status="{{ record[6] }}"
+								data-time="{{ record[7] }}"
+								data-pages="{{ record[5] }}"
+								data-orientation="{{ record[8] }}"
+								data-print_sides="{{ record[9] }}"
+								data-num_copies="{{ record[10] }}">
+								Xem chi tiết
+							</button>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
+
 			<div class="pagination">
 				<button>&lt;</button>
 				<button class="active">01</button>
@@ -278,56 +299,54 @@
 			</div>
 		</div>
 
+		{% for record in history %}
 		<!-- Script -->
 		<script>
 			document.querySelectorAll(".details-btn").forEach((button) => {
 				button.addEventListener("click", function () {
-					// Dữ liệu nhập tay cho modal
+					// Lấy dữ liệu từ data-* attributes
 					const details = {
-						name: "XSTK.pdf",
-						size: "94 KB",
-						status: "Thành công",
-						paperSize: "A4",
-						copies: 1,
-						pages: "1-10",
-						sides: "2 mặt",
-						orientation: "Ngang",
-						transactionId: "VN1234567890ABCD",
-						amount: "12.000 VNĐ",
-						time: "11:06 4/11/2024",
+						name: button.getAttribute("data-name"),
+						size: button.getAttribute("data-size"),
+						status: button.getAttribute("data-status"),
+						time: button.getAttribute("data-time"),
+						paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
+						copies: button.getAttribute("data-num_copies"), // Giá trị mẫu
+						pages: button.getAttribute("data-pages"), // Giá trị mẫu
+						sides: button.getAttribute("data-print_sides"), // Giá trị mẫu
+						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
 					};
 
+					// Tạo nội dung modal từ dữ liệu
 					const modalContent = `
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
-          <div>
-            <p><strong>${details.name}</strong></p>
-            <p>${details.size}</p>
-          </div>
-          <div style="margin-left: auto; color: green; font-weight: bold;">
-            ${details.status}
-          </div>
-        </div>
-        <hr />
-        <p><strong>ĐẶC ĐIỂM</strong></p>
-        <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
-        <p><strong>Số bản:</strong> ${details.copies}</p>
-        <p><strong>Số trang:</strong> ${details.pages}</p>
-        <p><strong>Số mặt in:</strong> ${details.sides}</p>
-        <p><strong>Khổ:</strong> ${details.orientation}</p>
-        <hr />
-        <p><strong>THÔNG TIN THANH TOÁN</strong></p>
-        <p><strong>Mã giao dịch:</strong> ${details.transactionId}</p>
-        <p><strong>Số tiền đã thanh toán:</strong> ${details.amount}</p>
-        <p><strong>Thời gian:</strong> ${details.time}</p>
-      `;
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
+                <div>
+                    <p><strong>${details.name}</strong></p>
+                    <p>${details.size} KB</p>
+                </div>
+                <div style="margin-left: auto; color: green; font-weight: bold;">
+                    ${details.status}
+                </div>
+            </div>
+            <hr />
+            <p><strong>ĐẶC ĐIỂM</strong></p>
+            <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
+            <p><strong>Số bản:</strong> ${details.copies}</p>
+            <p><strong>Số trang:</strong> ${details.pages}</p>
+            <p><strong>Số mặt in:</strong> ${details.sides}</p>
+            <p><strong>Khổ:</strong> ${details.orientation}</p>
+            <hr />
+            <p><strong>THÔNG TIN IN</strong></p>
+            <p><strong>Thời gian:</strong> ${details.time}</p>
+        `;
 
+					// Hiển thị modal
 					document.getElementById("details-content").innerHTML = modalContent;
 					document.getElementById("details-modal").style.display = "flex";
 
-					// Thêm sự kiện cho nút Xóa
-					const deleteBtn = document.getElementById("delete-btn");
-					deleteBtn.onclick = function () {
+					// Xử lý nút Xóa
+					document.getElementById("delete-btn").onclick = function () {
 						if (
 							confirm(
 								`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
@@ -340,6 +359,7 @@
 				});
 			});
 
+			// Đóng modal
 			document
 				.querySelector(".close-btn")
 				.addEventListener("click", function () {
@@ -353,6 +373,7 @@
 				}
 			});
 		</script>
+		{% endfor %}
 
 		<!-- script -->
 		<script>
