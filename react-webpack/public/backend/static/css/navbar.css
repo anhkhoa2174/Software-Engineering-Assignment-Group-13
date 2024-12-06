@@ -93,6 +93,7 @@
 	padding: 0 4px;
 }
 #navbar .info-list .name {
+	margin-left:10px;
 	font-size: 15px;
 	font-family: Montserrat, sans-serif;
 	font-weight: 400;
@@ -215,3 +216,10 @@
 		align-items: center;
 	}
 }
+
+.profile-img {
+	width: 43px; /* Kích thước ảnh */
+	height: 43px; /* Kích thước ảnh */
+	border-radius: 50%; /* Tạo hình tròn */
+	object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  }

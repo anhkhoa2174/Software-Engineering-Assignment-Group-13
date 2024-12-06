@@ -126,86 +126,65 @@
 							stroke="black" />
 					</svg>
 					<div id="notification-box" class="hidden">
-						<div class="notification-header">Thông báo</div>
-						<ul class="notification-list">
-							<li>
-								<span class="notification-title">Thông báo 1</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">10 phút trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-							<li>
-								<span class="notification-title">Thông báo 2</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">30 phút trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-							<li>
-								<span class="notification-title">Thông báo 3</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">1 giờ trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-						</ul>
-					</div>
+            <div class="notification-header">Thông báo</div>
+            <ul class="notification-list">
+                {% if notifications %}
+                    {% for notification in notifications %}
+                    <li>
+                        <span class="notification-title">Thông báo {{ loop.index }}</span> <!-- Hiển thị số thứ tự thông báo -->
+                        <p>{{ notification[0] }}</p> <!-- Nội dung thông báo -->
+                        <div class="notification-footer">
+                            <span class="notification-time">{{ notification[1] }}</span> <!-- Thời gian thông báo -->
+                            <button class="notification-detail-btn">Xem chi tiết</button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li>
+                        <p>Không có thông báo nào.</p> <!-- Thông báo khi không có dữ liệu -->
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
 				</div>
-				<div class="info-list">
-					<ul>
-						<li>
-							<svg
-								width="51"
-								height="51"
-								viewBox="0 0 51 51"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<g id="User / User_Square">
-									<path
-										id="Vector"
-										d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
-										stroke="black"
-										stroke-width="1.6"
-										stroke-linecap="round"
-										stroke-linejoin="round" />
-								</g>
-							</svg>
-							<div class="name">Katheryn</div>
-							<ul class="dropdown">
-								<li><a>Hồ sơ</a></li>
-								<li>
-									<a>Ngôn ngữ</a>
-									<ul class="nextpage">
-										<li>Tiếng Việt</li>
-										<li>English</li>
-									</ul>
-								</li>
-								<li><a href="/">Đăng xuất</a></li>
-							</ul>
-							<svg
-								style="padding: 0 10px, 0 10px"
-								width="10"
-								height="5"
-								viewBox="0 0 12 8"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								style="margin-left: -5px">
-								<path
-									d="M1 1L6 6L11 1"
-									stroke="black"
-									stroke-width="1.6"
-									stroke-linecap="round"
-									stroke-linejoin="round" />
-							</svg>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+				 <div class="info-list">
+          <ul>
+            <li>
+              <img src="data:image/png;base64,{{ profile_picture_base64 }}" class="profile-img" alt="Profile Picture">
+              <div class="name">{{ name }}</div>
+              <ul class="dropdown">
+                <li><a>Hồ sơ</a></li>
+                <li>
+                  <a>Ngôn ngữ</a>
+                  <ul class="nextpage">
+                    <li>Tiếng Việt</li>
+                    <li>English</li>
+                  </ul>
+                </li>
+                <li><a href="/">Đăng xuất</a></li>
+              </ul>
+              <svg
+                style="padding: 0 10px, 0 10px"
+                width="10"
+                height="5"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: -5px"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 		<!-- lịch sử in -->
 		<div class="container">
 			<div class="header">
@@ -375,72 +354,72 @@
 		</script>
 		{% endfor %}
 
-		<!-- script -->
-		<script>
-			function filterByDate() {
-				const startDateInput = document.getElementById("start-date").value;
-				const endDateInput = document.getElementById("end-date").value;
-				const startDate = startDateInput ? new Date(startDateInput) : null;
-				const endDate = endDateInput ? new Date(endDateInput) : null;
-				const rows = document.querySelectorAll("tbody tr");
+    <!-- script -->
+    <script>
+      function filterByDate() {
+        const startDateInput = document.getElementById("start-date").value;
+        const endDateInput = document.getElementById("end-date").value;
+        const startDate = startDateInput ? new Date(startDateInput) : null;
+        const endDate = endDateInput ? new Date(endDateInput) : null;
+        const rows = document.querySelectorAll("tbody tr");
 
-				rows.forEach((row) => {
-					const timeCell = row.children[2].innerText;
-					const rowDate = new Date(
-						timeCell.split(" ")[0].split("/").reverse().join("-")
-					);
-					if (
-						(!startDate || rowDate >= startDate) &&
-						(!endDate || rowDate <= endDate)
-					) {
-						row.style.display = "";
-					} else {
-						row.style.display = "none";
-					}
-				});
-			}
-			document
-				.getElementById("start-date")
-				.addEventListener("change", filterByDate);
-			document
-				.getElementById("end-date")
-				.addEventListener("change", filterByDate);
-			// Tìm kiếm trong bảng
-			document
-				.querySelector(".search-bar input")
-				.addEventListener("input", function () {
-					const searchValue = this.value.toLowerCase();
-					const rows = document.querySelectorAll("tbody tr");
+        rows.forEach((row) => {
+          const timeCell = row.children[2].innerText;
+          const rowDate = new Date(
+            timeCell.split(" ")[0].split("/").reverse().join("-")
+          );
+          if (
+            (!startDate || rowDate >= startDate) &&
+            (!endDate || rowDate <= endDate)
+          ) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+      document
+        .getElementById("start-date")
+        .addEventListener("change", filterByDate);
+      document
+        .getElementById("end-date")
+        .addEventListener("change", filterByDate);
+      // Tìm kiếm trong bảng
+      document
+        .querySelector(".search-bar input")
+        .addEventListener("input", function () {
+          const searchValue = this.value.toLowerCase();
+          const rows = document.querySelectorAll("tbody tr");
 
-					rows.forEach((row) => {
-						const fileName = row.cells[0].innerText.toLowerCase();
-						if (fileName.includes(searchValue)) {
-							row.style.display = "";
-						} else {
-							row.style.display = "none";
-						}
-					});
-				});
-			// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
-			document.getElementById("noti").addEventListener("click", function (e) {
-				e.stopPropagation();
-				const notificationBox = document.getElementById("notification-box");
-				notificationBox.classList.toggle("active");
-			});
+          rows.forEach((row) => {
+            const fileName = row.cells[0].innerText.toLowerCase();
+            if (fileName.includes(searchValue)) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        });
+      // Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+      document.getElementById("noti").addEventListener("click", function (e) {
+        e.stopPropagation();
+        const notificationBox = document.getElementById("notification-box");
+        notificationBox.classList.toggle("active");
+      });
 
-			document.addEventListener("click", function (e) {
-				const notificationBox = document.getElementById("notification-box");
-				const noti = document.getElementById("noti");
-				if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
-					notificationBox.classList.remove("active");
-				}
-			});
+      document.addEventListener("click", function (e) {
+        const notificationBox = document.getElementById("notification-box");
+        const noti = document.getElementById("noti");
+        if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+          notificationBox.classList.remove("active");
+        }
+      });
 
-			document
-				.getElementById("notification-box")
-				.addEventListener("click", function (e) {
-					e.stopPropagation();
-				});
-		</script>
-	</body>
+      document
+        .getElementById("notification-box")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+    </script>
+  </body>
 </html>

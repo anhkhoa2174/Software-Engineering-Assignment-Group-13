@@ -1,8 +1,6 @@
-* {
-	font-family: "Inter";
-	font-size: 14px;
-	font-weight: 400px;
-}
+body {
+	font-family: 'Montserrat', sans-serif;
+  }
 
 h1 {
 	font-size: 18px;

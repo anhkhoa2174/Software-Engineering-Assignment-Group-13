@@ -4,6 +4,8 @@ import psycopg2
 from logging.config import dictConfig
 import logging
 import sys
+import base64
+from io import BytesIO
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -12,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="p123", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -34,16 +36,27 @@ def index():
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('SELECT name FROM "User" WHERE username = %s', (username,))
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
     logger.debug(f"User fetched: {user}")  # Thêm dòng log này
+
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+
     cur.close()
     conn.close()
 
     if user:
         name = user[0]
+        profile_picture2 = user[1]
         logger.debug(f"Name: {name}")  # Thêm dòng log này
-        return render_template('index.html', name=name)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture2:
+            profile_picture2_base64 = base64.b64encode(profile_picture2).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture2_base64 = None
+        return render_template('index.html', name=name, profile_picture2_base64=profile_picture2_base64,notifications=notifications)
     else:
         return "User not found", 404
 
@@ -56,15 +69,80 @@ def login_for_student():
 def login_for_spso():
     return render_template('login_for_spso.html') 
 
+
 @app.route('/upload_file')
 @login_required
 def upload_file():
-    return render_template('upload_file.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture3 = user[1] 
+        logger.debug(f"Fetched name for user {username}: {name}")
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture3:
+            profile_picture3_base64 = base64.b64encode(profile_picture3).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture3_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('upload_file.html', name=name, profile_picture3_base64=profile_picture3_base64,notifications=notifications)
+ 
 
 @app.route('/buy_paper')
 @login_required
 def buy_paper():
-    return render_template('buy_paper.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture4 = user[1]
+        logger.debug(f"Fetched name for user {username}: {name}")
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture4:
+            profile_picture4_base64 = base64.b64encode(profile_picture4).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture4_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('buy_paper.html', name=name, profile_picture4_base64=profile_picture4_base64,notifications=notifications)
+
 
 @app.route('/printing_history')
 @login_required
@@ -94,12 +172,32 @@ def printing_history():
     
     logger.debug(f"Printing history fetched: {printing_history}")
     logger.debug(f"Total records for {username}: {record_count}")
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched name for user {username}: {name}")
+        # Chuyển đổi ảnh nhị phân (bytea) thành base64
+        if profile_picture:
+            profile_picture_base64 = base64.b64encode(profile_picture).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    
     cur.close()
     conn.close()
-    
     # Truyền dữ liệu vào template
-    return render_template('printing_history.html', history=printing_history, record_count=record_count)
-
+    return render_template('printing_history.html', history=printing_history, record_count=record_count, name=name, profile_picture_base64=profile_picture_base64,notifications=notifications)
+    
 @app.route('/system_error')
 @login_required
 def system_error():
@@ -118,7 +216,39 @@ def spso_dashboard():
 @app.route('/student_dashboard')
 @login_required
 def student_dashboard():
-    return render_template('student_dashboard.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ cơ sở dữ liệu
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture1 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture1:
+            profile_picture1_base64 = base64.b64encode(profile_picture1).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture1_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    
+    cur.close()
+    conn.close()
+    
+    return render_template('student_dashboard.html', name=name, profile_picture1_base64=profile_picture1_base64, notifications=notifications)
+
+
 
 @app.route('/login_student', methods=['POST'])
 def login_student():
