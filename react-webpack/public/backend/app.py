@@ -1,61 +1,64 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-import psycopg2 
+from flask import Flask, render_template, request, redirect, url_for, session
+from functools import wraps
+import psycopg2
+from logging.config import dictConfig
+import logging
+import sys
+import base64
+from io import BytesIO
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
-app = Flask(__name__) 
-DB_CONFIG = {
-    "dbname": "CNPM",
-    "user": "postgres",
-    "password": "123456",
-    "host": "localhost",
-    "port": 5432,
-}
-# Khởi tạo cơ sở dữ liệu và bảng
-conn = psycopg2.connect(**DB_CONFIG) 
-  
-cur = conn.cursor() 
+app = Flask(__name__)
+app.secret_key = 'your_secret_key_here'
 
-# cur.execute('''
-#     CREATE TABLE IF NOT EXISTS products (
-#         id SERIAL PRIMARY KEY,
-#         name VARCHAR(100),
-#         price FLOAT
-#     );
-# ''') 
+# Kết nối cơ sở dữ liệu
+def get_db_connection():
+    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
 
-conn.commit() 
-cur.close() 
-conn.close()
+# Yêu cầu đăng nhập
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' not in session:
+            return redirect(url_for('login_for_student'))
+        return f(*args, **kwargs)
+    return decorated_function
 
-user_name = "tien_dat"
-
-# Route hiển thị danh sách sản phẩm
-# @app.route('/') 
-# def index(): 
-#     conn = psycopg2.connect(database="CNPM", 
-#                             user="postgres", 
-#                             password="123456", 
-#                             host="localhost", port="5432") 
-#     cur = conn.cursor() 
-#     cur.execute('SELECT * FROM products') 
-#     data = cur.fetchall() 
-#     cur.close() 
-#     conn.close() 
-#     return render_template('index.html', data=data) 
-
-
-
-# Tạo route link đến các file html
 @app.route('/index')
+@login_required
 def index():
-    # conn = psycopg2.connect(database="CNPM", 
-    #                         user="postgres", 
-    #                         password="123456", 
-    #                         host="localhost", port="5432") 
-    # cur = conn.cursor() 
-    # data = cur.fetchall() 
-    # cur.close() 
-    # conn.close() 
-    return render_template('index.html') 
+    username = session.get('username')
+    logger.debug(f"Session username: {username}")  # Thêm dòng log này
+
+    if not username:
+        return redirect(url_for('login_for_student'))
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+    logger.debug(f"User fetched: {user}")  # Thêm dòng log này
+
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+
+    cur.close()
+    conn.close()
+
+    if user:
+        name = user[0]
+        profile_picture2 = user[1]
+        logger.debug(f"Name: {name}")  # Thêm dòng log này
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture2:
+            profile_picture2_base64 = base64.b64encode(profile_picture2).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture2_base64 = None
+        return render_template('index.html', name=name, profile_picture2_base64=profile_picture2_base64,notifications=notifications)
+    else:
+        return "User not found", 404
 
 @app.route('/')
 def login_for_student():
@@ -65,21 +68,93 @@ def login_for_student():
 def login_for_spso():
     return render_template('login_for_spso.html') 
 
+
 @app.route('/upload_file')
+@login_required
 def upload_file():
-    return render_template('upload_file.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture3 = user[1] 
+        logger.debug(f"Fetched name for user {username}: {name}")
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture3:
+            profile_picture3_base64 = base64.b64encode(profile_picture3).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture3_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('upload_file.html', name=name, profile_picture3_base64=profile_picture3_base64,notifications=notifications)
+ 
 
 @app.route('/buy_paper')
+@login_required
 def buy_paper():
     transactions = get_transactions()
     no_papers = get_paper_number()
-    return render_template('buy_paper.html', transactions=transactions, no_papers=no_papers) 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture4 = user[1]
+        logger.debug(f"Fetched name for user {username}: {name}")
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture4:
+            profile_picture4_base64 = base64.b64encode(profile_picture4).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture4_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('buy_paper.html', 
+                           name=name, 
+                           profile_picture4_base64=profile_picture4_base64,
+                           notifications=notifications, 
+                           transactions=transactions, 
+                           no_papers=no_papers) 
 
 def get_transactions():
     try:
         connection = psycopg2.connect(**DB_CONFIG)
         cursor = connection.cursor()
-
+        username = session.get('username')
+        
         cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{user_name}' ORDER BY "trans_id" DESC''')
         transactions = cursor.fetchall()
         cursor.close()
@@ -94,6 +169,8 @@ def get_paper_number():
     try:
         connection = psycopg2.connect(**DB_CONFIG)
         cursor = connection.cursor()
+        username = session.get('username')
+        
         cursor.execute(f'''SELECT "account_balance" FROM "Student" WHERE "username" = '{user_name}' ''')
         no_papers = cursor.fetchall()
         print(no_papers)
@@ -119,6 +196,7 @@ def new_transaction():
         # Connect to the database
         connection = psycopg2.connect(**DB_CONFIG)
         cursor = connection.cursor()
+        username = session.get('username')
 
         # Secure parameterized SQL query
         # cursor.execute(f'''UPDATE "Student" SET "account_balance" = '{balance}' WHERE "username" = '{user_name}' ''')
@@ -151,6 +229,7 @@ def update_balance():
         data = request.json
         balance = data.get('account_balance')
         trans_id = data.get('trans_id')
+        username = session.get('username')
         if balance is None or trans_id is None:
             return jsonify({'error': 'Invalid input data'}), 400
 
@@ -221,6 +300,7 @@ def update_error():
 #     try:
 #         connection = psycopg2.connect(**DB_CONFIG)
 #         cursor = connection.cursor()
+          username = session.get('username')
 
 #         # Fetch updated data
 #         cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{user_name}' ORDER BY "trans_id" DESC''')
@@ -243,126 +323,150 @@ def update_error():
 
 
 @app.route('/printing_history')
+@login_required
 def printing_history():
-    return render_template('printing_history.html') 
-
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Lấy dữ liệu lịch sử in của người dùng
+    logger.debug(f"Fetching printing history for username: {username}")
+    cur.execute(
+        'SELECT username, printer_id, file_type, file_name, file_size, no_pages, status, time, paper_orientation, print_sides, num_copies '
+        'FROM "Uses" WHERE username = %s',
+        (username,)
+    )
+    printing_history = cur.fetchall()  # Lấy tất cả kết quả
+    
+    # Đếm số lượng record của user
+    cur.execute(
+        'SELECT COUNT(*) FROM "Uses" WHERE username = %s',
+        (username,)
+    )
+    record_count = cur.fetchone()[0]  # Lấy số lượng bản ghi
+    
+    logger.debug(f"Printing history fetched: {printing_history}")
+    logger.debug(f"Total records for {username}: {record_count}")
+    
+    # Truy vấn tên người dùng từ bảng "User"
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched name for user {username}: {name}")
+        # Chuyển đổi ảnh nhị phân (bytea) thành base64
+        if profile_picture:
+            profile_picture_base64 = base64.b64encode(profile_picture).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    
+    cur.close()
+    conn.close()
+    # Truyền dữ liệu vào template
+    return render_template('printing_history.html', history=printing_history, record_count=record_count, name=name, profile_picture_base64=profile_picture_base64,notifications=notifications)
+    
 @app.route('/system_error')
+@login_required
 def system_error():
     return render_template('system_error.html') 
 
 @app.route('/homescreen_spso')
+@login_required
 def homescreen_spso():
     return render_template('homescreen_spso.html') 
 
 @app.route('/spso_dashboard')
+@login_required
 def spso_dashboard():
     return render_template('spso_dashboard.html') 
 
 @app.route('/student_dashboard')
+@login_required
 def student_dashboard():
-    return render_template('student_dashboard.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn tên người dùng từ cơ sở dữ liệu
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture1 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture1:
+            profile_picture1_base64 = base64.b64encode(profile_picture1).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture1_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    
+    cur.close()
+    conn.close()
+    
+    return render_template('student_dashboard.html', name=name, profile_picture1_base64=profile_picture1_base64, notifications=notifications)
 
-  
-# Route thêm sản phẩm
-# @app.route('/create', methods=['POST']) 
-# def create(): 
-#     conn = psycopg2.connect(database="CNPM", 
-#                             user="postgres", 
-#                             password="123456", 
-#                             host="localhost", port="5432") 
-#     cur = conn.cursor() 
-#     name = request.form['name'] 
-#     price = request.form['price'] 
-#     cur.execute(
-#         'INSERT INTO products (name, price) VALUES (%s, %s)', 
-#         (name, price))
-#     conn.commit() 
-#     cur.close() 
-#     conn.close() 
-#     return redirect(url_for('index')) 
-  
-# Route cập nhật sản phẩm
-# @app.route('/update', methods=['POST']) 
-# def update(): 
-#     conn = psycopg2.connect(database="CNPM", 
-#                             user="postgres", 
-#                             password="123456", 
-#                             host="localhost", port="5432") 
-#     cur = conn.cursor() 
-#     name = request.form['name'] 
-#     price = request.form['price'] 
-#     id = request.form['id'] 
-#     cur.execute(
-#         'UPDATE products SET name=%s, price=%s WHERE id=%s', 
-#         (name, price, id))
-#     conn.commit() 
-#     cur.close() 
-#     conn.close() 
-#     return redirect(url_for('index')) 
-  
-# Route xóa sản phẩm
-# @app.route('/delete', methods=['POST']) 
-# def delete(): 
-#     conn = psycopg2.connect(database="CNPM", 
-#                             user="postgres", 
-#                             password="123456", 
-#                             host="localhost", port="5432") 
-#     cur = conn.cursor() 
-#     id = request.form['id'] 
-#     cur.execute('DELETE FROM products WHERE id=%s', (id,)) 
-#     conn.commit() 
-#     cur.close() 
-#     conn.close() 
-#     return redirect(url_for('index')) 
 
-# Login cho student
+
 @app.route('/login_student', methods=['POST'])
 def login_student():
-    conn = psycopg2.connect(**DB_CONFIG)
+    conn = get_db_connection()
     cur = conn.cursor()
-
-    # Lấy thông tin từ form
     username = request.form['username']
     password = request.form['password']
+    logger.debug(f"Login attempt: username={username}, password={password}")  # Log input
 
-    # Kiểm tra thông tin trong bảng User
     cur.execute('SELECT * FROM "User" WHERE username = %s AND password = %s', (username, password))
     user = cur.fetchone()
+    logger.debug(f"User found: {user}")  # Log result from database
 
     cur.close()
     conn.close()
 
     if user:
-        global user_name 
-        user_name = username
-        # Nếu thông tin hợp lệ
+        session['username'] = username
+        logger.debug(f"Session saved: {session['username']}")  # Log session
         return redirect(url_for('index'))
     else:
-        # Nếu thông tin không hợp lệ
         return redirect(url_for('login_for_student', wrongpw='false'))
-    
-# Login cho spso
-@app.route('/login_student', methods=['POST'])
-def login_spso():
-    conn = psycopg2.connect(**DB_CONFIG)
-    cur = conn.cursor()
 
-    # Lấy thông tin từ form
+@app.route('/login_spso', methods=['POST'])
+def login_spso():
+    conn = get_db_connection()
+    
+    cur = conn.cursor()
     username = request.form['username']
     password = request.form['password']
 
-    # Kiểm tra thông tin trong bảng User
     cur.execute('SELECT * FROM "User" WHERE username = %s AND password = %s', (username, password))
     user = cur.fetchone()
-
     cur.close()
     conn.close()
 
     if user:
-        # Nếu thông tin hợp lệ
+        session['username'] = username
         return redirect(url_for('index'))
     else:
-        # Nếu thông tin không hợp lệ
         return redirect(url_for('login_for_spso', wrongpw='false'))
      
 if __name__ == '__main__':

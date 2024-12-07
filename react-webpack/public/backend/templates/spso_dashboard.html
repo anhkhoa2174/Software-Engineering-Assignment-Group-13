@@ -33,7 +33,7 @@
 			width: 100%;
 		}
 	</style>
-	<link rel="stylesheet" href="css/navbar.css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}"  />
 	<link rel="stylesheet" href="css/printing_history.css" />
     <!--<link rel="stylesheet" href="main.css">-->
 	<body>
@@ -111,14 +111,14 @@
 						BẢNG ĐIỀU KHIỂN
 					</li>
 					<li onClick="window.location.href='upload_file';">
-						IN TÀI LIỆU
+						MÁY IN
 					</li>
 					<li
 						onClick="window.location.href='printing_history';">
 						LỊCH SỬ IN
 					</li>
 					<li onClick="window.location.href='buy_paper';">
-						MUA THÊM GIẤY
+						LỊCH SỬ MUA GIẤY
 					</li>
 				</ul>
 			</div>
@@ -366,7 +366,6 @@
 						</div>
 					</div>
 		</div>
-
 	</body>
 </html>
 
