@@ -14,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="123456", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
