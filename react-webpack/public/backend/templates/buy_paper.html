@@ -19,10 +19,20 @@
 		</style>
 		<link
 			rel="stylesheet"
-			href="{{ url_for('static', filename='css/navbar.css') }}" />
+			href="{{ url_for('static', filename='css/navbar.css') }}" 
+		/>
+			<link
+				rel="stylesheet"
+				href="{{ url_for('static', filename='css/buyPaper.css') }}" 
+		/>
 		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/buyPaper.css') }}" />
+		rel="stylesheet"
+		href="{{ url_for('static', filename='css/chatbox.css') }}"
+		/>
+		<link
+		rel="stylesheet"
+		href="{{ url_for('static', filename='css/noti_box.css') }}"
+		/>
 	</head>
 	<body>
 		<div id="root"></div>
@@ -138,27 +148,33 @@
 								d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
 								stroke="black" />
 						</svg>
+            <div id="notification-box" class="hidden">
+              <div class="notification-header">Thông báo</div>
+                <ul class="notification-list">
+                  {% if notifications %}
+                  {% for notification in notifications %}
+                  <li>
+                    <span class="notification-title">Thông báo {{ loop.index }}</span> <!-- Hiển thị số thứ tự thông báo -->
+                    <p>{{ notification[0] }}</p> <!-- Nội dung thông báo -->
+                    <div class="notification-footer">
+                      <span class="notification-time">{{ notification[1] }}</span> <!-- Thời gian thông báo -->
+                      <button class="notification-detail-btn">Xem chi tiết</button>
+                    </div>
+                  </li>
+                    {% endfor %}
+                    {% else %}
+                  <li>
+                    <p>Không có thông báo nào.</p> <!-- Thông báo khi không có dữ liệu -->
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
 					</div>
 					<div class="info-list">
 						<ul>
 							<li>
-								<svg
-									width="51"
-									height="51"
-									viewBox="0 0 51 51"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg">
-									<g id="User / User_Square">
-										<path
-											id="Vector"
-											d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
-											stroke="black"
-											stroke-width="1.6"
-											stroke-linecap="round"
-											stroke-linejoin="round" />
-									</g>
-								</svg>
-								<div class="name">Katheryn</div>
+								<img src="data:image/png;base64,{{ profile_picture4_base64 }}" class="profile-img" alt="Profile Picture">
+								<div class="name">{{ name }}</div>
 								<ul class="dropdown">
 									<li><a>Hồ sơ</a></li>
 									<li>
@@ -168,7 +184,7 @@
 											<li>English</li>
 										</ul>
 									</li>
-									<li><a href="login_for_student">Đăng xuất</a></li>
+									<li><a href="/">Đăng xuất</a></li>
 								</ul>
 								<svg
 									style="padding: 0 10px, 0 10px"
@@ -194,9 +210,7 @@
 				<div class="log">
 					<h2>Lịch sử mua</h2>
 					<ul class="filter-buttons">
-						<li data-class="all" 
-							class="chosen" 
-							onclick="filterTable('')">
+						<li data-class="all" class="chosen" onclick="filterTable('')">
 							Tất cả
 						</li>
 						<li
@@ -324,7 +338,7 @@
 							new_no_pages = nopaper + icr_amount
 							document.getElementById("pop-up").classList.remove("disappear")
 							document.getElementById("text1").innerHTML = String(icr_amount) + " tờ"
-							document.getElementById("text2").innerHTML = String(icr_amount * 1000) + " VND"
+							document.getElementById("text2").innerHTML = String(icr_amount) + ".000 VND"
 							try {
 								const response = await fetch('/new_transaction', {
 									method: 'POST',
@@ -350,35 +364,6 @@
 							catch (error) {
 								console.error('Error:', error);
 							}
-							// try {
-							// 	// Fetch updated data from the server
-							// 	const response = await fetch('/get_transactions');
-							// 	const transactions = await response.json();
-
-							// 	if (response.ok) {
-							// 		// Clear the current table body
-							// 		const tableBody = document.querySelector('#transaction tbody');
-							// 		tableBody.innerHTML = '';
-
-							// 		// Populate the table with the updated data
-							// 		transactions.forEach(transaction => {
-							// 			const row = document.createElement('tr');
-							// 			const usernameCell = document.createElement('td');
-							// 			const balanceCell = document.createElement('td');
-
-							// 			usernameCell.textContent = student.username;
-							// 			balanceCell.textContent = student.account_balance;
-
-							// 			row.appendChild(usernameCell);
-							// 			row.appendChild(balanceCell);
-							// 			tableBody.appendChild(row);
-							// 		});
-							// 	} else {
-							// 		console.error('Error fetching data:', students.error);
-							// 	}
-							// } catch (error) {
-							// 	console.error('Error:', error);
-							// }
 							
 							document.getElementById("cancel").addEventListener("click", async (event) => {
 								event.preventDefault();
@@ -418,7 +403,7 @@
 				</div>
 			</div>
 			<div id="pop-up" class="disappear">
-				<h2>PAYMENT ALERT</h2>
+				<h2>Thông báo thanh toán</h2>
 				<div style="display: flex;">
 					<p style="float: left; width: 50%;">
 						Tổng số lượng giấy:<br/>
@@ -427,7 +412,7 @@
 					</p>
 					<p style="float: right; width: 50%;">
 						<text id="text1">tờ</text><br/>
-						1000VNĐ/tờ<br/>
+						1.000 VNĐ/tờ<br/>
 						<text id="text2">VND</text>
 					</p>
 				</div>
@@ -437,5 +422,73 @@
 				</div>
 			</div>
 		</div>
+        <!-- chatbox -->
+    <div class="chat-bar" id="chat-bar">
+		<img
+			src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+		/>
+		<span>Chat tư vấn - Giải đáp mọi thắc mắc</span>
+    </div>
+    <div class="chat-box" id="chat-box">
+		<div class="chat-header">
+			<div class="chat-header-left">
+				<img
+					src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+				/>
+				<span>Liên hệ SPSO</span>
+			</div>
+			<button id="close-chat">✖</button>
+		</div>
+		<div class="chat-content">
+			<div class="chat-message">
+				<img
+					src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+				/>
+				<p>
+					Nếu bạn cần hỗ trợ gì cho việc in ấn thì có thể nhắn vào khung chat
+					để được giúp đỡ. SPSO sẽ liên lạc lại sớm nhất có thể
+				</p>
+			</div>
+		</div>
+		<div class="chat-input">
+			<textarea placeholder="Nhập nội dung..."></textarea>
+			<button id="send-message">Gửi</button>
+		</div>
+    </div>
+    <script>
+		const chatBar = document.getElementById("chat-bar");
+		const chatBox = document.getElementById("chat-box");
+		const closeChat = document.getElementById("close-chat");
+		// Hiển thị khung chat và ẩn thanh chat bar
+		chatBar.addEventListener("click", () => {
+			chatBox.classList.add("show");
+			chatBar.style.display = "none"; // Ẩn thanh chat bar
+		});
+		// Ẩn khung chat và hiển thị lại thanh chat bar
+		closeChat.addEventListener("click", () => {
+			chatBox.classList.remove("show");
+			chatBar.style.display = "flex"; // Hiển thị lại thanh chat bar
+		});
+		// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+		document.getElementById("noti").addEventListener("click", function (e) {
+			e.stopPropagation();
+			const notificationBox = document.getElementById("notification-box");
+			notificationBox.classList.toggle("active");
+		});
+
+		document.addEventListener("click", function (e) {
+			const notificationBox = document.getElementById("notification-box");
+			const noti = document.getElementById("noti");
+			if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+			notificationBox.classList.remove("active");
+			}
+		});
+
+		document
+			.getElementById("notification-box")
+			.addEventListener("click", function (e) {
+			e.stopPropagation();
+			});
+    </script>
 	</body>
 </html>
