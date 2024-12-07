@@ -213,6 +213,26 @@ def homescreen_spso():
 def spso_dashboard():
     return render_template('spso_dashboard.html') 
 
+@app.route('/spso_printing_history')
+@login_required
+def spso_printing_history():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn dữ liệu từ bảng spso_printinghistory
+    logger.debug("Fetching SPSO printing history")
+    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time FROM spso_printinghistory')
+    spso_history = cur.fetchall()  # Lấy tất cả kết quả
+    
+    logger.debug(f"SPSO printing history fetched: {spso_history}")
+    
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('spso_printing_history.html', spso_history=spso_history)
+
+
 @app.route('/student_dashboard')
 @login_required
 def student_dashboard():
@@ -268,9 +288,9 @@ def login_student():
     if user:
         session['username'] = username
         logger.debug(f"Session saved: {session['username']}")  # Log session
-        return redirect(url_for('index'))
+        return redirect(url_for('index'), )
     else:
-        return redirect(url_for('login_for_student', wrongpw='false'))
+        return redirect(url_for('login_for_student', wrongpw='true'))
 
 @app.route('/login_spso', methods=['POST'])
 def login_spso():
@@ -288,7 +308,7 @@ def login_spso():
         session['username'] = username
         return redirect(url_for('index'))
     else:
-        return redirect(url_for('login_for_spso', wrongpw='false'))
+        return redirect(url_for('login_for_spso', wrongpw='true'))
 
 if __name__ == '__main__':
     print('xin chao')

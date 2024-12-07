@@ -1,104 +1,171 @@
--- phpMyAdmin SQL Dump
--- version 4.9.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 06:39 PM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- Bảng User
+CREATE TABLE "User" (
+    username VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(100),
+    profile_picture VARCHAR(255),
+    id SERIAL UNIQUE
+);
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+-- Bảng Student (kế thừa từ User)
+CREATE TABLE "Student" (
+    username VARCHAR(50) PRIMARY KEY REFERENCES "User"(username),
+    account_balance NUMERIC(10, 2) DEFAULT 0
+);
 
+SELECT name FROM "User" WHERE username = 'khoa'
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- Bảng SPSO (kế thừa từ User)
+CREATE TABLE "SPSO" (
+    username VARCHAR(50) PRIMARY KEY REFERENCES "User"(username)
+);
 
---
--- Database: `cnpm`
---
-CREATE DATABASE IF NOT EXISTS `cnpm` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `cnpm`;
+-- Bảng Printer
+CREATE TABLE "Printer" (
+    printer_id SERIAL PRIMARY KEY,
+    status VARCHAR(50),
+    slot INT,
+    branch VARCHAR(100),
+    building VARCHAR(100),
+    room VARCHAR(50)
+);
 
--- --------------------------------------------------------
+-- Bảng quản lý mối quan hệ giữa SPSO và Printer
+CREATE TABLE "Manages" (
+    username VARCHAR(50) REFERENCES "SPSO"(username),
+    printer_id INT REFERENCES "Printer"(printer_id),
+    PRIMARY KEY (username, printer_id)
+);
 
---
--- Table structure for table `spso`
---
+-- Bảng Transaction
+CREATE TABLE "Transaction" (
+    trans_id SERIAL PRIMARY KEY,
+    price NUMERIC(10, 2) NOT NULL,
+    no_pages INT NOT NULL,
+    status VARCHAR(50),
+    student_username VARCHAR(50) REFERENCES "Student"(username)
+);
 
-CREATE TABLE `spso` (
-  `id` int(7) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `pwd` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT curtime()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Bảng Notification
+CREATE TABLE "Notification" (
+    noti_id SERIAL PRIMARY KEY,
+    content TEXT NOT NULL,
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    username VARCHAR(50) REFERENCES "User"(username)
+);
 
---
--- Dumping data for table `spso`
---
+-- Bảng Uses (mối quan hệ giữa User và Printer)
+CREATE TABLE "Uses" (
+    printer_id INT REFERENCES "Printer"(printer_id),
+    username VARCHAR(50) REFERENCES "User"(username),
+    file_type VARCHAR(50),
+    file_name VARCHAR(255),
+    file_size NUMERIC(10, 2),
+    no_pages INT,
+    status VARCHAR(50),
+	time TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (printer_id, username, file_name)
+);
 
-INSERT INTO `spso` (`id`, `username`, `pwd`, `email`, `created_at`) VALUES
-(1, 'SPSO1', '12345', 'spso@hcmut.edu.vn', '2024-12-02 15:42:59');
+-- Insert vào bảng User
+INSERT INTO "User" (username, password, name, profile_picture) 
+VALUES
+('khoa', 'password123', 'Khoa', 'profile_khoa.jpg'),
+('duc_huy', 'password456', 'Đức Huy', 'profile_duc_huy.jpg'),
+('tien_dat', 'password789', 'Tiến Đạt', 'profile_tien_dat.jpg');
 
--- --------------------------------------------------------
+-- Insert vào bảng Student (kế thừa từ bảng User)
+INSERT INTO "Student" (username, account_balance) 
+VALUES
+('khoa', 100),
+('tien_dat', 100);
 
---
--- Table structure for table `users`
---
+-- Insert vào bảng SPSO (kế thừa từ bảng User)
+INSERT INTO "SPSO" (username) 
+VALUES ('duc_huy');  -- Giả sử Đức Huy là SPSO
 
-CREATE TABLE `users` (
-  `id` int(7) NOT NULL,
-  `username` varchar(30) NOT NULL,
-  `pwd` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT curtime()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Insert vào bảng Printer
+INSERT INTO "Printer" (status, slot, branch, building, room) 
+VALUES
+('Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('Sẵn sàng', 3, 'CS2', 'Tòa H1', 'Phòng 202'),
+('Sẵn sàng', 3, 'CS1', 'Tòa B2', 'Phòng 303');
 
---
--- Dumping data for table `users`
---
+-- Insert vào bảng Manages (quản lý mối quan hệ giữa SPSO và Printer)
+INSERT INTO "Manages" (username, printer_id) 
+VALUES
+('duc_huy', 1),('duc_huy', 2),
+('duc_huy', 3);
 
-INSERT INTO `users` (`id`, `username`, `pwd`, `email`, `created_at`) VALUES
-(1, 'katheryn', '12345', 'katheryn@hcmut.edu.vn', '2024-12-01 15:39:47');
+-- Insert vào bảng Transaction
+INSERT INTO "Transaction" (price, no_pages, status, student_username) 
+VALUES
+(5000, 5, 'Đã thanh toán', 'khoa'),
+(2000, 2, 'Lỗi Thanh Toán', 'tien_dat');
 
---
--- Indexes for dumped tables
---
+-- Insert vào bảng Notification
+INSERT INTO "Notification" (content, username) 
+VALUES
+('In thành công!', 'khoa'),
+('In thành công!', 'tien_dat');
 
---
--- Indexes for table `spso`
---
-ALTER TABLE `spso`
-  ADD PRIMARY KEY (`id`);
+-- Insert vào bảng Uses (mối quan hệ giữa User và Printer)
+INSERT INTO "Uses" (printer_id, username, file_type, file_name, file_size, no_pages, status) 
+VALUES
+(1, 'khoa', 'PDF', 'document1.pdf', 1.5, 5, 'Hoàn thành'),
+(3, 'tien_dat', 'DOCX', 'assignment.docx', 0.5, 2, 'Lỗi in');
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO "Uses" (printer_id, username, file_type, file_name, file_size, no_pages, status) 
+VALUES
+(1, 'khoa', 'DOCX', 'btlmmt.docx', 0.5, 2, 'Lỗi in');
 
---
--- AUTO_INCREMENT for dumped tables
---
+ALTER TABLE "Transaction"
+ADD COLUMN "date" DATE DEFAULT CURRENT_DATE;
 
---
--- AUTO_INCREMENT for table `spso`
---
-ALTER TABLE `spso`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE "Transaction" ALTER COLUMN "price" SET DATA TYPE NUMERIC(10, 0);
 
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
+INSERT INTO "Transaction" (price, no_pages, status, student_username) 
+VALUES
+(5000, 5, 'Đã thanh toán', 'khoa'),
+(2000, 2, 'Lỗi thanh toán', 'tien_dat'),
+(51000, 51, 'Đã thanh toán', 'tien_dat'),
+(23000, 23, 'Đã thanh toán', 'tien_dat'),
+(100000, 100, 'Lỗi thanh toán', 'tien_dat'),
+(5000, 5, 'Đã thanh toán', 'tien_dat'),
+(5000, 5, 'Đã thanh toán', 'tien_dat'),
+(4000, 4, 'Đã thanh toán', 'tien_dat'),
+(13000, 13, 'Đã thanh toán', 'tien_dat');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE "Uses"
+ADD COLUMN paper_orientation VARCHAR(10) CHECK (paper_orientation IN ('Ngang', 'Dọc')),
+ADD COLUMN print_sides VARCHAR(10) CHECK (print_sides IN ('1 mặt', '2 mặt')),
+ADD COLUMN num_copies INT DEFAULT 1;
+
+UPDATE "Uses"
+SET paper_orientation = 'Dọc'
+
+UPDATE "Uses"
+SET print_sides = '1 mặt'
+
+ALTER TABLE "User"
+ALTER COLUMN profile_picture TYPE BYTEA
+USING profile_picture::bytea;
+
+UPDATE "User"
+SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\duchuy.png')
+WHERE username = 'duc_huy';
+--mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
+
+UPDATE "User"
+SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\anhkhoa.png')
+WHERE username = 'khoa';
+--mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
+
+UPDATE "User"
+SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\dat.png')
+WHERE username = 'tien_dat';
+--mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
+
+CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME
+FROM "User" JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME

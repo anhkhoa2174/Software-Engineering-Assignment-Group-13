@@ -138,14 +138,14 @@
 			</form>
 		</div>
 		<div id="wrongpw_message">Sai email hoặc mật khẩu!</div>
-		<script>
-			// Function to check query parameters and show error
-			window.onload = function () {
-				const urlParams = new URLSearchParams(window.location.search);
-				if (urlParams.get("wrongpw") === "false") {
-					document.getElementById("wrongpw_message").style.display = "block";
-				}
-			};
-		</script>
+		// Function to check query parameters and show error window.onload =
+		function () { const urlParams = new URLSearchParams(window.location.search);
+		// Lấy tham số từ URL const wrongpw = urlParams.get("wrongpw"); // Lấy giá
+		trị của `wrongpw` console.log("Value of wrongpw:", wrongpw); // In giá trị
+		để kiểm tra // Hiển thị thông báo chỉ khi wrongpw có giá trị "true" if
+		(wrongpw === "true") {
+		document.getElementById("wrongpw_message").style.display = "block"; } else {
+		document.getElementById("wrongpw_message").style.display = "none"; // Ẩn
+		trong các trường hợp khác } };
 	</body>
 </html>
