@@ -1,14 +1,20 @@
 #buy-paper-page {
 	height: 90vh;
+	font-family: Montserrat;
+	position: relative;
+	display: flex;
+	width: 100%;
 }
 .pay-log {
-	font-family: Montserrat;
 	justify-content: space-between;
 	margin: 70px 3% 0 3%;
 	display: flex;
+	position: relative;
+	width: 100%;
+	float: right;
 }
 .log {
-	width: 75%;
+	width: 100%;
 	float: left;
 	position: relative;
 }
@@ -73,7 +79,7 @@
 }
 .pay-log .buy-paper {
 	display: block;
-	width: 300px;
+	width: 350px;
 	margin: 20px 0 0 2%;
 }
 .pay-log .buy-paper #paperleft {
@@ -131,6 +137,44 @@
     border-radius: 20px;
     cursor: pointer;
 }
+#buy-paper-page #pop-up {
+	width: 400px;
+	border: 1px solid #000000;
+	border-radius: 15px;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	padding: 0 10px 10px 10px;
+	background-color: #ffffff;
+}
+#buy-paper-page #pop-up #click-box {
+	width: 205px;
+	margin-left: auto;
+}
+#buy-paper-page #pop-up button {
+	margin: 5px;
+	width: 90px;
+	padding: 10px 15px;
+	font-size: medium;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	box-shadow: 0 2px 5px #00000033;
+}
+#buy-paper-page #pop-up p {
+	line-height: 2;
+}
+#buy-paper-page #pop-up #cancel {
+	background-color: #c4c4c4;
+}
+#buy-paper-page #pop-up #ok {
+	background-color: #23abea;
+}
+.disappear {
+	display: none;
+}
+
 @media (max-width: 1040px) {
 	#buy-paper-page {
 		position: relative;
