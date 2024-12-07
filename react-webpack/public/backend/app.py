@@ -151,7 +151,7 @@ def buy_paper():
 
 def get_transactions():
     try:
-        connection = get_db_connection
+        connection = get_db_connection()
         cursor = connection.cursor()
         username = session.get('username')
         
@@ -167,7 +167,7 @@ def get_transactions():
 
 def get_paper_number():
     try:
-        connection = get_db_connection
+        connection = get_db_connection()
         cursor = connection.cursor()
         username = session.get('username')
         
@@ -194,7 +194,7 @@ def new_transaction():
             return jsonify({'error': 'Invalid input data'}), 400
 
         # Connect to the database
-        connection = get_db_connection
+        connection = get_db_connection()
         cursor = connection.cursor()
         username = session.get('username')
 
@@ -234,7 +234,7 @@ def update_balance():
             return jsonify({'error': 'Invalid input data'}), 400
 
         # Connect to the database
-        connection = get_db_connection
+        connection = get_db_connection()
         cursor = connection.cursor()
 
         # Secure parameterized SQL query
@@ -270,7 +270,7 @@ def update_error():
             return jsonify({'error': 'Invalid input data'}), 400
 
         # Connect to the database
-        connection = get_db_connection
+        connection = get_db_connection()
         cursor = connection.cursor()
 
         # Secure parameterized SQL query
