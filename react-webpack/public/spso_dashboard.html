@@ -8,35 +8,11 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
 		rel="stylesheet"
 		/>
-		<style>
-			.icon {
-				font-size: 24px;
-				margin-right: 10px;
-				cursor: pointer;
-			}
-	
-			/* Xoay biểu tượng thanh trượt */
-			.fa-sliders-h {
-				transform: rotate(90deg);
-			}
-		</style>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"></script>
-		
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 	</head>
-	<style>
-		html,
-		body {
-			overflow-x: hidden;
-			margin: 0;
-			padding: 0;
-			height: 100%;
-			width: 100%;
-		}
-	</style>
 	<link rel="stylesheet" href="css/navbar.css" />
-	<link rel="stylesheet" href="css/printing_history.css" />
-    <link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="dashboard.css">
+	<link rel="stylesheet" href="css/dashboard.css"/>
 	<body>
 		<div id="root"></div>
 		<link
@@ -207,6 +183,8 @@
 			<!--Trang điều khiển-->
 			<div class="main-container">
 				<div class="left-column">
+					<div class="big-container">
+					<div class="sub-container">
 					<!--thống kê-->
 					<div class="container">
 						<!--Stat-item 1-->
@@ -264,14 +242,128 @@
 						<div class="footer">16:11, 30/12/2024</div>
 					</div>
 					<!--Bảng thống kê-->
-					
-					<!--Bảng yêu cầu in-->
-				<div class="request">
-					<div class="head">
-						<span>YÊU CẦU IN GẦN ĐÂY</span>
-						<i class="fa-solid fa-sliders"></i>
-						<i class="fa-solid fa-arrow-up-right-from-square"></i>
+					<div class="chart-container">
+						<div class="chart-title">
+							<h3>LOẠI FILE IN</h3>
+							<canvas id="myChart"></canvas>
+							<div class="footer">16:11, 30/12/2024</div>
+						</div>
+						<script>
+							 ctx = document.getElementById('myChart').getContext('2d');
+								const dataValues = [367, 220, 346, 153]; // Số liệu
+								const total = dataValues.reduce((a, b) => a + b, 0); // Tính tổng để ra phần trăm
+
+								const fileTypeChart = new Chart(ctx, {
+									type: 'pie',
+									data: {
+										labels: ['PDF', 'PNG', 'DOCS', 'KHÁC'],
+										datasets: [{
+											data: dataValues,
+											backgroundColor: ['#00cc99', '#ff00ff', '#0000ff', '#ff9900'], // Màu sắc
+											borderWidth: 1,
+										}]
+									},
+									options: {
+										responsive: true,
+										plugins: {
+											legend: {
+												position: 'right',
+												labels: {
+													usePointStyle: true,
+												},
+											},
+											datalabels: {
+												color: '#000', // Màu chữ
+												font: {
+													size: 12,
+													weight: 'bold'
+												},
+												formatter: (value, context) => {
+													// Tính phần trăm
+													const percentage = ((value / total) * 100).toFixed(2);
+													return `${percentage}%`; // Hiển thị phần trăm
+												},
+												anchor: 'end', // Vị trí
+												align: 'start',
+												offset: 10,
+											},
+										},
+									},
+									plugins: [ChartDataLabels],
+								});
+						</script>
 					</div>
+					</div>
+					<div class="revenueChart">
+							<canvas id="revenueChart"></canvas>
+							<script>
+								const ctx = document.getElementById('revenueChart').getContext('2d');
+								 data = {
+									labels: ['Quý 1', 'Quý 2', 'Quý 3', 'Quý 4'],
+									datasets: [
+										{
+											label: 'Doanh thu (triệu đồng)',
+											data: [10500, 11000, 12000, 14000],
+											backgroundColor: 'rgba(54, 162, 235, 0.5)',
+											borderColor: 'rgba(54, 162, 235, 1)',
+											borderWidth: 1,
+											type: 'bar'
+										},
+										{
+											label: 'Trendline',
+											data: [10500, 11000, 12000, 14000],
+											borderColor: 'rgba(75, 192, 192, 1)',
+											fill: false,
+											type: 'line',
+											tension: 0.3
+										}
+									]
+								};
+						
+								 config = {
+									type: 'bar',
+									data: data,
+									options: {
+										responsive: true,
+										plugins: {
+											legend: {
+												position: 'top',
+											},
+											title: {
+												display: true,
+												text: 'DOANH THU'
+											}
+										},
+										scales: {
+											y: {
+												beginAtZero: true,
+												title: {
+													display: true,
+													text: 'triệu đồng'
+												}
+											}
+										}
+									},
+								};
+						
+								const revenueChart = new Chart(ctx, config);
+							</script>
+						
+					</div>
+					</div>
+				</div>
+				<!--Right column-->
+				<div class="right-column">
+				<div class="big-container">
+						<!--Bảng yêu cầu in-->
+				<div class="request">
+					<div style="display: flex; justify-content: space-between; ">
+						<span style="font-weight: bold;">YÊU CẦU IN GẦN ĐÂY</span>
+						<div>
+						  <i class="fa-solid fa-sliders"></i>
+						  <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 1px;"></i>
+						</div>
+					  </div>					  
 				<table>
 					<thead>
 						<tr>
@@ -334,11 +426,68 @@
 					</tbody>
 				</table>
 				</div>
+					<!--Tạo chart-->
+					<div class="bar-chart">
+						<div class="chart-container-1">
+						<h3>SỐ GIẤY ĐÃ BÁN TRONG 10 NGÀY GẦN ĐÂY</h3>
+						<div class="chart">
+							<canvas id="newChart"></canvas>
+							<script>
+								// Dữ liệu của biểu đồ
+								const labels = ['9/10', '10/10', '11/10', '12/10', '13/10', '14/10', '15/10', '16/10', '17/10', '18/10'];
+								const data = {
+								  labels: labels,
+								  datasets: [{
+									label: 'Số trang giấy đã bán',
+									data: [40, 52, 54, 24, 89, 29, 89, 43, 70, 40],
+									backgroundColor: '#001F668',
+									borderColor: '#001F66',
+									borderWidth: 1
+								  }]
+								};
+							
+								// Cấu hình biểu đồ
+								const config = {
+								  type: 'bar',
+								  data: data,
+								  options: {
+									responsive: true,
+									plugins: {
+									  legend: {
+										display: false
+									  },
+									  tooltip: {
+										callbacks: {
+										  label: function(context) {
+											return `${context.raw} trang`;
+										  }
+										}
+									  }
+									},
+									scales: {
+									  y: {
+										beginAtZero: true,
+										max: 100,
+										ticks: {
+										  stepSize: 10
+										}
+									  }
+									}
+								  }
+								};
+							
+								// Vẽ biểu đồ
+								const myChart = new Chart(
+								  document.getElementById('newChart'),
+								  config
+								);
+							  </script>
+						</div>
+						</div>
+					</div>
+				</div>
 				</div>
 			</div>			
-		
-		
-
 	</body>
 </html>
 
