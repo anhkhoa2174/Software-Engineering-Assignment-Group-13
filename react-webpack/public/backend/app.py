@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from functools import wraps
 import psycopg2
 from logging.config import dictConfig
@@ -14,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="123456", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -59,7 +59,6 @@ def index():
         return render_template('index.html', name=name, profile_picture2_base64=profile_picture2_base64,notifications=notifications)
     else:
         return "User not found", 404
-
 
 @app.route('/')
 def login_for_student():
@@ -110,6 +109,8 @@ def upload_file():
 @app.route('/buy_paper')
 @login_required
 def buy_paper():
+    transactions = get_transactions()
+    no_papers = get_paper_number()
     username = session.get('username')  # Lấy username từ session
     if not username:
         return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
@@ -141,7 +142,184 @@ def buy_paper():
     conn.close()
     
     # Truyền dữ liệu vào template
-    return render_template('buy_paper.html', name=name, profile_picture4_base64=profile_picture4_base64,notifications=notifications)
+    return render_template('buy_paper.html', 
+                           name=name, 
+                           profile_picture4_base64=profile_picture4_base64,
+                           notifications=notifications, 
+                           transactions=transactions, 
+                           no_papers=no_papers) 
+
+def get_transactions():
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        username = session.get('username')
+        
+        cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{username}' ORDER BY "trans_id" DESC''')
+        transactions = cursor.fetchall()
+        cursor.close()
+        connection.close()
+
+        return transactions
+    except Exception as e:
+        print(f"Error: {e}")
+        return []
+
+def get_paper_number():
+    try:
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        username = session.get('username')
+        
+        cursor.execute(f'''SELECT "account_balance" FROM "Student" WHERE "username" = '{username}' ''')
+        no_papers = cursor.fetchall()
+        print(no_papers)
+        cursor.close()
+        connection.close()
+
+        return no_papers
+    except Exception as e:
+        print(f"Error: {e}")
+        return []
+
+@app.route('/new_transaction', methods=['POST'])
+def new_transaction():
+    try:
+        # Get JSON data from the request
+        data = request.json
+        # balance = data.get('account_balance')
+        no_paper = data.get('paper_number')
+
+        if no_paper is None:
+            return jsonify({'error': 'Invalid input data'}), 400
+
+        # Connect to the database
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        username = session.get('username')
+
+        # Secure parameterized SQL query
+        # cursor.execute(f'''UPDATE "Student" SET "account_balance" = '{balance}' WHERE "username" = '{user_name}' ''')
+        cursor.execute(f'''INSERT INTO "Transaction" (price, no_pages, status, student_username) 
+                           VALUES ({no_paper*1000}, {no_paper}, 'Đang chờ thanh toán', '{username}')
+                           RETURNING trans_id;''')
+        # Commit changes
+        trans_id = cursor.fetchone()[0]
+        connection.commit()
+        # Check if any rows were updated
+        if cursor.rowcount > 0:
+            return jsonify({'message': 'Account balance updated successfully', 'trans_id': trans_id}), 200
+        else:
+            return jsonify({'error': 'No user found with the given username'}), 404
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        # Clean up resources
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+@app.route('/update_balance', methods=['POST'])
+def update_balance():
+    try:
+        # Get JSON data from the request
+        data = request.json
+        balance = data.get('account_balance')
+        trans_id = data.get('trans_id')
+        username = session.get('username')
+        if balance is None or trans_id is None:
+            return jsonify({'error': 'Invalid input data'}), 400
+
+        # Connect to the database
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Secure parameterized SQL query
+        cursor.execute(f'''UPDATE "Student" SET "account_balance" = '{balance}' WHERE "username" = '{username}' ''')
+        cursor.execute(f'''UPDATE "Transaction" SET "status" = 'Đã thanh toán' WHERE "trans_id" = {trans_id};''')
+        
+        # Commit changes
+        connection.commit()
+
+        # Check if any rows were updated
+        if cursor.rowcount > 0:
+            return jsonify({'message': 'Account balance updated successfully'}), 200
+        else:
+            return jsonify({'error': 'No user found with the given username'}), 404
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        # Clean up resources
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+@app.route('/update_error', methods=['POST'])
+def update_error():
+    try:
+        # Get JSON data from the request
+        data = request.json
+        trans_id = data.get('trans_id')
+        if trans_id is None:
+            return jsonify({'error': 'Invalid input data'}), 400
+
+        # Connect to the database
+        connection = get_db_connection()
+        cursor = connection.cursor()
+
+        # Secure parameterized SQL query
+        cursor.execute(f'''UPDATE "Transaction" SET "status" = 'Lỗi thanh toán' WHERE "trans_id" = {trans_id};''')
+        
+        # Commit changes
+        connection.commit()
+
+        # Check if any rows were updated
+        if cursor.rowcount > 0:
+            return jsonify({'message': 'Account balance updated successfully'}), 200
+        else:
+            return jsonify({'error': 'No user found with the given username'}), 404
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    finally:
+        # Clean up resources
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
+
+# @app.route('/get_transactions', methods=['GET'])
+# def get_trans():
+#     try:
+#         connection = psycopg2.connect(**DB_CONFIG)
+#         cursor = connection.cursor()
+#         username = session.get('username')
+
+#         # Fetch updated data
+#         cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{user_name}' ORDER BY "trans_id" DESC''')
+#         transactions = cursor.fetchall()
+
+#         # Convert data to JSON-friendly format
+#         transactions_data = [{'tran_id': col[0], 'date': col[5], 'no_pages': col[2], 'price': col[1], 'status': col[3]} for col in transactions]
+
+#         return jsonify(transactions_data)
+
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+
+#     finally:
+#         if cursor:
+#             cursor.close()
+#         if connection:
+#             connection.close()
+
 
 
 @app.route('/printing_history')
@@ -213,6 +391,26 @@ def homescreen_spso():
 def spso_dashboard():
     return render_template('spso_dashboard.html') 
 
+@app.route('/spso_printing_history')
+@login_required
+def spso_printing_history():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Truy vấn dữ liệu từ bảng spso_printinghistory
+    logger.debug("Fetching SPSO printing history")
+    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time FROM spso_printinghistory')
+    spso_history = cur.fetchall()  # Lấy tất cả kết quả
+    
+    logger.debug(f"SPSO printing history fetched: {spso_history}")
+    
+    cur.close()
+    conn.close()
+    
+    # Truyền dữ liệu vào template
+    return render_template('spso_printing_history.html', spso_history=spso_history)
+
+
 @app.route('/student_dashboard')
 @login_required
 def student_dashboard():
@@ -268,13 +466,14 @@ def login_student():
     if user:
         session['username'] = username
         logger.debug(f"Session saved: {session['username']}")  # Log session
-        return redirect(url_for('index'))
+        return redirect(url_for('index'), )
     else:
-        return redirect(url_for('login_for_student', wrongpw='false'))
+        return redirect(url_for('login_for_student', wrongpw='true'))
 
 @app.route('/login_spso', methods=['POST'])
 def login_spso():
     conn = get_db_connection()
+    
     cur = conn.cursor()
     username = request.form['username']
     password = request.form['password']
@@ -291,5 +490,4 @@ def login_spso():
         return redirect(url_for('login_for_spso', wrongpw='false'))
 
 if __name__ == '__main__':
-    print('xin chao')
     app.run(debug=True)
