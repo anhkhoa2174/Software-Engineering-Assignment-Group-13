@@ -14,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="123456", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="p123", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -142,12 +142,7 @@ def buy_paper():
     conn.close()
     
     # Truyền dữ liệu vào template
-    return render_template('buy_paper.html', 
-                           name=name, 
-                           profile_picture4_base64=profile_picture4_base64,
-                           notifications=notifications, 
-                           transactions=transactions, 
-                           no_papers=no_papers) 
+    return render_template('buy_paper.html', name=name, profile_picture4_base64=profile_picture4_base64,notifications=notifications, transactions=transactions, no_papers=no_papers) 
 
 def get_transactions():
     try:
@@ -384,7 +379,62 @@ def system_error():
 @app.route('/homescreen_spso')
 @login_required
 def homescreen_spso():
-    return render_template('homescreen_spso.html') 
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # Truy vấn tên người dùng từ cơ sở dữ liệu
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture5 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture5:
+            profile_picture5_base64 = base64.b64encode(profile_picture5).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture5_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    cur.close()
+    conn.close()
+    return render_template('homescreen_spso.html', name=name, profile_picture5_base64=profile_picture5_base64, notifications=notifications) 
+
+@app.route('/choose_printer_spso')
+@login_required
+def choose_printer_spso():
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
+    conn = get_db_connection()
+    cur = conn.cursor()
+    # Truy vấn tên người dùng từ cơ sở dữ liệu
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture6 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture6:
+            profile_picture6_base64 = base64.b64encode(profile_picture6).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture6_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+    cur.close()
+    conn.close()
+    return render_template('choose_printer_spso.html', name=name,notifications=notifications,profile_picture6_base64=profile_picture6_base64)
 
 @app.route('/spso_dashboard')
 @login_required
@@ -394,21 +444,40 @@ def spso_dashboard():
 @app.route('/spso_printing_history')
 @login_required
 def spso_printing_history():
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))
     conn = get_db_connection()
     cur = conn.cursor()
-    
+    # Truy vấn tên người dùng từ cơ sở dữ liệu
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+     # Lấy thông báo của người dùng
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    notifications = cur.fetchall()
     # Truy vấn dữ liệu từ bảng spso_printinghistory
     logger.debug("Fetching SPSO printing history")
     cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time FROM spso_printinghistory')
     spso_history = cur.fetchall()  # Lấy tất cả kết quả
     
     logger.debug(f"SPSO printing history fetched: {spso_history}")
-    
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture7 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
+        if profile_picture7:
+            profile_picture7_base64 = base64.b64encode(profile_picture7).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture7_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
     cur.close()
     conn.close()
     
     # Truyền dữ liệu vào template
-    return render_template('spso_printing_history.html', spso_history=spso_history)
+    return render_template('spso_printing_history.html', spso_history=spso_history, name=name,notifications=notifications,profile_picture7_base64=profile_picture7_base64)
 
 
 @app.route('/student_dashboard')
@@ -473,20 +542,39 @@ def login_student():
 @app.route('/login_spso', methods=['POST'])
 def login_spso():
     conn = get_db_connection()
-    
     cur = conn.cursor()
     username = request.form['username']
     password = request.form['password']
-
-    cur.execute('SELECT * FROM "User" WHERE username = %s AND password = %s', (username, password))
+    # Kiểm tra thông tin đăng nhập
+    cur.execute('SELECT username FROM "User" WHERE username = %s AND password = %s', (username, password))
     user = cur.fetchone()
-    cur.close()
-    conn.close()
-
     if user:
-        session['username'] = username
-        return redirect(url_for('index'))
+        # Kiểm tra vai trò của tài khoản
+        cur.execute('SELECT username FROM "SPSO" WHERE username = %s', (username,))
+        spso_account = cur.fetchone()
+        if spso_account:
+            # Nếu là SPSO
+            session['username'] = username
+            cur.close()
+            conn.close()
+            return redirect(url_for('homescreen_spso'))  # Trang chủ SPSO
+        # Nếu không phải SPSO, kiểm tra xem có phải Student
+        cur.execute('SELECT username FROM "Student" WHERE username = %s', (username,))
+        student_account = cur.fetchone()
+        if student_account:
+            # Nếu là Student
+            session['username'] = username
+            cur.close()
+            conn.close()
+            return redirect(url_for('index'))  # Trang chủ Student
+        # Nếu không thuộc bảng nào khác
+        cur.close()
+        conn.close()
+        return redirect(url_for('system_error'))  # Lỗi nếu tài khoản không hợp lệ
     else:
+        # Nếu username hoặc password không đúng
+        cur.close()
+        conn.close()
         return redirect(url_for('login_for_spso', wrongpw='false'))
 
 if __name__ == '__main__':
