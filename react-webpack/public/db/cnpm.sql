@@ -167,5 +167,28 @@ WHERE username = 'tien_dat';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
-SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME
+SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME, paper_orientation, print_sides, num_copies
 FROM "User" JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
+
+CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME, paper_orientation, print_sides, num_copies
+FROM "User" JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
+
+DROP VIEW spso_printinghistory
+
+CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+SELECT 
+    "User".NAME, 
+    "User".id AS USER_ID, -- Nếu bạn muốn phân biệt rõ ID này thuộc User
+    PRINTER_ID,     -- Đổi tên PRINTER_ID thành ID
+    FILE_TYPE, 
+    FILE_NAME, 
+    FILE_SIZE, 
+    NO_PAGES, 
+    STATUS, 
+    TIME, 
+    paper_orientation, 
+    print_sides, 
+    num_copies
+FROM "User" 
+JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
