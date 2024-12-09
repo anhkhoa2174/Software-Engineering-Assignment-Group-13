@@ -240,7 +240,8 @@
 								data-pages="{{ record[5] }}"
 								data-orientation="{{ record[8] }}"
 								data-print_sides="{{ record[9] }}"
-								data-num_copies="{{ record[10] }}">
+								data-num_copies="{{ record[10] }}"
+								data-type="{{record[2]}}">
 								Xem chi tiết
 							</button>
 						</td>
@@ -302,17 +303,43 @@
 						pages: button.getAttribute("data-pages"), // Giá trị mẫu
 						sides: button.getAttribute("data-print_sides"), // Giá trị mẫu
 						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
+						type: button.getAttribute("data-type"),
 					};
+
+					// Kiểm tra loại tệp để chọn biểu tượng
+					let fileIcon = "";
+					if (details.type === "PDF") {
+						fileIcon = "static/images/pdf.png";
+					} else if (details.type === "DOCX") {
+						fileIcon = "static/images/docx.png";
+					} else if (details.type == "PNG") {
+						fileIcon = "static/images/png.png";
+					} else if (details.type == "JPG") {
+						fileIcon = "static/images/jpg.png";
+					} else {
+						fileIcon =
+							"https://upload.wikimedia.org/wikipedia/commons/4/47/File_icon.svg"; // Mặc định
+					}
+
+					// Thêm class trạng thái
+					const statusClass =
+						details.status === "Hoàn thành"
+							? "status completed"
+							: details.status === "Lỗi in"
+							? "status error"
+							: details.status === "Đang in"
+							? "status in-progress"
+							: "unknown";
 
 					// Tạo nội dung modal từ dữ liệu
 					const modalContent = `
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
+                <img src="${fileIcon}" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
                 <div>
                     <p><strong>${details.name}</strong></p>
                     <p>${details.size} KB</p>
                 </div>
-                <div style="margin-left: auto; color: green; font-weight: bold;">
+                <div style="margin-left: auto" class="${statusClass}">
                     ${details.status}
                 </div>
             </div>
