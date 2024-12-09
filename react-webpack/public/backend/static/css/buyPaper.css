@@ -5,6 +5,16 @@
 	display: flex;
 	width: 100%;
 }
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+}
 .pay-log {
 	justify-content: space-between;
 	margin: 70px 3% 0 3%;
@@ -56,8 +66,9 @@
 .log #transaction td {
 	padding: 12px 5px;
 }
-.log #transaction tbody td a {
+.log #transaction tbody .show-more {
 	color: #23abea;
+	cursor: pointer;
 }
 .log #transaction tbody .done .status {
 	color: #14bc14;
@@ -68,7 +79,7 @@
 .log #transaction tbody .error .status {
 	color: #ed2629;
 }
-.log #transaction tbody td a:hover {
+.log #transaction tbody .show-more:hover {
 	color: #ed2629;
 }
 .log #transaction tbody tr {
@@ -137,22 +148,26 @@
     border-radius: 20px;
     cursor: pointer;
 }
-#buy-paper-page #pop-up {
+#pop-up, 
+#pop-up-2 {
 	width: 400px;
-	border: 1px solid #000000;
+	border: none;
 	border-radius: 15px;
+	box-shadow: 0 2px 5px #00000033;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
-	padding: 0 10px 10px 10px;
+	padding: 0 20px 10px 20px;
 	background-color: #ffffff;
+	z-index: 1001;
 }
-#buy-paper-page #pop-up #click-box {
+#pop-up #click-box {
 	width: 205px;
+	margin-top: 5px;
 	margin-left: auto;
 }
-#buy-paper-page #pop-up button {
+#pop-up button {
 	margin: 5px;
 	width: 90px;
 	padding: 10px 15px;
@@ -162,14 +177,27 @@
 	cursor: pointer;
 	box-shadow: 0 2px 5px #00000033;
 }
-#buy-paper-page #pop-up p {
+#pop-up p {
 	line-height: 2;
 }
-#buy-paper-page #pop-up #cancel {
+#pop-up #cancel {
 	background-color: #c4c4c4;
 }
-#buy-paper-page #pop-up #ok {
+#pop-up #ok {
 	background-color: #23abea;
+}
+#pop-up #close-btn,
+#pop-up-2 #close-btn-2 {
+	padding: 5px;
+	margin-top: 10px;
+	margin-left: auto;
+	float: right;
+	cursor: pointer;
+}
+#pop-up #line {
+	width: 100%;
+	background-color: #000000;
+	height: 0.5px;
 }
 .disappear {
 	display: none;
