@@ -14,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="123456", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -399,7 +399,7 @@ def spso_printing_history():
     
     # Truy vấn dữ liệu từ bảng spso_printinghistory
     logger.debug("Fetching SPSO printing history")
-    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time FROM spso_printinghistory')
+    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time, paper_orientation, print_sides, num_copies, file_type, user_id FROM spso_printinghistory')
     spso_history = cur.fetchall()  # Lấy tất cả kết quả
     
     logger.debug(f"SPSO printing history fetched: {spso_history}")
@@ -485,7 +485,7 @@ def login_spso():
 
     if user:
         session['username'] = username
-        return redirect(url_for('index'))
+        return redirect(url_for('homescreen_spso'))
     else:
         return redirect(url_for('login_for_spso', wrongpw='false'))
 
