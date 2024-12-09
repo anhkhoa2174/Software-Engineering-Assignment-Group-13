@@ -6,6 +6,10 @@
 		<title>printting_history</title>
 	</head>
 	<link
+		rel="shortcut icon"
+		href="static/images/HCMUT_official_logo.ico"
+		type="image/x-icon" />
+	<link
 		rel="stylesheet"
 		href="{{ url_for('static', filename='css/navbar.css') }}" />
 	<link
@@ -14,6 +18,9 @@
 	<link
 		rel="stylesheet"
 		href="{{ url_for('static', filename='css/noti_box.css') }}" />
+	<link
+		rel="stylesheet"
+		href="{{ url_for('static', filename='css/chatbox.css') }}" />
 	<body>
 		<div id="root"></div>
 		<link
@@ -218,6 +225,7 @@
 			<table>
 				<thead>
 					<tr>
+						<th>ID sinh viên</th>
 						<th>Tên sinh viên</th>
 						<th>Máy in</th>
 						<th>Tên tài liệu</th>
@@ -231,17 +239,35 @@
 				<tbody>
 					{% for record in spso_history %}
 					<tr>
+						<td>{{ record[11] }}</td>
 						<td>{{ record[0] }}</td>
 						<td>{{ record[1] }}</td>
-						<td>{{ record[2] }} KB</td>
-						<td>{{ record[3] }}</td>
+						<td>{{ record[2] }}</td>
+						<td>{{ record[3] }} KB</td>
 						<td>{{ record[4] }}</td>
 						<td
 							class="status {% if record[5] == 'Hoàn thành' %}completed {% elif record[5] == 'Lỗi in' %}error {% elif record[5] == 'Đang in' %}in-progress {% else %}unknown{% endif %}">
 							{{ record[5] }}
 						</td>
 						<td>{{ record[6] }}</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
+						<td>
+							<button
+								class="details-btn"
+								data-name="{{ record[0] }}"
+								data-printer="{{ record[1] }}"
+								data-filename="{{ record[2] }}"
+								data-length="{{ record[3] }}"
+								data-pages="{{ record[4] }}"
+								data-status="{{ record[5] }}"
+								data-time="{{ record[6] }}"
+								data-orientation="{{ record[7] }}"
+								data-printsides="{{ record[8] }}"
+								data-copies="{{ record[9] }}"
+								data-type="{{ record[10] }}"
+								data-id="{{record[11]}}">
+								Xem chi tiết
+							</button>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -283,56 +309,84 @@
 			</div>
 		</div>
 
+		{% for record in spso_history %}
 		<!-- Script -->
 		<script>
 			document.querySelectorAll(".details-btn").forEach((button) => {
 				button.addEventListener("click", function () {
-					// Dữ liệu nhập tay cho modal
+					// Lấy dữ liệu từ data-* attributes
 					const details = {
-						name: "XSTK.pdf",
-						size: "94 KB",
-						status: "Thành công",
-						paperSize: "A4",
-						copies: 1,
-						pages: "1-10",
-						sides: "2 mặt",
-						orientation: "Ngang",
-						transactionId: "VN1234567890ABCD",
-						amount: "12.000 VNĐ",
-						time: "11:06 4/11/2024",
+						name: button.getAttribute("data-name"),
+						filename: button.getAttribute("data-filename"),
+						size: button.getAttribute("data-length"),
+						printer: button.getAttribute("data-printer"),
+						status: button.getAttribute("data-status"),
+						time: button.getAttribute("data-time"),
+						paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
+						copies: button.getAttribute("data-copies"), // Giá trị mẫu
+						pages: button.getAttribute("data-pages"), // Giá trị mẫu
+						sides: button.getAttribute("data-printsides"), // Giá trị mẫu
+						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
+						type: button.getAttribute("data-type"), // Loại file
+						id: button.getAttribute("data-id"), // ID sinh viên
 					};
 
-					const modalContent = `
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
-          <div>
-            <p><strong>${details.name}</strong></p>
-            <p>${details.size}</p>
-          </div>
-          <div style="margin-left: auto; color: green; font-weight: bold;">
-            ${details.status}
-          </div>
-        </div>
-        <hr />
-        <p><strong>ĐẶC ĐIỂM</strong></p>
-        <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
-        <p><strong>Số bản:</strong> ${details.copies}</p>
-        <p><strong>Số trang:</strong> ${details.pages}</p>
-        <p><strong>Số mặt in:</strong> ${details.sides}</p>
-        <p><strong>Khổ:</strong> ${details.orientation}</p>
-        <hr />
-        <p><strong>THÔNG TIN THANH TOÁN</strong></p>
-        <p><strong>Mã giao dịch:</strong> ${details.transactionId}</p>
-        <p><strong>Số tiền đã thanh toán:</strong> ${details.amount}</p>
-        <p><strong>Thời gian:</strong> ${details.time}</p>
-      `;
+					// Kiểm tra loại tệp để chọn biểu tượng
+					let fileIcon = "";
+					if (details.type === "PDF") {
+						fileIcon = "static/images/pdf.png";
+					} else if (details.type === "DOCX") {
+						fileIcon = "static/images/docx.png";
+					} else if (details.type == "PNG") {
+						fileIcon = "static/images/png.png";
+					} else if (details.type == "JPG") {
+						fileIcon = "static/images/jpg.png";
+					} else {
+						fileIcon =
+							"https://upload.wikimedia.org/wikipedia/commons/4/47/File_icon.svg"; // Mặc định nếu không phải PDF hay DOCX
+					}
 
+					// Thêm class trạng thái
+					const statusClass =
+						details.status === "Hoàn thành"
+							? "status completed"
+							: details.status === "Lỗi in"
+							? "status error"
+							: details.status === "Đang in"
+							? "in-progress"
+							: "status unknown";
+
+					// Tạo nội dung modal từ dữ liệu
+					const modalContent = `
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="${fileIcon}" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
+                <div>
+                    <p><strong>${details.filename}</strong></p>
+                    <p>${details.size} KB</p>
+                </div>
+                <div style="margin-left: auto" class="${statusClass}">
+                    ${details.status}
+                </div>
+            </div>
+            <hr />
+            <p><strong>ĐẶC ĐIỂM</strong></p>
+			<p><strong>ID sinh viên:</strong> ${details.id}</p>
+            <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
+            <p><strong>Số bản:</strong> ${details.copies}</p>
+            <p><strong>Số trang:</strong> ${details.pages}</p>
+            <p><strong>Số mặt in:</strong> ${details.sides}</p>
+            <p><strong>Khổ:</strong> ${details.orientation}</p>
+            <hr />
+            <p><strong>THÔNG TIN IN</strong></p>
+            <p><strong>Thời gian:</strong> ${details.time}</p>
+        `;
+
+					// Hiển thị modal
 					document.getElementById("details-content").innerHTML = modalContent;
 					document.getElementById("details-modal").style.display = "flex";
 
-					// Thêm sự kiện cho nút Xóa
-					const deleteBtn = document.getElementById("delete-btn");
-					deleteBtn.onclick = function () {
+					// Xử lý nút Xóa
+					document.getElementById("delete-btn").onclick = function () {
 						if (
 							confirm(
 								`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
@@ -345,6 +399,7 @@
 				});
 			});
 
+			// Đóng modal
 			document
 				.querySelector(".close-btn")
 				.addEventListener("click", function () {
@@ -358,6 +413,7 @@
 				}
 			});
 		</script>
+		{% endfor %}
 
 		<!-- script -->
 		<script>
