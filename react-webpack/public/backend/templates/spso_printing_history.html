@@ -1,362 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>printting_history</title>
-	</head>
-	<link
-		rel="shortcut icon"
-		href="static/images/HCMUT_official_logo.ico"
-		type="image/x-icon" />
-	<link
-		rel="stylesheet"
-		href="{{ url_for('static', filename='css/navbar.css') }}" />
-	<link
-		rel="stylesheet"
-		href="{{ url_for('static', filename='css/printing_history.css') }}" />
-	<link
-		rel="stylesheet"
-		href="{{ url_for('static', filename='css/noti_box.css') }}" />
-	<link
-		rel="stylesheet"
-		href="{{ url_for('static', filename='css/chatbox_spso.css') }}" />
-	<body>
-		<div id="root"></div>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-			rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>printting_history</title>
+  </head>
+  <link
+    rel="shortcut icon"
+    href="static/images/HCMUT_official_logo.ico"
+    type="image/x-icon"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/navbar.css') }}"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/print_history_spso.css') }}"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/noti_box.css') }}"
+  />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/chatbox_spso.css') }}"
+  />
+  <body>
+    <div id="root"></div>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <!-- nav bar -->
     <div id="navbar">
-		<div
-		  id="logo"
-		  style="
-			width: 285.6px;
-			height: 57.6px;
-			left: 40px;
-			top: 5.6px;
-			position: absolute;
-		  "
-		>
-		  <div
-			style="
-			  width: 255px;
-			  height: 53.6px;
-			  left: 17.6px;
-			  top: 0px;
-			  position: absolute;
-			  background: #142c64;
-			  border-radius: 16px;
-			"
-		  ></div>
-		  <img
-			style="
-			  width: 88.8px;
-			  height: 56.8px;
-			  left: 0px;
-			  top: 0.8px;
-			  position: absolute;
-			"
-			src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
-		  />
-		  <div
-			style="
-			  width: 178px;
-			  height: 49px;
-			  left: 85px;
-			  top: 0px;
-			  position: absolute;
-			  color: white;
-			  font-size: 22.4px;
-			  font-family: Montserrat;
-			  font-weight: 700;
-			  word-wrap: break-word;
-			"
-		  >
-			Student Smart Printing Service
-		  </div>
-		</div>
-		<div class="nav-block">
-		  <script>
-			function openMenu(x) {
-			  x.classList.toggle("change");
-			  const menu = document.getElementById("menu");
-			  if (menu.classList.contains("appear")) {
-				menu.classList.remove("appear");
-			  } else {
-				menu.classList.add("appear");
-			  }
-			}
-		  </script>
-		  <div id="menu-icon" onclick="openMenu(this)">
-			<div id="bar1"></div>
-			<div id="bar2"></div>
-			<div id="bar3"></div>
-		  </div>
-		  <ul id="menu">
-			<li onClick="window.location.href='homescreen_spso';">TRANG CHỦ</li>
-			<li>
-			  BẢNG ĐIỀU KHIỂN
-			</li>
-			<li
-			  onClick="window.location.href='choose_printer_spso';"
-			>
-			  MÁY IN
-			</li>
-			<li onClick="window.location.href='spso_printing_history';" class="index-page">LỊCH SỬ IN</li>
-			<li>MUA THÊM GIẤY</li>
-		  </ul>
-		</div>
-		<div id="noti-account">
-		  <div id="noti">
-			<svg
-			  id="circle"
-			  width="18"
-			  height="20"
-			  viewBox="0 0 18 20"
-			  fill="none"
-			  xmlns="http://www.w3.org/2000/svg"
-			>
-			  <path
-				id="Vector"
-				d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
-				stroke="black"
-				stroke-width="1.6"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			  />
-			</svg>
-			<svg
-			  id="bell"
-			  width="42"
-			  height="41"
-			  viewBox="0 0 42 41"
-			  fill="none"
-			  xmlns="http://www.w3.org/2000/svg"
-			>
-			  <path
-				id="Ellipse 3230"
-				d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
-				stroke="black"
-			  />
-			</svg>
-			<div id="notification-box" class="hidden">
-			  <div class="notification-header">Thông báo</div>
-			  <ul class="notification-list">
-				{% if notifications %} {% for notification in notifications %}
-				<li>
-				  <span class="notification-title"
-					>Thông báo {{ loop.index }}</span
-				  >
-				  <!-- Hiển thị số thứ tự thông báo -->
-				  <p>{{ notification[0] }}</p>
-				  <!-- Nội dung thông báo -->
-				  <div class="notification-footer">
-					<span class="notification-time">{{ notification[1] }}</span>
-					<!-- Thời gian thông báo -->
-					<button class="notification-detail-btn">Xem chi tiết</button>
-				  </div>
-				</li>
-				{% endfor %} {% else %}
-				<li>
-				  <p>Không có thông báo nào.</p>
-				  <!-- Thông báo khi không có dữ liệu -->
-				</li>
-				{% endif %}
-			  </ul>
-			</div>
-		  </div>
-		  <div class="info-list">
-			<ul>
-			  <li>
-				<img
-				  src="data:image/png;base64,{{ profile_picture7_base64 }}"
-				  class="profile-img"
-				  alt="Profile Picture"
-				/>
-				<div class="name">{{ name }}</div>
-				<ul class="dropdown">
-				  <li><a>Hồ sơ</a></li>
-				  <li>
-					<a>Ngôn ngữ</a>
-					<ul class="nextpage">
-					  <li>Tiếng Việt</li>
-					  <li>English</li>
-					</ul>
-				  </li>
-				  <li><a href="/">Đăng xuất</a></li>
-				</ul>
-				<svg
-				  style="padding: 0 10px, 0 10px"
-				  width="10"
-				  height="5"
-				  viewBox="0 0 12 8"
-				  fill="none"
-				  xmlns="http://www.w3.org/2000/svg"
-				  style="margin-left: -5px"
-				>
-				  <path
-					d="M1 1L6 6L11 1"
-					stroke="black"
-					stroke-width="1.6"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				  />
-				</svg>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-	  </div>
-		<!-- lịch sử in -->
-		<div class="container">
-			<div class="header">
-				<h2>Lịch sử in</h2>
-				<div class="date-filter">
-					<input type="date" id="start-date" />
-					<span>đến</span>
-					<input type="date" id="end-date" />
-				</div>
-			</div>
-			<div class="search-bar">
-				<input type="text" placeholder="Tìm kiếm" />
-			</div>
-			<table>
-				<thead>
-					<tr>
-						<th>ID sinh viên</th>
-						<th>Tên sinh viên</th>
-						<th>Máy in</th>
-						<th>Tên tài liệu</th>
-						<th>Dung lượng</th>
-						<th>Số trang</th>
-						<th>Trạng thái</th>
-						<th>Thời điểm</th>
-						<th>Hành động</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for record in spso_history %}
-					<tr>
-						<td>{{ record[11] }}</td>
-						<td>{{ record[0] }}</td>
-						<td>{{ record[1] }}</td>
-						<td>{{ record[2] }}</td>
-						<td>{{ record[3] }} KB</td>
-						<td>{{ record[4] }}</td>
-						<td
-							class="status {% if record[5] == 'Hoàn thành' %}completed {% elif record[5] == 'Lỗi in' %}error {% elif record[5] == 'Đang in' %}in-progress {% else %}unknown{% endif %}">
-							{{ record[5] }}
-						</td>
-						<td>{{ record[6] }}</td>
-						<td>
-							<button
-								class="details-btn"
-								data-name="{{ record[0] }}"
-								data-printer="{{ record[1] }}"
-								data-filename="{{ record[2] }}"
-								data-length="{{ record[3] }}"
-								data-pages="{{ record[4] }}"
-								data-status="{{ record[5] }}"
-								data-time="{{ record[6] }}"
-								data-orientation="{{ record[7] }}"
-								data-printsides="{{ record[8] }}"
-								data-copies="{{ record[9] }}"
-								data-type="{{ record[10] }}"
-								data-id="{{record[11]}}">
-								Xem chi tiết
-							</button>
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<div class="pagination">
-				<button>&lt;</button>
-				<button class="active">01</button>
-				<button>02</button>
-				<button>03</button>
-				<button>04</button>
-				<button>05</button>
-				<button>06</button>
-				<button>&gt;</button>
-				<button>Tất cả</button>
-			</div>
-		</div>
-		<!-- Bảng xem chi tiết -->
-		<div id="details-modal" class="modal" style="display: none">
-			<div class="modal-content">
-				<span class="close-btn">&times;</span>
-				<h3>Chi tiết tài liệu</h3>
-				<div id="details-content">
-					<!-- Nội dung chi tiết sẽ được thêm động qua JavaScript -->
-				</div>
-				<button
-					id="delete-btn"
-					class="delete-btn"
-					style="
-						margin-top: 20px;
-						background-color: red;
-						color: white;
-						border: none;
-						padding: 10px;
-						border-radius: 5px;
-						cursor: pointer;
-					">
-					Xóa
-				</button>
-			</div>
-		</div>
+      <div
+        id="logo"
+        style="
+          width: 285.6px;
+          height: 57.6px;
+          left: 40px;
+          top: 5.6px;
+          position: absolute;
+        "
+      >
+        <div
+          style="
+            width: 255px;
+            height: 53.6px;
+            left: 17.6px;
+            top: 0px;
+            position: absolute;
+            background: #142c64;
+            border-radius: 16px;
+          "
+        ></div>
+        <img
+          style="
+            width: 88.8px;
+            height: 56.8px;
+            left: 0px;
+            top: 0.8px;
+            position: absolute;
+          "
+          src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+        />
+        <div
+          style="
+            width: 178px;
+            height: 49px;
+            left: 85px;
+            top: 0px;
+            position: absolute;
+            color: white;
+            font-size: 22.4px;
+            font-family: Montserrat;
+            font-weight: 700;
+            word-wrap: break-word;
+          "
+        >
+          Student Smart Printing Service
+        </div>
+      </div>
+      <div class="nav-block">
+        <script>
+          function openMenu(x) {
+            x.classList.toggle("change");
+            const menu = document.getElementById("menu");
+            if (menu.classList.contains("appear")) {
+              menu.classList.remove("appear");
+            } else {
+              menu.classList.add("appear");
+            }
+          }
+        </script>
+        <div id="menu-icon" onclick="openMenu(this)">
+          <div id="bar1"></div>
+          <div id="bar2"></div>
+          <div id="bar3"></div>
+        </div>
+        <ul id="menu">
+          <li onClick="window.location.href='homescreen_spso';">TRANG CHỦ</li>
+          <li>BẢNG ĐIỀU KHIỂN</li>
+          <li onClick="window.location.href='choose_printer_spso';">MÁY IN</li>
+          <li
+            onClick="window.location.href='spso_printing_history';"
+            class="index-page"
+          >
+            LỊCH SỬ IN
+          </li>
+          <li>MUA THÊM GIẤY</li>
+        </ul>
+      </div>
+      <div id="noti-account">
+        <div id="noti">
+          <svg
+            id="circle"
+            width="18"
+            height="20"
+            viewBox="0 0 18 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Vector"
+              d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            id="bell"
+            width="42"
+            height="41"
+            viewBox="0 0 42 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Ellipse 3230"
+              d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
+              stroke="black"
+            />
+          </svg>
+          <div id="notification-box" class="hidden">
+            <div class="notification-header">Thông báo</div>
+            <ul class="notification-list">
+              {% if notifications %} {% for notification in notifications %}
+              <li>
+                <span class="notification-title"
+                  >Thông báo {{ loop.index }}</span
+                >
+                <!-- Hiển thị số thứ tự thông báo -->
+                <p>{{ notification[0] }}</p>
+                <!-- Nội dung thông báo -->
+                <div class="notification-footer">
+                  <span class="notification-time">{{ notification[1] }}</span>
+                  <!-- Thời gian thông báo -->
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              {% endfor %} {% else %}
+              <li>
+                <p>Không có thông báo nào.</p>
+                <!-- Thông báo khi không có dữ liệu -->
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <div class="info-list">
+          <ul>
+            <li>
+              <img
+                src="data:image/png;base64,{{ profile_picture7_base64 }}"
+                class="profile-img"
+                alt="Profile Picture"
+              />
+              <div class="name">{{ name }}</div>
+              <ul class="dropdown">
+                <li><a>Hồ sơ</a></li>
+                <li>
+                  <a>Ngôn ngữ</a>
+                  <ul class="nextpage">
+                    <li>Tiếng Việt</li>
+                    <li>English</li>
+                  </ul>
+                </li>
+                <li><a href="/">Đăng xuất</a></li>
+              </ul>
+              <svg
+                style="padding: 0 10px, 0 10px"
+                width="10"
+                height="5"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: -5px"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-		{% for record in spso_history %}
-		<!-- Script -->
-		<script>
-			document.querySelectorAll(".details-btn").forEach((button) => {
-				button.addEventListener("click", function () {
-					// Lấy dữ liệu từ data-* attributes
-					const details = {
-						name: button.getAttribute("data-name"),
-						filename: button.getAttribute("data-filename"),
-						size: button.getAttribute("data-length"),
-						printer: button.getAttribute("data-printer"),
-						status: button.getAttribute("data-status"),
-						time: button.getAttribute("data-time"),
-						paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
-						copies: button.getAttribute("data-copies"), // Giá trị mẫu
-						pages: button.getAttribute("data-pages"), // Giá trị mẫu
-						sides: button.getAttribute("data-printsides"), // Giá trị mẫu
-						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
-						type: button.getAttribute("data-type"), // Loại file
-						id: button.getAttribute("data-id"), // ID sinh viên
-					};
+    <!-- lịch sử in -->
+    <div class="container">
+      <div class="header">
+        <h2>Lịch sử in</h2>
+        <div class="date-filter">
+          <input type="date" id="start-date" />
+          <span>đến</span>
+          <input type="date" id="end-date" />
+        </div>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm" />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID sinh viên</th>
+            <th>Tên sinh viên</th>
+            <th>Máy in</th>
+            <th>Tên tài liệu</th>
+            <th>Dung lượng</th>
+            <th>Số trang</th>
+            <th>Trạng thái</th>
+            <th>Thời điểm</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for record in spso_history %}
+          <tr>
+            <td>{{ record[11] }}</td>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>{{ record[3] }} KB</td>
+            <td>{{ record[4] }}</td>
+            <td
+              class="status {% if record[5] == 'Hoàn thành' %}completed {% elif record[5] == 'Lỗi in' %}error {% elif record[5] == 'Đang in' %}in-progress {% else %}unknown{% endif %}"
+            >
+              {{ record[5] }}
+            </td>
+            <td>{{ record[6] }}</td>
+            <td>
+              <button
+                class="details-btn"
+                data-name="{{ record[0] }}"
+                data-printer="{{ record[1] }}"
+                data-filename="{{ record[2] }}"
+                data-length="{{ record[3] }}"
+                data-pages="{{ record[4] }}"
+                data-status="{{ record[5] }}"
+                data-time="{{ record[6] }}"
+                data-orientation="{{ record[7] }}"
+                data-printsides="{{ record[8] }}"
+                data-copies="{{ record[9] }}"
+                data-type="{{ record[10] }}"
+                data-id="{{record[11]}}"
+              >
+                Xem chi tiết
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination">
+        <button>&lt;</button>
+        <button class="active">01</button>
+        <button>02</button>
+        <button>03</button>
+        <button>04</button>
+        <button>05</button>
+        <button>06</button>
+        <button>&gt;</button>
+        <button>Tất cả</button>
+      </div>
+    </div>
+    <!-- Bảng xem chi tiết -->
+    <div id="details-modal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Chi tiết tài liệu</h3>
+        <div id="details-content">
+          <!-- Nội dung chi tiết sẽ được thêm động qua JavaScript -->
+        </div>
+        <button
+          id="delete-btn"
+          class="delete-btn"
+          style="
+            margin-top: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+          "
+        >
+          Xóa
+        </button>
+      </div>
+    </div>
 
-					// Kiểm tra loại tệp để chọn biểu tượng
-					let fileIcon = "";
-					if (details.type === "PDF") {
-						fileIcon = "static/images/pdf.png";
-					} else if (details.type === "DOCX") {
-						fileIcon = "static/images/docx.png";
-					} else if (details.type == "PNG") {
-						fileIcon = "static/images/png.png";
-					} else if (details.type == "JPG") {
-						fileIcon = "static/images/jpg.png";
-					} else {
-						fileIcon =
-							"https://upload.wikimedia.org/wikipedia/commons/4/47/File_icon.svg"; // Mặc định nếu không phải PDF hay DOCX
-					}
+    {% for record in spso_history %}
+    <!-- Script -->
+    <script>
+      document.querySelectorAll(".details-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          // Lấy dữ liệu từ data-* attributes
+          const details = {
+            name: button.getAttribute("data-name"),
+            filename: button.getAttribute("data-filename"),
+            size: button.getAttribute("data-length"),
+            printer: button.getAttribute("data-printer"),
+            status: button.getAttribute("data-status"),
+            time: button.getAttribute("data-time"),
+            paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
+            copies: button.getAttribute("data-copies"), // Giá trị mẫu
+            pages: button.getAttribute("data-pages"), // Giá trị mẫu
+            sides: button.getAttribute("data-printsides"), // Giá trị mẫu
+            orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
+            type: button.getAttribute("data-type"), // Loại file
+            id: button.getAttribute("data-id"), // ID sinh viên
+          };
 
-					// Thêm class trạng thái
-					const statusClass =
-						details.status === "Hoàn thành"
-							? "status completed"
-							: details.status === "Lỗi in"
-							? "status error"
-							: details.status === "Đang in"
-							? "in-progress"
-							: "status unknown";
+          // Kiểm tra loại tệp để chọn biểu tượng
+          let fileIcon = "";
+          if (details.type === "PDF") {
+            fileIcon = "static/images/pdf.png";
+          } else if (details.type === "DOCX") {
+            fileIcon = "static/images/docx.png";
+          } else if (details.type == "PNG") {
+            fileIcon = "static/images/png.png";
+          } else if (details.type == "JPG") {
+            fileIcon = "static/images/jpg.png";
+          } else {
+            fileIcon =
+              "https://upload.wikimedia.org/wikipedia/commons/4/47/File_icon.svg"; // Mặc định nếu không phải PDF hay DOCX
+          }
 
-					// Tạo nội dung modal từ dữ liệu
-					const modalContent = `
+          // Thêm class trạng thái
+          const statusClass =
+            details.status === "Hoàn thành"
+              ? "status completed"
+              : details.status === "Lỗi in"
+              ? "status error"
+              : details.status === "Đang in"
+              ? "in-progress"
+              : "status unknown";
+
+          // Tạo nội dung modal từ dữ liệu
+          const modalContent = `
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                 <img src="${fileIcon}" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
                 <div>
@@ -380,249 +389,249 @@
             <p><strong>Thời gian:</strong> ${details.time}</p>
         `;
 
-					// Hiển thị modal
-					document.getElementById("details-content").innerHTML = modalContent;
-					document.getElementById("details-modal").style.display = "flex";
+          // Hiển thị modal
+          document.getElementById("details-content").innerHTML = modalContent;
+          document.getElementById("details-modal").style.display = "flex";
 
-					// Xử lý nút Xóa
-					document.getElementById("delete-btn").onclick = function () {
-						if (
-							confirm(
-								`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
-							)
-						) {
-							alert(`Tài liệu "${details.name}" đã bị xóa.`);
-							document.getElementById("details-modal").style.display = "none";
-						}
-					};
-				});
-			});
+          // Xử lý nút Xóa
+          document.getElementById("delete-btn").onclick = function () {
+            if (
+              confirm(
+                `Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
+              )
+            ) {
+              alert(`Tài liệu "${details.name}" đã bị xóa.`);
+              document.getElementById("details-modal").style.display = "none";
+            }
+          };
+        });
+      });
 
-			// Đóng modal
-			document
-				.querySelector(".close-btn")
-				.addEventListener("click", function () {
-					document.getElementById("details-modal").style.display = "none";
-				});
+      // Đóng modal
+      document
+        .querySelector(".close-btn")
+        .addEventListener("click", function () {
+          document.getElementById("details-modal").style.display = "none";
+        });
 
-			window.addEventListener("click", function (event) {
-				const modal = document.getElementById("details-modal");
-				if (event.target === modal) {
-					modal.style.display = "none";
-				}
-			});
-		</script>
-		{% endfor %}
+      window.addEventListener("click", function (event) {
+        const modal = document.getElementById("details-modal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      });
+    </script>
+    {% endfor %}
 
-		<!-- script -->
-		<script>
-			function filterByDate() {
-				const startDateInput = document.getElementById("start-date").value;
-				const endDateInput = document.getElementById("end-date").value;
-				const startDate = startDateInput ? new Date(startDateInput) : null;
-				const endDate = endDateInput ? new Date(endDateInput) : null;
-				const rows = document.querySelectorAll("tbody tr");
+    <!-- script -->
+    <script>
+      function filterByDate() {
+        const startDateInput = document.getElementById("start-date").value;
+        const endDateInput = document.getElementById("end-date").value;
+        const startDate = startDateInput ? new Date(startDateInput) : null;
+        const endDate = endDateInput ? new Date(endDateInput) : null;
+        const rows = document.querySelectorAll("tbody tr");
 
-				rows.forEach((row) => {
-					const timeCell = row.children[2].innerText;
-					const rowDate = new Date(
-						timeCell.split(" ")[0].split("/").reverse().join("-")
-					);
-					if (
-						(!startDate || rowDate >= startDate) &&
-						(!endDate || rowDate <= endDate)
-					) {
-						row.style.display = "";
-					} else {
-						row.style.display = "none";
-					}
-				});
-			}
-			document
-				.getElementById("start-date")
-				.addEventListener("change", filterByDate);
-			document
-				.getElementById("end-date")
-				.addEventListener("change", filterByDate);
-			// Tìm kiếm trong bảng
-			document
-				.querySelector(".search-bar input")
-				.addEventListener("input", function () {
-					const searchValue = this.value.toLowerCase();
-					const rows = document.querySelectorAll("tbody tr");
+        rows.forEach((row) => {
+          const timeCell = row.children[2].innerText;
+          const rowDate = new Date(
+            timeCell.split(" ")[0].split("/").reverse().join("-")
+          );
+          if (
+            (!startDate || rowDate >= startDate) &&
+            (!endDate || rowDate <= endDate)
+          ) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+      document
+        .getElementById("start-date")
+        .addEventListener("change", filterByDate);
+      document
+        .getElementById("end-date")
+        .addEventListener("change", filterByDate);
+      // Tìm kiếm trong bảng
+      document
+        .querySelector(".search-bar input")
+        .addEventListener("input", function () {
+          const searchValue = this.value.toLowerCase();
+          const rows = document.querySelectorAll("tbody tr");
 
-					rows.forEach((row) => {
-						const fileName = row.cells[0].innerText.toLowerCase();
-						if (fileName.includes(searchValue)) {
-							row.style.display = "";
-						} else {
-							row.style.display = "none";
-						}
-					});
-				});
-			// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
-			document.getElementById("noti").addEventListener("click", function (e) {
-				e.stopPropagation();
-				const notificationBox = document.getElementById("notification-box");
-				notificationBox.classList.toggle("active");
-			});
+          rows.forEach((row) => {
+            const fileName = row.cells[0].innerText.toLowerCase();
+            if (fileName.includes(searchValue)) {
+              row.style.display = "";
+            } else {
+              row.style.display = "none";
+            }
+          });
+        });
+      // Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+      document.getElementById("noti").addEventListener("click", function (e) {
+        e.stopPropagation();
+        const notificationBox = document.getElementById("notification-box");
+        notificationBox.classList.toggle("active");
+      });
 
-			document.addEventListener("click", function (e) {
-				const notificationBox = document.getElementById("notification-box");
-				const noti = document.getElementById("noti");
-				if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
-					notificationBox.classList.remove("active");
-				}
-			});
+      document.addEventListener("click", function (e) {
+        const notificationBox = document.getElementById("notification-box");
+        const noti = document.getElementById("noti");
+        if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+          notificationBox.classList.remove("active");
+        }
+      });
 
-			document
-				.getElementById("notification-box")
-				.addEventListener("click", function (e) {
-					e.stopPropagation();
-				});
-		</script>
-		<!-- chatbox spso -->
-		<div
-		id="chat-icon"
-		draggable="true"
-		onmousedown="this.style.cursor='grabbing'"
-		onmouseup="this.style.cursor='grab'"
-		ondragstart="event.dataTransfer.setDragImage(new Image(), 0, 0);"
-		ondrag="if(event.clientX > 0 && event.clientY > 0) { this.style.left = event.clientX - 25 + 'px'; this.style.top = event.clientY - 25 + 'px'; this.style.position='fixed'; }"
-		onclick="document.getElementById('chat-box').style.display = 'flex';"
-	  >
-		💬
-	  </div>
-  
-	  <!-- Chat Box -->
-	  <div id="chat-box">
-		<!-- Chat List -->
-		<div id="chat-list">
-		  <div class="chat-header">
-			<span>Đoạn chat</span>
-			<button
-			  onclick="document.getElementById('chat-box').style.display = 'none';"
-			>
-			  ×
-			</button>
-		  </div>
-		  <ul>
-			<li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
-			  <img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
-			  <div>
-				<span class="chat-name">Anh Khoa</span>
-				<p class="chat-message">Tôi cần hỗ trợ...</p>
-			  </div>
-			</li>
-			<li
-			  onclick="openChat('Tiến Đạt', 'Tôi cần hỗ trợ với máy tính mạng');"
-			>
-			  <img src="{{ url_for('static', filename='images/dat.png') }}" />
-			  <div>
-				<span class="chat-name">Tiến Đạt</span>
-				<p class="chat-message">Tôi cần hỗ trợ...</p>
-			  </div>
-			</li>
-		  </ul>
-		</div>
-  
-		<!-- Chat Conversation -->
-		<div id="chat-conversation" style="display: none">
-		  <div class="chat-header">
-			<button onclick="backToChatList()">←</button>
-			<span id="conversation-name"></span>
-		  </div>
-		  <div id="messages">
-			<!-- Messages dynamically injected -->
-		  </div>
-		  <div class="chat-input">
-			<input
-			  type="text"
-			  placeholder="Nhập tin nhắn..."
-			  id="message-input"
-			/>
-			<button onclick="sendMessage()">Gửi</button>
-		  </div>
-		</div>
-	  </div>
-	  <!-- script chatbox -->
-	  <script>
-		const chatIcon = document.getElementById("chat-icon");
-		const chatBox = document.getElementById("chat-box");
-		const chatList = document.getElementById("chat-list");
-		const chatConversation = document.getElementById("chat-conversation");
-		const conversationName = document.getElementById("conversation-name");
-		const messages = document.getElementById("messages");
-		const messageInput = document.getElementById("message-input");
-  
-		let offsetX, offsetY;
-  
-		// Data for the messages
-		const chatData = {
-		  "Anh Khoa": ["Tôi cần hỗ trợ ở máy in số 4", "Máy in bị lỗi giấy"],
-		  "Tiến Đạt": [
-			"Tôi cần hỗ trợ với máy tính mạng",
-			"Mạng bị ngắt kết nối",
-		  ],
-		};
-		// Toggle chat box visibility
-		function toggleChat() {
-		  chatBox.classList.toggle("hidden");
-		}
-  
-		// Close chat box
-		function closeChat() {
-		  chatBox.classList.add("hidden");
-		}
-  
-		function openChat(name, initialMessage) {
-		  // Hide chat list and show chat conversation
-		  document.getElementById("chat-list").style.display = "none";
-		  document.getElementById("chat-conversation").style.display = "flex";
-  
-		  // Set the conversation name
-		  document.getElementById("conversation-name").textContent = name;
-  
-		  // Show all messages for the selected chat
-		  const messages = chatData[name]
-			.map((message) => `<p><strong>${name}:</strong> ${message}</p>`)
-			.join("");
-  
-		  // Display all the messages
-		  document.getElementById("messages").innerHTML = messages;
-		}
-  
-		// Back to the chat list
-		function backToChatList() {
-		  document.getElementById("chat-conversation").style.display = "none";
-		  document.getElementById("chat-list").style.display = "block";
-		}
-  
-		// Send message
-		function sendMessage() {
-		  const text = document.getElementById("message-input").value.trim();
-		  if (text) {
-			const message = `<p><strong>Bạn:</strong> ${text}</p>`;
-			document.getElementById("messages").innerHTML += message;
-			document.getElementById("message-input").value = "";
-		  }
-		}
-  
-		// Dragging the chat icon
-		function startDrag(e) {
-		  offsetX = e.clientX - chatIcon.offsetLeft;
-		  offsetY = e.clientY - chatIcon.offsetTop;
-		  chatIcon.style.cursor = "grabbing";
-		}
-  
-		function endDrag(e) {
-		  chatIcon.style.left = `${e.clientX - offsetX}px`;
-		  chatIcon.style.top = `${e.clientY - offsetY}px`;
-		  chatIcon.style.cursor = "grab";
-		}
-  
-		// Add click listener to open chat box
-		chatIcon.addEventListener("click", toggleChat);
-	  </script>
-	</body>
+      document
+        .getElementById("notification-box")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+    </script>
+    <!-- chatbox spso -->
+    <div
+      id="chat-icon"
+      draggable="true"
+      onmousedown="this.style.cursor='grabbing'"
+      onmouseup="this.style.cursor='grab'"
+      ondragstart="event.dataTransfer.setDragImage(new Image(), 0, 0);"
+      ondrag="if(event.clientX > 0 && event.clientY > 0) { this.style.left = event.clientX - 25 + 'px'; this.style.top = event.clientY - 25 + 'px'; this.style.position='fixed'; }"
+      onclick="document.getElementById('chat-box').style.display = 'flex';"
+    >
+      💬
+    </div>
+
+    <!-- Chat Box -->
+    <div id="chat-box">
+      <!-- Chat List -->
+      <div id="chat-list">
+        <div class="chat-header">
+          <span>Đoạn chat</span>
+          <button
+            onclick="document.getElementById('chat-box').style.display = 'none';"
+          >
+            ×
+          </button>
+        </div>
+        <ul>
+          <li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
+            <img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
+            <div>
+              <span class="chat-name">Anh Khoa</span>
+              <p class="chat-message">Tôi cần hỗ trợ...</p>
+            </div>
+          </li>
+          <li
+            onclick="openChat('Tiến Đạt', 'Tôi cần hỗ trợ với máy tính mạng');"
+          >
+            <img src="{{ url_for('static', filename='images/dat.png') }}" />
+            <div>
+              <span class="chat-name">Tiến Đạt</span>
+              <p class="chat-message">Tôi cần hỗ trợ...</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Chat Conversation -->
+      <div id="chat-conversation" style="display: none">
+        <div class="chat-header">
+          <button onclick="backToChatList()">←</button>
+          <span id="conversation-name"></span>
+        </div>
+        <div id="messages">
+          <!-- Messages dynamically injected -->
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            placeholder="Nhập tin nhắn..."
+            id="message-input"
+          />
+          <button onclick="sendMessage()">Gửi</button>
+        </div>
+      </div>
+    </div>
+    <!-- script chatbox -->
+    <script>
+      const chatIcon = document.getElementById("chat-icon");
+      const chatBox = document.getElementById("chat-box");
+      const chatList = document.getElementById("chat-list");
+      const chatConversation = document.getElementById("chat-conversation");
+      const conversationName = document.getElementById("conversation-name");
+      const messages = document.getElementById("messages");
+      const messageInput = document.getElementById("message-input");
+
+      let offsetX, offsetY;
+
+      // Data for the messages
+      const chatData = {
+        "Anh Khoa": ["Tôi cần hỗ trợ ở máy in số 4", "Máy in bị lỗi giấy"],
+        "Tiến Đạt": [
+          "Tôi cần hỗ trợ với máy tính mạng",
+          "Mạng bị ngắt kết nối",
+        ],
+      };
+      // Toggle chat box visibility
+      function toggleChat() {
+        chatBox.classList.toggle("hidden");
+      }
+
+      // Close chat box
+      function closeChat() {
+        chatBox.classList.add("hidden");
+      }
+
+      function openChat(name, initialMessage) {
+        // Hide chat list and show chat conversation
+        document.getElementById("chat-list").style.display = "none";
+        document.getElementById("chat-conversation").style.display = "flex";
+
+        // Set the conversation name
+        document.getElementById("conversation-name").textContent = name;
+
+        // Show all messages for the selected chat
+        const messages = chatData[name]
+          .map((message) => `<p><strong>${name}:</strong> ${message}</p>`)
+          .join("");
+
+        // Display all the messages
+        document.getElementById("messages").innerHTML = messages;
+      }
+
+      // Back to the chat list
+      function backToChatList() {
+        document.getElementById("chat-conversation").style.display = "none";
+        document.getElementById("chat-list").style.display = "block";
+      }
+
+      // Send message
+      function sendMessage() {
+        const text = document.getElementById("message-input").value.trim();
+        if (text) {
+          const message = `<p><strong>Bạn:</strong> ${text}</p>`;
+          document.getElementById("messages").innerHTML += message;
+          document.getElementById("message-input").value = "";
+        }
+      }
+
+      // Dragging the chat icon
+      function startDrag(e) {
+        offsetX = e.clientX - chatIcon.offsetLeft;
+        offsetY = e.clientY - chatIcon.offsetTop;
+        chatIcon.style.cursor = "grabbing";
+      }
+
+      function endDrag(e) {
+        chatIcon.style.left = `${e.clientX - offsetX}px`;
+        chatIcon.style.top = `${e.clientY - offsetY}px`;
+        chatIcon.style.cursor = "grab";
+      }
+
+      // Add click listener to open chat box
+      chatIcon.addEventListener("click", toggleChat);
+    </script>
+  </body>
 </html>
