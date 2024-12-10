@@ -1,7 +1,6 @@
 .body{
     font-family: "Montserrat", Arial, sans-serif;
 	background-color: #FFFFFF;
-	margin: 0;
 }
 .main-container{
     background-color: white;
@@ -128,32 +127,55 @@
     color: #28A91D;
 }
 /* Thiết lập cho bảng */
-.request{
-    margin-left: 2%;
-    margin-top: 30px;
-    display: grid;
-    background-color: white;
-    border-radius: 10px;
-    width: 54%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.06);
-    overflow: hidden;
-}
-table {
-	width: 100%;
-	border-collapse: collapse;
-    border-spacing: 0 10px ;
-	margin-bottom: 2%;
-}
-thead{
-    background-color: #142C64;
-	border-bottom: 1px solid #ddd;
-}
-th,td {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid black;
-  border: 1px solid black;
-}
+
+/* Bao quanh bảng */
+.table-container {
+    margin: 20px auto;
+    width: 75%;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-left: 1%;
+  }
+  
+  /* Bảng */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center; /* Căn giữa nội dung */
+    font-size: 16px;
+    margin-bottom: auto ;
+    margin-top: auto;
+  }
+  
+  th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Định dạng tiêu đề */
+  thead th {
+    background-color: #004680;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Định dạng các dòng */
+  tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    th, td {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
 h3{
     font-size: 16px;
     font-weight: bold;
@@ -174,8 +196,12 @@ h3{
     display: flex;
 }
 /*Phần cho bảng yêu cầu in và biểu đồ bar*/
+.small-container{
+    display: flex;
+
+}
 .bar-chart{
-    width: 42%;
+    width: 32%;
     margin: auto;
     background-color: white;
     border-radius: 7px;
@@ -192,7 +218,7 @@ h3{
 }
 /*Thiết lập cho bảng còn lại*/ 
 .revenueChart{
-    width: 42.5%;
+    width: 41.5%;
     margin: auto;
     background-color: white;
     border-radius: 7px;
@@ -200,4 +226,5 @@ h3{
     display: flex;
     margin-right: 20px;
 }
+
 
