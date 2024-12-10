@@ -492,7 +492,7 @@ def spso_printing_history():
     notifications = cur.fetchall()
     # Truy vấn dữ liệu từ bảng spso_printinghistory
     logger.debug("Fetching SPSO printing history")
-    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time FROM spso_printinghistory')
+    cur.execute('SELECT name, printer_id, file_name, file_size, no_pages, status, time, paper_orientation, print_sides, num_copies, file_type, user_id FROM spso_printinghistory')
     spso_history = cur.fetchall()  # Lấy tất cả kết quả
     
     logger.debug(f"SPSO printing history fetched: {spso_history}")
