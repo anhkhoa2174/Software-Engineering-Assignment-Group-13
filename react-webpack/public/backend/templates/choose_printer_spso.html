@@ -529,68 +529,29 @@
       <div id="printers-container" class="printers-container">
         <!-- Đường dẫn điều hướng -->
         <div class="breadcrumb">
-          Cơ sở Lý Thường Kiệt > Tòa B6 > Phòng B6 - 303
+          Cơ sở Lý Thường Kiệt > Tòa B1 > Phòng B1 - 301
         </div>
         <!-- Danh sách máy in -->
         <div class="printers-grid">
-          <div class="printer-card" data-printer-id="B63031">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63031</p>
-            <p class="status status-busy">ĐANG IN</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63032">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63032</p>
-            <p class="status status-busy">ĐANG IN</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63033">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63033</p>
-            <p class="status status-available">SẴN SÀNG</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63034">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63034</p>
-            <p class="status status-disabled">VÔ HIỆU HÓA</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63035">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63035</p>
-            <p class="status status-available">SẴN SÀNG</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63036">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63036</p>
-            <p class="status status-available">SẴN SÀNG</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63037">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63037</p>
-            <p class="status status-busy">ĐANG IN</p>
-          </div>
-          <div class="printer-card" data-printer-id="B63038">
-            <img
-              src="{{ url_for('static', filename='images/icon_printer.png') }}"
-            />
-            <p class="printer-id">B63038</p>
-            <p class="status status-disabled">VÔ HIỆU HÓA</p>
-          </div>
-        </div>
+          {% for printer in printers %}
+              {% if printer[4].strip() == "Tòa B1" %}
+              <div class="printer-card" data-printer-id="{{ printer[0] }}" >
+                  <img src="{{ url_for('static', filename='images/icon_printer.png') }}" />
+                  <p class="printer-id">B130{{ 10 + loop.index }}</p> <!-- Hiển thị ID tùy chỉnh -->
+                  {% if printer[1] == "Sẵn sàng" %}
+                      <p class="status status-available">SẴN SÀNG</p>
+                  {% elif printer[1] == "Đang in" %}
+                      <p class="status status-busy">ĐANG IN</p>
+                  {% elif printer[1] == "Vô hiệu hóa" %}
+                      <p class="status status-disabled">VÔ HIỆU HÓA</p>
+                  {% else %}
+                      <p class="status status-unknown">KHÔNG XÁC ĐỊNH</p>
+                  {% endif %}
+              </div>
+              {% endif %}
+          {% endfor %}
       </div>
+    </div>
       <!-- cấu hình máy in -->
       <div class="config-panel">
         <div class="header2">Cấu hình máy in</div>
@@ -614,67 +575,86 @@
         document.addEventListener("DOMContentLoaded", function () {
           const printerCards = document.querySelectorAll(".printer-card");
           const contentImage = document.querySelector(".content-image");
-          const placeholder = document.querySelector(".content .placeholder");
-          const disableSwitch = document.getElementById(
-            "disable-printer-switch"
-          );
-
+          const disableSwitch = document.getElementById("disable-printer-switch");
           let selectedPrinter = null; // Biến lưu máy in đang chọn
-
+      
           printerCards.forEach((printerCard) => {
-            printerCard.addEventListener("click", function () {
-              if (this.classList.contains("selected")) {
-                // Bỏ chọn nếu nhấn vào máy in đang được chọn
-                this.classList.remove("selected");
-                selectedPrinter = null;
-                contentImage.style.display = "none";
-                disableSwitch.checked = false; // Reset trạng thái switch
-                disableSwitch.disabled = true; // Disable switch
-              } else {
-                // Chọn máy in mới
-                printerCards.forEach((card) =>
-                  card.classList.remove("selected")
-                ); // Xóa class 'selected' khỏi tất cả các thẻ
-                this.classList.add("selected");
-                selectedPrinter = this;
-
-                const printerId = this.dataset.printerId; // Lấy ID máy in từ thuộc tính data
-                const statusElement = this.querySelector(".status"); // Lấy trạng thái của máy in
-
-                // Hiển thị hình ảnh cấu hình
-                contentImage.src = `{{ url_for('static', filename='images/cauhinhmayin.png') }}`;
-                contentImage.style.display = "block";
-
-                // Cập nhật trạng thái công tắc
-
-                if (statusElement.classList.contains("status-disabled")) {
-                  disableSwitch.checked = true; // Bật công tắc
-                } else {
-                  disableSwitch.checked = false; // Tắt công tắc
-                }
-
-                disableSwitch.disabled = false; // Bật công tắc để có thể thao tác
-              }
-            });
+              printerCard.addEventListener("click", function () {
+                  if (this.classList.contains("selected")) {
+                      // Bỏ chọn nếu nhấn vào máy in đang được chọn
+                      this.classList.remove("selected");
+                      selectedPrinter = null;
+                      contentImage.style.display = "none";
+                      disableSwitch.checked = false; // Reset trạng thái switch
+                      disableSwitch.disabled = true; // Disable switch
+                  } else {
+                      // Chọn máy in mới
+                      printerCards.forEach((card) => card.classList.remove("selected"));
+                      this.classList.add("selected");
+                      selectedPrinter = this;
+      
+                      const printerId = this.dataset.printerId; // Lấy ID máy in từ thuộc tính data
+                      const statusElement = this.querySelector(".status"); // Lấy trạng thái của máy in
+      
+                      // Hiển thị hình ảnh cấu hình
+                      contentImage.src = `{{ url_for('static', filename='images/cauhinhmayin.png') }}`;
+                      contentImage.style.display = "block";
+      
+                      // Cập nhật trạng thái công tắc
+                      if (statusElement.classList.contains("status-disabled")) {
+                          disableSwitch.checked = true; // Bật công tắc
+                      } else {
+                          disableSwitch.checked = false; // Tắt công tắc
+                      }
+      
+                      disableSwitch.disabled = false; // Bật công tắc để có thể thao tác
+                  }
+              });
           });
+      
+          // Lắng nghe thay đổi trạng thái của công tắc
           disableSwitch.addEventListener("change", function () {
-            if (!selectedPrinter) return; // Nếu không có máy in nào được chọn
-
-            const statusElement = selectedPrinter.querySelector(".status");
-
-            if (this.checked) {
-              // Chuyển sang trạng thái "vô hiệu hóa"
-              statusElement.textContent = "VÔ HIỆU HÓA";
-              statusElement.classList.remove("status-available", "status-busy");
-              statusElement.classList.add("status-disabled");
-            } else {
-              // Chuyển sang trạng thái "sẵn sàng"
-              statusElement.textContent = "SẴN SÀNG";
-              statusElement.classList.remove("status-disabled", "status-busy");
-              statusElement.classList.add("status-available");
-            }
+              if (!selectedPrinter) return; // Nếu không có máy in nào được chọn
+      
+              const printerId = selectedPrinter.dataset.printerId; // Lấy ID của máy in được chọn
+              const newStatus = this.checked ? 'Vô hiệu hóa' : 'Sẵn sàng'; // Tính trạng thái mới dựa trên công tắc
+      
+              // Cập nhật trạng thái giao diện
+              const statusElement = selectedPrinter.querySelector(".status");
+              if (this.checked) {
+                  statusElement.textContent = "VÔ HIỆU HÓA";
+                  statusElement.classList.remove("status-available", "status-busy");
+                  statusElement.classList.add("status-disabled");
+              } else {
+                  statusElement.textContent = "SẴN SÀNG";
+                  statusElement.classList.remove("status-disabled", "status-busy");
+                  statusElement.classList.add("status-available");
+              }
+      
+              // Gửi yêu cầu cập nhật trạng thái lên server (Flask)
+              fetch('/update_printer_status', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      printer_id: printerId,
+                      status: newStatus,
+                  }),
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      console.log(`Máy in ${printerId} đã được cập nhật trạng thái.`);
+                  } else {
+                      console.log(`Lỗi khi cập nhật trạng thái máy in ${printerId}`);
+                  }
+              })
+              .catch(error => {
+                  console.error("Có lỗi khi gửi yêu cầu:", error);
+              });
           });
-        });
+      });
       </script>
     </div>
 
@@ -707,7 +687,7 @@
           <li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
             <img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
             <div>
-              <span class="chat-name">Anh Khoa</span>
+              <span class="chat-name">Anh Khoa</span>  
               <p class="chat-message">Tôi cần hỗ trợ...</p>
             </div>
           </li>

@@ -420,6 +420,9 @@ def choose_printer_spso():
      # Lấy thông báo của người dùng
     cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
+    # Truy vấn tất cả dữ liệu từ bảng Printer
+    cur.execute('SELECT printer_id, status, slot, branch, building, room FROM "Printer" ORDER BY printer_id ASC')
+    printers = cur.fetchall()  # Lấy danh sách máy in và các thông tin liên quan
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
         profile_picture6 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
@@ -434,7 +437,39 @@ def choose_printer_spso():
         return "User not found", 404
     cur.close()
     conn.close()
-    return render_template('choose_printer_spso.html', name=name,notifications=notifications,profile_picture6_base64=profile_picture6_base64)
+    
+    return render_template('choose_printer_spso.html', name=name,notifications=notifications,profile_picture6_base64=profile_picture6_base64,printers=printers)
+
+#cập nhật trạng thái khi frontend yêu cầu
+@app.route('/update_printer_status', methods=['POST'])
+def update_printer_status():
+    # Lấy dữ liệu từ body request
+    data = request.get_json()
+    printer_id = data['printer_id']
+    status = data['status']
+
+    # Kiểm tra giá trị status và chuyển đổi cho phù hợp với cơ sở dữ liệu
+    if status == "Sẵn sàng":
+        status_value = "Sẵn sàng"
+    elif status == "Vô hiệu hóa":
+        status_value = "Vô hiệu hóa"
+    else:
+        return jsonify({'success': False, 'message': 'Trạng thái không hợp lệ'})
+
+    # Kết nối cơ sở dữ liệu và cập nhật trạng thái máy in
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        UPDATE "Printer" 
+        SET status = %s
+        WHERE printer_id = %s
+    """, (status_value, printer_id))
+    conn.commit()
+    
+    cur.close()
+    conn.close()
+    
+    return jsonify({'success': True, 'message': f'Máy in {printer_id} đã được cập nhật trạng thái {status}.'})
 
 @app.route('/spso_dashboard')
 @login_required
