@@ -237,7 +237,7 @@
 					<form id="form" method="POST">
 						<div class="fill">
 							<label for="paper_type">CỠ GIẤY:</label>
-							<select id="paper_type">
+							<select id="paper_type" name="paper_type">
 								<option>A4</option>
 								<option>A3</option>
 								</select
@@ -248,6 +248,7 @@
 							<input
 								type="number"
 								id="num_copies"
+								name="num_copies"
 								min="0"
 								max="100"
 								required /><br />
@@ -256,13 +257,13 @@
 							<label for="page_range">SỐ TRANG:</label>
 							<input
 								type="text"
-								id="pageRange"
+								id="page_range" name="page_range"
 								placeholder="  VD: 1 - 10"
 								required /><br />
 						</div>
 						<div class="fill">
 							<label for="print_sides">SỐ MẶT:</label>
-							<select id="print_sides">
+							<select id="print_sides" name ="print_sides">
 								<option>1 mặt</option>
 								<option>2 mặt</option>
 								<option>4 mặt</option>
@@ -274,7 +275,7 @@
 						</div>
 						<div class="fill">
 							<label for="paper_orientation">KHỔ:</label>
-							<select id="paper_orientation">
+							<select id="paper_orientation" name="paper_orientation">
 								<option>Dọc</option>
 								<option>Ngang</option>
 								</select
