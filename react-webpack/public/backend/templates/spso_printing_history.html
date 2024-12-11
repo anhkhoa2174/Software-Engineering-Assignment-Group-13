@@ -6,14 +6,21 @@
 		<title>printting_history</title>
 	</head>
 	<link
+		rel="shortcut icon"
+		href="static/images/HCMUT_official_logo.ico"
+		type="image/x-icon" />
+	<link
 		rel="stylesheet"
 		href="{{ url_for('static', filename='css/navbar.css') }}" />
 	<link
 		rel="stylesheet"
-		href="{{ url_for('static', filename='css/printing_history.css') }}" />
+		href="{{ url_for('static', filename='css/print_history_spso.css') }}" />
 	<link
 		rel="stylesheet"
 		href="{{ url_for('static', filename='css/noti_box.css') }}" />
+	<link
+		rel="stylesheet"
+		href="{{ url_for('static', filename='css/chatbox_spso.css') }}" />
 	<body>
 		<div id="root"></div>
 		<link
@@ -83,13 +90,19 @@
 					<div id="bar3"></div>
 				</div>
 				<ul id="menu">
-					<li onClick="window.location.href='index';">TRANG CHỦ</li>
-					<li onClick="window.location.href='student_dashboard';">
-						BẢNG ĐIỀU KHIỂN
+					<li onClick="window.location.href='homescreen_spso';">TRANG CHỦ</li>
+					<li>BẢNG ĐIỀU KHIỂN</li>
+					<li onClick="window.location.href='choose_printer_spso';">
+						QUẢN LÝ MÁY IN
 					</li>
-					<li onClick="window.location.href='upload_file';">IN TÀI LIỆU</li>
-					<li class="index-page">LỊCH SỬ IN</li>
-					<li onClick="window.location.href='buy_paper';">MUA THÊM GIẤY</li>
+					<li
+						onClick="window.location.href='spso_printing_history';"
+						class="index-page">
+						LỊCH SỬ IN
+					</li>
+					<li onClick="window.location.href='spso_transaction';">
+						LỊCH SỬ MUA GIẤY
+					</li>
 				</ul>
 			</div>
 			<div id="noti-account">
@@ -124,53 +137,37 @@
 					<div id="notification-box" class="hidden">
 						<div class="notification-header">Thông báo</div>
 						<ul class="notification-list">
+							{% if notifications %} {% for notification in notifications %}
 							<li>
-								<span class="notification-title">Thông báo 1</span>
-								<p>Nội dung chi tiết của thông báo...</p>
+								<span class="notification-title"
+									>Thông báo {{ loop.index }}</span
+								>
+								<!-- Hiển thị số thứ tự thông báo -->
+								<p>{{ notification[0] }}</p>
+								<!-- Nội dung thông báo -->
 								<div class="notification-footer">
-									<span class="notification-time">10 phút trước</span>
+									<span class="notification-time">{{ notification[1] }}</span>
+									<!-- Thời gian thông báo -->
 									<button class="notification-detail-btn">Xem chi tiết</button>
 								</div>
 							</li>
+							{% endfor %} {% else %}
 							<li>
-								<span class="notification-title">Thông báo 2</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">30 phút trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
+								<p>Không có thông báo nào.</p>
+								<!-- Thông báo khi không có dữ liệu -->
 							</li>
-							<li>
-								<span class="notification-title">Thông báo 3</span>
-								<p>Nội dung chi tiết của thông báo...</p>
-								<div class="notification-footer">
-									<span class="notification-time">1 giờ trước</span>
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
+							{% endif %}
 						</ul>
 					</div>
 				</div>
 				<div class="info-list">
 					<ul>
 						<li>
-							<svg
-								width="51"
-								height="51"
-								viewBox="0 0 51 51"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<g id="User / User_Square">
-									<path
-										id="Vector"
-										d="M35.6998 44.0998C35.6998 38.3008 30.9988 33.5998 25.1998 33.5998C19.4008 33.5998 14.6998 38.3008 14.6998 44.0998M35.6998 44.0998H37.3863C39.7339 44.0998 40.9078 44.0998 41.8053 43.6425C42.5956 43.2398 43.2398 42.5956 43.6425 41.8053C44.0998 40.9078 44.0998 39.7339 44.0998 37.3863V13.0133C44.0998 10.6657 44.0998 9.49013 43.6425 8.59258C43.2398 7.8023 42.5956 7.16025 41.8053 6.75758C40.9069 6.2998 39.7324 6.2998 37.3802 6.2998H13.0202C10.668 6.2998 9.49101 6.2998 8.59258 6.75758C7.8023 7.16025 7.16025 7.8023 6.75758 8.59258C6.2998 9.49101 6.2998 10.668 6.2998 13.0202V37.3802C6.2998 39.7324 6.2998 40.9069 6.75758 41.8053C7.16025 42.5956 7.8023 43.2398 8.59258 43.6425C9.49013 44.0998 10.6657 44.0998 13.0133 44.0998H14.6998M35.6998 44.0998H14.6998M25.1998 27.2998C21.7204 27.2998 18.8998 24.4792 18.8998 20.9998C18.8998 17.5204 21.7204 14.6998 25.1998 14.6998C28.6792 14.6998 31.4998 17.5204 31.4998 20.9998C31.4998 24.4792 28.6792 27.2998 25.1998 27.2998Z"
-										stroke="black"
-										stroke-width="1.6"
-										stroke-linecap="round"
-										stroke-linejoin="round" />
-								</g>
-							</svg>
-							<div class="name">Katheryn</div>
+							<img
+								src="data:image/png;base64,{{ profile_picture7_base64 }}"
+								class="profile-img"
+								alt="Profile Picture" />
+							<div class="name">{{ name }}</div>
 							<ul class="dropdown">
 								<li><a>Hồ sơ</a></li>
 								<li>
@@ -202,6 +199,7 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- lịch sử in -->
 		<div class="container">
 			<div class="header">
@@ -218,8 +216,9 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Tên sinh viên</th>
-						<th>Máy in</th>
+						<th>Mã giao dịch</th>
+						<th>Số tiền</th>
+						<th>Số trang</th>
 						<th>Tên tài liệu</th>
 						<th>Dung lượng</th>
 						<th>Số trang</th>
@@ -231,17 +230,35 @@
 				<tbody>
 					{% for record in spso_history %}
 					<tr>
+						<td>{{ record[11] }}</td>
 						<td>{{ record[0] }}</td>
 						<td>{{ record[1] }}</td>
-						<td>{{ record[2] }} KB</td>
-						<td>{{ record[3] }}</td>
+						<td>{{ record[2] }}</td>
+						<td>{{ record[3] }} KB</td>
 						<td>{{ record[4] }}</td>
 						<td
 							class="status {% if record[5] == 'Hoàn thành' %}completed {% elif record[5] == 'Lỗi in' %}error {% elif record[5] == 'Đang in' %}in-progress {% else %}unknown{% endif %}">
 							{{ record[5] }}
 						</td>
 						<td>{{ record[6] }}</td>
-						<td><button class="details-btn">Xem chi tiết</button></td>
+						<td>
+							<button
+								class="details-btn"
+								data-name="{{ record[0] }}"
+								data-printer="{{ record[1] }}"
+								data-filename="{{ record[2] }}"
+								data-length="{{ record[3] }}"
+								data-pages="{{ record[4] }}"
+								data-status="{{ record[5] }}"
+								data-time="{{ record[6] }}"
+								data-orientation="{{ record[7] }}"
+								data-printsides="{{ record[8] }}"
+								data-copies="{{ record[9] }}"
+								data-type="{{ record[10] }}"
+								data-id="{{record[11]}}">
+								Xem chi tiết
+							</button>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -283,56 +300,84 @@
 			</div>
 		</div>
 
+		{% for record in spso_history %}
 		<!-- Script -->
 		<script>
 			document.querySelectorAll(".details-btn").forEach((button) => {
 				button.addEventListener("click", function () {
-					// Dữ liệu nhập tay cho modal
+					// Lấy dữ liệu từ data-* attributes
 					const details = {
-						name: "XSTK.pdf",
-						size: "94 KB",
-						status: "Thành công",
-						paperSize: "A4",
-						copies: 1,
-						pages: "1-10",
-						sides: "2 mặt",
-						orientation: "Ngang",
-						transactionId: "VN1234567890ABCD",
-						amount: "12.000 VNĐ",
-						time: "11:06 4/11/2024",
+						name: button.getAttribute("data-name"),
+						filename: button.getAttribute("data-filename"),
+						size: button.getAttribute("data-length"),
+						printer: button.getAttribute("data-printer"),
+						status: button.getAttribute("data-status"),
+						time: button.getAttribute("data-time"),
+						paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
+						copies: button.getAttribute("data-copies"), // Giá trị mẫu
+						pages: button.getAttribute("data-pages"), // Giá trị mẫu
+						sides: button.getAttribute("data-printsides"), // Giá trị mẫu
+						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
+						type: button.getAttribute("data-type"), // Loại file
+						id: button.getAttribute("data-id"), // ID sinh viên
 					};
 
-					const modalContent = `
-        <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
-          <div>
-            <p><strong>${details.name}</strong></p>
-            <p>${details.size}</p>
-          </div>
-          <div style="margin-left: auto; color: green; font-weight: bold;">
-            ${details.status}
-          </div>
-        </div>
-        <hr />
-        <p><strong>ĐẶC ĐIỂM</strong></p>
-        <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
-        <p><strong>Số bản:</strong> ${details.copies}</p>
-        <p><strong>Số trang:</strong> ${details.pages}</p>
-        <p><strong>Số mặt in:</strong> ${details.sides}</p>
-        <p><strong>Khổ:</strong> ${details.orientation}</p>
-        <hr />
-        <p><strong>THÔNG TIN THANH TOÁN</strong></p>
-        <p><strong>Mã giao dịch:</strong> ${details.transactionId}</p>
-        <p><strong>Số tiền đã thanh toán:</strong> ${details.amount}</p>
-        <p><strong>Thời gian:</strong> ${details.time}</p>
-      `;
+					// Kiểm tra loại tệp để chọn biểu tượng
+					let fileIcon = "";
+					if (details.type === "PDF") {
+						fileIcon = "static/images/pdf.png";
+					} else if (details.type === "DOCX") {
+						fileIcon = "static/images/docx.png";
+					} else if (details.type == "PNG") {
+						fileIcon = "static/images/png.png";
+					} else if (details.type == "JPG") {
+						fileIcon = "static/images/jpg.png";
+					} else {
+						fileIcon =
+							"https://upload.wikimedia.org/wikipedia/commons/4/47/File_icon.svg"; // Mặc định nếu không phải PDF hay DOCX
+					}
 
+					// Thêm class trạng thái
+					const statusClass =
+						details.status === "Hoàn thành"
+							? "status completed"
+							: details.status === "Lỗi in"
+							? "status error"
+							: details.status === "Đang in"
+							? "in-progress"
+							: "status unknown";
+
+					// Tạo nội dung modal từ dữ liệu
+					const modalContent = `
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <img src="${fileIcon}" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
+                <div>
+                    <p><strong>${details.filename}</strong></p>
+                    <p>${details.size} KB</p>
+                </div>
+                <div style="margin-left: auto" class="${statusClass}">
+                    ${details.status}
+                </div>
+            </div>
+            <hr />
+            <p><strong>ĐẶC ĐIỂM</strong></p>
+			<p><strong>ID sinh viên:</strong> ${details.id}</p>
+            <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
+            <p><strong>Số bản:</strong> ${details.copies}</p>
+            <p><strong>Số trang:</strong> ${details.pages}</p>
+            <p><strong>Số mặt in:</strong> ${details.sides}</p>
+            <p><strong>Khổ:</strong> ${details.orientation}</p>
+            <hr />
+            <p><strong>THÔNG TIN IN</strong></p>
+            <p><strong>Thời gian:</strong> ${details.time}</p>
+        `;
+
+					// Hiển thị modal
 					document.getElementById("details-content").innerHTML = modalContent;
 					document.getElementById("details-modal").style.display = "flex";
 
-					// Thêm sự kiện cho nút Xóa
-					const deleteBtn = document.getElementById("delete-btn");
-					deleteBtn.onclick = function () {
+					// Xử lý nút Xóa
+					document.getElementById("delete-btn").onclick = function () {
 						if (
 							confirm(
 								`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
@@ -345,6 +390,7 @@
 				});
 			});
 
+			// Đóng modal
 			document
 				.querySelector(".close-btn")
 				.addEventListener("click", function () {
@@ -358,6 +404,7 @@
 				}
 			});
 		</script>
+		{% endfor %}
 
 		<!-- script -->
 		<script>
@@ -425,6 +472,145 @@
 				.addEventListener("click", function (e) {
 					e.stopPropagation();
 				});
+		</script>
+		<!-- chatbox spso -->
+		<div
+			id="chat-icon"
+			draggable="true"
+			onmousedown="this.style.cursor='grabbing'"
+			onmouseup="this.style.cursor='grab'"
+			ondragstart="event.dataTransfer.setDragImage(new Image(), 0, 0);"
+			ondrag="if(event.clientX > 0 && event.clientY > 0) { this.style.left = event.clientX - 25 + 'px'; this.style.top = event.clientY - 25 + 'px'; this.style.position='fixed'; }"
+			onclick="document.getElementById('chat-box').style.display = 'flex';">
+			💬
+		</div>
+
+		<!-- Chat Box -->
+		<div id="chat-box">
+			<!-- Chat List -->
+			<div id="chat-list">
+				<div class="chat-header">
+					<span>Đoạn chat</span>
+					<button
+						onclick="document.getElementById('chat-box').style.display = 'none';">
+						×
+					</button>
+				</div>
+				<ul>
+					<li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
+						<img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
+						<div>
+							<span class="chat-name">Anh Khoa</span>
+							<p class="chat-message">Tôi cần hỗ trợ...</p>
+						</div>
+					</li>
+					<li
+						onclick="openChat('Tiến Đạt', 'Tôi cần hỗ trợ với máy tính mạng');">
+						<img src="{{ url_for('static', filename='images/dat.png') }}" />
+						<div>
+							<span class="chat-name">Tiến Đạt</span>
+							<p class="chat-message">Tôi cần hỗ trợ...</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Chat Conversation -->
+			<div id="chat-conversation" style="display: none">
+				<div class="chat-header">
+					<button onclick="backToChatList()">←</button>
+					<span id="conversation-name"></span>
+				</div>
+				<div id="messages">
+					<!-- Messages dynamically injected -->
+				</div>
+				<div class="chat-input">
+					<input
+						type="text"
+						placeholder="Nhập tin nhắn..."
+						id="message-input" />
+					<button onclick="sendMessage()">Gửi</button>
+				</div>
+			</div>
+		</div>
+		<!-- script chatbox -->
+		<script>
+			const chatIcon = document.getElementById("chat-icon");
+			const chatBox = document.getElementById("chat-box");
+			const chatList = document.getElementById("chat-list");
+			const chatConversation = document.getElementById("chat-conversation");
+			const conversationName = document.getElementById("conversation-name");
+			const messages = document.getElementById("messages");
+			const messageInput = document.getElementById("message-input");
+
+			let offsetX, offsetY;
+
+			// Data for the messages
+			const chatData = {
+				"Anh Khoa": ["Tôi cần hỗ trợ ở máy in số 4", "Máy in bị lỗi giấy"],
+				"Tiến Đạt": [
+					"Tôi cần hỗ trợ với máy tính mạng",
+					"Mạng bị ngắt kết nối",
+				],
+			};
+			// Toggle chat box visibility
+			function toggleChat() {
+				chatBox.classList.toggle("hidden");
+			}
+
+			// Close chat box
+			function closeChat() {
+				chatBox.classList.add("hidden");
+			}
+
+			function openChat(name, initialMessage) {
+				// Hide chat list and show chat conversation
+				document.getElementById("chat-list").style.display = "none";
+				document.getElementById("chat-conversation").style.display = "flex";
+
+				// Set the conversation name
+				document.getElementById("conversation-name").textContent = name;
+
+				// Show all messages for the selected chat
+				const messages = chatData[name]
+					.map((message) => `<p><strong>${name}:</strong> ${message}</p>`)
+					.join("");
+
+				// Display all the messages
+				document.getElementById("messages").innerHTML = messages;
+			}
+
+			// Back to the chat list
+			function backToChatList() {
+				document.getElementById("chat-conversation").style.display = "none";
+				document.getElementById("chat-list").style.display = "block";
+			}
+
+			// Send message
+			function sendMessage() {
+				const text = document.getElementById("message-input").value.trim();
+				if (text) {
+					const message = `<p><strong>Bạn:</strong> ${text}</p>`;
+					document.getElementById("messages").innerHTML += message;
+					document.getElementById("message-input").value = "";
+				}
+			}
+
+			// Dragging the chat icon
+			function startDrag(e) {
+				offsetX = e.clientX - chatIcon.offsetLeft;
+				offsetY = e.clientY - chatIcon.offsetTop;
+				chatIcon.style.cursor = "grabbing";
+			}
+
+			function endDrag(e) {
+				chatIcon.style.left = `${e.clientX - offsetX}px`;
+				chatIcon.style.top = `${e.clientY - offsetY}px`;
+				chatIcon.style.cursor = "grab";
+			}
+
+			// Add click listener to open chat box
+			chatIcon.addEventListener("click", toggleChat);
 		</script>
 	</body>
 </html>

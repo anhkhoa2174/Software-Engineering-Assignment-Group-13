@@ -1,0 +1,312 @@
+/* Thiết lập cơ bản cho toàn bộ trang */
+html,
+body {
+  height: 100%; /* Đảm bảo chiều cao của toàn bộ trang */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Montserrat, sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column; /* Đảm bảo thân trang chiếm hết chiều cao */
+}
+
+/* Container chính */
+.container {
+  display: flex;
+  height: 88%; /* Chiều cao chiếm toàn bộ màn hình */
+  margin-top: 5%; /* Lùi xuống một chút để tạo không gian */
+  margin-left: 1%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 25%; /* Chiều rộng sidebar */
+  background-color: #ffffff;
+  border: 3px solid #ddd; /* Viền toàn khung */
+  padding: 1%; /* Padding linh hoạt hơn */
+  box-sizing: border-box; /* Đảm bảo padding không vượt quá kích thước */
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài */
+  border-radius: 8px;
+}
+
+/* Tiêu đề trong sidebar */
+.header {
+  font-size: 20px;
+  color: #4a4a4a; /* Đảm bảo màu chữ đủ tương phản */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center; /* Căn giữa tiêu đề nếu cần */
+}
+
+.img-container {
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  height: auto; /* Chiều cao của container */
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.img-responsive {
+  max-width: auto; /* Đảm bảo ảnh không vượt quá chiều rộng của phần tử chứa */
+  height: auto; /* Giữ tỷ lệ khung hình cho ảnh */
+}
+
+/* Đường phân cách trong sidebar */
+.sidebar hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: #4a4a4a;
+  font-weight: bold;
+}
+
+/* Custom radio buttons */
+.custom-radio {
+  margin: 3% 0;
+  display: inline-flex; /* Đảm bảo các radio button nằm ngang */
+  align-items: center;
+}
+
+.radio-group {
+  display: flex; /* Dùng Flexbox để sắp xếp ngang */
+  gap: 20px; /* Khoảng cách giữa các radio button */
+}
+
+.radio-group1 {
+    display: flex; /* Dùng Flexbox để sắp xếp ngang */
+    gap: 20px; /* Khoảng cách giữa các radio button */
+    justify-content: space-between;
+}
+
+.custom-radio input[type="radio"] {
+  display: none;
+}
+
+.custom-radio label {
+  display: inline-flex; /* Căn chỉnh inline-flex để không kéo dài */
+  align-items: center; /* Căn giữa radio và text */
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 3px 8px; /* Giảm padding để làm nhỏ khung radio */
+  font-size: 0.9rem; /* Giảm kích thước font chữ */
+  max-width: 100%; /* Đảm bảo label không vượt quá chiều rộng */
+  text-align: left; /* Canh trái chữ */
+  cursor: pointer;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Khi chọn radio */
+.custom-radio input[type="radio"]:checked + label {
+  border-color: #4caf50;
+  background-color: #e8f5e9;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Hover khi di chuột vào label */
+.custom-radio label:hover {
+  border-color: #2196f3;
+  background-color: #e3f2fd;
+}
+
+
+
+
+/* Content chính */
+.content {
+  flex-grow: 1; /* Chiếm toàn bộ không gian còn lại */
+  padding: 5%;
+  box-sizing: border-box; /* Đảm bảo padding không vượt quá kích thước */
+}
+
+/* Tiêu đề nội dung */
+.content h1 {
+  font-size: 2rem;
+  color: #4a4a4a;
+  margin-bottom: 5%;
+}
+
+/* main */
+.printers-container {
+  visibility: hidden;  /* Ẩn máy in nhưng vẫn giữ không gian */
+  flex: 1 1 auto;
+    padding: 20px;
+    width: 50% ;
+    margin: auto;
+}
+/* Breadcrumb (Đường dẫn điều hướng) */
+.breadcrumb {
+    font-size: 25px;
+    color: #3C5FB0;
+    margin-bottom: 20px;
+    background-color: #E8ECF8;
+    padding: 10px 15px; /* Tạo khoảng cách trong khung */
+    display: inline-block; /* Để khung vừa nội dung */
+    max-width: 100%; /* Giới hạn chiều rộng tối đa */
+    white-space: nowrap; /* Không xuống dòng */
+    overflow: hidden; /* Ẩn phần chữ vượt quá khung */
+    text-overflow: ellipsis; /* Thêm dấu ... nếu chữ quá dài */
+    border-radius: 10px; /* Bo góc khung */
+}
+
+/* Lưới máy in */
+.printers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+/* Thẻ máy in */
+.printer-card {
+    background: #F7F8F3;
+    border: 3px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height:200px ;
+}
+
+.selected {
+  border: 3px solid #4a4a4a; 
+}
+
+/* Icon máy in */
+.printer-card img {
+    width: 125px;
+    height: 150px;
+    
+}
+
+/* ID máy in */
+.printer-id {
+    font-weight: bold;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Trạng thái máy in */
+.status {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Màu trạng thái */
+.status-busy {
+    color: #ff4d4d;
+    
+}
+
+.status-available {
+    color: #4caf50;
+}
+
+.status-disabled {
+    color: #15037B;
+}
+
+/* Panel styling */
+.config-panel {
+  flex: 0 1 auto;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #F8F7F3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 1%;
+}
+
+.header2 {
+  background-color: #F8F7F3;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  border-top-left-radius: 8px;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+.content img {
+  width: 100%; /* Hình ảnh chiếm tối đa chiều rộng container */
+  height: 100%; /* Đảm bảo hình ảnh không vượt quá chiều cao container */
+  margin: 0 auto; /* Căn giữa hình ảnh */
+  display: block; /* Để áp dụng margin căn giữa */
+}
+
+
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+/* Toggle switch styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
