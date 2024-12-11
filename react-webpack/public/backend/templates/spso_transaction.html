@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>printting_history</title>
+		<title>Lịch sử mua giấy</title>
 	</head>
 	<link
 		rel="shortcut icon"
@@ -95,12 +95,12 @@
 					<li onClick="window.location.href='choose_printer_spso';">
 						QUẢN LÝ MÁY IN
 					</li>
-					<li
-						onClick="window.location.href='spso_printing_history';"
-						class="index-page">
+					<li onClick="window.location.href='spso_printing_history';">
 						LỊCH SỬ IN
 					</li>
-					<li onClick="window.location.href='spso_transaction';">
+					<li
+						onClick="window.location.href='spso_transaction';"
+						class="index-page">
 						LỊCH SỬ MUA GIẤY
 					</li>
 				</ul>
@@ -217,45 +217,39 @@
 				<thead>
 					<tr>
 						<th>Mã giao dịch</th>
-						<th>Số tiền</th>
+						<th>Tên sinh viên</th>
+						<th>ID sinh viên</th>
+						<th>Giá tiền</th>
 						<th>Số trang</th>
-						<th>Tên tài liệu</th>
-						<th>Dung lượng</th>
-						<th>Số trang</th>
+						<th>Số dư</th>
 						<th>Trạng thái</th>
-						<th>Thời điểm</th>
 						<th>Hành động</th>
 					</tr>
 				</thead>
 				<tbody>
-					{% for record in spso_history %}
+					{% for record in transactions %}
 					<tr>
-						<td>{{ record[11] }}</td>
 						<td>{{ record[0] }}</td>
+						<td>{{ record[5] }}</td>
+						<td>{{ record[6] }}</td>
 						<td>{{ record[1] }}</td>
 						<td>{{ record[2] }}</td>
-						<td>{{ record[3] }} KB</td>
-						<td>{{ record[4] }}</td>
+						<td>{{ record[7] }}</td>
 						<td
-							class="status {% if record[5] == 'Hoàn thành' %}completed {% elif record[5] == 'Lỗi in' %}error {% elif record[5] == 'Đang in' %}in-progress {% else %}unknown{% endif %}">
-							{{ record[5] }}
+							class="status {% if record[3] == 'Đã thanh toán' %}completed {% elif record[5] == 'Lỗi thanh toán' %}error {% elif record[5] == 'Đang chờ thanh toán' %}in-progress {% else %}unknown{% endif %}">
+							{{ record[3] }}
 						</td>
-						<td>{{ record[6] }}</td>
 						<td>
 							<button
 								class="details-btn"
-								data-name="{{ record[0] }}"
-								data-printer="{{ record[1] }}"
-								data-filename="{{ record[2] }}"
-								data-length="{{ record[3] }}"
-								data-pages="{{ record[4] }}"
-								data-status="{{ record[5] }}"
-								data-time="{{ record[6] }}"
-								data-orientation="{{ record[7] }}"
-								data-printsides="{{ record[8] }}"
-								data-copies="{{ record[9] }}"
-								data-type="{{ record[10] }}"
-								data-id="{{record[11]}}">
+								data-transid="{{ record[0] }}"
+								data-price="{{ record[1] }}"
+								data-nopages="{{ record[2] }}"
+								data-status="{{ record[3] }}"
+								data-username="{{ record[4] }}"
+								data-name="{{ record[5] }}"
+								data-id="{{ record[6] }}"
+								data-balance="{{ record[7] }}">
 								Xem chi tiết
 							</button>
 						</td>
@@ -279,7 +273,7 @@
 		<div id="details-modal" class="modal" style="display: none">
 			<div class="modal-content">
 				<span class="close-btn">&times;</span>
-				<h3>Chi tiết tài liệu</h3>
+				<h3>Chi tiết giao dịch</h3>
 				<div id="details-content">
 					<!-- Nội dung chi tiết sẽ được thêm động qua JavaScript -->
 				</div>
@@ -300,26 +294,22 @@
 			</div>
 		</div>
 
-		{% for record in spso_history %}
+		{% for record in transactions %}
 		<!-- Script -->
 		<script>
 			document.querySelectorAll(".details-btn").forEach((button) => {
 				button.addEventListener("click", function () {
 					// Lấy dữ liệu từ data-* attributes
 					const details = {
-						name: button.getAttribute("data-name"),
-						filename: button.getAttribute("data-filename"),
-						size: button.getAttribute("data-length"),
-						printer: button.getAttribute("data-printer"),
+						transid: button.getAttribute("data-transid"),
+						price: button.getAttribute("data-price"),
+						nopages: button.getAttribute("data-nopages"),
 						status: button.getAttribute("data-status"),
-						time: button.getAttribute("data-time"),
 						paperSize: "A4", // Giá trị mẫu (có thể thêm từ Flask nếu cần)
-						copies: button.getAttribute("data-copies"), // Giá trị mẫu
-						pages: button.getAttribute("data-pages"), // Giá trị mẫu
-						sides: button.getAttribute("data-printsides"), // Giá trị mẫu
-						orientation: button.getAttribute("data-orientation"), // Giá trị mẫu
-						type: button.getAttribute("data-type"), // Loại file
-						id: button.getAttribute("data-id"), // ID sinh viên
+						username: button.getAttribute("data-username"), // Giá trị mẫu
+						name: button.getAttribute("data-name"), // Giá trị mẫu
+						id: button.getAttribute("data-id"), // Giá trị mẫu
+						balance: button.getAttribute("data-balance"), // Giá trị mẫu
 					};
 
 					// Kiểm tra loại tệp để chọn biểu tượng
@@ -339,21 +329,19 @@
 
 					// Thêm class trạng thái
 					const statusClass =
-						details.status === "Hoàn thành"
+						details.status === "Đã thanh toán"
 							? "status completed"
-							: details.status === "Lỗi in"
+							: details.status === "Lỗi thanh toán"
 							? "status error"
-							: details.status === "Đang in"
+							: details.status === "Đang chờ thanh toán"
 							? "in-progress"
 							: "status unknown";
 
 					// Tạo nội dung modal từ dữ liệu
 					const modalContent = `
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <img src="${fileIcon}" alt="PDF Icon" style="width: 50px; margin-right: 10px;" />
-                <div>
-                    <p><strong>${details.filename}</strong></p>
-                    <p>${details.size} KB</p>
+                 <div>
+                    <p><strong>Trạng thái giao dịch</strong></p>
                 </div>
                 <div style="margin-left: auto" class="${statusClass}">
                     ${details.status}
@@ -363,13 +351,12 @@
             <p><strong>ĐẶC ĐIỂM</strong></p>
 			<p><strong>ID sinh viên:</strong> ${details.id}</p>
             <p><strong>Cỡ giấy:</strong> ${details.paperSize}</p>
-            <p><strong>Số bản:</strong> ${details.copies}</p>
-            <p><strong>Số trang:</strong> ${details.pages}</p>
-            <p><strong>Số mặt in:</strong> ${details.sides}</p>
-            <p><strong>Khổ:</strong> ${details.orientation}</p>
+            <p><strong>Số trang:</strong> ${details.nopages}</p>
+            <p><strong>Số dư còn lại:</strong> ${details.balance}</p>
             <hr />
-            <p><strong>THÔNG TIN IN</strong></p>
-            <p><strong>Thời gian:</strong> ${details.time}</p>
+            <p><strong>THÔNG TIN MUA</strong></p>
+            <p><strong>Mã giao dịch:</strong> ${details.transid}</p>
+            <p><strong>Thành tiền:</strong> ${details.price}</p>
         `;
 
 					// Hiển thị modal
@@ -380,7 +367,7 @@
 					document.getElementById("delete-btn").onclick = function () {
 						if (
 							confirm(
-								`Bạn có chắc chắn muốn xóa tài liệu "${details.name}" không?`
+								`Bạn có chắc chắn muốn xóa giao dịch "${details.name}" không?`
 							)
 						) {
 							alert(`Tài liệu "${details.name}" đã bị xóa.`);
