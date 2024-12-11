@@ -13,7 +13,7 @@ CREATE TABLE "Student" (
     account_balance NUMERIC(10, 2) DEFAULT 0
 );
 
-SELECT name FROM "User" WHERE username = 'khoa'
+SELECT name FROM "User" WHERE username = 'khoa';
 
 -- Bảng SPSO (kế thừa từ User)
 CREATE TABLE "SPSO" (
@@ -29,6 +29,8 @@ CREATE TABLE "Printer" (
     building VARCHAR(100),
     room VARCHAR(50)
 );
+
+ALTER TABLE "Printer" ALTER COLUMN slot SET DEFAULT 3;
 
 -- Bảng quản lý mối quan hệ giữa SPSO và Printer
 CREATE TABLE "Manages" (
@@ -142,27 +144,27 @@ ADD COLUMN print_sides VARCHAR(10) CHECK (print_sides IN ('1 mặt', '2 mặt'))
 ADD COLUMN num_copies INT DEFAULT 1;
 
 UPDATE "Uses"
-SET paper_orientation = 'Dọc'
+SET paper_orientation = 'Dọc';
 
 UPDATE "Uses"
-SET print_sides = '1 mặt'
+SET print_sides = '1 mặt';
 
 ALTER TABLE "User"
 ALTER COLUMN profile_picture TYPE BYTEA
 USING profile_picture::bytea;
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\duchuy.png')
+SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\duchuy.png')
 WHERE username = 'duc_huy';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\anhkhoa.png')
+SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\anhkhoa.png')
 WHERE username = 'khoa';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('C:\xampp\htdocs\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\dat.png')
+SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\dat.png')
 WHERE username = 'tien_dat';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 

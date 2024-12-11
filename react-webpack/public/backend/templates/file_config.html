@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-		<title>Tải tài liệu</title>
+		<title>Chỉnh tài liệu</title>
 		<link />
 		<link
 			rel="shortcut icon"
@@ -18,7 +18,7 @@
 			}
 		</style>
 		<link rel="stylesheet" href={{ url_for('static', filename='css/navbar.css')}} /> 
-		<link rel="stylesheet" href={{ url_for('static', filename='css/uploadDocument.css') }} />
+		<link rel="stylesheet" href={{ url_for('static', filename='css/file_config.css') }} />
 		<link rel="stylesheet" href={{ url_for('static', filename='css/noti_box.css') }} />
 		<link rel="stylesheet" href={{ url_for('static', filename='css/chatbox.css') }} />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,7 +30,7 @@
 			rel="stylesheet" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<div id="upload-document-page">
+		<div id="document-config">
 			<div id="navbar">
 				<div
 					id="logo"
@@ -196,84 +196,269 @@
 					</div>
 				</div>
 			</div>
-			<div id="grid-container">
-				<div id="uploadBox" >
-					<h1>Tải file từ máy</h1>
-					<span id="upload-box-description" class="grey-text">
-						Thêm tài liệu của bạn ở đây</span
-					>
-					<form
-						id="upload-form"
-						action=""
-						method="post"	
-						enctype="multipart/form-data">
-						<div id="uploadBox-insideBox" ondragover="handleDragOver(event)" ondrop="handleFileDrop(event)">
-							<svg
-								width="37"
-								height="24"
-								viewBox="0 0 37 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg">
-								<path
-									d="M29.525 9.06C28.505 3.885 23.96 0 18.5 0C14.165 0 10.4 2.46 8.525 6.06C4.01 6.54 0.5 10.365 0.5 15C0.5 19.965 4.535 24 9.5 24H29C33.14 24 36.5 20.64 36.5 16.5C36.5 12.54 33.425 9.33 29.525 9.06ZM29 21H9.5C6.185 21 3.5 18.315 3.5 15C3.5 11.925 5.795 9.36 8.84 9.045L10.445 8.88L11.195 7.455C12.62 4.71 15.41 3 18.5 3C22.43 3 25.82 5.79 26.585 9.645L27.035 11.895L29.33 12.06C31.67 12.21 33.5 14.175 33.5 16.5C33.5 18.975 31.475 21 29 21ZM12.5 13.5H16.325V18H20.675V13.5H24.5L18.5 7.5L12.5 13.5Z"
-									fill="#1849D6" />
-							</svg>
-							<p>
-								Kéo thả file của bạn tại đây hoặc
-								<label for="upload" id="upload-label">tải lên</label>
-							</p>
-							<p class="grey-text">Kích thước tối đa là 10MB</p>
-							<input
-								type="file"
-								id="upload"
-								name="upload"
-								onchange="form.submit()"
-								accept=".jpeg, .png, .pdf, .gif, .docx, .exc, .xlsx, .pptx"
-								hidden />
+		<!-- print box -->
+		
+
+		<div class="parent">
+			<div class="div1">
+				<div id ='preview-box' class="div2">
+					<div >
+						<embed id="preview-frame" style="width: 55%; height: 610px;" frameborder="0">
+						</embed>
+					</div>
+				</div>
+			</div>
+			<div class="div3">
+				<div id = "general-info">
+					<table class="general-table" style="width: 100%;">
+						<tr>
+							<td colspan="2">
+								<h3>THÔNG TIN CHUNG</h3>
+							</td>
+						</tr>
+						<tr>
+							<td>TÊN TÀI LIỆU:</td>
+							<td id="file-name"></td>
+						</tr>
+						<tr>
+							<td> ĐỊNH DẠNG:</td>
+							<td id="file-type"></td>
+						</tr>
+						<tr>
+							<td> KÍCH THƯỚC: </td>
+							<td id="file-size"></td>
+						</tr>
+					</table>
+				</div>
+				<br />
+				<br />
+				<div id="configuration">
+					<h3>TUỲ CHỌN IN ẤN</h3>
+					<form id="form" method="POST">
+						<div class="fill">
+							<label for="paper_type">CỠ GIẤY:</label>
+							<select id="paper_type">
+								<option>A4</option>
+								<option>A3</option>
+								</select
+							><br />
 						</div>
-						<br />
-						<p class="grey-text">
-							Các định dạng hợp lệ: .jpeg, .png, .pdf, .gif, .docx, .exc, .xlsx,
-							.pptx
-						</p>
-						<p class="line-text">Hoặc</p>
-						<h1>Tải file từ URL</h1>
-						<div>
+						<div class="fill">
+							<label for="num_copies">SỐ BẢN:</label>
 							<input
-								type="url"
-								id="upload-url"
-								name="upload-url"
-								placeholder="Dán liên kết tại đây" />
-							<button  id="submit-url" name = "action" value = "upload-url">Tải lên</button>
+								type="number"
+								id="num_copies"
+								min="0"
+								max="100"
+								required /><br />
+						</div>
+						<div class="fill">
+							<label for="page_range">SỐ TRANG:</label>
+							<input
+								type="text"
+								id="pageRange"
+								placeholder="  VD: 1 - 10"
+								required /><br />
+						</div>
+						<div class="fill">
+							<label for="print_sides">SỐ MẶT:</label>
+							<select id="print_sides">
+								<option>1 mặt</option>
+								<option>2 mặt</option>
+								<option>4 mặt</option>
+								<option>6 mặt</option>
+								<option>9 mặt</option>
+								<option>16 mặt</option>
+								</select
+							><br />
+						</div>
+						<div class="fill">
+							<label for="paper_orientation">KHỔ:</label>
+							<select id="paper_orientation">
+								<option>Dọc</option>
+								<option>Ngang</option>
+								</select
+							><br />
+						</div>
+						<div class="submit">
+							<input id="back-button" value="Quay lại"  onClick="window.location.href='upload_file';"/>
+							<input type="button" id="next-button" value="Tiếp tục" />
+						</div>
+						<div class="popup-overlay" id="popupOverlay" style="display: none;">
+							<div class="popup" id="popup" >
+						
+								<span class="close" id="closePopup">&times;</span>
+								<div class="popup-content">
+									<h3>CHỌN MÁY IN</h3>
+									<table id="printer-table" border="1">
+										<thead>
+											<tr>
+												<th>Cơ sở</th>
+												<th>Toà</th>
+												<th>Máy in</th>
+												<th>Phòng</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- Printer rows will be dynamically added here -->
+										</tbody>
+									</table>
+									<input type="hidden" id="selected-printer-id" name="printer_id" value="">	
+									</br>				
+									<input type="submit" id="submitButton" value="Xác nhận" disabled/>
+								</div>
+							</div>		
 						</div>
 					</form>
+					<script>
+						const popupOverlay = document.getElementById('popupOverlay');
+						const popup = document.getElementById('popup');
+						const closePopup = document.getElementById('closePopup');
+						function closePopupFunc() {
+							popupOverlay.style.display = 'none';
+						}
+
+						
+						async function fetchAndDisplayPrinters() {
+							try {
+								document.getElementById('popupOverlay').style.display = 'block';
+								closePopup.addEventListener('click', closePopupFunc);
+								popupOverlay.addEventListener('click', function (event) {
+									if (event.target === popupOverlay) {
+										closePopupFunc();
+									}
+								});
+								// Fetch printer data from the backend
+								const response = await fetch('/choose_printer');
+								
+								// Check if the response is okay
+								if (!response.ok) {
+									throw new Error('Failed to fetch printer data');
+								}
+
+								// Parse the JSON response
+								const printers = await response.json();
+
+								// Reference to the table body
+								const tableBody = document.getElementById('printer-table').querySelector('tbody');
+
+								// Clear existing rows
+								tableBody.innerHTML = '';
+
+								// Loop through printers and create rows
+								printers.forEach(printer => {
+									const row = document.createElement('tr');
+									row.dataset.printerId = printer.printer_id;
+
+									// Create cells for each piece of data
+									Object.values(printer).forEach(value => {
+										const cell = document.createElement('td');
+										cell.textContent = value;
+										row.appendChild(cell);
+									});
+
+									// Add click event to select the row
+									row.addEventListener('click', () => toggleSelection(row));
+
+									// Append the row to the table body
+									tableBody.appendChild(row);
+								});
+							} catch (error) {
+								console.error('Error:', error);
+								alert('Failed to load printer data. Please try again later.');
+							}
+						}
+
+						// Function to handle printer selection
+						function toggleSelection(row) {
+							const selectedPrinterId = row.dataset.printerId;
+							const currentlySelectedRow = document.querySelector('.selected');
+
+							// If the clicked row is already selected, deselect it
+							if (currentlySelectedRow === row) {
+								row.classList.remove('selected');
+								document.getElementById('selected-printer-id').value = ''; 
+								document.getElementById('submitButton').disabled = true;
+							} else {
+								// Otherwise, select the new row and deselect the old one
+								if (currentlySelectedRow) {
+									currentlySelectedRow.classList.remove('selected');
+								}
+
+								row.classList.add('selected');
+								document.getElementById('selected-printer-id').value = selectedPrinterId; // Set the selected printer ID
+								document.getElementById('submitButton').disabled = false; // Enable the submit button
+							}
+						}						
+						document.getElementById('form').addEventListener('submit', function(event) {
+							event.preventDefault();
+
+							const selectedPrinterId = document.getElementById('selected-printer-id').value;
+
+							if (selectedPrinterId) {
+								alert('Gửi yêu cầu in thành công!');
+								this.submit();
+								// alert('Chọn thành công');
+							} else {
+								alert('Xin hãy chọn một máy in!');
+							}
+						});
+						
+						document.getElementById('next-button').addEventListener('click', fetchAndDisplayPrinters);
+					</script>
 				</div>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
-
-				<div id="lottieAnimation"></div>
-
-				<script>
-					lottie.loadAnimation({
-						container: document.getElementById("lottieAnimation"), // Element to render the animation
-						renderer: "svg", // Render as SVG
-						loop: true, // Loop animation
-						autoplay: true, // Start playing automatically
-						path: "https://assets8.lottiefiles.com/packages/lf20_komemhfl.json", // URL to the Lottie JSON file
-					});
-				</script>
 			</div>
-
-
 		</div>
-		<div>
-			<button id="next-button"  onClick="window.location.href='file_config';" disabled>
-				Tiếp tục
-			</button>	
-		</div>
-		<div>
-			
-		</div>
+		<script>
+			// Fetch the file and display it in the iframe
+			const previewFrame = document.getElementById('preview-frame');
+			let contentType = 'application/pdf';
+			fetch('/serve_file')
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('File not found');
+					}
+					document.getElementById('file-name').textContent = response.headers.get('file_name');
+					document.getElementById('file-type').textContent = response.headers.get('file_type');
+					document.getElementById('file-size').textContent = response.headers.get('file_size');
+					return response.blob();
+				})
+				.then(blob => {
+					// Create a URL for the blob and set it as iframe source
+					const fileURL = URL.createObjectURL(blob);
+					previewFrame.src = fileURL;
+					previewFrame.type = contentType;
+				})
+				.catch(error => console.error('Error fetching file:', error));
+		</script>
+	
+		<script>
+			// Function to simulate saving the configuration to the database
+			function saveConfiguration() {
+				// Collect the content of the print preview section
+				const content = document.getElementById('print-preview').innerHTML;
+	
+				// Example of sending the content to the backend (Flask API call)
+				fetch('http://localhost:5000/save-print-config', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ content: content })
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log('Configuration saved:', data);
+					alert('Configuration saved successfully!');
+				})
+				.catch(error => {
+					console.error('Error saving configuration:', error);
+					alert('Failed to save configuration.');
+				});
+			}
+		</script>
 		<!-- chatbox -->
+
 		<div class="chat-bar" id="chat-bar">
 			<img
 				src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
@@ -307,6 +492,7 @@
 			const chatBar = document.getElementById("chat-bar");
 			const chatBox = document.getElementById("chat-box");
 			const closeChat = document.getElementById("close-chat");
+
 			// Hiển thị khung chat và ẩn thanh chat bar
 			chatBar.addEventListener("click", () => {
 				chatBox.classList.add("show");
@@ -336,89 +522,7 @@
 				.getElementById("notification-box")
 				.addEventListener("click", function (e) {
 				  e.stopPropagation();
-				});
-			
+				});	
 		</script>
-		<!-- Handle Message -->
-		{% with messages = get_flashed_messages() %}
-		{% if messages%}
-			{% if messages[0] == 'Success' %}
-				<div class = "upload-result-box" id="upload-result-box" >
-					<table style="width: 100%;" >
-						<tr>
-							<td rowspan="2"> <i class="fa fa-file" style="font-size:40px; color:darkcyan"></i></td>
-							<td style="text-align: left;">{{file_name}} </th>
-							<td style="text-align: right"><i id="removeFile" class="fa fa-trash-o" style="font-size:20px;color:red;"></i></th>
-						</tr>
-						<tr>
-							<td style="text-align: left;">{{file_size}}</th>
-							<td style="text-align: right"> <i class="fa fa-check-circle" aria-hidden="true" style="color: darkcyan;"></i> Thành công</th>
-						</tr>
-					</table>
-					<div id="upload-result-content"></div>
-				</div>
-				<script>
-					const uploadResultBox = document.getElementById('upload-result-box');
-					const removeFile = document.getElementById('removeFile');
-					const nextButton = document.getElementById('next-button');
-					nextButton.disabled = false;
-					
-
-					function removeFileFunc() {
-						uploadResultBox.style.display = 'none';
-						nextButton.disabled = true;
-						button.classList.add('no-hover');
-						button.onmouseover = () => button.style.backgroundColor = ''; // Remove hover effect dynamically
-            			button.onmouseleave = () => button.style.backgroundColor = '#4CAF50'; // Restore default
-					}
-					removeFile.addEventListener('click', removeFileFunc);
-				</script>
-			{% else %}
-				<div class="popup-overlay" id="popupOverlay">
-
-					<div class="popup" id="popup">
-				
-						<span class="close" id="closePopup">&times;</span>
-						<div class="popup-content">
-							<h3>Lỗi</h3>
-							<p>{{messages[0]}}</p>
-
-						</div>
-					</div>		
-				</div>
-				<script>
-					document.addEventListener('DOMContentLoaded', function () {
-
-						const popupOverlay = document.getElementById('popupOverlay');
-
-						const popup = document.getElementById('popup');
-
-						const closePopup = document.getElementById('closePopup');
-
-						function openPopup() {
-
-							popupOverlay.style.display = 'block';
-
-						}
-
-						function closePopupFunc() {
-
-							popupOverlay.style.display = 'none';
-
-						}
-					// Event listener
-						openPopup();
-						closePopup.addEventListener('click', closePopupFunc);
-						popupOverlay.addEventListener('click', function (event) {
-							if (event.target === popupOverlay) {
-
-								closePopupFunc();
-							}
-						});
-						});
-				</script>
-			{% endif %}
-		{% endif %}
-		{% endwith %}
 	</body>
 </html>
