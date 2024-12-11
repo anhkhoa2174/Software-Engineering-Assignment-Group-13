@@ -192,3 +192,20 @@ SELECT
     num_copies
 FROM "User" 
 JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
+
+CREATE OR REPLACE VIEW spso_transaction AS
+SELECT
+    t.trans_id,
+    t.price,
+    t.no_pages,
+    t.status AS transaction_status,
+    u.username,
+    u.name,
+	u.id,
+    s.account_balance
+FROM 
+    "Transaction" t
+JOIN 
+    "Student" s ON t.student_username = s.username
+JOIN 
+    "User" u ON s.username = u.username;
