@@ -14,7 +14,7 @@ app.secret_key = 'your_secret_key_here'
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="p123", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -611,6 +611,49 @@ def login_spso():
         cur.close()
         conn.close()
         return redirect(url_for('login_for_spso', wrongpw='false'))
+    
+@app.route('/spso_transaction')
+@login_required
+def spso_transaction():
+    username = session.get('username')  # Lấy username từ session
+    if not username:
+        return redirect(url_for('login_for_student'))
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Truy vấn thông tin user (tên và ảnh đại diện)
+    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
+    user = cur.fetchone()
+
+    # Truy vấn tất cả thông tin từ view spso_transaction
+    logger.debug("Fetching transaction data from view spso_transaction")
+    cur.execute('SELECT trans_id, price, no_pages, transaction_status, username, name, id, account_balance FROM spso_transaction')
+    transactions = cur.fetchall()
+    logger.debug(f"Transaction data fetched: {transactions}")
+
+    if user:
+        name = user[0]  # Lấy tên từ kết quả truy vấn
+        profile_picture7 = user[1]  # Lấy ảnh từ cơ sở dữ liệu (dạng bytea)
+        logger.debug(f"Fetched profile picture for {username}: {name}")
+        if profile_picture7:
+            profile_picture7_base64 = base64.b64encode(profile_picture7).decode('utf-8')  # Chuyển sang chuỗi base64
+        else:
+            profile_picture7_base64 = None
+    else:
+        cur.close()
+        conn.close()
+        return "User not found", 404
+
+    cur.close()
+    conn.close()
+
+    # Truyền dữ liệu vào template
+    return render_template('spso_transaction.html', 
+                           transactions=transactions, 
+                           name=name, 
+                           profile_picture7_base64=profile_picture7_base64)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
