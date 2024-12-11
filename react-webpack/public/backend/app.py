@@ -16,7 +16,7 @@ file_storage = {}
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="gialinh", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -209,47 +209,40 @@ def file_config():
 @app.route('/file_config', methods=['POST'])
 @login_required
 def file_config_post():
-    # file_storage['paper_orientation'] = request.form.get('paper_orientation')
-    # file_storage['print_sides'] = request.form.get('print_sides')
-    # file_storage['num_copies'] = request.form.get('num_copies')
-    # file_storage['paper_type'] = request.form.get('paper_type')
-    # file_storage['page_range'] = request.form.get('page_range')
-    
-    username = session.get('username')  # Lấy username từ session
-    if not username:
-        return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
-    
+    paper_orientation = request.form.get('paper_orientation')
+    print_sides = request.form.get('print_sides')
+    num_copies = request.form.get('num_copies')
+    # paper_type= request.form.get('paper_type')
+    page_range = request.form.get('page_range')
+    selected_printer_id = request.form.get('printer_id')
+    file_type = file_storage['type']
+    file_name = file_storage['name']
+    file_split = file_storage['size'].split(' ')
+    if file_split[1] == 'MB':
+        file_size = int(float(file_split[0]) * 1024)
+    else:
+        file_size = int(float(file_split[0]))
+
+    page_range = page_range.split('-')
+    no_pages = int(page_range[1]) - int(page_range[0]) + 1
+
     conn = get_db_connection()
     cur = conn.cursor()
     
-    # Truy vấn tên người dùng từ bảng "User"
-    cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
-    user = cur.fetchone()
-     # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
-    notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
-    if user:
-        name = user[0]  # Lấy tên từ kết quả truy vấn
-        profile_picture4 = user[1]
-        logger.debug(f"Fetched name for user {username}: {name}")
-        logger.debug(f"Fetched profile picture for {username}: {name}")  # Log ảnh đại diện đã được lấy
-        if profile_picture4:
-            profile_picture4_base64 = base64.b64encode(profile_picture4).decode('utf-8')  # Chuyển sang chuỗi base64
-        else:
-            profile_picture4_base64 = None
-    else:
-        cur.close()
-        conn.close()
-        return "User not found", 404
+    cur.execute('''
+        INSERT INTO "Uses" 
+        (printer_id, username, file_type, file_name, file_size, no_pages, status, paper_orientation, num_copies) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    ''', 
+    (selected_printer_id, session.get('username'), file_type, file_name, file_size, no_pages, 'Hoàn thành', paper_orientation, num_copies))
 
-    cur.close()
+    cur.execute('INSERT INTO "Notification" (content, username) VALUES (%s, %s)', ('In thành công!', session.get('username')))
+    
+    conn.commit()
     conn.close()
     
     # Truyền dữ liệu vào template
-    return render_template('upload_file.html', 
-                           name=name, 
-                           profile_picture4_base64=profile_picture4_base64,
-                           notifications=notifications)
+    return redirect(url_for('printing_history'))
 
 @app.route('/choose_printer')
 @login_required
