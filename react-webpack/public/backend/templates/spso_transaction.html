@@ -236,7 +236,7 @@
 						<td>{{ record[2] }}</td>
 						<td>{{ record[7] }}</td>
 						<td
-							class="status {% if record[3] == 'Đã thanh toán' %}completed {% elif record[5] == 'Lỗi thanh toán' %}error {% elif record[5] == 'Đang chờ thanh toán' %}in-progress {% else %}unknown{% endif %}">
+							class="status {% if record[3] == 'Đã thanh toán' %}completed {% elif record[3] == 'Lỗi thanh toán' %}error {% elif record[3] == 'Đang chờ thanh toán' %}in-progress {% else %}unknown{% endif %}">
 							{{ record[3] }}
 						</td>
 						<td>
