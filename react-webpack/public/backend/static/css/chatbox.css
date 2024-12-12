@@ -5,7 +5,7 @@ body {
 .chat-bar {
     position: fixed;
     bottom: 0;
-    right: 20px;
+    left: 20px;
     background-color: #23abea;
     color: white;
     padding: 10px 20px;

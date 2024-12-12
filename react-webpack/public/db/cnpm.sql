@@ -13,8 +13,6 @@ CREATE TABLE "Student" (
     account_balance NUMERIC(10, 2) DEFAULT 0
 );
 
-SELECT name FROM "User" WHERE username = 'khoa';
-
 -- Bảng SPSO (kế thừa từ User)
 CREATE TABLE "SPSO" (
     username VARCHAR(50) PRIMARY KEY REFERENCES "User"(username)
@@ -29,8 +27,6 @@ CREATE TABLE "Printer" (
     building VARCHAR(100),
     room VARCHAR(50)
 );
-
-ALTER TABLE "Printer" ALTER COLUMN slot SET DEFAULT 3;
 
 -- Bảng quản lý mối quan hệ giữa SPSO và Printer
 CREATE TABLE "Manages" (
@@ -93,11 +89,27 @@ VALUES
 ('Sẵn sàng', 3, 'CS2', 'Tòa H1', 'Phòng 202'),
 ('Sẵn sàng', 3, 'CS1', 'Tòa B2', 'Phòng 303');
 
+INSERT INTO "Printer" (printer_id, status, slot, branch, building, room) 
+VALUES
+('2','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('4','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('5','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('6','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('7','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('8','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101'),
+('9','Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101');
+
+update "Printer"
+set room = 'Phòng 303'
+where printer_id = '3'
+
+select * from "Transaction"
+
 -- Insert vào bảng Manages (quản lý mối quan hệ giữa SPSO và Printer)
 INSERT INTO "Manages" (username, printer_id) 
 VALUES
 ('duc_huy', 1),('duc_huy', 2),
-('duc_huy', 3);
+('duc_huy', 3),('duc_huy', 4),('duc_huy', 5),('duc_huy', 6),('duc_huy', 7),('duc_huy', 8),('duc_huy', 9);
 
 -- Insert vào bảng Transaction
 INSERT INTO "Transaction" (price, no_pages, status, student_username) 
@@ -110,6 +122,15 @@ INSERT INTO "Notification" (content, username)
 VALUES
 ('In thành công!', 'khoa'),
 ('In thành công!', 'tien_dat');
+INSERT INTO "Notification" (content, username) 
+VALUES
+('In thất bại!', 'khoa');
+INSERT INTO "Notification" (content, username) 
+VALUES
+('In thành công!', 'khoa');
+INSERT INTO "Notification" (content, username) 
+VALUES
+('In thất bại!', 'khoa')
 
 -- Insert vào bảng Uses (mối quan hệ giữa User và Printer)
 INSERT INTO "Uses" (printer_id, username, file_type, file_name, file_size, no_pages, status) 
@@ -117,82 +138,138 @@ VALUES
 (1, 'khoa', 'PDF', 'document1.pdf', 1.5, 5, 'Hoàn thành'),
 (3, 'tien_dat', 'DOCX', 'assignment.docx', 0.5, 2, 'Lỗi in');
 
+
 INSERT INTO "Uses" (printer_id, username, file_type, file_name, file_size, no_pages, status) 
+
 VALUES
+
 (1, 'khoa', 'DOCX', 'btlmmt.docx', 0.5, 2, 'Lỗi in');
 
+
+
 ALTER TABLE "Transaction"
+
 ADD COLUMN "date" DATE DEFAULT CURRENT_DATE;
+
+
 
 ALTER TABLE "Transaction" ALTER COLUMN "price" SET DATA TYPE NUMERIC(10, 0);
 
+
+
 INSERT INTO "Transaction" (price, no_pages, status, student_username) 
+
 VALUES
+
 (5000, 5, 'Đã thanh toán', 'khoa'),
+
 (2000, 2, 'Lỗi thanh toán', 'tien_dat'),
+
 (51000, 51, 'Đã thanh toán', 'tien_dat'),
+
 (23000, 23, 'Đã thanh toán', 'tien_dat'),
+
 (100000, 100, 'Lỗi thanh toán', 'tien_dat'),
+
 (5000, 5, 'Đã thanh toán', 'tien_dat'),
+
 (5000, 5, 'Đã thanh toán', 'tien_dat'),
+
 (4000, 4, 'Đã thanh toán', 'tien_dat'),
+
 (13000, 13, 'Đã thanh toán', 'tien_dat');
 
+
+
 ALTER TABLE "Uses"
+
 ADD COLUMN paper_orientation VARCHAR(10) CHECK (paper_orientation IN ('Ngang', 'Dọc')),
+
 ADD COLUMN print_sides VARCHAR(10) CHECK (print_sides IN ('1 mặt', '2 mặt')),
+
 ADD COLUMN num_copies INT DEFAULT 1;
 
-UPDATE "Uses"
-SET paper_orientation = 'Dọc';
+
 
 UPDATE "Uses"
-SET print_sides = '1 mặt';
+
+SET paper_orientation = 'Dọc'
+
+
+
+UPDATE "Uses"
+
+SET print_sides = '1 mặt'
 
 ALTER TABLE "User"
-ALTER COLUMN profile_picture TYPE BYTEA
-USING profile_picture::bytea;
+    ALTER COLUMN profile_picture TYPE BYTEA
+    USING profile_picture::bytea;
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\duchuy.png')
+SET profile_picture = pg_read_binary_file('D:\duchuy.png')
 WHERE username = 'duc_huy';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\anhkhoa.png')
+SET profile_picture = pg_read_binary_file('D:\BTL_SE\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\anhkhoa.png')
 WHERE username = 'khoa';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 UPDATE "User"
-SET profile_picture = pg_read_binary_file('D:\JavaCode\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\dat.png')
+SET profile_picture = pg_read_binary_file('D:\BTL_SE\Software-Engineering-Assignment-Group-13\react-webpack\public\backend\static\images\dat.png')
 WHERE username = 'tien_dat';
 --mỗi máy nhớ đổi đường dẫn để thêm ảnh vào user
 
 CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+
 SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME, paper_orientation, print_sides, num_copies
+
 FROM "User" JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
 
+
+
 CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+
 SELECT "User".NAME, PRINTER_ID, FILE_TYPE, FILE_NAME, FILE_SIZE, NO_PAGES, STATUS, TIME, paper_orientation, print_sides, num_copies
+
 FROM "User" JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
+
+
 
 DROP VIEW spso_printinghistory
 
+
+
 CREATE OR REPLACE VIEW SPSO_PRINTINGHISTORY AS
+
 SELECT 
+
     "User".NAME, 
+
     "User".id AS USER_ID, -- Nếu bạn muốn phân biệt rõ ID này thuộc User
+
     PRINTER_ID,     -- Đổi tên PRINTER_ID thành ID
+
     FILE_TYPE, 
+
     FILE_NAME, 
+
     FILE_SIZE, 
+
     NO_PAGES, 
+
     STATUS, 
+
     TIME, 
+
     paper_orientation, 
+
     print_sides, 
+
     num_copies
+
 FROM "User" 
+
 JOIN "Uses" ON "User".USERNAME = "Uses".USERNAME
 
 CREATE OR REPLACE VIEW spso_transaction AS
@@ -211,3 +288,10 @@ JOIN
     "Student" s ON t.student_username = s.username
 JOIN 
     "User" u ON s.username = u.username;
+
+DROP VIEW spso_transaction
+
+ALTER TABLE "Student" ALTER COLUMN "account_balance" SET DATA TYPE NUMERIC(10, 0);
+
+delete from "Transaction"
+where "status" = 'Lỗi Thanh Toán' 
