@@ -295,3 +295,25 @@ ALTER TABLE "Student" ALTER COLUMN "account_balance" SET DATA TYPE NUMERIC(10, 0
 
 delete from "Transaction"
 where "status" = 'Lỗi Thanh Toán' 
+
+---------------------------------------------------------------------------Thêm vào 8:57PM 12/12/2024
+ALTER TABLE "Transaction"
+ADD COLUMN time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+CREATE OR REPLACE VIEW spso_transaction AS
+SELECT
+    t.trans_id,
+    t.price,
+    t.no_pages,
+    t.status AS transaction_status,
+    u.username,
+    u.name,
+	u.id,
+    s.account_balance,
+    t.time
+FROM 
+    "Transaction" t
+JOIN 
+    "Student" s ON t.student_username = s.username
+JOIN 
+    "User" u ON s.username = u.username;
