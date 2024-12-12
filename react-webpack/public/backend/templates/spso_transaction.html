@@ -218,6 +218,7 @@
 						<th>Giá tiền</th>
 						<th>Số trang</th>
 						<th>Số dư</th>
+						<th>Thời gian</th>
 						<th>Trạng thái</th>
 						<th>Hành động</th>
 					</tr>
@@ -231,6 +232,7 @@
 						<td>{{ record[1] }}</td>
 						<td>{{ record[2] }}</td>
 						<td>{{ record[7] }}</td>
+						<td>{{ record[8]}}</td>
 						<td
 							class="status {% if record[3] == 'Đã thanh toán' %}completed {% elif record[3] == 'Lỗi thanh toán' %}error {% elif record[3] == 'Đang chờ thanh toán' %}in-progress {% else %}unknown{% endif %}">
 							{{ record[3] }}
@@ -307,6 +309,7 @@
 						name: button.getAttribute("data-name"), // Giá trị mẫu
 						id: button.getAttribute("data-id"), // Giá trị mẫu
 						balance: button.getAttribute("data-balance"), // Giá trị mẫu
+						time: button.getAttribute("data-time"),
 					};
 
 					// Kiểm tra loại tệp để chọn biểu tượng
@@ -354,6 +357,7 @@
             <p><strong>THÔNG TIN MUA</strong></p>
             <p><strong>Mã giao dịch:</strong> ${details.transid}</p>
             <p><strong>Thành tiền:</strong> ${details.price}</p>
+			<p><strong>Thời gian:</strong> ${details.time}</p>
         `;
 
 					// Hiển thị modal
@@ -392,7 +396,34 @@
 
 		<!-- script -->
 		<script>
-			
+			function filterByDate() {
+				const startDateInput = document.getElementById("start-date").value;
+				const endDateInput = document.getElementById("end-date").value;
+				const startDate = startDateInput ? new Date(startDateInput) : null;
+				const endDate = endDateInput ? new Date(endDateInput) : null;
+				const rows = document.querySelectorAll("tbody tr");
+
+				rows.forEach((row) => {
+					const timeCell = row.children[6].innerText;
+					const rowDate = new Date(
+						timeCell.split(" ")[0].split("/").reverse().join("-")
+					);
+					if (
+						(!startDate || rowDate >= startDate) &&
+						(!endDate || rowDate <= endDate)
+					) {
+						row.style.display = "";
+					} else {
+						row.style.display = "none";
+					}
+				});
+			}
+			document
+				.getElementById("start-date")
+				.addEventListener("change", filterByDate);
+			document
+				.getElementById("end-date")
+				.addEventListener("change", filterByDate);
 			// Tìm kiếm trong bảng
 			document
 				.querySelector(".search-bar input")
