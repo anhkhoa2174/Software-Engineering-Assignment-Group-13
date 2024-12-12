@@ -181,7 +181,8 @@
 										<li>English</li>
 									</ul>
 								</li>
-								<li><a href="/">Đăng xuất</a></li>
+								<!--<li><a href="/">Đăng xuất</a></li>-->
+								<li><a href="login_for_spso">Đăng xuất</a></li>
 							</ul>
 							<svg
 								style="padding: 0 10px, 0 10px"
@@ -535,6 +536,8 @@
 						<input type="checkbox" id="disable-printer-switch" />
 						<span class="slider"></span>
 					</label>
+					<button id="add-button">Thêm máy in</button>
+    				<button id="delete-button">Xóa máy in</button>
 				</div>
 			</div>
 			<!-- script hiện cấu hình in và vô hiệu hóa -->
@@ -542,6 +545,7 @@
 				document.addEventListener("DOMContentLoaded", function () {
 					const printerCards = document.querySelectorAll(".printer-card");
 					const contentImage = document.querySelector(".content-image");
+					const deleteButton = document.getElementById("delete-button");
 					const disableSwitch = document.getElementById(
 						"disable-printer-switch"
 					);
@@ -556,6 +560,7 @@
 								contentImage.style.display = "none";
 								disableSwitch.checked = false; // Reset trạng thái switch
 								disableSwitch.disabled = true; // Disable switch
+								deleteButton.disabled = true; // Disable nút xóa
 							} else {
 								// Chọn máy in mới
 								printerCards.forEach((card) =>
@@ -579,7 +584,9 @@
 								}
 
 								disableSwitch.disabled = false; // Bật công tắc để có thể thao tác
+								deleteButton.disabled = false; // Bật nút xóa
 							}
+							console.log("Selected Printer ID:", selectedPrinter?.dataset.printerId); // Log ID được chọn
 						});
 					});
 
@@ -629,7 +636,59 @@
 								console.error("Có lỗi khi gửi yêu cầu:", error);
 							});
 					});
+					// Lắng nghe sự kiện xóa máy in
+    deleteButton.addEventListener("click", function () {
+        if (!selectedPrinter) {
+            alert("Vui lòng chọn một máy in để xóa.");
+            return;
+        }
+
+        const printerId = selectedPrinter.dataset.printerId; // Lấy ID của máy in được chọn
+
+        fetch("/delete_printer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ printer_id: printerId }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    alert(`Máy in với ID ${printerId} đã được xóa.`);
+                    location.reload(); // Tải lại trang để cập nhật danh sách
+                } else {
+                    alert("Lỗi khi xóa máy in.");
+                }
+            })
+            .catch((error) => {
+                console.error("Có lỗi xảy ra:", error);
+            });
+    });
 				});
+						// insert máy in
+						document.getElementById("add-button").addEventListener("click", function () {
+							fetch("/insert_printer", {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json",
+								},
+							})
+								.then((response) => response.json())
+								.then((data) => {
+									if (data.success) {
+										alert(`Máy in mới với ID ${data.printer_id} đã được thêm.`);
+										location.reload(); // Tải lại trang để hiển thị danh sách cập nhật
+									} else {
+										alert("Lỗi khi thêm máy in.");
+									}
+								})
+								.catch((error) => {
+									console.error("Có lỗi xảy ra:", error);
+								});
+						});
+						// delete máy in
+						
 			</script>
 		</div>
 

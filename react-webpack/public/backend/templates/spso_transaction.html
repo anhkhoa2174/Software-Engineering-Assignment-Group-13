@@ -204,14 +204,10 @@
 		<div class="container">
 			<div class="header">
 				<h2>Lịch sử in</h2>
-				<div class="date-filter">
-					<input type="date" id="start-date" />
-					<span>đến</span>
-					<input type="date" id="end-date" />
-				</div>
+				
 			</div>
 			<div class="search-bar">
-				<input type="text" placeholder="Tìm kiếm" />
+				<input type="text" placeholder="Tìm kiếm theo mã giao dịch" />
 			</div>
 			<table>
 				<thead>
@@ -249,7 +245,8 @@
 								data-username="{{ record[4] }}"
 								data-name="{{ record[5] }}"
 								data-id="{{ record[6] }}"
-								data-balance="{{ record[7] }}">
+								data-balance="{{ record[7] }}"
+								data-time="{{record[8]}}">
 								Xem chi tiết
 							</button>
 						</td>
@@ -395,34 +392,7 @@
 
 		<!-- script -->
 		<script>
-			function filterByDate() {
-				const startDateInput = document.getElementById("start-date").value;
-				const endDateInput = document.getElementById("end-date").value;
-				const startDate = startDateInput ? new Date(startDateInput) : null;
-				const endDate = endDateInput ? new Date(endDateInput) : null;
-				const rows = document.querySelectorAll("tbody tr");
-
-				rows.forEach((row) => {
-					const timeCell = row.children[2].innerText;
-					const rowDate = new Date(
-						timeCell.split(" ")[0].split("/").reverse().join("-")
-					);
-					if (
-						(!startDate || rowDate >= startDate) &&
-						(!endDate || rowDate <= endDate)
-					) {
-						row.style.display = "";
-					} else {
-						row.style.display = "none";
-					}
-				});
-			}
-			document
-				.getElementById("start-date")
-				.addEventListener("change", filterByDate);
-			document
-				.getElementById("end-date")
-				.addEventListener("change", filterByDate);
+			
 			// Tìm kiếm trong bảng
 			document
 				.querySelector(".search-bar input")

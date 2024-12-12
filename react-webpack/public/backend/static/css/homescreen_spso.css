@@ -135,124 +135,85 @@ button:hover {
 	margin-left: 2%;
 	overflow: hidden;
 	text-align: center;
-	height: 394px; /* Chiều cao cố định */
+	height: 425px; /* Chiều cao cố định */
 }
 
-/* Tiêu đề */
-.printer-header h3 {
-	margin: 2% 0 2% 0;
-	font-size: 100%;
-	color: #333;
-	font-weight: 600;
+/* File Icon Styles */
+.file-icon {
+    width: 30px; /* Điều chỉnh kích thước icon */
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease;
 }
 
-/* Khu vực carousel */
-.printer-carousel {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 1%;
-	position: relative;
-	margin-bottom: 2.5%;
+.file-icon:hover {
+    transform: scale(1.2); /* Hiệu ứng phóng to khi hover */
 }
 
-/* Nút điều hướng (trái/phải) */
-.carousel-btn {
-	background-color: transparent;
-	border: none;
-	font-size: 24px;
-	color: #007bff;
-	cursor: pointer;
+/* Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
 }
 
-.left-btn {
-	position: absolute;
-	left: 1%;
-	top: 50%;
-	transform: translateY(-50%);
+.switch input {
+    display: none;
 }
 
-.right-btn {
-	position: absolute;
-	right: 1%;
-	top: 50%;
-	transform: translateY(-50%);
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: 0.4s;
 }
 
-.carousel-btn:hover {
-	color: #0056b3;
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
 }
 
-/* Các thẻ máy in */
-.printer-items {
-	display: flex;
-	gap: 2%;
-	padding: 1% 0;
-	justify-content: center; /* Đảm bảo căn giữa */
-	width: 100%; /* Cố định chiều rộng của thẻ máy in */
-	overflow: hidden; /* Ẩn thanh cuộn ngang */
+input:checked + .slider {
+    background-color: #4caf50;
 }
 
-/* Mỗi thẻ máy in */
-.printer-card {
-	flex: 0 0 auto;
-	width: 17%; /* Chiều rộng mỗi thẻ máy in */
-	height: 220px; /* Chiều cao của thẻ máy in */
-	text-align: center;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 1%;
-	background-color: #f7f8f3;
-	transition: transform 0.2s, box-shadow 0.2s;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	justify-content: center;
-	align-items: center;
+input:checked + .slider:before {
+    transform: translateX(14px);
 }
 
-/* Hình ảnh máy in */
-.printer-card img {
-	width: 130px; /* Tăng kích thước hình ảnh */
-	height: 150px; /* Tăng kích thước hình ảnh */
-	margin-bottom: 5%; /* Khoảng cách giữa hình ảnh và phần văn bản */
+/* File Format Table Styles */
+.file-format-table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
 }
 
-/* Mã máy in */
-.printer-id {
-	font-size: 20px; /* Tăng kích thước chữ mã máy in */
-	font-weight: 600;
-	margin: 0;
-	color: #333;
+.file-format-table th, .file-format-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
 }
 
-/* Trạng thái */
-.status {
-	margin: 0;
-	font-size: 16px; /* Tăng kích thước chữ trạng thái */
-	font-weight: 600;
+.file-format-table th {
+    background-color: #f4f4f4;
 }
 
-.status.ready {
-	color: #01a12f; /* Màu xanh lá */
-}
-
-.status.disabled {
-	color: #15037b; /* Màu cam */
-}
-
-.go-button {
-	padding: 1.28% 2%;
-	font-size: 14px;
-	background-color: #23abea;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-.go-button:hover {
-	background-color: #0056b3;
+.file-format-table td {
+    text-align: center;
 }
 
 /* đăng thông báo */

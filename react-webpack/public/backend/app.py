@@ -43,7 +43,7 @@ def index():
     logger.debug(f"User fetched: {user}")  # Thêm dòng log này
 
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
 
     cur.close()
@@ -86,7 +86,7 @@ def upload_file():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -126,7 +126,7 @@ def handle_upload_file():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -185,7 +185,7 @@ def file_config():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -265,6 +265,51 @@ def choose_printer():
     conn.close()
     return jsonify(result)
 
+@app.route('/insert_printer', methods=['POST'])
+@login_required
+def insert_printer():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    
+    # Lấy printer_id lớn nhất hiện có
+    cur.execute('SELECT MAX(printer_id) FROM "Printer"')
+    max_id = cur.fetchone()[0] or 0  # Nếu không có bản ghi nào thì max_id = 0
+    new_id = max_id + 1
+
+    # Chèn máy in mới
+    cur.execute(
+        'INSERT INTO "Printer" (printer_id, status, slot, branch, building, room) VALUES (%s, %s, %s, %s, %s, %s)',
+        (new_id, 'Sẵn sàng', 3, 'CS1', 'Tòa B1', 'Phòng 101')
+    )
+    conn.commit()
+    cur.close()
+    conn.close()
+    
+    return jsonify({"success": True, "printer_id": new_id})
+
+@app.route('/delete_printer', methods=['POST'])
+@login_required
+def delete_printer():
+    data = request.json
+    printer_id = data.get('printer_id')
+    
+    if not printer_id:
+        return jsonify({"success": False, "message": "Printer ID is required"}), 400
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Xóa máy in
+    cur.execute('DELETE FROM "Printer" WHERE printer_id = %s', (printer_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+    print(f"Deleting printer ID: {printer_id}")
+    
+    return jsonify({"success": True})
+
+
+
 @app.route('/serve_file')
 def serve_file():
     if 'content' not in file_storage:
@@ -294,7 +339,7 @@ def buy_paper():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -322,7 +367,7 @@ def get_transactions():
         cursor = connection.cursor()
         username = session.get('username')
         
-        cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{username}' ORDER BY "trans_id" DESC''')
+        cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{username}' ORDER BY "trans_id" ASC''')
         transactions = cursor.fetchall()
         cursor.close()
         connection.close()
@@ -470,7 +515,7 @@ def update_error():
 #         username = session.get('username')
 
 #         # Fetch updated data
-#         cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{user_name}' ORDER BY "trans_id" DESC''')
+#         cursor.execute(f'''SELECT * FROM "Transaction" WHERE "student_username" = '{user_name}' ORDER BY "trans_id" ASC''')
 #         transactions = cursor.fetchall()
 
 #         # Convert data to JSON-friendly format
@@ -522,7 +567,7 @@ def printing_history():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -560,7 +605,7 @@ def homescreen_spso():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     if user:
         name = user[0]  # Lấy tên từ kết quả truy vấn
@@ -590,7 +635,7 @@ def choose_printer_spso():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     # Truy vấn tất cả dữ liệu từ bảng Printer
     cur.execute('SELECT printer_id, status, slot, branch, building, room FROM "Printer" ORDER BY printer_id ASC')
@@ -660,7 +705,7 @@ def spso_printing_history():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()
     # Truy vấn dữ liệu từ bảng spso_printinghistory
     logger.debug("Fetching SPSO printing history")
@@ -701,7 +746,7 @@ def student_dashboard():
     cur.execute('SELECT name, profile_picture FROM "User" WHERE username = %s', (username,))
     user = cur.fetchone()
      # Lấy thông báo của người dùng
-    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time DESC', (username,))
+    cur.execute('SELECT content, time FROM "Notification" WHERE username = %s ORDER BY time ASC', (username,))
     notifications = cur.fetchall()  # Lấy tất cả thông báo của người dùng
     
     if user:
@@ -800,7 +845,7 @@ def spso_transaction():
 
     # Truy vấn tất cả thông tin từ view spso_transaction
     logger.debug("Fetching transaction data from view spso_transaction")
-    cur.execute('SELECT trans_id, price, no_pages, transaction_status, username, name, id, account_balance FROM spso_transaction')
+    cur.execute('SELECT trans_id, price, no_pages, transaction_status, username, name, id, account_balance, time FROM spso_transaction')
     transactions = cur.fetchall()
     logger.debug(f"Transaction data fetched: {transactions}")
 

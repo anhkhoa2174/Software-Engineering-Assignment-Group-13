@@ -1,677 +1,813 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bảng điều khiển sinh viên</title>
-		<link
-			rel="shortcut icon"
-			href="static/images/HCMUT_official_logo.ico"
-			type="image/x-icon" />
-		<style>
-			html,
-			body {
-				overflow-x: hidden;
-				margin: 0;
-				padding: 0;
-				height: 100%;
-				width: 100%;
-			}
-		</style>
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/navbar.css') }}" />
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/homescreen_spso.css') }}" />
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/chatbox.css') }}" />
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/noti_box.css') }}" />
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='css/chatbox_spso.css') }}" />
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển sinh viên</title>
+    <link
+      rel="shortcut icon"
+      href="static/images/HCMUT_official_logo.ico"
+      type="image/x-icon"
+    />
+    <style>
+      html,
+      body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/navbar.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/homescreen_spso.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chatbox.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/noti_box.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chatbox_spso.css') }}"
+    />
+  </head>
 
-	<body>
-		<div id="root"></div>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-			rel="stylesheet" />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
-			rel="stylesheet" />
+  <body>
+    <div id="root"></div>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      rel="stylesheet"
+    />
 
-		<!-- nửa trên xài chung cho tất cả các web -->
+    <!-- nửa trên xài chung cho tất cả các web -->
 
-		<!-- nav bar -->
-		<div id="navbar">
-			<div
-				id="logo"
-				style="
-					width: 285.6px;
-					height: 57.6px;
-					left: 40px;
-					top: 5.6px;
-					position: absolute;
-				">
-				<div
-					style="
-						width: 255px;
-						height: 53.6px;
-						left: 17.6px;
-						top: 0px;
-						position: absolute;
-						background: #142c64;
-						border-radius: 16px;
-					"></div>
-				<img
-					style="
-						width: 88.8px;
-						height: 56.8px;
-						left: 0px;
-						top: 0.8px;
-						position: absolute;
-					"
-					src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}" />
-				<div
-					style="
-						width: 178px;
-						height: 49px;
-						left: 85px;
-						top: 0px;
-						position: absolute;
-						color: white;
-						font-size: 22.4px;
-						font-family: Montserrat;
-						font-weight: 700;
-						word-wrap: break-word;
-					">
-					Student Smart Printing Service
-				</div>
-			</div>
-			<div class="nav-block">
-				<script>
-					function openMenu(x) {
-						x.classList.toggle("change");
-						const menu = document.getElementById("menu");
-						if (menu.classList.contains("appear")) {
-							menu.classList.remove("appear");
-						} else {
-							menu.classList.add("appear");
-						}
-					}
-				</script>
-				<div id="menu-icon" onclick="openMenu(this)">
-					<div id="bar1"></div>
-					<div id="bar2"></div>
-					<div id="bar3"></div>
-				</div>
-				<ul id="menu">
-					<li
-						onClick="window.location.href='homescreen_spso';"
-						class="index-page">
-						TRANG CHỦ
-					</li>
-					<li>BẢNG ĐIỀU KHIỂN</li>
-					<li onClick="window.location.href='choose_printer_spso';">
-						QUẢN LÝ MÁY IN
-					</li>
-					<li onClick="window.location.href='spso_printing_history';">
-						LỊCH SỬ IN
-					</li>
-					<li onClick="window.location.href='spso_transaction';">
-						LỊCH SỬ MUA GIẤY
-					</li>
-				</ul>
-			</div>
-			<div id="noti-account">
-				<div id="noti">
-					<svg
-						id="circle"
-						width="18"
-						height="20"
-						viewBox="0 0 18 20"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Vector"
-							d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
-							stroke="black"
-							stroke-width="1.6"
-							stroke-linecap="round"
-							stroke-linejoin="round" />
-					</svg>
-					<svg
-						id="bell"
-						width="42"
-						height="41"
-						viewBox="0 0 42 41"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							id="Ellipse 3230"
-							d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
-							stroke="black" />
-					</svg>
-					<div id="notification-box" class="hidden">
-						<div class="notification-header">Thông báo</div>
-						<ul class="notification-list">
-							{% if notifications %} {% for notification in notifications %}
-							<li>
-								<span class="notification-title"
-									>Thông báo {{ loop.index }}</span
-								>
-								<!-- Hiển thị số thứ tự thông báo -->
-								<p>{{ notification[0] }}</p>
-								<!-- Nội dung thông báo -->
-								<div class="notification-footer">
-									<span class="notification-time">{{ notification[1] }}</span>
-									<!-- Thời gian thông báo -->
-									<button class="notification-detail-btn">Xem chi tiết</button>
-								</div>
-							</li>
-							{% endfor %} {% else %}
-							<li>
-								<p>Không có thông báo nào.</p>
-								<!-- Thông báo khi không có dữ liệu -->
-							</li>
-							{% endif %}
-						</ul>
-					</div>
-				</div>
-				<div class="info-list">
-					<ul>
-						<li>
-							<img
-								src="data:image/png;base64,{{ profile_picture5_base64 }}"
-								class="profile-img"
-								alt="Profile Picture" />
-							<div class="name">{{ name }}</div>
-							<ul class="dropdown">
-								<li><a>Hồ sơ</a></li>
-								<li>
-									<a>Ngôn ngữ</a>
-									<ul class="nextpage">
-										<li>Tiếng Việt</li>
-										<li>English</li>
-									</ul>
-								</li>
-								<li><a href="/">Đăng xuất</a></li>
-							</ul>
-							<svg
-								style="padding: 0 10px, 0 10px"
-								width="10"
-								height="5"
-								viewBox="0 0 12 8"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								style="margin-left: -5px">
-								<path
-									d="M1 1L6 6L11 1"
-									stroke="black"
-									stroke-width="1.6"
-									stroke-linecap="round"
-									stroke-linejoin="round" />
-							</svg>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="main-container">
-			<div class="left-column">
-				<!-- phản hồi sinh viên -->
-				<div class="container">
-					<!-- Tiêu đề lớn -->
-					<div class="header">
-						<h3>Phản hồi từ sinh viên</h3>
-					</div>
-					<!-- Bảng -->
-					<table>
-						<thead>
-							<tr>
-								<th>Họ và tên</th>
-								<th>MSSV</th>
-								<th>Thời gian</th>
-								<th>Trạng thái</th>
-								<th>Nội dung</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Nguyễn Văn A</td>
-								<td>2212134</td>
-								<td>4/11/2024 11:06</td>
-								<td class="orange">Đang xử lí</td>
-								<td><button>Xem chi tiết</button></td>
-							</tr>
-							<tr>
-								<td>Trần Văn B</td>
-								<td>2212135</td>
-								<td>4/11/2024 11:06</td>
-								<td class="green">Đã xử lí</td>
-								<td><button>Xem chi tiết</button></td>
-							</tr>
-							<tr>
-								<td>Hoàng Thị T</td>
-								<td>2212136</td>
-								<td>4/11/2024 11:06</td>
-								<td class="green">Đã xử lí</td>
-								<td><button>Xem chi tiết</button></td>
-							</tr>
-							<tr>
-								<td>Nguyễn Thị K</td>
-								<td>2212137</td>
-								<td>4/11/2024 11:06</td>
-								<td class="green">Đã xử lí</td>
-								<td><button>Xem chi tiết</button></td>
-							</tr>
-							<tr>
-								<td>Trần Hiếu A</td>
-								<td>2212138</td>
-								<td>4/11/2024 11:06</td>
-								<td class="green">Đã xử lí</td>
-								<td><button>Xem chi tiết</button></td>
-							</tr>
-						</tbody>
-					</table>
-					<!-- Dòng "Xem thêm ..." -->
-					<div class="footer">
-						<a href="#">Xem thêm ...</a>
-					</div>
-				</div>
-				<!-- những máy in truy cập gần đây -->
-				<div class="printer-container">
-					<!-- Tiêu đề -->
-					<div class="printer-header">
-						<h3>Những máy in truy cập gần đây</h3>
-					</div>
-					<!-- Vùng máy in -->
-					<div class="printer-carousel">
-						<img
-							src="{{ url_for('static', filename='images/arrow_circle_left.jpg') }}"
-							class="carousel-btn left-btn" />
+    <!-- nav bar -->
+    <div id="navbar">
+      <div
+        id="logo"
+        style="
+          width: 285.6px;
+          height: 57.6px;
+          left: 40px;
+          top: 5.6px;
+          position: absolute;
+        "
+      >
+        <div
+          style="
+            width: 255px;
+            height: 53.6px;
+            left: 17.6px;
+            top: 0px;
+            position: absolute;
+            background: #142c64;
+            border-radius: 16px;
+          "
+        ></div>
+        <img
+          style="
+            width: 88.8px;
+            height: 56.8px;
+            left: 0px;
+            top: 0.8px;
+            position: absolute;
+          "
+          src="{{ url_for('static', filename='images/01_logobachkhoatoi 1.png') }}"
+        />
+        <div
+          style="
+            width: 178px;
+            height: 49px;
+            left: 85px;
+            top: 0px;
+            position: absolute;
+            color: white;
+            font-size: 22.4px;
+            font-family: Montserrat;
+            font-weight: 700;
+            word-wrap: break-word;
+          "
+        >
+          Student Smart Printing Service
+        </div>
+      </div>
+      <div class="nav-block">
+        <script>
+          function openMenu(x) {
+            x.classList.toggle("change");
+            const menu = document.getElementById("menu");
+            if (menu.classList.contains("appear")) {
+              menu.classList.remove("appear");
+            } else {
+              menu.classList.add("appear");
+            }
+          }
+        </script>
+        <div id="menu-icon" onclick="openMenu(this)">
+          <div id="bar1"></div>
+          <div id="bar2"></div>
+          <div id="bar3"></div>
+        </div>
+        <ul id="menu">
+          <li
+            onClick="window.location.href='homescreen_spso';"
+            class="index-page"
+          >
+            TRANG CHỦ
+          </li>
+          <li>BẢNG ĐIỀU KHIỂN</li>
+          <li onClick="window.location.href='choose_printer_spso';">
+            QUẢN LÝ MÁY IN
+          </li>
+          <li onClick="window.location.href='spso_printing_history';">
+            LỊCH SỬ IN
+          </li>
+          <li onClick="window.location.href='spso_transaction';">
+            LỊCH SỬ MUA GIẤY
+          </li>
+        </ul>
+      </div>
+      <div id="noti-account">
+        <div id="noti">
+          <svg
+            id="circle"
+            width="18"
+            height="20"
+            viewBox="0 0 18 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Vector"
+              d="M12 15V16C12 17.6569 10.6569 19 9 19C7.34315 19 6 17.6569 6 16V15M12 15H6M12 15H15.5905C15.973 15 16.1652 15 16.3201 14.9478C16.616 14.848 16.8475 14.6156 16.9473 14.3198C16.9997 14.1643 16.9997 13.9715 16.9997 13.5859C16.9997 13.4172 16.9995 13.3329 16.9863 13.2524C16.9614 13.1004 16.9024 12.9563 16.8126 12.8312C16.7651 12.7651 16.7048 12.7048 16.5858 12.5858L16.1963 12.1963C16.0706 12.0706 16 11.9001 16 11.7224V8C16 4.134 12.866 0.999991 9 1C5.13401 1.00001 2 4.13401 2 8V11.7224C2 11.9002 1.92924 12.0706 1.80357 12.1963L1.41406 12.5858C1.29476 12.7051 1.23504 12.765 1.1875 12.8312C1.09766 12.9564 1.03815 13.1004 1.0132 13.2524C1 13.3329 1 13.4172 1 13.586C1 13.9715 1 14.1642 1.05245 14.3197C1.15225 14.6156 1.3848 14.848 1.68066 14.9478C1.83556 15 2.02701 15 2.40956 15H6"
+              stroke="black"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <svg
+            id="bell"
+            width="42"
+            height="41"
+            viewBox="0 0 42 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="Ellipse 3230"
+              d="M41 20.5C41 31.5457 32.0457 40.5 21 40.5C9.9543 40.5 1 31.5457 1 20.5C1 9.4543 9.9543 0.5 21 0.5C32.0457 0.5 41 9.4543 41 20.5Z"
+              stroke="black"
+            />
+          </svg>
+          <div id="notification-box" class="hidden">
+            <div class="notification-header">Thông báo</div>
+            <ul class="notification-list">
+              {% if notifications %} {% for notification in notifications %}
+              <li>
+                <span class="notification-title"
+                  >Thông báo {{ loop.index }}</span
+                >
+                <!-- Hiển thị số thứ tự thông báo -->
+                <p>{{ notification[0] }}</p>
+                <!-- Nội dung thông báo -->
+                <div class="notification-footer">
+                  <span class="notification-time">{{ notification[1] }}</span>
+                  <!-- Thời gian thông báo -->
+                  <button class="notification-detail-btn">Xem chi tiết</button>
+                </div>
+              </li>
+              {% endfor %} {% else %}
+              <li>
+                <p>Không có thông báo nào.</p>
+                <!-- Thông báo khi không có dữ liệu -->
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+        <div class="info-list">
+          <ul>
+            <li>
+              <img
+                src="data:image/png;base64,{{ profile_picture5_base64 }}"
+                class="profile-img"
+                alt="Profile Picture"
+              />
+              <div class="name">{{ name }}</div>
+              <ul class="dropdown">
+                <li><a>Hồ sơ</a></li>
+                <li>
+                  <a>Ngôn ngữ</a>
+                  <ul class="nextpage">
+                    <li>Tiếng Việt</li>
+                    <li>English</li>
+                  </ul>
+                </li>
+                <!--<li><a href="/">Đăng xuất</a></li>-->
+                <li><a href="login_for_spso">Đăng xuất</a></li>
+              </ul>
+              <svg
+                style="padding: 0 10px, 0 10px"
+                width="10"
+                height="5"
+                viewBox="0 0 12 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="margin-left: -5px"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="black"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="main-container">
+      <div class="left-column">
+        <!-- phản hồi sinh viên -->
+        <div class="container">
+          <!-- Tiêu đề lớn -->
+          <div class="header">
+            <h3>Phản hồi từ sinh viên</h3>
+          </div>
+          <!-- Bảng -->
+          <table>
+            <thead>
+              <tr>
+                <th>Họ và tên</th>
+                <th>MSSV</th>
+                <th>Thời gian</th>
+                <th>Trạng thái</th>
+                <th>Nội dung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nguyễn Văn A</td>
+                <td>2212134</td>
+                <td>4/11/2024 11:06</td>
+                <td class="orange">Đang xử lí</td>
+                <td><button>Xem chi tiết</button></td>
+              </tr>
+              <tr>
+                <td>Trần Văn B</td>
+                <td>2212135</td>
+                <td>4/11/2024 11:06</td>
+                <td class="green">Đã xử lí</td>
+                <td><button>Xem chi tiết</button></td>
+              </tr>
+              <tr>
+                <td>Hoàng Thị T</td>
+                <td>2212136</td>
+                <td>4/11/2024 11:06</td>
+                <td class="green">Đã xử lí</td>
+                <td><button>Xem chi tiết</button></td>
+              </tr>
+              <tr>
+                <td>Nguyễn Thị K</td>
+                <td>2212137</td>
+                <td>4/11/2024 11:06</td>
+                <td class="green">Đã xử lí</td>
+                <td><button>Xem chi tiết</button></td>
+              </tr>
+              <tr>
+                <td>Trần Hiếu A</td>
+                <td>2212138</td>
+                <td>4/11/2024 11:06</td>
+                <td class="green">Đã xử lí</td>
+                <td><button>Xem chi tiết</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Dòng "Xem thêm ..." -->
+          <div class="footer">
+            <a href="#">Xem thêm ...</a>
+          </div>
+        </div>
+        <!-- những định dạng file có thể tải lên -->
+        <div class="printer-container">
+          <h3>Các Định Dạng File Hỗ Trợ In</h3>
+          <table class="file-format-table">
+            <thead>
+              <tr>
+                <th>Định Dạng File</th>
+                <th>Cho Phép</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/docx.png') }}"
+                    class="file-icon"
+                    alt="PDF"
+                    title="PDF"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="pdf" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/pdf.png') }}"
+                    class="file-icon"
+                    alt="DOCX"
+                    title="DOCX"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="docx" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/png.png') }}"
+                    class="file-icon"
+                    alt="PNG"
+                    title="PNG"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="png" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/jpg.png') }}"
+                    class="file-icon"
+                    alt="JPG"
+                    title="JPG"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="jpg" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/excel.png') }}"
+                    class="file-icon"
+                    alt="JPG"
+                    title="JPG"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="jpg" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <img
+                    src="{{ url_for('static', filename='images/ppt.png') }}"
+                    class="file-icon"
+                    alt="JPG"
+                    title="JPG"
+                  />
+                </td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" data-file-type="jpg" checked />
+                    <span class="slider"></span>
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- script bật tắt file -->
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const switches = document.querySelectorAll(".switch input");
 
-						<!-- Các máy in -->
-						<div class="printer-items">
-							<div class="printer-card disabled">
-								<img
-									src="{{ url_for('static', filename='images/printer.jpg') }}"
-									alt="Printer" />
-								<p class="printer-id">B63034</p>
-								<p class="status disabled">VÔ HIỆU HÓA</p>
-							</div>
-							<div class="printer-card ready">
-								<img
-									src="{{ url_for('static', filename='images/printer.jpg') }}"
-									alt="Printer" />
-								<p class="printer-id">B63035</p>
-								<p class="status ready">SẴN SÀNG</p>
-							</div>
-							<div class="printer-card ready">
-								<img
-									src="{{ url_for('static', filename='images/printer.jpg') }}"
-									alt="Printer" />
-								<p class="printer-id">B63035</p>
-								<p class="status ready">SẴN SÀNG</p>
-							</div>
-							<div class="printer-card ready">
-								<img
-									src="{{ url_for('static', filename='images/printer.jpg') }}"
-									alt="Printer" />
-								<p class="printer-id">B63035</p>
-								<p class="status ready">SẴN SÀNG</p>
-							</div>
-						</div>
+            switches.forEach((toggleSwitch) => {
+              toggleSwitch.addEventListener("change", function () {
+                const fileType = this.dataset.fileType;
+                const isAllowed = this.checked;
 
-						<img
-							src="{{ url_for('static', filename='images/arrow_circle_right.jpg') }}"
-							class="carousel-btn right-btn" />
-					</div>
-					<!-- Nút điều hướng -->
-					<button class="go-button">Đi tới</button>
-				</div>
-			</div>
-			<div class="right-column">
-				<!-- đăng thông báo -->
-				<div class="notification-container">
-					<!-- Tiêu đề và lựa chọn -->
-					<div class="notification-header">
-						<h3>Thông báo</h3>
-						<select class="notification-select">
-							<option value="everyone">Mọi người</option>
-							<option value="friends">Bạn bè</option>
-							<option value="only-me">Chỉ mình tôi</option>
-						</select>
-						<img
-							src="{{ url_for('static', filename='images/icon_send.jpg') }}"
-							class="send-button" />
-					</div>
-					<!-- Ô nhập -->
-					<textarea
-						class="notification-input"
-						placeholder="Viết thông báo của bạn ở đây..."></textarea>
-					<!-- Các nút bổ sung -->
-					<div class="notification-footer">
-						<!-- Khung chứa "Thêm vào thông báo của bạn" và các icon -->
-						<div class="additional-options">
-							<span class="add-text">Thêm vào thông báo của bạn</span>
-							<div class="add-icons">
-								<button class="footer-button">
-									<img
-										src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
-										alt="Flag" />
-								</button>
-								<button class="footer-button">
-									<img
-										src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
-										alt="Friend" />
-								</button>
-								<button class="footer-button">
-									<img
-										src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
-										alt="Emoji" />
-								</button>
-								<button class="footer-button">
-									<img
-										src="{{ url_for('static', filename='images/icon_location.jpg') }}"
-										alt="Location" />
-								</button>
-								<button class="footer-button">
-									<img
-										src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
-										alt="GIF" />
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- đăng bài viết -->
-				<div class="post-container">
-					<!-- Tiêu đề -->
-					<div class="post-header">
-						<h3>Bài viết</h3>
-					</div>
-					<!-- Ô nhập văn bản -->
-					<textarea
-						class="post-input"
-						placeholder="Viết bài viết của bạn ở đây..."></textarea>
-					<!-- Các nút bổ sung -->
-					<!-- Các nút bổ sung (bao gồm cả khung "Thêm vào thông báo của bạn") -->
-					<div class="post-footer">
-						<!-- Khung 'Thêm vào thông báo của bạn' với các icon -->
-						<div class="add-to-post-container">
-							<span class="add-to-post-text">Thêm vào thông báo của bạn</span>
-							<div class="icon-container">
-								<img
-									src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
-									alt="Icon 1" />
-								<img
-									src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
-									alt="Icon 2" />
-								<img
-									src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
-									alt="Icon 3" />
-								<img
-									src="{{ url_for('static', filename='images/icon_location.jpg') }}"
-									alt="GIF" />
-								<img
-									src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
-									alt="GIF" />
-							</div>
-						</div>
-					</div>
-					<!-- Khung tải lên file -->
-					<div class="file-upload">
-						<p>
-							Kéo thả file của bạn tại đây hoặc
-							<a href="#" id="upload-trigger">tải lên</a>
-						</p>
-						<p>Kích thước file cho phép tối đa là 10MB</p>
-						<!-- Input file ẩn -->
-						<input
-							type="file"
-							id="file-input"
-							style="display: none"
-							accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xlsx,.txt" />
-						<!-- Khung hiển thị file -->
-						<div id="file-display-container" style="display: none">
-							<div class="file-display">
-								<div class="file-icon">
-									<img id="file-icon" src="" alt="File Icon" />
-								</div>
-								<div class="file-info">
-									<p class="file-name" id="file-name"></p>
-									<p class="file-size" id="file-size"></p>
-								</div>
+                console.log(`File type: ${fileType}, Allowed: ${isAllowed}`);
 
-								<span class="remove-file" id="remove-file">×</span>
-							</div>
-						</div>
-						<script>
-							const uploadTrigger = document.getElementById("upload-trigger");
-							const fileInput = document.getElementById("file-input");
-							const fileDisplayContainer = document.getElementById(
-								"file-display-container"
-							);
-							const fileNameElement = document.getElementById("file-name");
-							const fileSizeElement = document.getElementById("file-size");
-							const fileIcon = document.getElementById("file-icon");
-							const removeFile = document.getElementById("remove-file");
+                // Gửi yêu cầu cập nhật lên server nếu cần
+                fetch("/update_file_permission", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    file_type: fileType,
+                    allowed: isAllowed,
+                  }),
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.success) {
+                      console.log(`Cập nhật thành công cho ${fileType}`);
+                    } else {
+                      console.log(`Lỗi khi cập nhật ${fileType}`);
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Có lỗi xảy ra:", error);
+                  });
+              });
+            });
+          });
+        </script>
+      </div>
+      <div class="right-column">
+        <!-- đăng thông báo -->
+        <div class="notification-container">
+          <!-- Tiêu đề và lựa chọn -->
+          <div class="notification-header">
+            <h3>Thông báo</h3>
+            <select class="notification-select">
+              <option value="everyone">Mọi người</option>
+              <option value="friends">Bạn bè</option>
+              <option value="only-me">Chỉ mình tôi</option>
+            </select>
+            <img
+              src="{{ url_for('static', filename='images/icon_send.jpg') }}"
+              class="send-button"
+            />
+          </div>
+          <!-- Ô nhập -->
+          <textarea
+            class="notification-input"
+            placeholder="Viết thông báo của bạn ở đây..."
+          ></textarea>
+          <!-- Các nút bổ sung -->
+          <div class="notification-footer">
+            <!-- Khung chứa "Thêm vào thông báo của bạn" và các icon -->
+            <div class="additional-options">
+              <span class="add-text">Thêm vào thông báo của bạn</span>
+              <div class="add-icons">
+                <button class="footer-button">
+                  <img
+                    src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
+                    alt="Flag"
+                  />
+                </button>
+                <button class="footer-button">
+                  <img
+                    src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
+                    alt="Friend"
+                  />
+                </button>
+                <button class="footer-button">
+                  <img
+                    src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
+                    alt="Emoji"
+                  />
+                </button>
+                <button class="footer-button">
+                  <img
+                    src="{{ url_for('static', filename='images/icon_location.jpg') }}"
+                    alt="Location"
+                  />
+                </button>
+                <button class="footer-button">
+                  <img
+                    src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
+                    alt="GIF"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- đăng bài viết -->
+        <div class="post-container">
+          <!-- Tiêu đề -->
+          <div class="post-header">
+            <h3>Bài viết</h3>
+          </div>
+          <!-- Ô nhập văn bản -->
+          <textarea
+            class="post-input"
+            placeholder="Viết bài viết của bạn ở đây..."
+          ></textarea>
+          <!-- Các nút bổ sung -->
+          <!-- Các nút bổ sung (bao gồm cả khung "Thêm vào thông báo của bạn") -->
+          <div class="post-footer">
+            <!-- Khung 'Thêm vào thông báo của bạn' với các icon -->
+            <div class="add-to-post-container">
+              <span class="add-to-post-text">Thêm vào thông báo của bạn</span>
+              <div class="icon-container">
+                <img
+                  src="{{ url_for('static', filename='images/icon_insert_picture.jpg') }}"
+                  alt="Icon 1"
+                />
+                <img
+                  src="{{ url_for('static', filename='images/icon_tag_friend.jpg') }}"
+                  alt="Icon 2"
+                />
+                <img
+                  src="{{ url_for('static', filename='images/icon_insert_icon.jpg') }}"
+                  alt="Icon 3"
+                />
+                <img
+                  src="{{ url_for('static', filename='images/icon_location.jpg') }}"
+                  alt="GIF"
+                />
+                <img
+                  src="{{ url_for('static', filename='images/icon_insert_gif.jpg') }}"
+                  alt="GIF"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- Khung tải lên file -->
+          <div class="file-upload">
+            <p>
+              Kéo thả file của bạn tại đây hoặc
+              <a href="#" id="upload-trigger">tải lên</a>
+            </p>
+            <p>Kích thước file cho phép tối đa là 10MB</p>
+            <!-- Input file ẩn -->
+            <input
+              type="file"
+              id="file-input"
+              style="display: none"
+              accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.xlsx,.txt"
+            />
+            <!-- Khung hiển thị file -->
+            <div id="file-display-container" style="display: none">
+              <div class="file-display">
+                <div class="file-icon">
+                  <img id="file-icon" src="" alt="File Icon" />
+                </div>
+                <div class="file-info">
+                  <p class="file-name" id="file-name"></p>
+                  <p class="file-size" id="file-size"></p>
+                </div>
 
-							// Khi nhấn vào link "Tải lên", kích hoạt input file
-							uploadTrigger.addEventListener("click", (e) => {
-								e.preventDefault(); // Ngăn chặn hành động mặc định của link
-								fileInput.click(); // Mở màn hình chọn file
-							});
+                <span class="remove-file" id="remove-file">×</span>
+              </div>
+            </div>
+            <script>
+              const uploadTrigger = document.getElementById("upload-trigger");
+              const fileInput = document.getElementById("file-input");
+              const fileDisplayContainer = document.getElementById(
+                "file-display-container"
+              );
+              const fileNameElement = document.getElementById("file-name");
+              const fileSizeElement = document.getElementById("file-size");
+              const fileIcon = document.getElementById("file-icon");
+              const removeFile = document.getElementById("remove-file");
 
-							// Khi người dùng chọn file
-							fileInput.addEventListener("change", (e) => {
-								const file = e.target.files[0];
-								if (file) {
-									const fileName = file.name;
-									const fileSize = (file.size / 1024).toFixed(2) + " KB";
-									const fileExtension = fileName.split(".").pop().toLowerCase();
+              // Khi nhấn vào link "Tải lên", kích hoạt input file
+              uploadTrigger.addEventListener("click", (e) => {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của link
+                fileInput.click(); // Mở màn hình chọn file
+              });
 
-									// Hiển thị thông tin file
-									fileNameElement.textContent = fileName;
-									fileSizeElement.textContent = `${fileSize}`;
+              // Khi người dùng chọn file
+              fileInput.addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  const fileName = file.name;
+                  const fileSize = (file.size / 1024).toFixed(2) + " KB";
+                  const fileExtension = fileName.split(".").pop().toLowerCase();
 
-									// Hiển thị biểu tượng dựa trên loại file
-									const fileIcons = {
-										pdf: "https://cdn-icons-png.flaticon.com/512/337/337946.jpg",
-										doc: "https://cdn-icons-png.flaticon.com/512/337/337932.jpg",
-										docx: "https://cdn-icons-png.flaticon.com/512/337/337932.jpg",
-										xlsx: "https://cdn-icons-png.flaticon.com/512/337/337936.jpg",
-										png: "https://cdn-icons-png.flaticon.com/512/337/337937.jpg",
-										jpg: "https://cdn-icons-png.flaticon.com/512/337/337939.jpg",
-										jpeg: "https://cdn-icons-png.flaticon.com/512/337/337939.jpg",
-									};
-									fileIcon.src =
-										fileIcons[fileExtension] ||
-										"https://cdn-icons-png.flaticon.com/512/337/337940.jpg";
+                  // Hiển thị thông tin file
+                  fileNameElement.textContent = fileName;
+                  fileSizeElement.textContent = `${fileSize}`;
 
-									// Hiển thị khung
-									fileDisplayContainer.style.display = "block";
-								}
-							});
+                  // Hiển thị biểu tượng dựa trên loại file
+                  const fileIcons = {
+                    pdf: "https://cdn-icons-png.flaticon.com/512/337/337946.jpg",
+                    doc: "https://cdn-icons-png.flaticon.com/512/337/337932.jpg",
+                    docx: "https://cdn-icons-png.flaticon.com/512/337/337932.jpg",
+                    xlsx: "https://cdn-icons-png.flaticon.com/512/337/337936.jpg",
+                    png: "https://cdn-icons-png.flaticon.com/512/337/337937.jpg",
+                    jpg: "https://cdn-icons-png.flaticon.com/512/337/337939.jpg",
+                    jpeg: "https://cdn-icons-png.flaticon.com/512/337/337939.jpg",
+                  };
+                  fileIcon.src =
+                    fileIcons[fileExtension] ||
+                    "https://cdn-icons-png.flaticon.com/512/337/337940.jpg";
 
-							// Khi nhấn "Xóa file"
-							removeFile.addEventListener("click", () => {
-								fileInput.value = ""; // Reset input file
-								fileDisplayContainer.style.display = "none"; // Ẩn khung
-							});
-						</script>
-					</div>
-					<!-- Nút đăng -->
-					<button class="post-button">Đăng</button>
-				</div>
-			</div>
-		</div>
+                  // Hiển thị khung
+                  fileDisplayContainer.style.display = "block";
+                }
+              });
 
-		<script>
-			// Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
-			document.getElementById("noti").addEventListener("click", function (e) {
-				e.stopPropagation();
-				const notificationBox = document.getElementById("notification-box");
-				notificationBox.classList.toggle("active");
-			});
+              // Khi nhấn "Xóa file"
+              removeFile.addEventListener("click", () => {
+                fileInput.value = ""; // Reset input file
+                fileDisplayContainer.style.display = "none"; // Ẩn khung
+              });
+            </script>
+          </div>
+          <!-- Nút đăng -->
+          <button class="post-button">Đăng</button>
+        </div>
+      </div>
+    </div>
 
-			document.addEventListener("click", function (e) {
-				const notificationBox = document.getElementById("notification-box");
-				const noti = document.getElementById("noti");
-				if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
-					notificationBox.classList.remove("active");
-				}
-			});
+    <script>
+      // Xử lý hiển thị/ẩn bảng thông báo khi nhấn vào chuông
+      document.getElementById("noti").addEventListener("click", function (e) {
+        e.stopPropagation();
+        const notificationBox = document.getElementById("notification-box");
+        notificationBox.classList.toggle("active");
+      });
 
-			document
-				.getElementById("notification-box")
-				.addEventListener("click", function (e) {
-					e.stopPropagation();
-				});
-		</script>
-		<!-- chatbox spso -->
-		<div
-			id="chat-icon"
-			draggable="true"
-			onmousedown="this.style.cursor='grabbing'"
-			onmouseup="this.style.cursor='grab'"
-			ondragstart="event.dataTransfer.setDragImage(new Image(), 0, 0);"
-			ondrag="if(event.clientX > 0 && event.clientY > 0) { this.style.left = event.clientX - 25 + 'px'; this.style.top = event.clientY - 25 + 'px'; this.style.position='fixed'; }"
-			onclick="document.getElementById('chat-box').style.display = 'flex';">
-			💬
-		</div>
+      document.addEventListener("click", function (e) {
+        const notificationBox = document.getElementById("notification-box");
+        const noti = document.getElementById("noti");
+        if (!noti.contains(e.target) && !notificationBox.contains(e.target)) {
+          notificationBox.classList.remove("active");
+        }
+      });
 
-		<!-- Chat Box -->
-		<div id="chat-box">
-			<!-- Chat List -->
-			<div id="chat-list">
-				<div class="chat-header">
-					<span>Đoạn chat</span>
-					<button
-						onclick="document.getElementById('chat-box').style.display = 'none';">
-						×
-					</button>
-				</div>
-				<ul>
-					<li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
-						<img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
-						<div>
-							<span class="chat-name">Anh Khoa</span>
-							<p class="chat-message">Tôi cần hỗ trợ...</p>
-						</div>
-					</li>
-					<li
-						onclick="openChat('Tiến Đạt', 'Tôi cần hỗ trợ với máy tính mạng');">
-						<img src="{{ url_for('static', filename='images/dat.png') }}" />
-						<div>
-							<span class="chat-name">Tiến Đạt</span>
-							<p class="chat-message">Tôi cần hỗ trợ...</p>
-						</div>
-					</li>
-				</ul>
-			</div>
+      document
+        .getElementById("notification-box")
+        .addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+    </script>
+    <!-- chatbox spso -->
+    <div
+      id="chat-icon"
+      draggable="true"
+      onmousedown="this.style.cursor='grabbing'"
+      onmouseup="this.style.cursor='grab'"
+      ondragstart="event.dataTransfer.setDragImage(new Image(), 0, 0);"
+      ondrag="if(event.clientX > 0 && event.clientY > 0) { this.style.left = event.clientX - 25 + 'px'; this.style.top = event.clientY - 25 + 'px'; this.style.position='fixed'; }"
+      onclick="document.getElementById('chat-box').style.display = 'flex';"
+    >
+      💬
+    </div>
 
-			<!-- Chat Conversation -->
-			<div id="chat-conversation" style="display: none">
-				<div class="chat-header">
-					<button onclick="backToChatList()">←</button>
-					<span id="conversation-name"></span>
-				</div>
-				<div id="messages">
-					<!-- Messages dynamically injected -->
-				</div>
-				<div class="chat-input">
-					<input
-						type="text"
-						placeholder="Nhập tin nhắn..."
-						id="message-input" />
-					<button onclick="sendMessage()">Gửi</button>
-				</div>
-			</div>
-		</div>
-		<!-- script chatbox -->
-		<script>
-			const chatIcon = document.getElementById("chat-icon");
-			const chatBox = document.getElementById("chat-box");
-			const chatList = document.getElementById("chat-list");
-			const chatConversation = document.getElementById("chat-conversation");
-			const conversationName = document.getElementById("conversation-name");
-			const messages = document.getElementById("messages");
-			const messageInput = document.getElementById("message-input");
+    <!-- Chat Box -->
+    <div id="chat-box">
+      <!-- Chat List -->
+      <div id="chat-list">
+        <div class="chat-header">
+          <span>Đoạn chat</span>
+          <button
+            onclick="document.getElementById('chat-box').style.display = 'none';"
+          >
+            ×
+          </button>
+        </div>
+        <ul>
+          <li onclick="openChat('Anh Khoa', 'Tôi cần hỗ trợ ở máy in số 4');">
+            <img src="{{ url_for('static', filename='images/anhkhoa.png') }}" />
+            <div>
+              <span class="chat-name">Anh Khoa</span>
+              <p class="chat-message">Tôi cần hỗ trợ...</p>
+            </div>
+          </li>
+          <li
+            onclick="openChat('Tiến Đạt', 'Tôi cần hỗ trợ với máy tính mạng');"
+          >
+            <img src="{{ url_for('static', filename='images/dat.png') }}" />
+            <div>
+              <span class="chat-name">Tiến Đạt</span>
+              <p class="chat-message">Tôi cần hỗ trợ...</p>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-			let offsetX, offsetY;
+      <!-- Chat Conversation -->
+      <div id="chat-conversation" style="display: none">
+        <div class="chat-header">
+          <button onclick="backToChatList()">←</button>
+          <span id="conversation-name"></span>
+        </div>
+        <div id="messages">
+          <!-- Messages dynamically injected -->
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            placeholder="Nhập tin nhắn..."
+            id="message-input"
+          />
+          <button onclick="sendMessage()">Gửi</button>
+        </div>
+      </div>
+    </div>
+    <!-- script chatbox -->
+    <script>
+      const chatIcon = document.getElementById("chat-icon");
+      const chatBox = document.getElementById("chat-box");
+      const chatList = document.getElementById("chat-list");
+      const chatConversation = document.getElementById("chat-conversation");
+      const conversationName = document.getElementById("conversation-name");
+      const messages = document.getElementById("messages");
+      const messageInput = document.getElementById("message-input");
 
-			// Data for the messages
-			const chatData = {
-				"Anh Khoa": ["Tôi cần hỗ trợ ở máy in số 4", "Máy in bị lỗi giấy"],
-				"Tiến Đạt": [
-					"Tôi cần hỗ trợ với máy tính mạng",
-					"Mạng bị ngắt kết nối",
-				],
-			};
-			// Toggle chat box visibility
-			function toggleChat() {
-				chatBox.classList.toggle("hidden");
-			}
+      let offsetX, offsetY;
 
-			// Close chat box
-			function closeChat() {
-				chatBox.classList.add("hidden");
-			}
+      // Data for the messages
+      const chatData = {
+        "Anh Khoa": ["Tôi cần hỗ trợ ở máy in số 4", "Máy in bị lỗi giấy"],
+        "Tiến Đạt": [
+          "Tôi cần hỗ trợ với máy tính mạng",
+          "Mạng bị ngắt kết nối",
+        ],
+      };
+      // Toggle chat box visibility
+      function toggleChat() {
+        chatBox.classList.toggle("hidden");
+      }
 
-			function openChat(name, initialMessage) {
-				// Hide chat list and show chat conversation
-				document.getElementById("chat-list").style.display = "none";
-				document.getElementById("chat-conversation").style.display = "flex";
+      // Close chat box
+      function closeChat() {
+        chatBox.classList.add("hidden");
+      }
 
-				// Set the conversation name
-				document.getElementById("conversation-name").textContent = name;
+      function openChat(name, initialMessage) {
+        // Hide chat list and show chat conversation
+        document.getElementById("chat-list").style.display = "none";
+        document.getElementById("chat-conversation").style.display = "flex";
 
-				// Show all messages for the selected chat
-				const messages = chatData[name]
-					.map((message) => `<p><strong>${name}:</strong> ${message}</p>`)
-					.join("");
+        // Set the conversation name
+        document.getElementById("conversation-name").textContent = name;
 
-				// Display all the messages
-				document.getElementById("messages").innerHTML = messages;
-			}
+        // Show all messages for the selected chat
+        const messages = chatData[name]
+          .map((message) => `<p><strong>${name}:</strong> ${message}</p>`)
+          .join("");
 
-			// Back to the chat list
-			function backToChatList() {
-				document.getElementById("chat-conversation").style.display = "none";
-				document.getElementById("chat-list").style.display = "block";
-			}
+        // Display all the messages
+        document.getElementById("messages").innerHTML = messages;
+      }
 
-			// Send message
-			function sendMessage() {
-				const text = document.getElementById("message-input").value.trim();
-				if (text) {
-					const message = `<p><strong>Bạn:</strong> ${text}</p>`;
-					document.getElementById("messages").innerHTML += message;
-					document.getElementById("message-input").value = "";
-				}
-			}
+      // Back to the chat list
+      function backToChatList() {
+        document.getElementById("chat-conversation").style.display = "none";
+        document.getElementById("chat-list").style.display = "block";
+      }
 
-			// Dragging the chat icon
-			function startDrag(e) {
-				offsetX = e.clientX - chatIcon.offsetLeft;
-				offsetY = e.clientY - chatIcon.offsetTop;
-				chatIcon.style.cursor = "grabbing";
-			}
+      // Send message
+      function sendMessage() {
+        const text = document.getElementById("message-input").value.trim();
+        if (text) {
+          const message = `<p><strong>Bạn:</strong> ${text}</p>`;
+          document.getElementById("messages").innerHTML += message;
+          document.getElementById("message-input").value = "";
+        }
+      }
 
-			function endDrag(e) {
-				chatIcon.style.left = `${e.clientX - offsetX}px`;
-				chatIcon.style.top = `${e.clientY - offsetY}px`;
-				chatIcon.style.cursor = "grab";
-			}
+      // Dragging the chat icon
+      function startDrag(e) {
+        offsetX = e.clientX - chatIcon.offsetLeft;
+        offsetY = e.clientY - chatIcon.offsetTop;
+        chatIcon.style.cursor = "grabbing";
+      }
 
-			// Add click listener to open chat box
-			chatIcon.addEventListener("click", toggleChat);
-		</script>
-	</body>
+      function endDrag(e) {
+        chatIcon.style.left = `${e.clientX - offsetX}px`;
+        chatIcon.style.top = `${e.clientY - offsetY}px`;
+        chatIcon.style.cursor = "grab";
+      }
+
+      // Add click listener to open chat box
+      chatIcon.addEventListener("click", toggleChat);
+    </script>
+  </body>
 </html>
