@@ -211,7 +211,7 @@
 				</div>
 			</div>
 			<div class="search-bar">
-				<input type="text" placeholder="Tìm kiếm" />
+				<input type="text" placeholder="Tìm kiếm theo mã giao dịch" />
 			</div>
 			<table>
 				<thead>
@@ -222,6 +222,7 @@
 						<th>Giá tiền</th>
 						<th>Số trang</th>
 						<th>Số dư</th>
+						<th>Thời gian</th>
 						<th>Trạng thái</th>
 						<th>Hành động</th>
 					</tr>
@@ -235,6 +236,7 @@
 						<td>{{ record[1] }}</td>
 						<td>{{ record[2] }}</td>
 						<td>{{ record[7] }}</td>
+						<td>{{ record[8]}}</td>
 						<td
 							class="status {% if record[3] == 'Đã thanh toán' %}completed {% elif record[3] == 'Lỗi thanh toán' %}error {% elif record[3] == 'Đang chờ thanh toán' %}in-progress {% else %}unknown{% endif %}">
 							{{ record[3] }}
@@ -249,7 +251,8 @@
 								data-username="{{ record[4] }}"
 								data-name="{{ record[5] }}"
 								data-id="{{ record[6] }}"
-								data-balance="{{ record[7] }}">
+								data-balance="{{ record[7] }}"
+								data-time="{{record[8]}}">
 								Xem chi tiết
 							</button>
 						</td>
@@ -310,6 +313,7 @@
 						name: button.getAttribute("data-name"), // Giá trị mẫu
 						id: button.getAttribute("data-id"), // Giá trị mẫu
 						balance: button.getAttribute("data-balance"), // Giá trị mẫu
+						time: button.getAttribute("data-time"),
 					};
 
 					// Kiểm tra loại tệp để chọn biểu tượng
@@ -357,6 +361,7 @@
             <p><strong>THÔNG TIN MUA</strong></p>
             <p><strong>Mã giao dịch:</strong> ${details.transid}</p>
             <p><strong>Thành tiền:</strong> ${details.price}</p>
+			<p><strong>Thời gian:</strong> ${details.time}</p>
         `;
 
 					// Hiển thị modal
@@ -403,7 +408,7 @@
 				const rows = document.querySelectorAll("tbody tr");
 
 				rows.forEach((row) => {
-					const timeCell = row.children[2].innerText;
+					const timeCell = row.children[6].innerText;
 					const rowDate = new Date(
 						timeCell.split(" ")[0].split("/").reverse().join("-")
 					);
