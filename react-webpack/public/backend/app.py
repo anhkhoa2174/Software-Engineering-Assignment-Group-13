@@ -6,6 +6,7 @@ import logging
 import sys
 import base64
 import os
+from PyPDF2 import PdfReader
 from io import BytesIO
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -16,7 +17,7 @@ file_storage = {}
 
 # Kết nối cơ sở dữ liệu
 def get_db_connection():
-    return psycopg2.connect(database="CNPM", user="postgres", password="anhkhoa191217", host="localhost", port="5432")
+    return psycopg2.connect(database="CNPM", user="postgres", password="gialinh", host="localhost", port="5432")
 
 # Yêu cầu đăng nhập
 def login_required(f):
@@ -153,6 +154,7 @@ def handle_upload_file():
             flash('Định dạng tài liệu không được hỗ trợ')
         else:
             file_storage['content'] = BytesIO(uploaded_file.read())
+            uploaded_file.seek(0)  # Reset file pointer
             file_size = len(file_storage['content'].getvalue())
             if file_size > 1024*1024 * 10: # 10MB
                 file_storage.pop('content')
@@ -161,9 +163,21 @@ def handle_upload_file():
                 file_storage['name'] = file_name
                 file_storage['type'] = file_type.upper()
                 file_storage['content_type'] = uploaded_file.content_type
-                uploaded_file.seek(0)  # Reset file pointer
                 file_size = (f"{file_size / 1024:.2f} KB" if file_size < 1024 ** 2 else f"{file_size / (1024 ** 2):.2f} MB")
                 file_storage['size'] = file_size.upper()
+
+                if file_type == 'pdf':
+                    try:
+                        pdf_reader = PdfReader(BytesIO(uploaded_file.read()))  # Read PDF from memory
+                        num_pages = len(pdf_reader.pages)
+                        file_storage['defaultPageRange'] = f"1-{num_pages}"  # Default page range
+                    except Exception as e:
+                        logger.error(f"Failed to read PDF: {e}")
+                        flash('Không thể đọc số trang của tệp PDF')
+                        file_storage['defaultPageRange'] = "1-1"
+                else:
+                    file_storage['defaultPageRange'] = "1-1"
+
                 flash('Success')
                 return render_template('upload_file.html', file_size=file_size, file_name=file_name, file_type=file_type, name=name, profile_picture3_base64=profile_picture3_base64,notifications=notifications)
     else:
@@ -174,6 +188,9 @@ def handle_upload_file():
 @app.route('/file_config', methods=['GET'])
 @login_required
 def file_config():
+    if  'content' not in file_storage:
+        return redirect(url_for('upload_file'))
+    
     username = session.get('username')
     if not username:
         return redirect(url_for('login_for_student'))  # Nếu không có session, chuyển hướng đến trang login
@@ -204,7 +221,9 @@ def file_config():
     cur.close()
     conn.close()
 
-    return render_template('file_config.html', name=name, profile_picture3_base64=profile_picture3_base64,notifications=notifications)
+    defaultPageRange = file_storage['defaultPageRange']
+    
+    return render_template('file_config.html', name=name, profile_picture3_base64=profile_picture3_base64,notifications=notifications, defaultPageRange = defaultPageRange)
 
 @app.route('/file_config', methods=['POST'])
 @login_required
@@ -225,10 +244,20 @@ def file_config_post():
 
     page_range = page_range.split('-')
     no_pages = int(page_range[1]) - int(page_range[0]) + 1
+    
 
     conn = get_db_connection()
     cur = conn.cursor()
-    
+    username = session.get('username')  # Get username from session
+    cur.execute('SELECT account_balance FROM "Student" WHERE username = %s', (username,))
+    page_balance = cur.fetchone()[0]  # Fetch the result
+
+    if page_balance < no_pages:
+        flash('Số trang vượt quá số trang còn lại trong tài khoản')
+        return redirect(url_for('uplaod_file'))
+    else:
+        cur.execute('UPDATE "Student" SET account_balance = account_balance - %s WHERE username = %s', (no_pages, session.get('username')))
+
     cur.execute('''
         INSERT INTO "Uses" 
         (printer_id, username, file_type, file_name, file_size, no_pages, status, paper_orientation, num_copies) 
