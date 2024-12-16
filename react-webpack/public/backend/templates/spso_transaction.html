@@ -436,7 +436,7 @@
 					const rows = document.querySelectorAll("tbody tr");
 
 					rows.forEach((row) => {
-						const fileName = row.cells[0].innerText.toLowerCase();
+						const fileName = row.cells[1].innerText.toLowerCase();
 						if (fileName.includes(searchValue)) {
 							row.style.display = "";
 						} else {
